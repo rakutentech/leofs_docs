@@ -245,6 +245,7 @@ After executed make-command
 ::
 
     $ cd ${LEOFS_SRC}/
+    $ make prepare
     $ make release
 
     ${LEOFS_SRC_DIR}
