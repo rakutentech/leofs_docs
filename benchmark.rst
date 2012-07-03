@@ -3,17 +3,20 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Benchmark
-================================
 .. index::
     pair: Benchmark; Benchmark
 
-Set up basho_bench
---------------------------------
+Benchmark
+================================
+
 .. index::
     pair: Set up basho_bench; Set up basho_bench
 
-Commands to set up basho_bench are following.
+Set up basho_bench
+--------------------------------
+
+* Basho basho_bench <https://github.com/basho/basho_bench/>
+* Commands to set up basho_bench are following.
 
 ::
 
@@ -23,10 +26,11 @@ Commands to set up basho_bench are following.
     cp -i ../leofs/test/basho_bench_driver_leofs.erl src/
     make all
 
-Configuration file for basho_bench
--------------------------------------
 .. index::
     pair: Configuration file for basho_bench; Configuration file for basho_bench
+
+Configuration file for basho_bench
+-------------------------------------
 
 Samples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -65,10 +69,11 @@ Description
 
 These are covered more in detail on the `Basho wiki <http://wiki.basho.com/Benchmarking-with-Basho-Bench.html>`_.
 
-Run basho_bench
---------------------------------
 .. index::
     pair: Run basho_bench; Run basho_bench
+
+Run basho_bench
+--------------------------------
 
 Commands to run basho_bench are following.
 

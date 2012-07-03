@@ -317,7 +317,8 @@ Build "LeoFS"
 
 ::
 
-    $ cd ${LEOFS_SRC}/
+    $ cd leofs/
+    $ make prepare
     $ make release
     $ cp -r package/leofs ${LEOFS_DEPLOYED_DIR}
     $ cd ${LEOFS_DEPLOYED_DIR}/
@@ -383,7 +384,7 @@ Log Dir and Working Dir
 | work/queue  | For Message Queue's data which is stored into 'bitcask'|
 +-------------+--------------------------------------------------------+
 
-- ref: Basho bitcask - https://github.com/basho/bitcask
+- ref: Basho bitcask <https://github.com/basho/bitcask>
 
 
 ::
