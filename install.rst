@@ -246,6 +246,7 @@ After executed make-command
 
     $ cd ${LEOFS_SRC}/
     $ make prepare
+    $ make
     $ make release
 
     ${LEOFS_SRC_DIR}
@@ -319,6 +320,7 @@ Build "LeoFS"
 
     $ cd leofs/
     $ make prepare
+    $ make
     $ make release
     $ cp -r package/leofs ${LEOFS_DEPLOYED_DIR}
     $ cd ${LEOFS_DEPLOYED_DIR}/
