@@ -19,7 +19,7 @@ Install OS-related libraries (CentOS 6.2)
 .. index::
    pair: CentOS-6.2; Installation
 
-* Install when using yum 
+* Install when using yum
 
 ::
 
@@ -245,7 +245,6 @@ After executed make-command
 ::
 
     $ cd ${LEOFS_SRC}/
-    $ make prepare
     $ make
     $ make release
 
@@ -253,36 +252,6 @@ After executed make-command
       |
       |--- LICENSE
       |--- Makefile
-      |--- apps
-      |      |--- aria_gateway/
-      |      |        |--- Makefile
-      |      |        |--- build_deps.sh
-      |      |        |--- cherly/
-      |      |        |--- ebin/
-      |      |        |--- include/
-      |      |        |--- rebar
-      |      |        |--- rebar.config
-      |      |        |--- snmp/
-      |      |        |--- src/
-      |      |        `--- test/
-      |      |--- aria_manager/
-      |      |        |--- Makefile
-      |      |        |--- ebin/
-      |      |        |--- include/
-      |      |        |--- rebar
-      |      |        |--- rebar.config
-      |      |        |--- snmp/
-      |      |        |--- src/
-      |      |        `--- test/
-      |      `--- aria_storage/
-      |               |--- Makefile
-      |               |--- ebin/
-      |               |--- include/
-      |               |--- rebar
-      |               |--- rebar.config
-      |               |--- snmp/
-      |               |--- src/
-      |               `--- test/
       |---- deps/
       |      |--- amqp_client/
       |      |--- bear/
@@ -296,11 +265,14 @@ After executed make-command
       |      |--- jiffy/
       |      |--- leo_backend_db/
       |      |--- leo_commons/
+      |      |--- leo_gateway/
       |      |--- leo_logger/
+      |      |--- leo_manager/
       |      |--- leo_mq/
       |      |--- leo_object_storage/
       |      |--- leo_redundant_manager/
       |      |--- leo_statistics/
+      |      |--- leo_storage/
       |      |--- meck/
       |      |--- mochiweb/
       |      |--- proper/
@@ -319,7 +291,6 @@ Build "LeoFS"
 ::
 
     $ cd leofs/
-    $ make prepare
     $ make
     $ make release
     $ cp -r package/leofs ${LEOFS_DEPLOYED_DIR}
@@ -591,24 +562,24 @@ LeoFS Manager-Master
 
     ## Name of the node
     -name manager_0@${MASTER-IP}
-    
+
     ## Cookie for distributed erlang
-    -setcookie 401321b4 
-    
+    -setcookie 401321b4
+
     ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
     ## (Disabled by default..use with caution!)
     ##-heart
-    
+
     ## Enable kernel poll and a few async threads
     +K true
     +A 32
 
     ## Increase number of concurrent ports/sockets
     ##-env ERL_MAX_PORTS 4096
-    
+
     ## Tweak GC to run more often
     ##-env ERL_FULLSWEEP_AFTER 10
-    
+
     ## SNMP Config file
     -config ./snmp/${SNMPA-DIR}/leo_manager_snmp
 
@@ -681,24 +652,24 @@ Manager-Slave's Properties for launch
 
     ## Name of the node
     -name manager_0@${SLAVE-IP}
-    
+
     ## Cookie for distributed erlang
-    -setcookie 401321b4 
-    
+    -setcookie 401321b4
+
     ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
     ## (Disabled by default..use with caution!)
     ##-heart
-    
+
     ## Enable kernel poll and a few async threads
     +K true
     +A 32
 
     ## Increase number of concurrent ports/sockets
     ##-env ERL_MAX_PORTS 4096
-    
+
     ## Tweak GC to run more often
     ##-env ERL_FULLSWEEP_AFTER 10
-    
+
     ## SNMP Config file
     -config ./snmp/${SNMPA-DIR}/leo_manager_snmp
 
@@ -780,24 +751,24 @@ Storage's Properties for launch
 
     ## Name of the node
     -name ${STORAGE_ALIAS}@${STORAGE_IP}
-    
+
     ## Cookie for distributed erlang
-    -setcookie 401321b4 
+    -setcookie 401321b4
 
     ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
     ## (Disabled by default..use with caution!)
     ##-heart
-    
+
     ## Enable kernel poll and a few async threads
     +K true
-    +A 32 
-    
+    +A 32
+
     ## Increase number of concurrent ports/sockets
     ##-env ERL_MAX_PORTS 4096
-    
+
     ## Tweak GC to run more often
     ##-env ERL_FULLSWEEP_AFTER 10
-    
+
     ## SNMP Config file
     -config ./snmp/${SNMPA-DIR}/leo_storage_snmp
 
@@ -893,7 +864,7 @@ Gateway's Properties for launch
                   {queue_dir,   "${WORKING_DIR}/queue"},
                   {snmp_agent,  "./snmp/${SNMPA-DIR}/LEO-GATEWAY"}
                  ]},
-        {ecache_app, 
+        {ecache_app,
                 [
                    {rec_max_size, ${CACHE_TOTAL_SIZE} },
                    {proc_num, 32}
@@ -917,24 +888,24 @@ Gateway's Properties for launch
 
     ## Name of the node
     -name ${GATEWAY_ALIAS}@${GATEWAY_IP}
-    
+
     ## Cookie for distributed erlang
     -setcookie 401321b4
 
     ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
     ## (Disabled by default..use with caution!)
     ##-heart
-    
+
     ## Enable kernel poll and a few async threads
     +K true
     +A 32
-    
+
     ## Increase number of concurrent ports/sockets
     ##-env ERL_MAX_PORTS 4096
-    
+
     ## Tweak GC to run more often
     ##-env ERL_FULLSWEEP_AFTER 10
-    
+
     ## SNMP Config file
     -config ./snmp/${SNMPA-DIR}/leo_gateway_snmp
 
