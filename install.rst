@@ -383,7 +383,7 @@ Set up LeoFS's system-configuration (Only LeoFS-Manager)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * File: ${LEOFS_SRC}/package/leofs/manager_0/etc/app.config
-* **Consistency Lebel** is decided by this configuration file. Also, It should not modify in operation.
+* **Consistency Level** is decided by this configuration file. Also, It should not modify in operation.
 
 +-------------+--------------------------------------------------------+
 | Property    | Explanation                                            |
