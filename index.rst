@@ -22,5 +22,6 @@ LeoFS Manual
    admin_guide
    s3
    s3_api
+   s3_client
    benchmark
 
