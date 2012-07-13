@@ -1,10 +1,10 @@
 Amazon S3 Client Tutorials
 ================================
 
-Getting Started with Ruby: 'aws-sdk' (made by Amazon)
+Getting Started with Ruby: 'aws-sdk'
 ------------------------------------------------------
 
-A part of the Ruby's library, ``aws-sdk``, is available against the LeoFS as a client. The official document of ``aws-sdk`` is here: http://aws.amazon.com/sdkforruby/.
+A part of the Ruby's library, ``aws-sdk``, is available against the LeoFS as a client. It's made by Amazon. The official document of ``aws-sdk`` is here: http://aws.amazon.com/sdkforruby/.
 
 
 Install AWS-SDK for Ruby
@@ -20,6 +20,9 @@ Sample Code
 
 Connect to LeoFS
 """""""""""""""""
+
+.. note:: You need to rewrite 'Endpoint' and 'Port' as follows:
+
 
 .. code-block:: ruby
 
@@ -161,5 +164,5 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 
 .. note:: ``S3Object.find(path, backet)`` does not work because the current LeoFS does not support Bucket API on which the ``find`` method depends.
 
-Getting Started with Node: 'knox'
--------------------------------------
+.. Getting Started with Node: 'knox'
+.. -------------------------------------

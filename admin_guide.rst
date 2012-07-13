@@ -198,6 +198,9 @@ LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
 
 Command List
 """""""""""""
+
+\
+
 +-----------------------------------+------------------------------------------------------------+
 | Command                           | Explanation                                                |
 +===================================+============================================================+
@@ -426,6 +429,13 @@ Paths used by `purge` are governed by :ref:`this rule <s3-path-label>`
 .. index::
    attach-new-storage
 
+\
+\
+
+**Attach/Detach node from the cluster during in operation**
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+\ 
+
 .. image:: _static/images/leofs-order-of-attach.png
    :width: 720px
 
@@ -448,6 +458,8 @@ Manager
 a. SNMPA-Properties
 """"""""""""""""""""
 
+\
+
 +------------------+------------------------------------+
 | Property         | Value / Range                      |
 +==================+====================================+
@@ -464,6 +476,8 @@ a. SNMPA-Properties
 
 b. SNMPA-Items
 """"""""""""""
+
+\
 
 +------------------+------------------------------------+
 | Branch Number    | Explanation                        |
@@ -520,6 +534,8 @@ Storage
 a. SNMPA-Properties
 """""""""""""""""""
 
+\
+
 +------------------+------------------------------------+
 | Property         | Value / Range                      |
 +==================+====================================+
@@ -538,6 +554,8 @@ a. SNMPA-Properties
 
 b. SNMPA-Items
 """"""""""""""
+
+\
 
 +------------------+------------------------------------+
 | Branch Number    | Explanation                        |
@@ -641,6 +659,8 @@ Gateway
 a. SNMPA-Properties
 """"""""""""""""""""
 
+\
+
 +------------------+------------------------------------+
 | Item             | Value / Range                      |
 +==================+====================================+
@@ -655,6 +675,8 @@ a. SNMPA-Properties
 
 b. SNMPA-Items
 """"""""""""""
+
+\
 
 +------------------+------------------------------------+
 | Branch Number    | Explanation                        |

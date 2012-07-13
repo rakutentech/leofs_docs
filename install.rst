@@ -74,8 +74,13 @@ Confirm
     1>
 
 
+XFS-related
+------------
+
+.. note:: If You deploy LeoFS on your **DEV environments**, You does NOT need this operaion. But If You deploy LeoFS on your **PRODUCTION environments**, You need to install XFS-libs and create an XFS's partition.
+
 Install OS-related libraries (CentOS 6.2) for XFS
---------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. index::
    pair: CentOS-6.2; Installation
 
@@ -87,14 +92,15 @@ Install OS-related libraries (CentOS 6.2) for XFS
 
 
 Create XFS Partition (Volume)
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 .. index::
    pair: XFS; Installation
 
 Only **LeoFS-Storage node** use XFS (unix local file system). Because XFS is high I/O efficiency for Large-File. **LeoFS-Storage** is implemented on top of files stored in a single filesystem created on top of the a few TB volume.
 
 Create partition
-^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""
 
 ::
 
@@ -118,7 +124,7 @@ Create partition
    /dev/sda2            1952        2472     4184932+  82  Linux swap / Solaris
 
 Execute
-^^^^^^^^^^^
+""""""""
 
 ::
 
@@ -144,7 +150,7 @@ Execute
    Syncing disks.
 
 Confirm
-^^^^^^^^^^^
+""""""""
 
 ::
 
@@ -169,21 +175,21 @@ Confirm
    /dev/sda3            2473        8908    51697170   83  Linux
 
 Reboot
-^^^^^^^^^^
+"""""""
 
 ::
 
    # reboot
 
 Execute 'Format partition'
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""
 
 ::
 
    # mkfs.xfs -d agcount=13 -l size=32m /dev/sda3
 
 Modify "/etc/fstab" file
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""
 
 ::
 
@@ -191,7 +197,7 @@ Modify "/etc/fstab" file
    /dev/sda3   /mnt/xfs   xfs   noatime,nodiratime,osyncisdsync 0 0
 
 Create mount point and Execute "mount" command
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""""""""""""""""""""""
 
 ::
 
@@ -199,7 +205,7 @@ Create mount point and Execute "mount" command
    # mount -a
 
 Confirm
-^^^^^^^^^^^^
+"""""""""
 
 ::
 
@@ -253,14 +259,12 @@ After executed make-command
       |--- LICENSE
       |--- Makefile
       |---- deps/
-      |      |--- amqp_client/
       |      |--- bear/
       |      |--- bitcask/
       |      |--- cherly/
       |      |--- cowboy/
       |      |--- ecache_app/
       |      |--- eleveldb/
-      |      |--- erlzmq/
       |      |--- folsom/
       |      |--- jiffy/
       |      |--- leo_backend_db/
@@ -275,8 +279,7 @@ After executed make-command
       |      |--- leo_storage/
       |      |--- meck/
       |      |--- mochiweb/
-      |      |--- proper/
-      |      `--- rabbit_common/
+      |      `--- proper/
       |---- doc/
       |---- rebar
       |---- rebar.config
@@ -339,6 +342,8 @@ Build "LeoFS"
 Log Dir and Working Dir
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+\
+
 +-------------+--------------------------------------------------------+
 | Directory   | Explanation                                            |
 +=============+========================================================+
@@ -383,7 +388,8 @@ Set up LeoFS's system-configuration (Only LeoFS-Manager)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * File: ${LEOFS_SRC}/package/leofs/manager_0/etc/app.config
-* **Consistency Level** is decided by this configuration file. Also, It should not modify in operation.
+
+.. note::  **Consistency Level** is decided by this configuration file. Also, It should not modify in operation.
 
 +-------------+--------------------------------------------------------+
 | Property    | Explanation                                            |
@@ -419,12 +425,12 @@ Set up LeoFS's system-configuration (Only LeoFS-Manager)
         {sasl, [
                 {sasl_error_logger, {file, "./log/sasl-error.log"}},
                 {errlog_type, error},
-                {error_logger_mf_dir, "./log"},
+                {error_logger_mf_dir, "./log/sasl"},
                 {error_logger_mf_maxbytes, 10485760}, % 10 MB max file size
                 {error_logger_mf_maxfiles, 5}         % 5 files max
                ]},
         {mnesia, [
-                  {dir, "/path/to/working_dir/manager_0/work/mnesia"},
+                  {dir, "./work/mnesia"},
                   {dump_log_write_threshold, 50000},
                   {dc_dump_limit,            40}
                  ]},
@@ -444,7 +450,7 @@ Set up LeoFS's system-configuration (Only LeoFS-Manager)
                   {num_of_acceptors, 3},
                   %% Directories
                   {log_dir,          "./log"},
-                  {queue_dir,        "/path/to/working_dir/manager_0/work/queue"},
+                  {queue_dir,        "./work/queue"},
                   {snmp_agent,       "./snmp/manager_0/LEO-MANAGER"}
                  ]}
     ].
@@ -500,8 +506,6 @@ LeoFS Manager-Master
 +----------------+--------------------------------------------------------+
 |Property        | Configuration                                          |
 +================+========================================================+
-|${WORKING_DIR}  | Working Directory                                      |
-+----------------+--------------------------------------------------------+
 |${SLAVE-IP}     | Manager-Slave node's IP-address                        |
 +----------------+--------------------------------------------------------+
 |${SNMPA-DIR}    | SNMPA configuration files directory                    |
@@ -517,12 +521,12 @@ LeoFS Manager-Master
         {sasl, [
                 {sasl_error_logger, {file, "./log/sasl-error.log"}},
                 {errlog_type, error},
-                {error_logger_mf_dir, "./log"},
+                {error_logger_mf_dir, "./log/sasl"},
                 {error_logger_mf_maxbytes, 10485760}, % 10 MB max file size
                 {error_logger_mf_maxfiles, 5}         % 5 files max
                ]},
         {mnesia, [
-                  {dir, "${WORKING_DIR}/mnesia"},
+                  {dir, "./work/mnesia"},
                   {dump_log_write_threshold, 50000},
                   {dc_dump_limit,            40}
                  ]},
@@ -542,7 +546,7 @@ LeoFS Manager-Master
                   {num_of_acceptors, 3},
                   %% Directories
                   {log_dir,          "./log"},
-                  {queue_dir,        "${WORKING_DIR}/queue"},
+                  {queue_dir,        "./work/queue"},
                   {snmp_agent,       "./snmp/${SNMPA-DIR}/LEO-MANAGER"}
                  ]}
     ].
@@ -594,8 +598,6 @@ Manager-Slave's Properties for launch
 +----------------+--------------------------------------------------------+
 |Property        | Configuration                                          |
 +================+========================================================+
-|${WORKING_DIR}  | Working Directory                                      |
-+----------------+--------------------------------------------------------+
 |${MASTER-IP}    | Manager-Master node's IP-address                       |
 +----------------+--------------------------------------------------------+
 |${SNMPA-DIR}    | SNMPA configuration files directory                    |
@@ -607,12 +609,12 @@ Manager-Slave's Properties for launch
         {sasl, [
                 {sasl_error_logger, {file, "./log/sasl-error.log"}},
                 {errlog_type, error},
-                {error_logger_mf_dir, "./log"},
+                {error_logger_mf_dir, "./log/sasl"},
                 {error_logger_mf_maxbytes, 10485760}, % 10 MB max file size
                 {error_logger_mf_maxfiles, 5}         % 5 files max
                ]},
         {mnesia, [
-                  {dir, "${WORKING_DIR}/mnesia"},
+                  {dir, "./work/mnesia"},
                   {dump_log_write_threshold, 50000},
                   {dc_dump_limit,            40}
                  ]},
@@ -632,7 +634,7 @@ Manager-Slave's Properties for launch
                   {num_of_acceptors, 3},
                   %% Directories
                   {log_dir,          "./log"},
-                  {queue_dir,        "${WORKING_DIR}/queue"},
+                  {queue_dir,        "./work/queue"},
                   {snmp_agent,       "./snmp/${SNMPA-DIR}/LEO-MANAGER"}
                  ]}
     ].
@@ -684,9 +686,7 @@ Storage's Properties for launch
 +-------------------------+--------------------------------------------------------+
 |Property                 | Configuration                                          |
 +=========================+========================================================+
-|${WORKING_DIR}           | Working Directory                                      |
-+-------------------------+--------------------------------------------------------+
-|${OBJECT_STORAGE_DIR}    | Object Storage directory                               |
+|${OBJECT_STORAGE_DIR}    | Object Storage directory  - Default:"./avs"            |
 +-------------------------+--------------------------------------------------------+
 |${MANAGER_MASTER_IP}     | Manager-master node's IP-address                       |
 +-------------------------+--------------------------------------------------------+
@@ -705,12 +705,12 @@ Storage's Properties for launch
         {sasl, [
                 {sasl_error_logger, {file, "./log/sasl-error.log"}},
                 {errlog_type, error},
-                {error_logger_mf_dir, "./log"},
+                {error_logger_mf_dir, "./log/sasl"},
                 {error_logger_mf_maxbytes, 10485760}, % 10 MB max file size
                 {error_logger_mf_maxfiles, 5}         % 5 files max
                ]},
         {mnesia, [
-                  {dir, "${WORKING_DIR}/mnesia"},
+                  {dir, "./work/mnesia"},
                   {dump_log_write_threshold, 50000},
                   {dc_dump_limit,            40}
                  ]},
@@ -729,7 +729,7 @@ Storage's Properties for launch
 
                   %% Directories
                   {log_dir,     "./log"},
-                  {queue_dir,   "${WORKING_DIR}/queue"},
+                  {queue_dir,   "./work/queue"},
                   {snmp_agent,  "./snmp/${SNMPA-DIR}/LEO-STORAGE"}
                  ]},
                  .
