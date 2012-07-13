@@ -784,8 +784,6 @@ Gateway's Properties for launch
 +--------------------+--------------------------------------------------------+
 |Property            | Configuration                                          |
 +====================+========================================================+
-|${WORKING_DIR}      | Working Directory                                      |
-+--------------------+--------------------------------------------------------+
 |${LISTENING_PORT}   | Gateway's listening port number                        |
 +--------------------+--------------------------------------------------------+
 |${NUM_OF_LISTENNER} | Numbers of Gateway's listening processes               |
@@ -832,12 +830,12 @@ Gateway's Properties for launch
         {sasl, [
                 {sasl_error_logger, {file, "./log/sasl-error.log"}},
                 {errlog_type, error},
-                {error_logger_mf_dir, "./log"},
+                {error_logger_mf_dir, "./log/sasl"},
                 {error_logger_mf_maxbytes, 10485760}, % 10 MB max file size
                 {error_logger_mf_maxfiles, 5}         % 5 files max
                ]},
         {mnesia, [
-                  {dir, "${WORKING_DIR}/mnesia"},
+                  {dir, "./work/mnesia"},
                   {dump_log_write_threshold, 50000},
                   {dc_dump_limit,            40}
                  ]},
@@ -861,7 +859,7 @@ Gateway's Properties for launch
 
                   %% Directories
                   {log_dir,     "./log"},
-                  {queue_dir,   "${WORKING_DIR}/queue"},
+                  {queue_dir,   "./work/queue"},
                   {snmp_agent,  "./snmp/${SNMPA-DIR}/LEO-GATEWAY"}
                  ]},
         {ecache_app,
