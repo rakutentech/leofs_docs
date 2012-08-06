@@ -137,7 +137,7 @@ The following sample script should upload a text file (located in ``/path/to/loc
 
    file = '/path/to/localfile'
 
-   S3Object.store('/path/to/remotefile',
+   AWS::S3::S3Object.store('/path/to/remotefile',
                   open(file).read,
                   'somewhere',
                   :content_type => 'text/plain')
