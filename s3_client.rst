@@ -7,6 +7,7 @@ Getting Your S3 Key
 You can get s3 keys from LeoFS console.
 
 ::
+
   $ telnet 127.0.0.1 10010
   Trying 127.0.0.1...
   Connected to 127.0.0.1.
@@ -15,6 +16,7 @@ You can get s3 keys from LeoFS console.
 's3-gen-key ${USER-ID}' command generates your s3 key.
 
 ::
+
   s3-gen-key hoge
   access-key-id: xxxxxxxxxxxxxxxxxxxx
   secret-access-key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
