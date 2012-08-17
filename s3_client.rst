@@ -49,14 +49,7 @@ Connect to LeoFS
   Endpoint = "localhost"
   Port = 8080
 
-  class AWS::S3::Client
-    # magic to force subdirectory access
-    def self.path_style_bucket_name? bucket_name
-      true
-    end
-  end
-
-  class MyHandler < AWS::Core::Http::NetHttpHandler
+  class LeoFSHandler < AWS::Core::Http::NetHttpHandler
     # magic to reconfigure port
     def handle(request, response)
       request.port = ::Port
@@ -65,9 +58,12 @@ Connect to LeoFS
   end
 
   AWS.config(
-    access_key_id: "YOUR_ACCESS_KEY_ID", # For now, a string is required.
+    access_key_id: "YOUR_ACCESS_KEY_ID", # set your s3 key
     secret_access_key: "YOUR_SECRET_ACCESS_KEY",
-    s3_endpoint: Endpoint
+    s3_endpoint: Endpoint,
+    http_handler: LeoFSHandler.new,
+    s3_force_path_style: true,
+    use_ssl: false
   )
 
   s3 = AWS::S3.new
@@ -78,8 +74,11 @@ PUT an object into the LeoFS
 
 .. code-block:: ruby
 
-  # This is a Dummy Bucket (LeoFS doesn't support S3 bucket currently).
-  bucket = s3.buckets["bucket"]
+  # create bucket
+  s3.buckets.create("test")
+
+  # get bucket
+  bucket = s3.buckets["test"]
 
   # create new object - like unix's touch-command
   object = bucket.objects.create("image")
@@ -104,7 +103,7 @@ GET an object from the LeoFS
 
 .. code-block:: ruby
 
-  Image = object.read
+  image = object.read
 
 
 DELETE an object from the LeoFS
