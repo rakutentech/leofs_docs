@@ -4,7 +4,7 @@ Amazon S3 Client Tutorials
 Getting Your S3 Key
 ---------------------
 
-You can get s3 keys from LeoFS console.
+You can get s3 keys from ``LeoFS's Maager Console``.
 
 ::
 
@@ -18,8 +18,8 @@ You can get s3 keys from LeoFS console.
 ::
 
   s3-gen-key hoge
-  access-key-id: xxxxxxxxxxxxxxxxxxxx
-  secret-access-key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  access-key-id: 05dcba94333c7590a635
+  secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
 Getting Started with Ruby: 'aws-sdk'
 ------------------------------------------------------
@@ -185,3 +185,49 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 
 .. Getting Started with Node: 'knox'
 .. -------------------------------------
+
+
+Getting Started with S3FS-C (Ubuntu-12.04 LTS)
+------------------------------------------------------
+
+S3FS-C is a FUSE (File System in User Space) based file system backed by Amazon S3 storage buckets. Once mounted, S3 can be used just like it was a local file system.
+
+Install libs for S3FS-C into Ubuntu-12.04
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    sudo apt-get install libfuse-dev libcurl4-openssl-dev
+
+Install "S3FS-C"
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    git clone https://github.com/tongwang/s3fs-c.git
+    cd s3fs-c
+    ./configure
+    make
+    sudo make install
+
+Edit "/ets/hosts"
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    127.0.0.1 localhost {bucket_name}.localhost
+
+Set "~/.passwd-s3fs"
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    {access_key}:{secret}
+
+Mount "LeoFS"
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    s3fs {bucket_name} {mount_point} -o url='http://{endpoint}:{port}'
+
