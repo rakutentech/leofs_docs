@@ -30,15 +30,13 @@ Operation
 +-------------+------------------------------------+------------------------------------------------------------+
 | 4           | $ telnet $manager-master 10010     | Accessing **Manager Master Console** by telnet             |
 +-------------+------------------------------------+------------------------------------------------------------+
-| 5           | > attach ${storage-node}           | **'attach'** means join Storage-nodes in the cluster       |
+| 5           | > start                            | Starting LeoFS (manager and storages)                      |
 +-------------+------------------------------------+------------------------------------------------------------+
-| 6           | > start                            | Starting LeoFS (manager and storages)                      |
+| 6           | > status                           | Confirm status of the cluster on Manager Master Console #1 |
 +-------------+------------------------------------+------------------------------------------------------------+
-| 7           | > status                           | Confirm status of the cluster on Manager Master Console #1 |
+| 7           | $ bin/leofs_gateway start          | Startting Gateway(s) **on each Gateway Node**              |
 +-------------+------------------------------------+------------------------------------------------------------+
-| 8           | $ bin/leofs_gateway start          | Startting Gateway(s) **on each Gateway Node**              |
-+-------------+------------------------------------+------------------------------------------------------------+
-| 9           | > status                           | Confirm status of the cluster on Manager Master Console #2 |
+| 8           | > status                           | Confirm status of the cluster on Manager Master Console #2 |
 +-------------+------------------------------------+------------------------------------------------------------+
 
 
@@ -96,25 +94,11 @@ LeoFS Manager Console on **LeoFS-Manager Master** node
     ------------------------------------------------------------------------------------------------
      node                        state       ring (cur)    ring (prev)   when
     ------------------------------------------------------------------------------------------------
-     storage_0@127.0.0.1         idling                                  2012-06-29 14:23:08 +0900
-     storage_1@127.0.0.1         idling                                  2012-06-29 14:23:08 +0900
-     storage_2@127.0.0.1         idling                                  2012-06-29 14:23:08 +0900
-     storage_3@127.0.0.1         idling                                  2012-06-29 14:23:08 +0900
+     storage_0@127.0.0.1         attach                                  2012-06-29 14:23:08 +0900
+     storage_1@127.0.0.1         attach                                  2012-06-29 14:23:08 +0900
+     storage_2@127.0.0.1         attach                                  2012-06-29 14:23:08 +0900
+     storage_3@127.0.0.1         attach                                  2012-06-29 14:23:08 +0900
 
-
-**'attach'** command - Joined 4-nodes into LeoFS-cluster
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-::
-
-    attach storage_0@127.0.0.1
-    OK
-    attach storage_1@127.0.0.1
-    OK
-    attach storage_2@127.0.0.1
-    OK
-    attach storage_3@127.0.0.1
-    OK
 
 **'start' command** - Launch LeoFS-cluster.
 """""""""""""""""""""""""""""""""""""""""""""
@@ -204,8 +188,6 @@ Command List
 +-----------------------------------+------------------------------------------------------------+
 | Command                           | Explanation                                                |
 +===================================+============================================================+
-| attach ${storage-node}            | Attach a storage node in the cluster                       |
-+-----------------------------------+------------------------------------------------------------+
 | detach ${storage-node}            | Remove a storage node from the cluster                     |
 +-----------------------------------+------------------------------------------------------------+
 | resume ${storage-node}            | Restarting - 'nodedown' or 'stop' - storage node           |
@@ -213,6 +195,8 @@ Command List
 | suspend ${storage-node}           | Suspend a storage node                                     |
 +-----------------------------------+------------------------------------------------------------+
 | start                             | Launch the cluster                                         |
++-----------------------------------+------------------------------------------------------------+
+| rebalance                         | Rebalance files into the cluster                           |
 +-----------------------------------+------------------------------------------------------------+
 | history                           | Retrieve operation histories                               |
 +-----------------------------------+------------------------------------------------------------+
@@ -227,18 +211,6 @@ Command List
 | purge ${filepath}                 | Purge a cached file if the specified file existed in cache |
 +-----------------------------------+------------------------------------------------------------+
 
-.. index::
-   attach-command
-
-**'attach'** - Storage node is joined into the LeoFS-Cluster
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-::
-
-    attach storage_0@127.0.0.1
-    OK
-    rebalance
-    OK
 
 .. index::
    detach-command
@@ -273,6 +245,16 @@ Command List
 ::
 
     suspend storage_0@127.0.0.1
+    OK
+
+
+.. index::
+   rebalance-command
+
+**'rebalance'** - Rebalance files into the cluster
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    rebalance
     OK
 
 .. index::
