@@ -4,7 +4,7 @@ Amazon S3 Client Tutorials
 Getting Your S3 Key
 ---------------------
 
-You can get s3 keys from ``LeoFS's Maager Console``.
+You can get s3 keys from ``LeoFS's Manager Console``.
 
 ::
 

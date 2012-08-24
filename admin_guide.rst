@@ -210,6 +210,14 @@ Command List
 +-----------------------------------+------------------------------------------------------------+
 | purge ${filepath}                 | Purge a cached file if the specified file existed in cache |
 +-----------------------------------+------------------------------------------------------------+
+| s3-gen-key ${user-id}             | Generate a S3 key pair(AccessKeyID and SecretAccessKey)    |
++-----------------------------------+------------------------------------------------------------+
+| s3-set-endpoint ${endpoint}       | Register a new S3 Endpoint                                 |
++-----------------------------------+------------------------------------------------------------+
+| s3-delete-endpoint ${endpoint}    | Delete a S3 Endpoint                                       |
++-----------------------------------+------------------------------------------------------------+
+| s3-get-endpoints                  | Retrieve all of S3 Endpoints registered                    |
++-----------------------------------+------------------------------------------------------------+
 
 
 .. index::
@@ -407,6 +415,67 @@ Paths used by `purge` are governed by :ref:`this rule <s3-path-label>`
     purge leofs.org/is/s3/comaptible/storage.key
     OK
 
+.. _s3-gen-key:
+
+.. index::
+   s3-gen-key-command
+
+**'s3-gen-key'** - Generate a S3 key pair(AccessKeyID and SecretAccessKey)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Specify a user-id which must be unique across the whole system
+
+::
+
+   s3-gen-key test
+   access-key-id: be8111173c8218aaf1c3
+   secret-access-key: 929b09f9b794832142c59218f2907cd1c35ac163
+
+.. _s3-set-endpoint:
+
+.. index::
+   s3-set-endpoint-command
+
+**'s3-set-endpoint'** - Register a new S3 Endpoint
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Specify a new endpoint to be registered
+
+::
+
+   s3-set-endpoint test
+   OK
+
+.. _s3-delete-endpoint:
+
+.. index::
+   s3-delete-endpoint-command
+
+**'s3-delete-endpoint'** - Delete a S3 Endpoint
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Specify a endpoint to be deleted
+
+::
+
+   s3-delete-endpoint test
+   OK
+
+.. _s3-get-endpoints:
+
+.. index::
+   s3-get-endpoints-command
+
+**'s3-get-endpoints'** - Retrieve all of S3 Endpoints registered
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+::
+
+   s3-get-endpoints
+   [EndPoints]
+   2012-08-24 05:22:50 +0000 | s3.amazonaws.com
+   2012-08-24 05:22:49 +0000 | localhost
+   2012-08-24 05:22:50 +0000 | leofs.org   
 
 .. index::
    attach-new-storage
