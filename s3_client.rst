@@ -197,7 +197,7 @@ Install libs for S3FS-C into Ubuntu-12.04
 
 ::
 
-    sudo apt-get install libfuse-dev libcurl4-openssl-dev
+    sudo apt-get install libfuse-dev libcurl4-openssl-dev fuse-utils
 
 Install "S3FS-C"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
