@@ -231,3 +231,30 @@ Mount "LeoFS"
 
     s3fs {bucket_name} {mount_point} -o url='http://{endpoint}:{port}'
 
+
+Connect LeoFS from DragonDisk
+------------------------------------------------------
+
+DragonDisk is a powerful file manager for Amazon S3 Compatible Storage.
+
+URL: http://www.dragondisk.com/
+
+
+Setting up LeoFS account details
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* To setup your LeoFS's account, go to the menu ``File/Accounts``.
+* If the details are valid, you can see that S3 has been added on the Root list.
+
+.. image:: _static/images/dragondisk-2.png
+   :width: 320px
+
+Operating files from  main view
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* You can ``upload files`` into the LeoFS, ``download file`` from the LeoFS and operate others.
+
+.. image:: _static/images/dragondisk-1.png
+   :width: 720px
+
+
