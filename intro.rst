@@ -45,6 +45,7 @@ Milestones
         * Log Analysis/Search
 * 0.14 (Dec 2012)
     * Multi-layer Cache (Using SSD)
+    * Multi-tenant
     * Streaming
     * Web-Console (Leo Tamer)
         * Cluster manager/monitor
