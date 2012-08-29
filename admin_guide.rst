@@ -218,6 +218,8 @@ Command List
 +-----------------------------------+------------------------------------------------------------+
 | s3-get-endpoints                  | Retrieve all of S3 Endpoints registered                    |
 +-----------------------------------+------------------------------------------------------------+
+| s3-get-buckets                    | Retrieve all of Buckets registered                         |
++-----------------------------------+------------------------------------------------------------+
 
 
 .. index::
@@ -476,6 +478,22 @@ Specify a endpoint to be deleted
    2012-08-24 05:22:50 +0000 | s3.amazonaws.com
    2012-08-24 05:22:49 +0000 | localhost
    2012-08-24 05:22:50 +0000 | leofs.org   
+
+.. _s3-get-buckets:
+
+.. index::
+   s3-get-buckets-command
+
+**'s3-get-buckets'** - Retrieve all of Buckets registered
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+::
+
+   s3-get-buckets
+   [Buckets]
+    created at                | bucket (owner)
+   ---------------------------+----------------------------------------------------------------
+    2012-08-29 06:55:15 +0000 | bbb (__leofs__)
 
 .. index::
    attach-new-storage
