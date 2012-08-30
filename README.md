@@ -11,6 +11,7 @@ Overview
 $ git clone https://github.com/leo-project/leofs_docs.git
 $ cd leofs_docs
 $ sudo easy_install cloud_sptheme
+$ sudo easy_install sphinxcontrib-erlangdomain
 
 ## for Ubuntu/Debian
 $ sudo apt-get install libjpeg8 libjpeg8-dev zlib1g-dev libfreetype6 libfreetype6-dev python-dev

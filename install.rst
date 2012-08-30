@@ -274,7 +274,9 @@ After executed make-command
       |      |--- leo_manager/
       |      |--- leo_mq/
       |      |--- leo_object_storage/
+      |      |--- leo_ordning_reda/
       |      |--- leo_redundant_manager/
+      |      |--- leo_s3_libs/
       |      |--- leo_statistics/
       |      |--- leo_storage/
       |      |--- meck/
@@ -419,7 +421,7 @@ Set up LeoFS's system-configuration (Only LeoFS-Manager)
 
 * **Example - File: ${LEOFS_SRC}/package/leofs/manager_0/etc/app.config**:
 
-::
+.. code-block:: erlang
 
     [
         {sasl, [
@@ -461,25 +463,33 @@ Firewall Rules
 +----------------+-----------+-----------------+--------------------------+
 | Subsystem      | Direction | Ports           | Notes                    |
 +================+===========+=================+==========================+
-| Manager-Master | Incoming  | 10010/*         | admin console            |
+| Manager-Master | Incoming  | 10010/*         | Manager console          |
 +----------------+-----------+-----------------+--------------------------+
 | Manager-Master | Incoming  | 4369/*          | erlang RPC from others   |
 +----------------+-----------+-----------------+--------------------------+
+| Manager-Master | Incoming  | 4020/*          | SNMP Listen Port         |
++----------------+-----------+-----------------+--------------------------+
 | Manager-Master | Outgoing  | \*/4369         | erlang RPC to others     |
 +----------------+-----------+-----------------+--------------------------+
-| Manager-Slave  | Incoming  | 10011/*         | admin console            |
+| Manager-Slave  | Incoming  | 10011/*         | Manager console          |
 +----------------+-----------+-----------------+--------------------------+
 | Manager-Slave  | Incoming  | 4369/*          | erlang RPC from others   |
++----------------+-----------+-----------------+--------------------------+
+| Manager-Slave  | Incoming  | 4021/*          | SNMP Listen Port         |
 +----------------+-----------+-----------------+--------------------------+
 | Manager-Slave  | Outgoing  | \*/4369         | erlang RPC to others     |
 +----------------+-----------+-----------------+--------------------------+
 | Storage        | Incoming  | 4369/*          | erlang RPC from others   |
++----------------+-----------+-----------------+--------------------------+
+| Storage        | Incoming  | 4010/*          | SNMP Listen Port         |
 +----------------+-----------+-----------------+--------------------------+
 | Storage        | Outgoing  | \*/4369         | erlang RPC to others     |
 +----------------+-----------+-----------------+--------------------------+
 | Gateway        | Incoming  | 8080/*          | HTTP listen port         |
 +----------------+-----------+-----------------+--------------------------+
 | Gateway        | Incoming  | 4369/*          | erlang RPC from others   |
++----------------+-----------+-----------------+--------------------------+
+| Gateway        | Incoming  | 4000/*          | SNMP Listen Port         |
 +----------------+-----------+-----------------+--------------------------+
 | Gateway        | Outgoing  | \*/4369         | erlang RPC to others     |
 +----------------+-----------+-----------------+--------------------------+
@@ -515,7 +525,7 @@ LeoFS Manager-Master
 |                | - [snmpa_manager_0|snmpa_manager_1|snmpa_manager_0]    |
 +----------------+--------------------------------------------------------+
 
-::
+.. code-block:: erlang
 
     [
         {sasl, [
@@ -603,7 +613,7 @@ Manager-Slave's Properties for launch
 |${SNMPA-DIR}    | SNMPA configuration files directory                    |
 +----------------+--------------------------------------------------------+
 
-::
+.. code-block:: erlang
 
     [
         {sasl, [
@@ -699,7 +709,7 @@ Storage's Properties for launch
 |                         | - [snmpa_storage_0|snmpa_storage_1|snmpa_storage_0]    |
 +-------------------------+--------------------------------------------------------+
 
-::
+.. code-block:: erlang
 
     [
         {sasl, [
@@ -709,19 +719,38 @@ Storage's Properties for launch
                 {error_logger_mf_maxbytes, 10485760}, % 10 MB max file size
                 {error_logger_mf_maxfiles, 5}         % 5 files max
                ]},
-        {mnesia, [
-                  {dir, "./work/mnesia"},
-                  {dump_log_write_threshold, 50000},
-                  {dc_dump_limit,            40}
-                 ]},
         {leo_storage,
                  [
-                  %% Storage Configuration
-                  {obj_containers,     [{{volume, "${OBJECT_STORAGE_DIR}"}, {num_of_containers, 64}}] },
-                  {managers,           ["manager_0@${MANAGER_MASTER_IP}", "manager_1@${MANAGER_SLAVE_IP}"] },
+                  %% == Storage Configuration ==
+                  %%
+                  %% Object containers properties:
+                  %% @param path              - Directory of object-containers
+                  %% @param num_of_containers - # of object-containers
+                  %%
+                  %% Notes:
+                  %%   If you set up LeoFS on 'development', default value - "./avs" - is OK.
+                  %%   If you set up LeoFS on 'production' or 'staging', You should need to change "volume",
+                  %%       And We recommend volume's partition is XFS.
+                  %%
+                  {obj_containers,     [{path, "./avs"}, {num_of_containers, 64}] },
+
+                  %% leo-manager's nodes
+                  {managers,           ["manager_0@127.0.0.1", "manager_1@127.0.0.1"] },
+
+                  %% # of virtual-nodes
+                  {num_of_vnodes,      64 },
+
+                  %% # of file-replication-server's processes
                   {num_of_replicators, 32 },
+                  %% # of read-repair-server's processes
                   {num_of_repairers,   32 },
+                  %% # of mq-server's processes
                   {num_of_mq_procs,    8 },
+
+                  %% Size of stacked objects (bytes)
+                  {size_of_stacked_objs,    10485760 },
+                  %% Stacking timeout (msec)
+                  {stacking_timeout,        5000 },
 
                   %% Log-specific properties.
                   {log_level,    1 },
@@ -823,8 +852,7 @@ Gateway's Properties for launch
 |                    | (ex. 4000000000 means using 4GB memory cache)          |
 +--------------------+--------------------------------------------------------+
 
-
-::
+.. code-block:: erlang
 
     [
         {sasl, [
@@ -834,11 +862,6 @@ Gateway's Properties for launch
                 {error_logger_mf_maxbytes, 10485760}, % 10 MB max file size
                 {error_logger_mf_maxfiles, 5}         % 5 files max
                ]},
-        {mnesia, [
-                  {dir, "./work/mnesia"},
-                  {dump_log_write_threshold, 50000},
-                  {dc_dump_limit,            40}
-                 ]},
         {leo_gateway,
                  [
                   %% Gateway Configuration
@@ -862,9 +885,13 @@ Gateway's Properties for launch
                   {queue_dir,   "./work/queue"},
                   {snmp_agent,  "./snmp/${SNMPA-DIR}/LEO-GATEWAY"}
                  ]},
-        {ecache_app,
+        {ecache,
                 [
-                   {rec_max_size, ${CACHE_TOTAL_SIZE} },
+                   %% Total of cache-size (capacity)
+                   %% Unit is byte - 1000000000 = 1GB
+                   {rec_max_size, 1000000000 },
+
+                   %% # of cache-server processes
                    {proc_num, 32}
                 ]},
                  .

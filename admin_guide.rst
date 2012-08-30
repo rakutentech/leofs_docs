@@ -30,15 +30,13 @@ Operation
 +-------------+------------------------------------+------------------------------------------------------------+
 | 4           | $ telnet $manager-master 10010     | Accessing **Manager Master Console** by telnet             |
 +-------------+------------------------------------+------------------------------------------------------------+
-| 5           | > attach ${storage-node}           | **'attach'** means join Storage-nodes in the cluster       |
+| 5           | > start                            | Starting LeoFS (manager and storages)                      |
 +-------------+------------------------------------+------------------------------------------------------------+
-| 6           | > start                            | Starting LeoFS (manager and storages)                      |
+| 6           | > status                           | Confirm status of the cluster on Manager Master Console #1 |
 +-------------+------------------------------------+------------------------------------------------------------+
-| 7           | > status                           | Confirm status of the cluster on Manager Master Console #1 |
+| 7           | $ bin/leofs_gateway start          | Startting Gateway(s) **on each Gateway Node**              |
 +-------------+------------------------------------+------------------------------------------------------------+
-| 8           | $ bin/leofs_gateway start          | Startting Gateway(s) **on each Gateway Node**              |
-+-------------+------------------------------------+------------------------------------------------------------+
-| 9           | > status                           | Confirm status of the cluster on Manager Master Console #2 |
+| 8           | > status                           | Confirm status of the cluster on Manager Master Console #2 |
 +-------------+------------------------------------+------------------------------------------------------------+
 
 
@@ -96,25 +94,11 @@ LeoFS Manager Console on **LeoFS-Manager Master** node
     ------------------------------------------------------------------------------------------------
      node                        state       ring (cur)    ring (prev)   when
     ------------------------------------------------------------------------------------------------
-     storage_0@127.0.0.1         idling                                  2012-06-29 14:23:08 +0900
-     storage_1@127.0.0.1         idling                                  2012-06-29 14:23:08 +0900
-     storage_2@127.0.0.1         idling                                  2012-06-29 14:23:08 +0900
-     storage_3@127.0.0.1         idling                                  2012-06-29 14:23:08 +0900
+     storage_0@127.0.0.1         attach                                  2012-06-29 14:23:08 +0900
+     storage_1@127.0.0.1         attach                                  2012-06-29 14:23:08 +0900
+     storage_2@127.0.0.1         attach                                  2012-06-29 14:23:08 +0900
+     storage_3@127.0.0.1         attach                                  2012-06-29 14:23:08 +0900
 
-
-**'attach'** command - Joined 4-nodes into LeoFS-cluster
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-::
-
-    attach storage_0@127.0.0.1
-    OK
-    attach storage_1@127.0.0.1
-    OK
-    attach storage_2@127.0.0.1
-    OK
-    attach storage_3@127.0.0.1
-    OK
 
 **'start' command** - Launch LeoFS-cluster.
 """""""""""""""""""""""""""""""""""""""""""""
@@ -204,8 +188,6 @@ Command List
 +-----------------------------------+------------------------------------------------------------+
 | Command                           | Explanation                                                |
 +===================================+============================================================+
-| attach ${storage-node}            | Attach a storage node in the cluster                       |
-+-----------------------------------+------------------------------------------------------------+
 | detach ${storage-node}            | Remove a storage node from the cluster                     |
 +-----------------------------------+------------------------------------------------------------+
 | resume ${storage-node}            | Restarting - 'nodedown' or 'stop' - storage node           |
@@ -213,6 +195,8 @@ Command List
 | suspend ${storage-node}           | Suspend a storage node                                     |
 +-----------------------------------+------------------------------------------------------------+
 | start                             | Launch the cluster                                         |
++-----------------------------------+------------------------------------------------------------+
+| rebalance                         | Rebalance files into the cluster                           |
 +-----------------------------------+------------------------------------------------------------+
 | history                           | Retrieve operation histories                               |
 +-----------------------------------+------------------------------------------------------------+
@@ -226,19 +210,17 @@ Command List
 +-----------------------------------+------------------------------------------------------------+
 | purge ${filepath}                 | Purge a cached file if the specified file existed in cache |
 +-----------------------------------+------------------------------------------------------------+
+| s3-gen-key ${user-id}             | Generate a S3 key pair(AccessKeyID and SecretAccessKey)    |
++-----------------------------------+------------------------------------------------------------+
+| s3-set-endpoint ${endpoint}       | Register a new S3 Endpoint                                 |
++-----------------------------------+------------------------------------------------------------+
+| s3-delete-endpoint ${endpoint}    | Delete a S3 Endpoint                                       |
++-----------------------------------+------------------------------------------------------------+
+| s3-get-endpoints                  | Retrieve all of S3 Endpoints registered                    |
++-----------------------------------+------------------------------------------------------------+
+| s3-get-buckets                    | Retrieve all of Buckets registered                         |
++-----------------------------------+------------------------------------------------------------+
 
-.. index::
-   attach-command
-
-**'attach'** - Storage node is joined into the LeoFS-Cluster
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-::
-
-    attach storage_0@127.0.0.1
-    OK
-    rebalance
-    OK
 
 .. index::
    detach-command
@@ -273,6 +255,16 @@ Command List
 ::
 
     suspend storage_0@127.0.0.1
+    OK
+
+
+.. index::
+   rebalance-command
+
+**'rebalance'** - Rebalance files into the cluster
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    rebalance
     OK
 
 .. index::
@@ -425,6 +417,83 @@ Paths used by `purge` are governed by :ref:`this rule <s3-path-label>`
     purge leofs.org/is/s3/comaptible/storage.key
     OK
 
+.. _s3-gen-key:
+
+.. index::
+   s3-gen-key-command
+
+**'s3-gen-key'** - Generate a S3 key pair(AccessKeyID and SecretAccessKey)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Specify a user-id which must be unique across the whole system
+
+::
+
+   s3-gen-key test
+   access-key-id: be8111173c8218aaf1c3
+   secret-access-key: 929b09f9b794832142c59218f2907cd1c35ac163
+
+.. _s3-set-endpoint:
+
+.. index::
+   s3-set-endpoint-command
+
+**'s3-set-endpoint'** - Register a new S3 Endpoint
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Specify a new endpoint to be registered
+
+::
+
+   s3-set-endpoint test
+   OK
+
+.. _s3-delete-endpoint:
+
+.. index::
+   s3-delete-endpoint-command
+
+**'s3-delete-endpoint'** - Delete a S3 Endpoint
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Specify a endpoint to be deleted
+
+::
+
+   s3-delete-endpoint test
+   OK
+
+.. _s3-get-endpoints:
+
+.. index::
+   s3-get-endpoints-command
+
+**'s3-get-endpoints'** - Retrieve all of S3 Endpoints registered
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+::
+
+   s3-get-endpoints
+   [EndPoints]
+   2012-08-24 05:22:50 +0000 | s3.amazonaws.com
+   2012-08-24 05:22:49 +0000 | localhost
+   2012-08-24 05:22:50 +0000 | leofs.org   
+
+.. _s3-get-buckets:
+
+.. index::
+   s3-get-buckets-command
+
+**'s3-get-buckets'** - Retrieve all of Buckets registered
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+::
+
+   s3-get-buckets
+   [Buckets]
+    created at                | bucket (owner)
+   ---------------------------+----------------------------------------------------------------
+    2012-08-29 06:55:15 +0000 | bbb (__leofs__)
 
 .. index::
    attach-new-storage
