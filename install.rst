@@ -385,6 +385,7 @@ Log Dir and Working Dir
                            |--- mnesia
                            `--- queue
 
+.. _system-configuration-label:
 
 Set up LeoFS's system-configuration (Only LeoFS-Manager)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

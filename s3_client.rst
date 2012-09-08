@@ -21,13 +21,13 @@ You can get S3-API's Keys from ``LeoFS's Manager Console``.
   access-key-id: 05dcba94333c7590a635
   secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
+
+.. _aws-sdk-ruby-label:
+
 Getting Started with Ruby: 'aws-sdk'
 ------------------------------------------------------
 
 A part of the Ruby's library, ``aws-sdk``, is available against the LeoFS as a client. It's made by Amazon. The official document of ``aws-sdk`` is here: http://aws.amazon.com/sdkforruby/.
-
-
-.. _aws-sdk-ruby-label:
 
 Install AWS-SDK for Ruby
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -35,7 +35,6 @@ Install AWS-SDK for Ruby
 ::
 
   $ gem install aws-sdk
-
 
 Sample Code
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -127,6 +126,7 @@ HEAD an object from the LeoFS
   p metadata.to_hash
 
 
+.. _aws-s3-ruby-label:
 
 Getting Started with Ruby: 'aws-s3'
 -------------------------------------
@@ -189,6 +189,8 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 .. -------------------------------------
 
 
+.. _s3fs-c-label:
+
 Getting Started with S3FS-C (Ubuntu-12.04 LTS)
 ------------------------------------------------------
 
@@ -243,6 +245,7 @@ Mount "LeoFS"
     $ s3fs ${BUCKET_NAME} ${MOUNT_POINT} -o url='http://${END_POINT}:${PORT}'
 
 
+.. _dragondisk-label:
 
 Connect LeoFS from DragonDisk
 ------------------------------------------------------

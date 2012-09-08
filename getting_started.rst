@@ -90,6 +90,9 @@ Modify “/ets/hosts”
 3. Launch LeoFS's managers and storage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+* Launch master-manager, slave-manager
+* Launch a storage - ``# of replicas is ONE`` - System-configuration's details are :ref:`here <system-configuration-label>`.
+
 ::
 
     $ cd $LEOFS_ROOT/package/leofs
@@ -100,6 +103,8 @@ Modify “/ets/hosts”
 
 4. Launch the system
 ^^^^^^^^^^^^^^^^^^^^^
+
+* Using command is ``start`` on LeoFS's manager-console
 
 ::
 
@@ -115,6 +120,8 @@ Modify “/ets/hosts”
 
 5. Confirmation of the system
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Using command is ``status`` on LeoFS's manager-console
 
 ::
 
@@ -140,7 +147,7 @@ Modify “/ets/hosts”
 5. Getting Your S3-API's Key from LeoFS's Manager-Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Using ``s3-gen-key``
+* Using command is ``s3-gen-key`` on LeoFS's manager-console
 
 ::
 
@@ -154,9 +161,10 @@ Modify “/ets/hosts”
 5. Clients
 ^^^^^^^^^^^
 
-* Using  :ref:`Ruby - ‘aws-sdk’ <aws-sdk-ruby-label>`
+* LeoFS uses any S3-Clients as follows:
+    * :ref:`Ruby - ‘aws-sdk’ <aws-sdk-ruby-label>`
+    * :ref:`Ruby - ‘aws-s3’ <aws-s3-ruby-label>`
+    * :ref:`FUSE - ‘S3FS-C’ <s3fs-c-label>`
+    * :ref:`GUI  - ‘Dragon Disk’ <dragondisk-label>`
 
-::
-
-    $ gem install aws-sdk
 
