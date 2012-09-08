@@ -4,7 +4,7 @@ Amazon S3 Client Tutorials
 Getting Your S3 Key
 ---------------------
 
-You can get s3 keys from ``LeoFS's Manager Console``.
+You can get S3-API's Keys from ``LeoFS's Manager Console``.
 
 ::
 
@@ -17,7 +17,7 @@ You can get s3 keys from ``LeoFS's Manager Console``.
 
 ::
 
-  s3-gen-key hoge
+  s3-gen-key ${USER-ID}
   access-key-id: 05dcba94333c7590a635
   secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
@@ -26,6 +26,8 @@ Getting Started with Ruby: 'aws-sdk'
 
 A part of the Ruby's library, ``aws-sdk``, is available against the LeoFS as a client. It's made by Amazon. The official document of ``aws-sdk`` is here: http://aws.amazon.com/sdkforruby/.
 
+
+.. _aws-sdk-ruby-label:
 
 Install AWS-SDK for Ruby
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -210,26 +212,36 @@ Install "S3FS-C"
     make
     sudo make install
 
-Edit "/ets/hosts"
+Modify "/ets/hosts"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Add a LeoFS's domain in ``/ets/hosts``
+* LeoFS's domains are governed by :ref:`this rule <s3-path-label>`
 
 ::
 
-    127.0.0.1 localhost {bucket_name}.localhost
+    $ sudo vi /ets/hosts
 
-Set "~/.passwd-s3fs"
-^^^^^^^^^^^^^^^^^^^^^^^^^
+    ## Add a LeoFS's domain ##
+    127.0.0.1 localhost ${BUCKET_NAME}.localhost
+
+Create a credential file for S3FS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
-    {access_key}:{secret}
+    $ vi ~/.passwd-s3fs
+
+    ## Set access-key and secret-key ##
+    ${ACCESS_KEY}:${SECRET_KEY}
 
 Mount "LeoFS"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
-    s3fs {bucket_name} {mount_point} -o url='http://{endpoint}:{port}'
+    $ s3fs ${BUCKET_NAME} ${MOUNT_POINT} -o url='http://${END_POINT}:${PORT}'
+
 
 
 Connect LeoFS from DragonDisk
