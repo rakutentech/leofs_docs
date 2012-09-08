@@ -111,14 +111,14 @@ Modify “/ets/hosts”
     $ telnet 127.0.0.1 10010
     > start
 
-4. Launch a LeoFS's gateway
+5. Launch a LeoFS's gateway
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     $ gateway/bin/leo_gateway start
 
-5. Confirmation of the system
+6. Confirmation of the system
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Using command is ``status`` on LeoFS's manager-console
@@ -144,7 +144,7 @@ Modify “/ets/hosts”
      gateway@127.0.0.1           running     1428891014    1428891014    2012-09-07 14:24:37 +0900
 
 
-5. Getting Your S3-API's Key from LeoFS's Manager-Console
+7. Getting Your S3-API's Key from LeoFS's Manager-Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Using command is ``s3-gen-key`` on LeoFS's manager-console
@@ -158,7 +158,7 @@ Modify “/ets/hosts”
 
 
 
-5. Clients
+8. Clients
 ^^^^^^^^^^^
 
 * LeoFS uses any S3-Clients as follows:
@@ -166,5 +166,4 @@ Modify “/ets/hosts”
     * :ref:`Ruby - ‘aws-s3’ <aws-s3-ruby-label>`
     * :ref:`FUSE - ‘S3FS-C’ <s3fs-c-label>`
     * :ref:`GUI  - ‘Dragon Disk’ <dragondisk-label>`
-
 
