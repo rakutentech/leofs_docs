@@ -305,10 +305,8 @@ a. summary
 ::
 
     du storage_0@127.0.0.1
-                  file size: 799466
-     number of total object: 3
-    number of active object: 3
-
+                  file size: 3762871
+     number of total object: 14
 
 b. detail
 ::
@@ -317,42 +315,34 @@ b. detail
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_7.avs
                file size: 48234060240
   number of total object: 9873
- number of active object: 8012
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_6.avs
                file size: 48234060240
   number of total object: 9873
- number of active object: 8012
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_5.avs
                file size: 48234060240
   number of total object: 8013
- number of active object: 7888
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_4.avs
                file size: 48234060240
   number of total object: 8973
- number of active object: 8912
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_3.avs
                file size: 48234060240
   number of total object: 8099
- number of active object: 7966
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_2.avs
                file size: 48234060240
   number of total object: 9673
- number of active object: 8512
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_1.avs
                file size: 48234060240
   number of total object: 9973
- number of active object: 9012
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_0.avs
                file size: 48234060240
   number of total object: 10240
- number of active object: 9012
 
 
 .. index::
