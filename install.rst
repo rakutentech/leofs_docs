@@ -77,7 +77,7 @@ Confirm
 XFS-related
 ------------
 
-.. note:: If You deploy LeoFS on your **DEV environments**, You does NOT need this operaion. But If You deploy LeoFS on your **PRODUCTION environments**, You need to install XFS-libs and create an XFS's partition.
+.. note:: If You deploy LeoFS on your **DEV environments**, You does NOT need this operaion, but if you deploy LeoFS on your **PRODUCTION environments**, You need to install XFS-libs and create an XFS's partition.
 
 Install OS-related libraries (CentOS 6.2) for XFS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
