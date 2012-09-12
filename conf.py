@@ -27,7 +27,7 @@ import cloud_sptheme as csp
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['rst2pdf.pdfbuilder', 'sphinxcontrib.erlangdomain']
+extensions = ['sphinxcontrib.erlangdomain']
 
 
 # Add any paths that contain templates here, relative to this directory.
