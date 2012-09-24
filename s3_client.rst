@@ -4,7 +4,7 @@ Amazon S3 Client Tutorials
 Getting Your S3 Key
 ---------------------
 
-You can get s3 keys from ``LeoFS's Manager Console``.
+You can get S3-API's Keys from ``LeoFS's Manager Console``.
 
 ::
 
@@ -17,15 +17,17 @@ You can get s3 keys from ``LeoFS's Manager Console``.
 
 ::
 
-  s3-gen-key hoge
+  s3-gen-key ${USER-ID}
   access-key-id: 05dcba94333c7590a635
   secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
+
+
+.. _aws-sdk-ruby-label:
 
 Getting Started with Ruby: 'aws-sdk'
 ------------------------------------------------------
 
 A part of the Ruby's library, ``aws-sdk``, is available against the LeoFS as a client. It's made by Amazon. The official document of ``aws-sdk`` is here: http://aws.amazon.com/sdkforruby/.
-
 
 Install AWS-SDK for Ruby
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -33,7 +35,6 @@ Install AWS-SDK for Ruby
 ::
 
   $ gem install aws-sdk
-
 
 Sample Code
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -125,6 +126,7 @@ HEAD an object from the LeoFS
   p metadata.to_hash
 
 
+.. _aws-s3-ruby-label:
 
 Getting Started with Ruby: 'aws-s3'
 -------------------------------------
@@ -187,6 +189,8 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 .. -------------------------------------
 
 
+.. _s3fs-c-label:
+
 Getting Started with S3FS-C (Ubuntu-12.04 LTS)
 ------------------------------------------------------
 
@@ -210,24 +214,62 @@ Install "S3FS-C"
     make
     sudo make install
 
-Edit "/ets/hosts"
+Modify "/ets/hosts"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Add a LeoFS's domain in ``/ets/hosts``
+* LeoFS's domains are governed by :ref:`this rule <s3-path-label>`
 
 ::
 
-    127.0.0.1 localhost {bucket_name}.localhost
+    $ sudo vi /ets/hosts
 
-Set "~/.passwd-s3fs"
-^^^^^^^^^^^^^^^^^^^^^^^^^
+    ## Add a LeoFS's domain ##
+    127.0.0.1 localhost ${BUCKET_NAME}.localhost
+
+Create a credential file for S3FS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
-    {access_key}:{secret}
+    $ vi ~/.passwd-s3fs
+
+    ## Set access-key and secret-key ##
+    ${ACCESS_KEY}:${SECRET_KEY}
 
 Mount "LeoFS"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
-    s3fs {bucket_name} {mount_point} -o url='http://{endpoint}:{port}'
+    $ s3fs ${BUCKET_NAME} ${MOUNT_POINT} -o url='http://${END_POINT}:${PORT}'
+
+
+.. _dragondisk-label:
+
+Connect LeoFS from DragonDisk
+------------------------------------------------------
+
+DragonDisk is a powerful file manager for Amazon S3 Compatible Storage.
+
+URL: http://www.dragondisk.com/
+
+
+Setting up LeoFS account details
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* To setup your LeoFS's account, go to the menu ``File/Accounts``.
+* If the details are valid, you can see that S3 has been added on the Root list.
+
+.. image:: _static/images/dragondisk-2.png
+   :width: 320px
+
+Operating files from  main view
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* You can ``upload files`` into the LeoFS, ``download file`` from the LeoFS and operate others.
+
+.. image:: _static/images/dragondisk-1.png
+   :width: 720px
+
 

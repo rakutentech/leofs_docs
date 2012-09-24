@@ -81,23 +81,23 @@ LeoFS Manager Console on **LeoFS-Manager Master** node
 
     status
     [system config]
-                 version : 0.9.0
-     # of replicas       : 1
+                 version : 0.10.1
+     # of replicas       : 3
      # of successes of R : 1
-     # of successes of W : 1
-     # of successes of D : 1
+     # of successes of W : 2
+     # of successes of D : 2
                ring size : 2^128
         ring hash (cur)  : -1
         ring hash (prev) : -1
 
     [node(s) state]
-    ------------------------------------------------------------------------------------------------
-     node                        state       ring (cur)    ring (prev)   when
-    ------------------------------------------------------------------------------------------------
-     storage_0@127.0.0.1         attach                                  2012-06-29 14:23:08 +0900
-     storage_1@127.0.0.1         attach                                  2012-06-29 14:23:08 +0900
-     storage_2@127.0.0.1         attach                                  2012-06-29 14:23:08 +0900
-     storage_3@127.0.0.1         attach                                  2012-06-29 14:23:08 +0900
+    -------------------------------------------------------------------------------------------------
+     type node                    state       ring (cur)    ring (prev)   when
+    -------------------------------------------------------------------------------------------------
+     S    storage_0@127.0.0.1     attached                                2012-09-12 14:16:10 +0900
+     S    storage_1@127.0.0.1     attached                                2012-09-12 14:17:08 +0900
+     S    storage_2@127.0.0.1     attached                                2012-09-12 14:17:23 +0900
+     S    storage_3@127.0.0.1     attached                                2012-09-12 14:18:00 +0900
 
 
 **'start' command** - Launch LeoFS-cluster.
@@ -115,22 +115,23 @@ Confirm#1 by **LeoFS-Manager** node's console
 
     status
     [system config]
-                 version : 0.9.0
-     # of replicas       : 1
+                 version : 0.10.1
+     # of replicas       : 3
      # of successes of R : 1
-     # of successes of W : 1
-     # of successes of D : 1
+     # of successes of W : 2
+     # of successes of D : 2
                ring size : 2^128
-              ring state : 1428891014
+        ring hash (cur)  : 1428891014
+        ring hash (prev) : 1428891014
 
     [node(s) state]
-    ------------------------------------------------------------------------------------------------
-     node                        state       ring (cur)    ring (prev)   when
-    ------------------------------------------------------------------------------------------------
-     storage_0@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:08 +0900
-     storage_1@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:08 +0900
-     storage_2@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:08 +0900
-     storage_3@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:08 +0900
+    -------------------------------------------------------------------------------------------------
+     type node                    state       ring (cur)    ring (prev)   when
+    -------------------------------------------------------------------------------------------------
+     S    storage_0@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:16:10 +0900
+     S    storage_1@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:17:08 +0900
+     S    storage_2@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:17:23 +0900
+     S    storage_3@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:18:00 +0900
 
 
 Launch Gateway on each **LeoFS-Gateway** node.
@@ -149,23 +150,24 @@ Confirm#2 by **LeoFS-Manager** master node's console
 
     status
     [system config]
-                 version : 0.9.0
-     # of replicas       : 1
+                 version : 0.10.1
+     # of replicas       : 3
      # of successes of R : 1
-     # of successes of W : 1
-     # of successes of D : 1
+     # of successes of W : 2
+     # of successes of D : 2
                ring size : 2^128
-              ring state : 1428891014
+        ring hash (cur)  : 1428891014
+        ring hash (prev) : 1428891014
 
     [node(s) state]
-    ------------------------------------------------------------------------------------------------
-     node                        state       ring (cur)    ring (prev)   when
-    ------------------------------------------------------------------------------------------------
-     storage_0@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:08 +0900
-     storage_1@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:08 +0900
-     storage_2@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:08 +0900
-     storage_3@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:08 +0900
-     gateway_0@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:26 +0900
+    -------------------------------------------------------------------------------------------------
+     type node                    state       ring (cur)    ring (prev)   when
+    -------------------------------------------------------------------------------------------------
+     S    storage_0@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:16:10 +0900
+     S    storage_1@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:17:08 +0900
+     S    storage_2@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:17:23 +0900
+     S    storage_3@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:18:00 +0900
+     G    gateway_0@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:23:26 +0900
 
 
 LeoFS-cluster's operation commands
@@ -217,6 +219,8 @@ Command List
 | s3-delete-endpoint ${endpoint}    | Delete a S3 Endpoint                                       |
 +-----------------------------------+------------------------------------------------------------+
 | s3-get-endpoints                  | Retrieve all of S3 Endpoints registered                    |
++-----------------------------------+------------------------------------------------------------+
+| s3-get-buckets                    | Retrieve all of Buckets registered                         |
 +-----------------------------------+------------------------------------------------------------+
 
 
@@ -303,10 +307,8 @@ a. summary
 ::
 
     du storage_0@127.0.0.1
-                  file size: 799466
-     number of total object: 3
-    number of active object: 3
-
+                  file size: 3762871
+     number of total object: 14
 
 b. detail
 ::
@@ -315,42 +317,34 @@ b. detail
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_7.avs
                file size: 48234060240
   number of total object: 9873
- number of active object: 8012
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_6.avs
                file size: 48234060240
   number of total object: 9873
- number of active object: 8012
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_5.avs
                file size: 48234060240
   number of total object: 8013
- number of active object: 7888
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_4.avs
                file size: 48234060240
   number of total object: 8973
- number of active object: 8912
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_3.avs
                file size: 48234060240
   number of total object: 8099
- number of active object: 7966
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_2.avs
                file size: 48234060240
   number of total object: 9673
- number of active object: 8512
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_1.avs
                file size: 48234060240
   number of total object: 9973
- number of active object: 9012
 
                file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_0.avs
                file size: 48234060240
   number of total object: 10240
- number of active object: 9012
 
 
 .. index::
@@ -362,7 +356,7 @@ b. detail
 ::
 
     [system config]
-                 version : 0.9.0
+                 version : 0.10.1
      # of replicas       : 1
      # of successes of R : 1
      # of successes of W : 1
@@ -372,14 +366,14 @@ b. detail
         ring hash (prev) : 1428891014
 
     [node(s) state]
-    ------------------------------------------------------------------------------------------------
-     node                        state       ring (cur)    ring (prev)   when
-    ------------------------------------------------------------------------------------------------
-     storage_0@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:08 +0900
-     storage_1@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:08 +0900
-     storage_2@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:08 +0900
-     storage_3@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:08 +0900
-     gateway_0@127.0.0.1         running     1428891014    1428891014    2012-06-29 14:23:26 +0900
+    -------------------------------------------------------------------------------------------------
+     type node                    state       ring (cur)    ring (prev)   when
+    -------------------------------------------------------------------------------------------------
+     S    storage_0@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:16:10 +0900
+     S    storage_1@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:17:08 +0900
+     S    storage_2@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:17:23 +0900
+     S    storage_3@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:18:00 +0900
+     G    gateway_0@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:23:26 +0900
 
 .. _whereis:
 
@@ -471,11 +465,30 @@ Specify a endpoint to be deleted
 
 ::
 
-   s3-get-endpoints
-   [EndPoints]
-   2012-08-24 05:22:50 +0000 | s3.amazonaws.com
-   2012-08-24 05:22:49 +0000 | localhost
-   2012-08-24 05:22:50 +0000 | leofs.org   
+    s3-get-endpoints
+    endpoint         | created at
+    -----------------+---------------------------
+    s3.amazonaws.com | 2012-09-12 14:09:52 +0900
+    localhost        | 2012-09-12 14:09:52 +0900
+    leofs.org        | 2012-09-12 14:09:52 +0900
+
+.. _s3-get-buckets:
+
+.. index::
+   s3-get-buckets-command
+
+**'s3-get-buckets'** - Retrieve all of Buckets registered
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+::
+
+    s3-get-buckets
+    bucket | owner     | created at
+    -------+-----------+---------------------------
+    backup | __leofs__ | 2012-09-12 14:30:07 +0900
+    docs   | __leofs__ | 2012-09-12 14:29:30 +0900
+    logs   | __leofs__ | 2012-09-12 14:29:34 +0900
+    photo  | __leofs__ | 2012-09-12 14:29:26 +0900
 
 .. index::
    attach-new-storage
@@ -485,7 +498,7 @@ Specify a endpoint to be deleted
 
 **Attach/Detach node from the cluster during in operation**
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-\ 
+\
 
 .. image:: _static/images/leofs-order-of-attach.png
    :width: 720px
@@ -653,7 +666,7 @@ b. SNMPA-Items
 +------------------+------------------------------------+
 | 17               | # of DELETEs                       |
 +------------------+------------------------------------+
-| **# of objects**  (plan to support with 0.9.1)        |
+| **# of objects**  (plan to support with 0.12.0)       |
 +------------------+------------------------------------+
 | 18               | # of active objects                |
 +------------------+------------------------------------+

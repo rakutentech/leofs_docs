@@ -77,7 +77,7 @@ Confirm
 XFS-related
 ------------
 
-.. note:: If You deploy LeoFS on your **DEV environments**, You does NOT need this operaion. But If You deploy LeoFS on your **PRODUCTION environments**, You need to install XFS-libs and create an XFS's partition.
+.. note:: If You deploy LeoFS on your **DEV environments**, You does NOT need this operaion, but if you deploy LeoFS on your **PRODUCTION environments**, You need to install XFS-libs and create an XFS's partition.
 
 Install OS-related libraries (CentOS 6.2) for XFS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -385,6 +385,7 @@ Log Dir and Working Dir
                            |--- mnesia
                            `--- queue
 
+.. _system-configuration-label:
 
 Set up LeoFS's system-configuration (Only LeoFS-Manager)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -421,7 +422,7 @@ Set up LeoFS's system-configuration (Only LeoFS-Manager)
 
 * **Example - File: ${LEOFS_SRC}/package/leofs/manager_0/etc/app.config**:
 
-::
+.. code-block:: erlang
 
     [
         {sasl, [
@@ -525,7 +526,7 @@ LeoFS Manager-Master
 |                | - [snmpa_manager_0|snmpa_manager_1|snmpa_manager_0]    |
 +----------------+--------------------------------------------------------+
 
-::
+.. code-block:: erlang
 
     [
         {sasl, [
@@ -613,7 +614,7 @@ Manager-Slave's Properties for launch
 |${SNMPA-DIR}    | SNMPA configuration files directory                    |
 +----------------+--------------------------------------------------------+
 
-::
+.. code-block:: erlang
 
     [
         {sasl, [
@@ -709,7 +710,7 @@ Storage's Properties for launch
 |                         | - [snmpa_storage_0|snmpa_storage_1|snmpa_storage_0]    |
 +-------------------------+--------------------------------------------------------+
 
-::
+.. code-block:: erlang
 
     [
         {sasl, [
@@ -852,8 +853,7 @@ Gateway's Properties for launch
 |                    | (ex. 4000000000 means using 4GB memory cache)          |
 +--------------------+--------------------------------------------------------+
 
-
-::
+.. code-block:: erlang
 
     [
         {sasl, [

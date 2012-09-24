@@ -41,12 +41,17 @@ Milestones
 * 0.12 (Oct 2012)
     * Large Object Support
     * Support Cowboy on "leo_gateway"
-    * Web-Console (Leo Tamer)
+    * Web-Console (LeoTamer)
         * Log Analysis/Search
+
+.. image:: _static/images/leofs-web-console.png
+   :width: 480px
+
 * 0.14 (Dec 2012)
     * Multi-layer Cache (Using SSD)
+    * Multi-tenant
     * Streaming
-    * Web-Console (Leo Tamer)
+    * Web-Console (LeoTamer)
         * Cluster manager/monitor
 * 0.16 (2013)
     * HBase integration
