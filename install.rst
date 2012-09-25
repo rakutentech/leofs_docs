@@ -184,9 +184,12 @@ Reboot
 Execute 'Format partition'
 """""""""""""""""""""""""""
 
+* Reference(EN): <http://www.ibm.com/developerworks/linux/library/l-fs10/index.html>
+* Reference(JP): <http://www.ibm.com/developerworks/jp/linux/library/l-fs10/index.html>
+
 ::
 
-   # mkfs.xfs -d agcount=13 -l size=32m /dev/sda3
+   # mkfs.xfs -d agcount=4 -l size=32m ${TARGET_PARTITION}
 
 Modify "/etc/fstab" file
 """""""""""""""""""""""""
@@ -563,7 +566,7 @@ LeoFS Manager-Master
     ].
 
 
-* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_0/etc/vm.config**
+* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_0/etc/vm.args**
 
 +----------------+--------------------------------------------------------+
 |Property        | Configuration                                          |
@@ -651,7 +654,7 @@ Manager-Slave's Properties for launch
     ].
 
 
-* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_1/etc/vm.config**
+* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_1/etc/vm.args**
 
 +----------------+--------------------------------------------------------+
 |Property        | Configuration                                          |
@@ -733,10 +736,10 @@ Storage's Properties for launch
                   %%   If you set up LeoFS on 'production' or 'staging', You should need to change "volume",
                   %%       And We recommend volume's partition is XFS.
                   %%
-                  {obj_containers,     [{path, "./avs"}, {num_of_containers, 64}] },
+                  {obj_containers,     [{path, "${OBJECT_STORAGE_DIR}"}, {num_of_containers, 64}] },
 
                   %% leo-manager's nodes
-                  {managers,           ["manager_0@127.0.0.1", "manager_1@127.0.0.1"] },
+                  {managers,           ["manager_0@${MANAGER_MASTER_IP}", "manager_1@${MANAGER_SLAVE_IP}"] },
 
                   %% # of virtual-nodes
                   {num_of_vnodes,      64 },
@@ -765,7 +768,7 @@ Storage's Properties for launch
                  .
                  .
 
-* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/storage/etc/vm.config**
+* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/storage/etc/vm.args**
 
 +-------------------------+--------------------------------------------------------+
 |Property                 | Configuration                                          |
@@ -898,7 +901,7 @@ Gateway's Properties for launch
                  .
                  .
 
-* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/gateway/etc/vm.config**
+* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/gateway/etc/vm.args**
 
 +--------------------+--------------------------------------------------------+
 |Property            | Configuration                                          |
