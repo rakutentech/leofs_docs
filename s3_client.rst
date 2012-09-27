@@ -78,16 +78,16 @@ PUT an object into the LeoFS
 .. code-block:: ruby
 
   # create bucket
-  s3.buckets.create("test")
+  s3.buckets.create("photo")
 
   # get bucket
-  bucket = s3.buckets["test"]
+  bucket = s3.buckets["photo"]
 
   # create new object - like unix's touch-command
-  object = bucket.objects.create("image")
+  object = bucket.objects.create("image", "value")
 
   # show objects in the bucket
-  bucket.objects.each do |obj|
+  bucket.objects.with_prefix("").each do |obj|
     p obj
   end
 
