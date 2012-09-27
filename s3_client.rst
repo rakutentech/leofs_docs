@@ -83,7 +83,7 @@ PUT an object into the LeoFS
   # get bucket
   bucket = s3.buckets["photo"]
 
-  # create new object - like unix's touch-command
+  # create a new object
   object = bucket.objects.create("image", "value")
 
   # show objects in the bucket
@@ -91,10 +91,10 @@ PUT an object into the LeoFS
     p obj
   end
 
-  # get S3Object
+  # get an object
   object = bucket.objects["image"]
 
-  # write object from file
+  # Insert an object
   object.write(
     file: "/path/to/image.png",
     content_type: "png/image"
