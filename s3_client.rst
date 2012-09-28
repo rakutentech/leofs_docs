@@ -91,10 +91,10 @@ PUT an object into the LeoFS
     p obj
   end
 
-  # get an object
+  # retrieve an object
   object = bucket.objects["image"]
 
-  # Insert an object
+  # insert an object
   object.write(
     file: "/path/to/image.png",
     content_type: "png/image"
@@ -263,6 +263,16 @@ Setting up LeoFS account details
 
 .. image:: _static/images/dragondisk-2.png
    :width: 320px
+
+Create a bucket
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* You need to create a bucket. Because each object is stored in a bucket.
+* A bucket retrieved via a unique, developer-assigned key.
+
+.. image:: _static/images/dragondisk-3.png
+   :width: 720px
+
 
 Operating files from  main view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
