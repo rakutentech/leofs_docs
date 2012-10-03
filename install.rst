@@ -855,6 +855,9 @@ Gateway's Properties for launch
 |${CACHE_TOTAL_SIZE} | Total Memory Cache Size in byte                        |
 |                    | (ex. 4000000000 means using 4GB memory cache)          |
 +--------------------+--------------------------------------------------------+
+|${USE_S3_AUTH}      | Whether using S3 Authentication or not in Bool         |
+|                    | default true.                                          |
++--------------------+--------------------------------------------------------+
 
 .. code-block:: erlang
 
@@ -872,6 +875,7 @@ Gateway's Properties for launch
                   {port, ${LISTENING_PORT} },
                   {num_of_acceptors, ${NUM_OF_LISTENNER} },
                   {managers, ["manager_0@${MANAGER_MASTER_IP}", "manager_1@${MANAGER_SLAVE_IP}"] },
+                  {use_auth, ${USE_S3_AUTH}}
 
                   %% Cache Configuration(Optional)
                   {cache_plugin, ${CACHE_PLUGIN} },
