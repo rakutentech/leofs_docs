@@ -4,7 +4,7 @@ Amazon S3 Client Tutorials
 Getting Your S3 Key
 ---------------------
 
-You can get s3 keys from ``LeoFS's Manager Console``.
+You can get S3-API's Keys from ``LeoFS's Manager Console``.
 
 ::
 
@@ -17,15 +17,17 @@ You can get s3 keys from ``LeoFS's Manager Console``.
 
 ::
 
-  s3-gen-key hoge
+  s3-gen-key ${USER-ID}
   access-key-id: 05dcba94333c7590a635
   secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
+
+
+.. _aws-sdk-ruby-label:
 
 Getting Started with Ruby: 'aws-sdk'
 ------------------------------------------------------
 
 A part of the Ruby's library, ``aws-sdk``, is available against the LeoFS as a client. It's made by Amazon. The official document of ``aws-sdk`` is here: http://aws.amazon.com/sdkforruby/.
-
 
 Install AWS-SDK for Ruby
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -33,7 +35,6 @@ Install AWS-SDK for Ruby
 ::
 
   $ gem install aws-sdk
-
 
 Sample Code
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -77,23 +78,23 @@ PUT an object into the LeoFS
 .. code-block:: ruby
 
   # create bucket
-  s3.buckets.create("test")
+  s3.buckets.create("photo")
 
   # get bucket
-  bucket = s3.buckets["test"]
+  bucket = s3.buckets["photo"]
 
-  # create new object - like unix's touch-command
-  object = bucket.objects.create("image")
+  # create a new object
+  object = bucket.objects.create("image", "value")
 
   # show objects in the bucket
-  bucket.objects.each do |obj|
+  bucket.objects.with_prefix("").each do |obj|
     p obj
   end
 
-  # get S3Object
+  # retrieve an object
   object = bucket.objects["image"]
 
-  # write object from file
+  # insert an object
   object.write(
     file: "/path/to/image.png",
     content_type: "png/image"
@@ -125,6 +126,7 @@ HEAD an object from the LeoFS
   p metadata.to_hash
 
 
+.. _aws-s3-ruby-label:
 
 Getting Started with Ruby: 'aws-s3'
 -------------------------------------
@@ -268,6 +270,8 @@ Sample Code
 .. -------------------------------------
 
 
+.. _s3fs-c-label:
+
 Getting Started with S3FS-C (Ubuntu-12.04 LTS)
 ------------------------------------------------------
 
@@ -291,27 +295,38 @@ Install "S3FS-C"
     make
     sudo make install
 
-Edit "/ets/hosts"
+Modify "/ets/hosts"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Add a LeoFS's domain in ``/ets/hosts``
+* LeoFS's domains are governed by :ref:`this rule <s3-path-label>`
 
 ::
 
-    127.0.0.1 localhost {bucket_name}.localhost
+    $ sudo vi /ets/hosts
 
-Set "~/.passwd-s3fs"
-^^^^^^^^^^^^^^^^^^^^^^^^^
+    ## Add a LeoFS's domain ##
+    127.0.0.1 localhost ${BUCKET_NAME}.localhost
+
+Create a credential file for S3FS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
-    {access_key}:{secret}
+    $ vi ~/.passwd-s3fs
+
+    ## Set access-key and secret-key ##
+    ${ACCESS_KEY}:${SECRET_KEY}
 
 Mount "LeoFS"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
-    s3fs {bucket_name} {mount_point} -o url='http://{endpoint}:{port}'
+    $ s3fs ${BUCKET_NAME} ${MOUNT_POINT} -o url='http://${END_POINT}:${PORT}'
 
+
+.. _dragondisk-label:
 
 Connect LeoFS from DragonDisk
 ------------------------------------------------------
@@ -329,6 +344,16 @@ Setting up LeoFS account details
 
 .. image:: _static/images/dragondisk-2.png
    :width: 320px
+
+Create a bucket
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* You need to create a bucket. Because each object is stored in a bucket.
+* A bucket retrieved via a unique, developer-assigned key.
+
+.. image:: _static/images/dragondisk-3.png
+   :width: 720px
+
 
 Operating files from  main view
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
