@@ -266,18 +266,71 @@ Sample Code
   # delete S3Object
   s3_object.delete()
 
+.. _aws-sdk-php-label:
+
 Getting Started with PHP: 'aws-sdk'
 ------------------------------------------------------
 
-Install aws-sdk
-^^^^^^^^^^^^^^^
+Install aws-sdk for PHP
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Install PEAR (Debian)
-"""""""""""""""""""""
+php5-curl (Debian)
+""""""""""""""""""
 
 ::
 
-  sudo apt-get install php5 php5-curl php-pear
+  sudo apt-get install php5-curl
+
+PEAR (Debian)
+"""""""""""""
+
+::
+
+  sudo apt-get install php-pear
+
+aws-sdk for PHP
+^^^^^^^^^^^^^^^^
+
+::
+
+  sudo pear channel-discover pear.amazonwebservices.com
+  sudo pear install aws/sdk
+
+Sample Code
+^^^^^^^^^^^
+
+.. code-block:: php
+
+  <?php
+  require_once 'AWSSDKforPHP/sdk.class.php';
+
+  const Host = "192.168.11.111";
+
+  $s3 = new AmazonS3(array(
+    "key" => "YOUR ACCESS KEY ID",
+    "secret" => "YOUR SECRET ACCESS KEY",
+  ));
+  
+  $s3->enable_path_style();
+  
+  $bucket_name = "bucket";
+  $object_name = "hoge";
+  
+  # create object
+  $object = $s3->create_object($bucket_name, $object_name, array("body" => "This is a new object."));
+  
+  # get object
+  $object = $s3->get_object($bucket_name, $object_name);
+  print_r($object);
+  
+  # head
+  $head = $s3->get_object_headers($bucket_name, $object_name);
+  print_r($head);
+  
+  # delete
+  $result = $s3->delete_object($bucket_name, $object_name);
+  print_r($result);
+  ?>
 
 .. Getting Started with Node: 'knox'
 .. -------------------------------------
