@@ -266,6 +266,19 @@ Sample Code
   # delete S3Object
   s3_object.delete()
 
+Getting Started with PHP: 'aws-sdk'
+------------------------------------------------------
+
+Install aws-sdk
+^^^^^^^^^^^^^^^
+
+Install PEAR (Debian)
+"""""""""""""""""""""
+
+::
+
+  sudo apt-get install php5 php5-curl php-pear
+
 .. Getting Started with Node: 'knox'
 .. -------------------------------------
 
