@@ -234,7 +234,7 @@ Sample Code
   bucket = conn.create_bucket("leofs-bucket")
 
   # create object
-  s3_object = bucket.new_key("hoge")
+  s3_object = bucket.new_key("image_file")
 
   # write
   s3_object.set_contents_from_string("This is a text.")
@@ -254,7 +254,7 @@ Sample Code
   print bucket
   
   # get S3Object
-  s3_object = bucket.get_key("hoge")
+  s3_object = bucket.get_key("image_file")
   print s3_object
   
   # read
@@ -314,7 +314,7 @@ Sample Code
   $s3->enable_path_style();
   
   $bucket_name = "bucket";
-  $object_name = "hoge";
+  $object_name = "image_file";
   
   # create object
   $object = $s3->create_object($bucket_name, $object_name, array("body" => "This is a new object."));
