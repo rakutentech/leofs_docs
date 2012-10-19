@@ -81,7 +81,7 @@ LeoFS Manager Console on **LeoFS-Manager Master** node
 
     status
     [system config]
-                 version : 0.10.1
+                 version : 0.12.0
      # of replicas       : 3
      # of successes of R : 1
      # of successes of W : 2
@@ -115,7 +115,7 @@ Confirm#1 by **LeoFS-Manager** node's console
 
     status
     [system config]
-                 version : 0.10.1
+                 version : 0.12.0
      # of replicas       : 3
      # of successes of R : 1
      # of successes of W : 2
@@ -150,7 +150,7 @@ Confirm#2 by **LeoFS-Manager** master node's console
 
     status
     [system config]
-                 version : 0.10.1
+                 version : 0.12.0
      # of replicas       : 3
      # of successes of R : 1
      # of successes of W : 2
@@ -356,7 +356,7 @@ b. detail
 ::
 
     [system config]
-                 version : 0.10.1
+                 version : 0.12.0
      # of replicas       : 1
      # of successes of R : 1
      # of successes of W : 1
@@ -388,11 +388,11 @@ Paths used by `whereis` are governed by :ref:`this rule <s3-path-label>`
 ::
 
     whereis leofs.org/is/s3/comaptible/storage.key
-    ------------------------------------------------------------------------------------------------------------
-     del? node                 ring address    size      checksum    vclock            when
-    ------------------------------------------------------------------------------------------------------------
-          storage_1@127.0.0.1  207643840133    35409     4116193149  1332407492290951  2012-06-29 14:23:31 +0900
-          storage_0@127.0.0.1  207643840133    35409     4116193149  1332407492290951  2012-06-29 14:23:31 +0900
+    -----------------------------------------------------------------------------------------------------------------------
+     del? node                 ring address    size   # of chunks  checksum    vclock            when
+    -----------------------------------------------------------------------------------------------------------------------
+          storage_1@127.0.0.1  207643840133    35409  0             4116193149  1332407492290951  2012-06-29 14:23:31 +0900
+          storage_0@127.0.0.1  207643840133    35409  0             4116193149  1332407492290951  2012-06-29 14:23:31 +0900
 
 .. _purge:
 

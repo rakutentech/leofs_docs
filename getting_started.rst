@@ -17,8 +17,6 @@ most Linux platforms with the following software:
 And the following erlang libraries:
 
 * Basho Bitcask <https://github.com/basho/bitcask>
-* Basho eleveldb <https://github.com/basho/eleveldb>
-* Mochimedia Mochweb <https://github.com/mochi/mochiweb>
 * Ninenines Cowboy <https://github.com/extend/cowboy>
 * Boundary Folsom <https://github.com/boundary/folsom>
 

@@ -266,7 +266,7 @@ After executed make-command
       |      |--- bitcask/
       |      |--- cherly/
       |      |--- cowboy/
-      |      |--- ecache_app/
+      |      |--- ecache/
       |      |--- eleveldb/
       |      |--- folsom/
       |      |--- jiffy/
@@ -282,9 +282,10 @@ After executed make-command
       |      |--- leo_s3_libs/
       |      |--- leo_statistics/
       |      |--- leo_storage/
+      |      |--- lz4/
       |      |--- meck/
-      |      |--- mochiweb/
-      |      `--- proper/
+      |      |--- proper/
+      |      `--- snappy/
       |---- doc/
       |---- rebar
       |---- rebar.config
