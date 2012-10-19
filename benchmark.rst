@@ -47,13 +47,13 @@ Some samples are included in leofs repo where path is ${LEOFS_ROOT}/test/conf/le
     {driver, basho_bench_driver_leofs}.
     {code_paths, ["deps/ibrowse"]}.
     
-    {http_raw_ips, ["localhost"]}.
+    {http_raw_ips, ["${HOST_NAME}"]}.
     {http_raw_port, 8080}.
-    {http_raw_path, "/bbb"}.
+    {http_raw_path, "/${BUCKET}"}.
     
     {key_generator,   {partitioned_sequential_int, 1000000}}.
-    {value_generator, {fixed_bin, 16384}}.
-    {operations, [{put,1}]}.
+    {value_generator, {fixed_bin, 16384}}. %% 16KB
+    {operations, [{put,1}]}. %% PUT:100%
 
 Description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

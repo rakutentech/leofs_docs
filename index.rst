@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-LeoFS v0.10 Manual
+LeoFS v0.12 Manual
 ================================
 
 **"LeoFS"** is a highly available, distributed, eventually consistent object/blob store. Organizations can use **"LeoFS"** to store lots of data efficiently, safely, and inexpensive.
