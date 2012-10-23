@@ -31,9 +31,9 @@ Getting LeoFS
 * Leo Project/leofs: <https://github.com/leo-project/leofs>
 
 
----------------------------
-Quick Start -1 All in one
----------------------------
+------------------------------------------------------
+Quick Start -1 All in one for Application Development
+------------------------------------------------------
 
 1. Install
 ^^^^^^^^^^
