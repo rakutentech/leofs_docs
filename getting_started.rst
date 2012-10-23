@@ -31,9 +31,10 @@ Getting LeoFS
 * Leo Project/leofs: <https://github.com/leo-project/leofs>
 
 
--------------
-Quick Start
--------------
+---------------------------
+Quick Start -1 All in one
+---------------------------
+
 1. Install
 ^^^^^^^^^^
 
@@ -165,3 +166,9 @@ Modify “/ets/hosts”
     * :ref:`FUSE - ‘S3FS-C’ <s3fs-c-label>`
     * :ref:`GUI  - ‘Dragon Disk’ <dragondisk-label>`
 
+
+---------------------------
+Quick Start -2 Cluster
+---------------------------
+
+...under construction...
