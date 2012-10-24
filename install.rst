@@ -34,7 +34,7 @@ Install OS-related libraries (Ubuntu Server 12.04 LTS)
 
 ::
 
-   # sudo apt-get install libtool libncurses5-dev
+   # sudo apt-get install libtool libncurses5-dev libssl-dev
 
 
 Download "Erlang R14B04"
