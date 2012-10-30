@@ -872,37 +872,91 @@ Gateway's Properties for launch
                ]},
         {leo_gateway,
                  [
-                  %% Gateway Configuration
-                  {port, ${LISTENING_PORT} },
-                  {num_of_acceptors, ${NUM_OF_LISTENNER} },
-                  {managers, ["manager_0@${MANAGER_MASTER_IP}", "manager_1@${MANAGER_SLAVE_IP}"] },
-                  {use_auth, ${USE_S3_AUTH}}
+                   %% == Gateway Properties ==
+                   {listener, leo_s3_http},
+                   {layer_of_dirs, {1, 12} },
 
-                  %% Cache Configuration(Optional)
-                  {cache_plugin, ${CACHE_PLUGIN} },
-                  {cache_expire, ${CACHE_EXPIRE} },
-                  {cache_max_content_len, ${CACHE_MAX_C_LEN} },
-                  {cachable_path_pattern, ${CACHE_PATH_PAT} },
-                  {cachable_content_type, ${CACHE_C_TYPE} },
+                   {s3_http, [
+                              %% Use S3-API ?
+                              {s3_api, true},
 
-                  %% Log-specific properties.
-                  {log_level,    0 },
-                  {log_appender, [file]},
+                              %% HTTP-Server: [cowboy]
+                              {http_server, cowboy},
 
-                  %% Directories
-                  {log_dir,     "./log"},
-                  {queue_dir,   "./work/queue"},
-                  {snmp_agent,  "./snmp/${SNMPA-DIR}/LEO-GATEWAY"}
-                 ]},
+                              %% Gateway's port number
+                              {port, ${LISTENING_PORT} },
+
+                              %% # of acceptors
+                              {num_of_acceptors, ${NUM_OF_LISTENNER} },
+
+                              %% == ssl related ==
+                              {ssl_port,     8443 },
+                              {ssl_certfile, "./etc/server_cert.pem" },
+                              {ssl_keyfile,  "./etc/server_key.pem" },
+
+                              %% == large-object related ==
+                              {acceptable_max_obj_len, 2147483648 }, %% 2GB
+                              {chunked_obj_len,        4194304    }, %% 4MB
+                              {threshold_obj_len,      5242880    }, %% 5MB
+
+                              %% == Cache related ==
+                              %% Name of the cache plugin
+                              {cache_plugin, ${CACHE_PLUGIN} },
+
+                              %% Cache expire time. Unit is minutes.
+                              %% Unit is minutes - 300 = 5min
+                              {cache_expire, ${CACHE_EXPIRE} },
+
+                              %% Cache: Acceptable maximum content length
+                              %% Unit is bytes - 1048576 = 1MB
+                              {cache_max_content_len, ${CACHE_MAX_C_LEN} },
+
+                              %% Cache: Acceptable content-type(s)
+                              {cachable_content_type, ${CACHE_C_TYPE} },
+
+                              %% Cache: Acceptable URL-Pattern(s)
+                              {cachable_path_pattern, ${CACHE_PATH_PAT} }
+                             ]},
+
+                   %% == Manager ==
+                   %% leo-manager's nodes
+                   {managers, ["manager_0@127.0.0.1", "manager_1@127.0.0.1"] },
+
+                   %% == For Ordning-Reda ==
+                   %% Size of stacked objects (bytes)
+                   {size_of_stacked_objs,    10485760 },
+                   %% Stacking timeout (msec)
+                   {stacking_timeout,        5000 },
+
+                   %% == Log-specific properties ==
+                   %% Log output level
+                   %%   0: debug
+                   %%   1: info
+                   %%   2: warning
+                   %%   3: error
+                   {log_level,    1 },
+                   %% Log appender - [file]
+                   {log_appender, [
+                                   {file, [{path, "./log/app"}]}
+                                  ]},
+
+                   %% == Directories ==
+                   %% Directory of log output
+                   {log_dir,     "./log"},
+                   %% Directory of mq's db-files
+                   {queue_dir,   "./work/queue"},
+                   %% Directory of snmp-agent
+                   {snmp_agent,  "./snmp/${SNMPA-DIR}/LEO-GATEWAY"}
+                  ]},
         {ecache,
-                [
+                 [
                    %% Total of cache-size (capacity)
                    %% Unit is byte - 1000000000 = 1GB
-                   {rec_max_size, 1000000000 },
+                   {total_cache_size, 1073741824 },
 
                    %% # of cache-server processes
                    {proc_num, 32}
-                ]},
+                 ]},
                  .
                  .
 
