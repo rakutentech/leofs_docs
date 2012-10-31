@@ -435,17 +435,17 @@ Operating files from  main view
 Connect LeoFS from s3cmd
 ------------------------------------------------------
 
-Download
-^^^^^^^^^^
+Getting "s3cmd"
+^^^^^^^^^^^^^^^
 
-http://s3tools.org/s3cmd
+s3cmd is here: http://sourceforge.net/projects/s3tools/files/
 
 Configure
 ^^^^^^^^^^^^
 
 ::
 
-  $ ./s3cmd --configure
+  $ s3cmd --configure
 
   Enter new values or accept defaults in brackets with Enter.
   Refer to user manual for detailed description of all options.
@@ -470,45 +470,52 @@ Configure
   HTTP Proxy server port [3128]: 8080
   
   New settings:
-    Access Key: 
-    Secret Key: 
+    Access Key: ${ACCESS_KEY}
+    Secret Key: ${SECRET_KEY}
     Encryption password: 
     Path to GPG program: /usr/bin/gpg
     Use HTTPS protocol: False
-    HTTP Proxy server name: localhost
-    HTTP Proxy server port: 8080
+    HTTP Proxy server name: ${ENDPOINT}
+    HTTP Proxy server port: ${PORT}
   
   Test access with supplied credentials? [Y/n] 
 
-Note: Set your LeoFS gateway host and port as HTTP Proxy server name and port.
+.. note:: You need to set 'Endpoint' and 'Port'.
 
 Make a Bucket
 ^^^^^^^^^^^^^^^^
 
 ::
 
-  $ ./s3cmd mb s3://bucket-name
+  $ s3cmd mb s3://${BUCKET}
 
 PUT Object
 ^^^^^^^^^^^
 
 ::
 
-  $ ./s3cmd put hoge.txt s3://bucket-name
+  $ s3cmd put hoge.txt s3://${BUCKET}
 
 GET Object
 ^^^^^^^^^^^^
 
 ::
 
-  $ ./s3cmd get s3://bucket-name/hoge.txt ~/path/to/file
+  $ s3cmd get s3://${BUCKET}/${FILE} ~/path/to/file
 
 DELETE Object
 ^^^^^^^^^^^^^^
 
 ::
 
-  $ ./s3cnd del s3://bucket-name/hoge.txt
+  $ s3cmd del s3://${BUCKET}/${FILE}
+
+List objects 
+^^^^^^^^^^^^^^
+
+::
+
+  $ s3cmd ls s3://${BUCKET}/${PREFIX}
 
 Supported Commands
 ^^^^^^^^^^^^^^^^^^^
@@ -520,7 +527,7 @@ Supported Commands
  +----+----------------------------+--------------------------------------+
  | 2  | rb                         | No                                   |
  +----+----------------------------+--------------------------------------+
- | 3  | ls                         | **Yes (without bucket root)**        |
+ | 3  | **ls**                     | **Yes (without bucket root)**        |
  +----+----------------------------+--------------------------------------+
  | 4  | la                         | No                                   |
  +----+----------------------------+--------------------------------------+
