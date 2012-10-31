@@ -467,7 +467,7 @@ Configure
   On some networks all internet access must go through a HTTP proxy.
   Try setting it here if you can't conect to S3 directly
   HTTP Proxy server name: localhost
-  HTTP Proxy server port [3128]: 80
+  HTTP Proxy server port [3128]: 8080
   
   New settings:
     Access Key: 
@@ -476,7 +476,55 @@ Configure
     Path to GPG program: /usr/bin/gpg
     Use HTTPS protocol: False
     HTTP Proxy server name: localhost
-    HTTP Proxy server port: 80
+    HTTP Proxy server port: 8080
   
   Test access with supplied credentials? [Y/n] 
 
+Note: Set your LeoFS gateway host and port as HTTP Proxy server name and port.
+
+Make a Bucket
+^^^^^^^^^^^^^^^^
+
+::
+
+  $ ./s3cmd mb s3://bucket-name
+
+PUT Object
+^^^^^^^^^^^
+
+::
+
+  $ ./s3cmd put hoge.txt s3://bucket-name
+
+GET Object
+^^^^^^^^^^^^
+
+::
+
+  $ ./s3cmd get s3://bucket-name/hoge.txt ~/path/to/file
+
+DELETE Object
+^^^^^^^^^^^^^^
+
+::
+
+  $ ./s3cnd del s3://bucket-name/hoge.txt
+
+Which command of s3cmd does LeoFS support?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ +----+----------------------------+--------------------------------------+
+ | #  | Command                    | Status                               |
+ +====+============================+======================================+
+ | 1  | **put**                    | **Yes**                              |
+ +----+----------------------------+--------------------------------------+
+ | 2  | **get**                    | **Yes**                              |
+ +----+----------------------------+--------------------------------------+
+ | 3  | **del**                    | **Yes**                              |
+ +----+----------------------------+--------------------------------------+
+ | 4  | **mb**                     | **Yes**                              |
+ +----+----------------------------+--------------------------------------+
+ | 5  | ls                         | No                                   |
+ +----+----------------------------+--------------------------------------+
+ | 6  | db                         | No                                   |
+ +----+----------------------------+--------------------------------------+
