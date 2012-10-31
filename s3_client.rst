@@ -430,6 +430,8 @@ Operating files from  main view
 .. image:: _static/images/dragondisk-1.png
    :width: 720px
 
+.. _s3cmd-label:
+
 Connect LeoFS from s3cmd
 ------------------------------------------------------
 
