@@ -452,7 +452,7 @@ Configure
   
   Access key and Secret key are your identifiers for Amazon S3
   Access Key: ${ACCESS_KEY}
-  Secret Key: ${SECRET_KEY}
+  Secret Key: ${SECRET_ACCESS_KEY}
   
   Encryption password is used to protect your files from reading
   by unauthorized persons while in transfer to S3
@@ -471,7 +471,7 @@ Configure
   
   New settings:
     Access Key: ${ACCESS_KEY}
-    Secret Key: ${SECRET_KEY}
+    Secret Key: ${SECRET_ACCESS_KEY}
     Encryption password: 
     Path to GPG program: /usr/bin/gpg
     Use HTTPS protocol: False
@@ -481,6 +481,7 @@ Configure
   Test access with supplied credentials? [Y/n] 
 
 .. note:: You need to set 'Endpoint' and 'Port'.
+
 
 Make a Bucket
 ^^^^^^^^^^^^^^^^
@@ -525,7 +526,7 @@ Supported Commands
  +====+============================+======================================+
  | 1  | **mb**                     | **Yes**                              |
  +----+----------------------------+--------------------------------------+
- | 2  | rb                         | No                                   |
+ | 2  | **rb**                     | **Yes**                              |
  +----+----------------------------+--------------------------------------+
  | 3  | **ls**                     | **Yes (without bucket root)**        |
  +----+----------------------------+--------------------------------------+
@@ -539,7 +540,7 @@ Supported Commands
  +----+----------------------------+--------------------------------------+
  | 8  | **sync**                   | **Yes**                              |
  +----+----------------------------+--------------------------------------+
- | 9  | **du**                     | **Yes (prefix is required)**         |
+ | 9  | du                         | No                                   |
  +----+----------------------------+--------------------------------------+
  | 10 | info                       | No                                   |
  +----+----------------------------+--------------------------------------+
