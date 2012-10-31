@@ -510,8 +510,8 @@ DELETE Object
 
   $ ./s3cnd del s3://bucket-name/hoge.txt
 
-Which command of s3cmd does LeoFS support?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Supported Commands
+^^^^^^^^^^^^^^^^^^^
 
  +----+----------------------------+--------------------------------------+
  | #  | Command                    | Status                               |
