@@ -495,14 +495,14 @@ PUT Object
 
 ::
 
-  $ s3cmd put hoge.txt s3://${BUCKET}
+  $ s3cmd put ${FILE} s3://${BUCKET}
 
 GET Object
 ^^^^^^^^^^^^
 
 ::
 
-  $ s3cmd get s3://${BUCKET}/${FILE} ~/path/to/file
+  $ s3cmd get s3://${BUCKET}/${FILE0} ${FILE1}
 
 DELETE Object
 ^^^^^^^^^^^^^^
