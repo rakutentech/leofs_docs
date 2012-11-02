@@ -185,152 +185,153 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 
 .. note:: ``S3Object.find(path, backet)`` does not work because the current LeoFS does not support Bucket API on which the ``find`` method depends.
 
-Getting Started with Python: 'boto'
--------------------------------------
 
-Boto is a Python interface to Amazon Web Services. You can use it against LeoFS too.
-Repository: https://github.com/boto/boto
-Documentation: http://docs.pythonboto.org/en/latest/index.html
+.. Getting Started with Python: 'boto'
+.. -------------------------------------
 
-Install boto
-^^^^^^^^^^^^^^^^^^^^^^
+.. Boto is a Python interface to Amazon Web Services. You can use it against LeoFS too.
+.. Repository: https://github.com/boto/boto
+.. Documentation: http://docs.pythonboto.org/en/latest/index.html
 
-setup.py
-""""""""
-::
+.. Install boto
+.. ^^^^^^^^^^^^^^^^^^^^^^
 
-  git clone https://github.com/boto/boto.git; cd boto; sudo python setup.py install
+.. setup.py
+.. """"""""
+.. ::
 
-easy_install
-""""""""""""
-::
+..   git clone https://github.com/boto/boto.git; cd boto; sudo python setup.py install
 
-  sudo easy_install boto
+.. easy_install
+.. """"""""""""
+.. ::
 
-Sample Code
-"""""""""""
+..   sudo easy_install boto
 
-.. code-block:: python
+.. Sample Code
+.. """""""""""
 
-  #!/usr/bin/python
-  # coding: utf8
+.. .. code-block:: python
+
+..   #!/usr/bin/python
+..   # coding: utf8
   
-  from boto.s3.connection import S3Connection, OrdinaryCallingFormat
-  from boto.s3.bucket import Bucket
-  from boto.s3.key import Key
+..   from boto.s3.connection import S3Connection, OrdinaryCallingFormat
+..   from boto.s3.bucket import Bucket
+..   from boto.s3.key import Key
   
-  AWS_ACCESS_KEY = "YOUR_ACCESS_KEY_ID"
-  AWS_SECRET_ACCESS_KEY = "YOUR_SECRET_ACCESS_KEY"
+..   AWS_ACCESS_KEY = "YOUR_ACCESS_KEY_ID"
+..   AWS_SECRET_ACCESS_KEY = "YOUR_SECRET_ACCESS_KEY"
   
-  conn = S3Connection(AWS_ACCESS_KEY,
-                      AWS_SECRET_ACCESS_KEY,
-                      host = "example.com",
-                      port = 8080,
-                      calling_format = OrdinaryCallingFormat(),
-                      is_secure = False
-         )
+..   conn = S3Connection(AWS_ACCESS_KEY,
+..                       AWS_SECRET_ACCESS_KEY,
+..                       host = "example.com",
+..                       port = 8080,
+..                       calling_format = OrdinaryCallingFormat(),
+..                       is_secure = False
+..          )
  
-  # create bucket
-  bucket = conn.create_bucket("leofs-bucket")
+..   # create bucket
+..   bucket = conn.create_bucket("leofs-bucket")
 
-  # create object
-  s3_object = bucket.new_key("image_file")
+..   # create object
+..   s3_object = bucket.new_key("image_file")
 
-  # write
-  s3_object.set_contents_from_string("This is a text.")
+..   # write
+..   s3_object.set_contents_from_string("This is a text.")
   
-  # show buckets
-  for bucket in conn.get_all_buckets():
-    print bucket
+..   # show buckets
+..   for bucket in conn.get_all_buckets():
+..     print bucket
   
-    # show S3Objects
-    for obj in bucket.get_all_keys():
-      print obj 
+..     # show S3Objects
+..     for obj in bucket.get_all_keys():
+..       print obj 
   
-    print
+..     print
   
-  # get bucket
-  bucket = conn.get_bucket("leofs-bucket")
-  print bucket
+..   # get bucket
+..   bucket = conn.get_bucket("leofs-bucket")
+..   print bucket
   
-  # get S3Object
-  s3_object = bucket.get_key("image_file")
-  print s3_object
+..   # get S3Object
+..   s3_object = bucket.get_key("image_file")
+..   print s3_object
   
-  # read
-  print s3_object.read()
+..   # read
+..   print s3_object.read()
   
-  # write from file
-  #s3_object.set_contents_from_filename("filename")
+..   # write from file
+..   #s3_object.set_contents_from_filename("filename")
   
-  # delete S3Object
-  s3_object.delete()
+..   # delete S3Object
+..   s3_object.delete()
 
-.. _aws-sdk-php-label:
+.. .. _aws-sdk-php-label:
 
-Getting Started with PHP: 'aws-sdk'
-------------------------------------------------------
+.. Getting Started with PHP: 'aws-sdk'
+.. ------------------------------------------------------
 
-Install aws-sdk for PHP
-^^^^^^^^^^^^^^^^^^^^^^^
+.. Install aws-sdk for PHP
+.. ^^^^^^^^^^^^^^^^^^^^^^^
 
-php5-curl (Debian)
-""""""""""""""""""
+.. php5-curl (Debian)
+.. """"""""""""""""""
 
-::
+.. ::
 
-  sudo apt-get install php5-curl
+..   sudo apt-get install php5-curl
 
-PEAR (Debian)
-"""""""""""""
+.. PEAR (Debian)
+.. """""""""""""
 
-::
+.. ::
 
-  sudo apt-get install php-pear
+..   sudo apt-get install php-pear
 
-aws-sdk for PHP
-^^^^^^^^^^^^^^^^
+.. aws-sdk for PHP
+.. ^^^^^^^^^^^^^^^^
 
-::
+.. ::
 
-  sudo pear channel-discover pear.amazonwebservices.com
-  sudo pear install aws/sdk
+..   sudo pear channel-discover pear.amazonwebservices.com
+..   sudo pear install aws/sdk
 
-Sample Code
-^^^^^^^^^^^
+.. Sample Code
+.. ^^^^^^^^^^^
 
-.. code-block:: php
+.. .. code-block:: php
 
-  <?php
-  require_once 'AWSSDKforPHP/sdk.class.php';
+..   <?php
+..   require_once 'AWSSDKforPHP/sdk.class.php';
 
-  const Host = "192.168.11.111";
+..   const Host = "192.168.11.111";
 
-  $s3 = new AmazonS3(array(
-    "key" => "YOUR ACCESS KEY ID",
-    "secret" => "YOUR SECRET ACCESS KEY",
-  ));
+..   $s3 = new AmazonS3(array(
+..     "key" => "YOUR ACCESS KEY ID",
+..     "secret" => "YOUR SECRET ACCESS KEY",
+..   ));
   
-  $s3->enable_path_style();
+..   $s3->enable_path_style();
   
-  $bucket_name = "bucket";
-  $object_name = "image_file";
+..   $bucket_name = "bucket";
+..   $object_name = "image_file";
   
-  # create object
-  $object = $s3->create_object($bucket_name, $object_name, array("body" => "This is a new object."));
+..   # create object
+..   $object = $s3->create_object($bucket_name, $object_name, array("body" => "This is a new object."));
   
-  # get object
-  $object = $s3->get_object($bucket_name, $object_name);
-  print_r($object);
+..   # get object
+..   $object = $s3->get_object($bucket_name, $object_name);
+..   print_r($object);
   
-  # head
-  $head = $s3->get_object_headers($bucket_name, $object_name);
-  print_r($head);
+..   # head
+..   $head = $s3->get_object_headers($bucket_name, $object_name);
+..   print_r($head);
   
-  # delete
-  $result = $s3->delete_object($bucket_name, $object_name);
-  print_r($result);
-  ?>
+..   # delete
+..   $result = $s3->delete_object($bucket_name, $object_name);
+..   print_r($result);
+..   ?>
 
 .. Getting Started with Node: 'knox'
 .. -------------------------------------
@@ -429,4 +430,88 @@ Operating files from  main view
 .. image:: _static/images/dragondisk-1.png
    :width: 720px
 
+.. _s3cmd-label:
 
+Connect LeoFS from s3cmd
+------------------------------------------------------
+
+Getting "s3cmd"
+^^^^^^^^^^^^^^^
+
+s3cmd is here: http://sourceforge.net/projects/s3tools/files/
+
+Configure
+^^^^^^^^^^^^
+
+::
+
+  $ s3cmd --configure
+
+  Enter new values or accept defaults in brackets with Enter.
+  Refer to user manual for detailed description of all options.
+  
+  Access key and Secret key are your identifiers for Amazon S3
+  Access Key: ${ACCESS_KEY}
+  Secret Key: ${SECRET_ACCESS_KEY}
+  
+  Encryption password is used to protect your files from reading
+  by unauthorized persons while in transfer to S3
+  Encryption password: 
+  Path to GPG program [/usr/bin/gpg]: 
+  
+  When using secure HTTPS protocol all communication with Amazon S3
+  servers is protected from 3rd party eavesdropping. This method is
+  slower than plain HTTP and can't be used if you're behind a proxy
+  Use HTTPS protocol [No]: 
+  
+  On some networks all internet access must go through a HTTP proxy.
+  Try setting it here if you can't conect to S3 directly
+  HTTP Proxy server name: localhost
+  HTTP Proxy server port [3128]: 8080
+  
+  New settings:
+    Access Key: ${ACCESS_KEY}
+    Secret Key: ${SECRET_ACCESS_KEY}
+    Encryption password: 
+    Path to GPG program: /usr/bin/gpg
+    Use HTTPS protocol: False
+    HTTP Proxy server name: ${ENDPOINT}
+    HTTP Proxy server port: ${PORT}
+  
+  Test access with supplied credentials? [Y/n] 
+
+.. note:: You need to set 'Endpoint' and 'Port'.
+
+
+Commands
+^^^^^^^^^^^^
+
+ +----+-----------------------------------------------------------------------------------------------------+----------------+
+ |    | Command                                                                                             | Support Status |
+ +====+===============================================+=====================================================+================+
+ | 1  | Make bucket                                   | s3cmd mb s3://BUCKET                                | **Yes**        |
+ +----+-----------------------------------------------+-----------------------------------------------------+----------------+
+ | 2  | Remove bucket                                 | s3cmd rb s3://BUCKET                                | **Yes**        |
+ +----+-----------------------------------------------+-----------------------------------------------------+----------------+
+ | 3  | List objects or bucket                        | s3cmd ls [s3://BUCKET[/PREFIX]]                     | **Yes**        |
+ +----+-----------------------------------------------+-----------------------------------------------------+----------------+
+ | 4  | List all object in all buckets                | s3cmd la                                            | No             |
+ +----+-----------------------------------------------+-----------------------------------------------------+----------------+
+ | 5  | Put file into bucket                          | s3cmd put FILE [FILE...] s3://BUCKET[/PREFIX]       | **Yes**        |
+ +----+-----------------------------------------------+-----------------------------------------------------+----------------+
+ | 6  | Get file from bucket                          | s3cmd get s3://BUCKET/OBJECT LOCAL_FILE             | **Yes**        |
+ +----+-----------------------------------------------+-----------------------------------------------------+----------------+
+ | 7  | Delete file from bucket                       | s3cmd del s3://BUCKET/OBJECT                        | **Yes**        |
+ +----+-----------------------------------------------+-----------------------------------------------------+----------------+
+ | 8  | Synchronize a directory tree to S3            | s3cmd sync LOCAL_DIR s3://BUCKET[/PREFIX]           | **Yes**        |
+ |    |                                               |                                                     |                |
+ |    |                                               | s3://BUCKET[/PREFIX] LOCAL_DIR                      |                |
+ +----+-----------------------------------------------+-----------------------------------------------------+----------------+
+ | 9  | Disk usage by buckets                         | s3cmd du [s3://BUCKET[/PREFIX]]                     | No             |
+ +----+-----------------------------------------------+-----------------------------------------------------+----------------+
+ | 10 | Get various information about Buckets or Files| s3cmd info s3://BUCKET[/OBJECT]                     | No             |
+ +----+-----------------------------------------------+-----------------------------------------------------+----------------+
+ | 11 | Copy object                                   | s3cmd cp s3://BUCKET1/OBJECT1 s3://BUCKET2[/OBJECT2]| **Yes**        |
+ +----+-----------------------------------------------+-----------------------------------------------------+----------------+
+ | 12 | Move object                                   | s3cmd mv s3://BUCKET1/OBJECT1 s3://BUCKET2[/OBJECT2]| **Yes**        |
+ +----+-----------------------------------------------+-----------------------------------------------------+----------------+
