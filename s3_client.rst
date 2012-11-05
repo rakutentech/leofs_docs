@@ -337,61 +337,6 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 .. -------------------------------------
 
 
-.. _s3fs-c-label:
-
-Getting Started with S3FS-C (Ubuntu-12.04 LTS)
-------------------------------------------------------
-
-S3FS-C is a FUSE (File System in User Space) based file system backed by Amazon S3 storage buckets. Once mounted, S3 can be used just like it was a local file system.
-
-Install libs for S3FS-C into Ubuntu-12.04
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-::
-
-    sudo apt-get install libfuse-dev libcurl4-openssl-dev fuse-utils
-
-Install "S3FS-C"
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-::
-
-    git clone https://github.com/tongwang/s3fs-c.git
-    cd s3fs-c
-    ./configure
-    make
-    sudo make install
-
-Modify "/ets/hosts"
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* Add a LeoFS's domain in ``/ets/hosts``
-* LeoFS's domains are governed by :ref:`this rule <s3-path-label>`
-
-::
-
-    $ sudo vi /ets/hosts
-
-    ## Add a LeoFS's domain ##
-    127.0.0.1 localhost ${BUCKET_NAME}.localhost
-
-Create a credential file for S3FS
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-::
-
-    $ vi ~/.passwd-s3fs
-
-    ## Set access-key and secret-key ##
-    ${ACCESS_KEY}:${SECRET_KEY}
-
-Mount "LeoFS"
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-::
-
-    $ s3fs ${BUCKET_NAME} ${MOUNT_POINT} -o url='http://${END_POINT}:${PORT}'
-
 .. _aws-sdk-java-label:
 
 Getting Started with Java: 'aws-sdk'
@@ -400,7 +345,10 @@ Getting Started with Java: 'aws-sdk'
 Getting AWS SDK for Java
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-http://aws.amazon.com/jp/sdkforjava/
+"SDK for Java" is here: http://aws.amazon.com/jp/sdkforjava/
+
+.. note:: You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
+
 
 Sample Code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -511,6 +459,63 @@ Sample Code
           System.out.println();
       }
   }
+
+
+.. _s3fs-c-label:
+
+Getting Started with S3FS-C (Ubuntu-12.04 LTS)
+------------------------------------------------------
+
+S3FS-C is a FUSE (File System in User Space) based file system backed by Amazon S3 storage buckets. Once mounted, S3 can be used just like it was a local file system.
+
+Install libs for S3FS-C into Ubuntu-12.04
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    sudo apt-get install libfuse-dev libcurl4-openssl-dev fuse-utils
+
+Install "S3FS-C"
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    git clone https://github.com/tongwang/s3fs-c.git
+    cd s3fs-c
+    ./configure
+    make
+    sudo make install
+
+Modify "/ets/hosts"
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Add a LeoFS's domain in ``/ets/hosts``
+* LeoFS's domains are governed by :ref:`this rule <s3-path-label>`
+
+::
+
+    $ sudo vi /ets/hosts
+
+    ## Add a LeoFS's domain ##
+    127.0.0.1 localhost ${BUCKET_NAME}.localhost
+
+Create a credential file for S3FS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    $ vi ~/.passwd-s3fs
+
+    ## Set access-key and secret-key ##
+    ${ACCESS_KEY}:${SECRET_KEY}
+
+Mount "LeoFS"
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    $ s3fs ${BUCKET_NAME} ${MOUNT_POINT} -o url='http://${END_POINT}:${PORT}'
+
 
 .. _dragondisk-label:
 
