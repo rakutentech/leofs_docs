@@ -345,7 +345,7 @@ Getting Started with Java: 'aws-sdk'
 Getting AWS SDK for Java
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-"SDK for Java" is here: http://aws.amazon.com/jp/sdkforjava/
+"SDK for Java" is here: http://aws.amazon.com/sdkforjava/
 
 .. note:: You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
 
