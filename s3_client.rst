@@ -215,14 +215,14 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 
 ..   #!/usr/bin/python
 ..   # coding: utf8
-  
+
 ..   from boto.s3.connection import S3Connection, OrdinaryCallingFormat
 ..   from boto.s3.bucket import Bucket
 ..   from boto.s3.key import Key
-  
+
 ..   AWS_ACCESS_KEY = "YOUR_ACCESS_KEY_ID"
 ..   AWS_SECRET_ACCESS_KEY = "YOUR_SECRET_ACCESS_KEY"
-  
+
 ..   conn = S3Connection(AWS_ACCESS_KEY,
 ..                       AWS_SECRET_ACCESS_KEY,
 ..                       host = "example.com",
@@ -230,7 +230,7 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 ..                       calling_format = OrdinaryCallingFormat(),
 ..                       is_secure = False
 ..          )
- 
+
 ..   # create bucket
 ..   bucket = conn.create_bucket("leofs-bucket")
 
@@ -239,31 +239,31 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 
 ..   # write
 ..   s3_object.set_contents_from_string("This is a text.")
-  
+
 ..   # show buckets
 ..   for bucket in conn.get_all_buckets():
 ..     print bucket
-  
+
 ..     # show S3Objects
 ..     for obj in bucket.get_all_keys():
-..       print obj 
-  
+..       print obj
+
 ..     print
-  
+
 ..   # get bucket
 ..   bucket = conn.get_bucket("leofs-bucket")
 ..   print bucket
-  
+
 ..   # get S3Object
 ..   s3_object = bucket.get_key("image_file")
 ..   print s3_object
-  
+
 ..   # read
 ..   print s3_object.read()
-  
+
 ..   # write from file
 ..   #s3_object.set_contents_from_filename("filename")
-  
+
 ..   # delete S3Object
 ..   s3_object.delete()
 
@@ -311,23 +311,23 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 ..     "key" => "YOUR ACCESS KEY ID",
 ..     "secret" => "YOUR SECRET ACCESS KEY",
 ..   ));
-  
+
 ..   $s3->enable_path_style();
-  
+
 ..   $bucket_name = "bucket";
 ..   $object_name = "image_file";
-  
+
 ..   # create object
 ..   $object = $s3->create_object($bucket_name, $object_name, array("body" => "This is a new object."));
-  
+
 ..   # get object
 ..   $object = $s3->get_object($bucket_name, $object_name);
 ..   print_r($object);
-  
+
 ..   # head
 ..   $head = $s3->get_object_headers($bucket_name, $object_name);
 ..   print_r($head);
-  
+
 ..   # delete
 ..   $result = $s3->delete_object($bucket_name, $object_name);
 ..   print_r($result);
@@ -335,6 +335,130 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 
 .. Getting Started with Node: 'knox'
 .. -------------------------------------
+
+
+.. _aws-sdk-java-label:
+
+Getting Started with Java: 'aws-sdk'
+------------------------------------------------------
+
+Getting AWS SDK for Java
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+"SDK for Java" is here: http://aws.amazon.com/sdkforjava/
+
+.. note:: You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
+
+
+Sample Code
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+  import java.io.BufferedReader;
+  import java.io.File;
+  import java.io.FileOutputStream;
+  import java.io.IOException;
+  import java.io.InputStream;
+  import java.io.InputStreamReader;
+  import java.io.OutputStreamWriter;
+  import java.io.Writer;
+  import java.util.UUID;
+
+  import com.amazonaws.AmazonClientException;
+  import com.amazonaws.AmazonServiceException;
+  import com.amazonaws.auth.AWSCredentials;
+  import com.amazonaws.auth.BasicAWSCredentials;
+  import com.amazonaws.services.s3.AmazonS3;
+  import com.amazonaws.services.s3.AmazonS3Client;
+  import com.amazonaws.services.s3.model.GetObjectRequest;
+  import com.amazonaws.services.s3.model.ListObjectsRequest;
+  import com.amazonaws.services.s3.model.PutObjectRequest;
+  import com.amazonaws.services.s3.model.Bucket;
+  import com.amazonaws.services.s3.model.S3Object;
+  import com.amazonaws.services.s3.model.ObjectListing;
+  import com.amazonaws.services.s3.model.S3ObjectSummary;
+  import com.amazonaws.ClientConfiguration;
+  import com.amazonaws.Protocol;
+
+  public class LeoFSSample {
+      public static void main(String[] args) throws IOException {
+          /* ---------------------------------------------------------
+           * You need to set 'Proxy host', 'Proxy port' and 'Protocol'
+           * --------------------------------------------------------- */
+          ClientConfiguration config = new ClientConfiguration();
+          config.setProxyHost("localhost"); // LeoFS Gateway's Host
+          config.setProxyPort(8080);        // LeoFS Gateway's Port
+          config.withProtocol(Protocol.HTTP);
+
+          final String accessKeyId = "YOUR_ACCESS_KEY_ID";
+          final String secretAccessKey = "YOUR_SECRET_ACCESS_KEY";
+
+          AWSCredentials credentials = new BasicAWSCredentials(accessKeyId, secretAccessKey);
+          AmazonS3 s3 = new AmazonS3Client(credentials, config);
+
+          final String bucketName = "test-bucket-" + UUID.randomUUID();
+          final String key = "test-key";
+
+          try {
+              // Create a bucket
+              s3.createBucket(bucketName);
+
+              // Retrieve list of buckets
+              for (Bucket bucket : s3.listBuckets()) {
+                  System.out.println("Bucket:" + bucket.getName());
+              }
+
+              // PUT an object into the LeoFS
+              s3.putObject(new PutObjectRequest(bucketName, key, createFile()));
+
+              // GET an object from the LeoFS
+              S3Object object = s3.getObject(new GetObjectRequest(bucketName, key));
+              dumpInputStream(object.getObjectContent());
+
+              // Retrieve list of objects from the LeoFS
+              ObjectListing objectListing =
+                  s3.listObjects(new ListObjectsRequest().withBucketName(bucketName));
+
+              for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
+                  System.out.println(objectSummary.getKey() +
+                                     "Size:" + objectSummary.getSize());
+              }
+
+              // DELETE an object from the LeoFS
+              s3.deleteObject(bucketName, key);
+
+              // DELETE a bucket from the LeoFS
+              s3.deleteBucket(bucketName);
+
+          } catch (AmazonServiceException ase) {
+              System.out.println(ase.getMessage());
+              System.out.println(ase.getStatusCode());
+          } catch (AmazonClientException ace) {
+              System.out.println(ace.getMessage());
+          }
+      }
+
+      private static File createFile() throws IOException {
+          File file = File.createTempFile("leofs_test", ".txt");
+          file.deleteOnExit();
+
+          Writer writer = new OutputStreamWriter(new FileOutputStream(file));
+          writer.write("Hello, world!\n");
+          writer.close();
+
+          return file;
+      }
+
+      private static void dumpInputStream(InputStream input) throws IOException {
+          BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+          while (true) {
+              String line = reader.readLine();
+              if (line == null) break;
+              System.out.println(line);
+          }
+      }
+  }
 
 
 .. _s3fs-c-label:
@@ -449,36 +573,36 @@ Configure
 
   Enter new values or accept defaults in brackets with Enter.
   Refer to user manual for detailed description of all options.
-  
+
   Access key and Secret key are your identifiers for Amazon S3
   Access Key: ${ACCESS_KEY}
   Secret Key: ${SECRET_ACCESS_KEY}
-  
+
   Encryption password is used to protect your files from reading
   by unauthorized persons while in transfer to S3
-  Encryption password: 
-  Path to GPG program [/usr/bin/gpg]: 
-  
+  Encryption password:
+  Path to GPG program [/usr/bin/gpg]:
+
   When using secure HTTPS protocol all communication with Amazon S3
   servers is protected from 3rd party eavesdropping. This method is
   slower than plain HTTP and can't be used if you're behind a proxy
-  Use HTTPS protocol [No]: 
-  
+  Use HTTPS protocol [No]:
+
   On some networks all internet access must go through a HTTP proxy.
   Try setting it here if you can't conect to S3 directly
   HTTP Proxy server name: localhost
   HTTP Proxy server port [3128]: 8080
-  
+
   New settings:
     Access Key: ${ACCESS_KEY}
     Secret Key: ${SECRET_ACCESS_KEY}
-    Encryption password: 
+    Encryption password:
     Path to GPG program: /usr/bin/gpg
     Use HTTPS protocol: False
     HTTP Proxy server name: ${ENDPOINT}
     HTTP Proxy server port: ${PORT}
-  
-  Test access with supplied credentials? [Y/n] 
+
+  Test access with supplied credentials? [Y/n]
 
 .. note:: You need to set 'Endpoint' and 'Port'.
 
