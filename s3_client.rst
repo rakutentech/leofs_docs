@@ -267,71 +267,84 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 ..   # delete S3Object
 ..   s3_object.delete()
 
-.. .. _aws-sdk-php-label:
+.. _aws-sdk-php-label:
 
-.. Getting Started with PHP: 'aws-sdk'
-.. ------------------------------------------------------
+Getting Started with PHP: 'aws-sdk'
+------------------------------------------------------
 
-.. Install aws-sdk for PHP
-.. ^^^^^^^^^^^^^^^^^^^^^^^
+Install aws-sdk for PHP
+^^^^^^^^^^^^^^^^^^^^^^^
 
-.. php5-curl (Debian)
-.. """"""""""""""""""
+php5-curl (Debian)
+""""""""""""""""""
 
-.. ::
+::
 
-..   sudo apt-get install php5-curl
+  sudo apt-get install php5-curl
 
-.. PEAR (Debian)
-.. """""""""""""
+PEAR (Debian)
+"""""""""""""
 
-.. ::
+::
 
-..   sudo apt-get install php-pear
+  sudo apt-get install php-pear
 
-.. aws-sdk for PHP
-.. ^^^^^^^^^^^^^^^^
+aws-sdk for PHP
+^^^^^^^^^^^^^^^^
 
-.. ::
+::
 
-..   sudo pear channel-discover pear.amazonwebservices.com
-..   sudo pear install aws/sdk
+  sudo pear channel-discover pear.amazonwebservices.com
+  sudo pear install aws/sdk
 
-.. Sample Code
-.. ^^^^^^^^^^^
+Edit /etc/hosts
+^^^^^^^^^^^^^^^
 
-.. .. code-block:: php
+::
 
-..   <?php
-..   require_once 'AWSSDKforPHP/sdk.class.php';
+  127.0.0.1 s3.amazonaws.com
+  127.0.0.1 ${bucket_name}.s3.amazonaws.com # if you use create_bucket
 
-..   const Host = "192.168.11.111";
+Sample Code
+^^^^^^^^^^^
 
-..   $s3 = new AmazonS3(array(
-..     "key" => "YOUR ACCESS KEY ID",
-..     "secret" => "YOUR SECRET ACCESS KEY",
-..   ));
+.. code-block:: php
 
-..   $s3->enable_path_style();
+  <?php
+  require_once 'AWSSDKforPHP/sdk.class.php';
 
-..   $bucket_name = "bucket";
-..   $object_name = "image_file";
+  $s3 = new AmazonS3(array(
+    "key" => "YOUR ACCESS KEY ID",
+    "secret" => "YOUR SECRET ACCESS KEY",
+  ));
+  $s3->use_ssl = false;
+  $s3->enable_path_style();
 
-..   # create object
-..   $object = $s3->create_object($bucket_name, $object_name, array("body" => "This is a new object."));
+  $bucket_name = "bucket";
+  $object_name = "key";
 
-..   # get object
-..   $object = $s3->get_object($bucket_name, $object_name);
-..   print_r($object);
+  # create bucket (region is a dummy)
+  $bucket = $s3->create_bucket($bucket_name, AmazonS3::REGION_US_E1);
 
-..   # head
-..   $head = $s3->get_object_headers($bucket_name, $object_name);
-..   print_r($head);
+  # create object
+  $object = $s3->create_object($bucket_name, $object_name, array("body" => "This is a new object."));
 
-..   # delete
-..   $result = $s3->delete_object($bucket_name, $object_name);
-..   print_r($result);
-..   ?>
+  # get object
+  $object = $s3->get_object($bucket_name, $object_name);
+  print_r($object);
+
+  # get list of buckets
+  $buckets = $s3->get_bucket_list();
+  print_r($buckets);
+
+  # head
+  $head = $s3->get_object_headers($bucket_name, $object_name);
+  print_r($head);
+
+  # delete
+  $result = $s3->delete_object($bucket_name, $object_name);
+  print_r($result);
+  ?>
 
 .. Getting Started with Node: 'knox'
 .. -------------------------------------
