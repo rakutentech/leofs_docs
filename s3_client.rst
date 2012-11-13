@@ -584,6 +584,8 @@ s3cmd is here: http://sourceforge.net/projects/s3tools/files/
 Configure
 ^^^^^^^^^^^^
 
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`. You need to set 'Endpoint' and 'Port'.
+
 ::
 
   $ s3cmd --configure
@@ -620,8 +622,6 @@ Configure
     HTTP Proxy server port: ${PORT}
 
   Test access with supplied credentials? [Y/n]
-
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`. You need to set 'Endpoint' and 'Port'.
 
 
 Commands
