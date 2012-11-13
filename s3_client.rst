@@ -42,7 +42,7 @@ Sample Code
 Connect to LeoFS
 """""""""""""""""
 
-.. note:: You need to rewrite 'Endpoint' and 'Port' as follows:
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`. You need to rewrite 'Endpoint' and 'Port' as follows:
 
 
 .. code-block:: ruby
@@ -198,7 +198,7 @@ Getting AWS SDK for Java
 
 "SDK for Java" is here: http://aws.amazon.com/sdkforjava/
 
-.. note:: You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`. You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
 
 
 Sample Code
@@ -315,6 +315,8 @@ Sample Code
 
 Getting Started with PHP: 'aws-sdk'
 ------------------------------------------------------
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
 
 Install aws-sdk for PHP
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -535,6 +537,8 @@ Mount "LeoFS"
 Connect LeoFS from DragonDisk
 ------------------------------------------------------
 
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+
 DragonDisk is a powerful file manager for Amazon S3 Compatible Storage.
 
 URL: http://www.dragondisk.com/
@@ -617,7 +621,7 @@ Configure
 
   Test access with supplied credentials? [Y/n]
 
-.. note:: You need to set 'Endpoint' and 'Port'.
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`. You need to set 'Endpoint' and 'Port'.
 
 
 Commands
