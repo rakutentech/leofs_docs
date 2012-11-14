@@ -328,20 +328,12 @@ php5-curl (Debian)
 
   sudo apt-get install php5-curl
 
-PEAR (Debian)
-"""""""""""""
-
-::
-
-  sudo apt-get install php-pear
-
 aws-sdk for PHP
 ^^^^^^^^^^^^^^^^
 
 ::
 
-  sudo pear channel-discover pear.amazonwebservices.com
-  sudo pear install aws/sdk
+  git clone git://github.com/amazonwebservices/aws-sdk-for-php.git AWSSDKforPHP
 
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
