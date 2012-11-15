@@ -565,8 +565,56 @@ Sample Code
 ..   # delete S3Object
 ..   s3_object.delete()
 
-.. Getting Started with Node: 'knox'
-.. -------------------------------------
+.. _knox-label:
+
+Getting Started with Node: 'knox'
+-------------------------------------
+
+Install knox
+^^^^^^^^^^^^^^
+
+::
+
+  npm install knox
+
+Sample Code
+^^^^^^^^^^^^
+ 
+.. code-block:: javascript
+
+  Var knox = require("knox")
+  
+  var client = knox.createClient({
+    key: "YOUR ACCESS KEY ID",
+    secret: "YOUR SECRET ACCESS KEY",
+    bucket: "bucket",
+    endpoint: "bucket.localhost",
+    port: 8080
+  });
+  
+  // PUT object
+  var string = "Hello, world!";
+  client.put("key", {
+    "Content-Length": string.length,
+    "Content-Type": "application/json"
+  }).end(string);
+  
+  // HEAD object
+  client.headFile("key", function(err, res) {
+    console.log("Headers:\n", res.headers);
+  });
+  
+  // GET object
+  client.getFile("key", function(err, res) {
+    res.on('data', function(chunk){
+      console.log(chunk.toString());
+    });
+  });
+  
+  // DELETE object
+  client.deleteFile("key", function(err, res) {
+    console.log(res.statusCode);
+  });
 
 .. _s3fs-c-label:
 
