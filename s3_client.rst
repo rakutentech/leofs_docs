@@ -42,7 +42,7 @@ Sample Code
 Connect to LeoFS
 """""""""""""""""
 
-.. note:: You need to rewrite 'Endpoint' and 'Port' as follows:
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`. You need to rewrite 'Endpoint' and 'Port' as follows:
 
 
 .. code-block:: ruby
@@ -186,155 +186,6 @@ As for deleting an object, you can use ``S3Object.delete(key, bucket)``
 .. note:: ``S3Object.find(path, backet)`` does not work because the current LeoFS does not support Bucket API on which the ``find`` method depends.
 
 
-.. Getting Started with Python: 'boto'
-.. -------------------------------------
-
-.. Boto is a Python interface to Amazon Web Services. You can use it against LeoFS too.
-.. Repository: https://github.com/boto/boto
-.. Documentation: http://docs.pythonboto.org/en/latest/index.html
-
-.. Install boto
-.. ^^^^^^^^^^^^^^^^^^^^^^
-
-.. setup.py
-.. """"""""
-.. ::
-
-..   git clone https://github.com/boto/boto.git; cd boto; sudo python setup.py install
-
-.. easy_install
-.. """"""""""""
-.. ::
-
-..   sudo easy_install boto
-
-.. Sample Code
-.. """""""""""
-
-.. .. code-block:: python
-
-..   #!/usr/bin/python
-..   # coding: utf8
-
-..   from boto.s3.connection import S3Connection, OrdinaryCallingFormat
-..   from boto.s3.bucket import Bucket
-..   from boto.s3.key import Key
-
-..   AWS_ACCESS_KEY = "YOUR_ACCESS_KEY_ID"
-..   AWS_SECRET_ACCESS_KEY = "YOUR_SECRET_ACCESS_KEY"
-
-..   conn = S3Connection(AWS_ACCESS_KEY,
-..                       AWS_SECRET_ACCESS_KEY,
-..                       host = "example.com",
-..                       port = 8080,
-..                       calling_format = OrdinaryCallingFormat(),
-..                       is_secure = False
-..          )
-
-..   # create bucket
-..   bucket = conn.create_bucket("leofs-bucket")
-
-..   # create object
-..   s3_object = bucket.new_key("image_file")
-
-..   # write
-..   s3_object.set_contents_from_string("This is a text.")
-
-..   # show buckets
-..   for bucket in conn.get_all_buckets():
-..     print bucket
-
-..     # show S3Objects
-..     for obj in bucket.get_all_keys():
-..       print obj
-
-..     print
-
-..   # get bucket
-..   bucket = conn.get_bucket("leofs-bucket")
-..   print bucket
-
-..   # get S3Object
-..   s3_object = bucket.get_key("image_file")
-..   print s3_object
-
-..   # read
-..   print s3_object.read()
-
-..   # write from file
-..   #s3_object.set_contents_from_filename("filename")
-
-..   # delete S3Object
-..   s3_object.delete()
-
-.. .. _aws-sdk-php-label:
-
-.. Getting Started with PHP: 'aws-sdk'
-.. ------------------------------------------------------
-
-.. Install aws-sdk for PHP
-.. ^^^^^^^^^^^^^^^^^^^^^^^
-
-.. php5-curl (Debian)
-.. """"""""""""""""""
-
-.. ::
-
-..   sudo apt-get install php5-curl
-
-.. PEAR (Debian)
-.. """""""""""""
-
-.. ::
-
-..   sudo apt-get install php-pear
-
-.. aws-sdk for PHP
-.. ^^^^^^^^^^^^^^^^
-
-.. ::
-
-..   sudo pear channel-discover pear.amazonwebservices.com
-..   sudo pear install aws/sdk
-
-.. Sample Code
-.. ^^^^^^^^^^^
-
-.. .. code-block:: php
-
-..   <?php
-..   require_once 'AWSSDKforPHP/sdk.class.php';
-
-..   const Host = "192.168.11.111";
-
-..   $s3 = new AmazonS3(array(
-..     "key" => "YOUR ACCESS KEY ID",
-..     "secret" => "YOUR SECRET ACCESS KEY",
-..   ));
-
-..   $s3->enable_path_style();
-
-..   $bucket_name = "bucket";
-..   $object_name = "image_file";
-
-..   # create object
-..   $object = $s3->create_object($bucket_name, $object_name, array("body" => "This is a new object."));
-
-..   # get object
-..   $object = $s3->get_object($bucket_name, $object_name);
-..   print_r($object);
-
-..   # head
-..   $head = $s3->get_object_headers($bucket_name, $object_name);
-..   print_r($head);
-
-..   # delete
-..   $result = $s3->delete_object($bucket_name, $object_name);
-..   print_r($result);
-..   ?>
-
-.. Getting Started with Node: 'knox'
-.. -------------------------------------
 
 
 .. _aws-sdk-java-label:
@@ -347,7 +198,7 @@ Getting AWS SDK for Java
 
 "SDK for Java" is here: http://aws.amazon.com/sdkforjava/
 
-.. note:: You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`. You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
 
 
 Sample Code
@@ -460,6 +311,262 @@ Sample Code
       }
   }
 
+.. _aws-sdk-php-label:
+
+Getting Started with PHP: 'aws-sdk'
+------------------------------------------------------
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+
+Install aws-sdk for PHP
+^^^^^^^^^^^^^^^^^^^^^^^
+
+php5-curl (Debian)
+""""""""""""""""""
+
+::
+
+  sudo apt-get install php5-curl
+
+aws-sdk for PHP
+^^^^^^^^^^^^^^^^
+
+::
+
+  git clone git://github.com/amazonwebservices/aws-sdk-for-php.git AWSSDKforPHP
+
+Edit /etc/hosts
+^^^^^^^^^^^^^^^
+
+::
+
+  127.0.0.1 s3.amazonaws.com
+  127.0.0.1 ${bucket_name}.s3.amazonaws.com # if you use create_bucket
+
+Sample Code
+^^^^^^^^^^^
+
+.. code-block:: php
+
+  <?php
+  require_once 'AWSSDKforPHP/sdk.class.php';
+
+  $s3 = new AmazonS3(array(
+    "key" => "YOUR ACCESS KEY ID",
+    "secret" => "YOUR SECRET ACCESS KEY",
+  ));
+  $s3->use_ssl = false;
+  $s3->enable_path_style();
+
+  $bucket_name = "bucket";
+  $object_name = "key";
+
+  # create bucket (region is a dummy)
+  $bucket = $s3->create_bucket($bucket_name, AmazonS3::REGION_US_E1);
+
+  # create object
+  $object = $s3->create_object($bucket_name, $object_name, array("body" => "This is a new object."));
+
+  # get object
+  $object = $s3->get_object($bucket_name, $object_name);
+  print_r($object);
+
+  # get list of buckets
+  $buckets = $s3->get_bucket_list();
+  print_r($buckets);
+
+  # head
+  $head = $s3->get_object_headers($bucket_name, $object_name);
+  print_r($head);
+
+  # delete
+  $result = $s3->delete_object($bucket_name, $object_name);
+  print_r($result);
+  ?>
+
+.. _aws-sdk-php2-label:
+
+Getting Started with PHP: 'aws-sdk version 2'
+------------------------------------------------------
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+
+Install aws-sdk for PHP 2
+^^^^^^^^^^^^^^^^^^^^^^^
+
+php5-curl (Debian)
+""""""""""""""""""
+
+::
+
+  sudo apt-get install php5-curl
+
+PEAR (Debian)
+"""""""""""""
+
+::
+
+  sudo apt-get install php-pear
+
+aws-sdk for PHP
+^^^^^^^^^^^^^^^^
+
+::
+
+  sudo pear channel-discover pear.amazonwebservices.com
+  sudo pear install aws/sdk
+
+Edit /etc/hosts
+^^^^^^^^^^^^^^^
+
+::
+
+  127.0.0.1 s3.amazonaws.com
+  127.0.0.1 ${bucket_name}.s3.amazonaws.com # if you use create_bucket
+
+Sample Code
+^^^^^^^^^^^^
+
+.. code-block:: php
+  
+  <?php
+  require "vendor/autoload.php";
+  
+  use Aws\Common\Enum\Region;
+  use Aws\S3\S3Client;
+  
+  $client = S3Client::factory(array(
+    "key" => "YOUR ACCESS KEY ID",
+    "secret" => "YOUR SECRET ACCESS KEY",
+    "region" => Region::US_EAST_1,
+    "scheme" => "http",
+  ));
+  
+  // list buckets
+  $buckets = $client->listBuckets()->toArray();
+  
+  foreach($buckets as $bucket){
+    print_r($bucket);
+  }
+  print("\n\n");
+  
+  // create bucket
+  $result = $client->createBucket(array(
+    "Bucket" => "test"
+  ));
+  
+  // PUT object
+  $client->putObject(array(
+    "Bucket" => "test",
+    "Key" => "key-test",
+    "Body" => "Hello, world!"
+  ));
+  
+  // GET object
+  $object = $client->getObject(array(
+    "Bucket" => "test",
+    "Key" => "key-test"
+  ));
+  print($object->get("Body"));
+  print("\n\n");
+  
+  // HEAD object
+  $headers = $client->headObject(array(
+    "Bucket" => "test",
+    "Key" => "key-test"
+  ));
+  print_r($headers->toArray());
+  
+  // DELETE object
+  $client->deleteObject(array(
+    "Bucket" => "test",
+    "Key" => "key-test"
+  ));
+  ?>
+
+.. Getting Started with Python: 'boto'
+.. -------------------------------------
+
+.. Boto is a Python interface to Amazon Web Services. You can use it against LeoFS too.
+.. Repository: https://github.com/boto/boto
+.. Documentation: http://docs.pythonboto.org/en/latest/index.html
+
+.. Install boto
+.. ^^^^^^^^^^^^^^^^^^^^^^
+
+.. setup.py
+.. """"""""
+.. ::
+
+..   git clone https://github.com/boto/boto.git; cd boto; sudo python setup.py install
+
+.. easy_install
+.. """"""""""""
+.. ::
+
+..   sudo easy_install boto
+
+.. Sample Code
+.. """""""""""
+
+.. .. code-block:: python
+
+..   #!/usr/bin/python
+..   # coding: utf8
+
+..   from boto.s3.connection import S3Connection, OrdinaryCallingFormat
+..   from boto.s3.bucket import Bucket
+..   from boto.s3.key import Key
+
+..   AWS_ACCESS_KEY = "YOUR_ACCESS_KEY_ID"
+..   AWS_SECRET_ACCESS_KEY = "YOUR_SECRET_ACCESS_KEY"
+
+..   conn = S3Connection(AWS_ACCESS_KEY,
+..                       AWS_SECRET_ACCESS_KEY,
+..                       host = "example.com",
+..                       port = 8080,
+..                       calling_format = OrdinaryCallingFormat(),
+..                       is_secure = False
+..          )
+
+..   # create bucket
+..   bucket = conn.create_bucket("leofs-bucket")
+
+..   # create object
+..   s3_object = bucket.new_key("image_file")
+
+..   # write
+..   s3_object.set_contents_from_string("This is a text.")
+
+..   # show buckets
+..   for bucket in conn.get_all_buckets():
+..     print bucket
+
+..     # show S3Objects
+..     for obj in bucket.get_all_keys():
+..       print obj
+
+..     print
+
+..   # get bucket
+..   bucket = conn.get_bucket("leofs-bucket")
+..   print bucket
+
+..   # get S3Object
+..   s3_object = bucket.get_key("image_file")
+..   print s3_object
+
+..   # read
+..   print s3_object.read()
+
+..   # write from file
+..   #s3_object.set_contents_from_filename("filename")
+
+..   # delete S3Object
+..   s3_object.delete()
+
+.. Getting Started with Node: 'knox'
+.. -------------------------------------
 
 .. _s3fs-c-label:
 
@@ -522,6 +629,8 @@ Mount "LeoFS"
 Connect LeoFS from DragonDisk
 ------------------------------------------------------
 
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+
 DragonDisk is a powerful file manager for Amazon S3 Compatible Storage.
 
 URL: http://www.dragondisk.com/
@@ -567,6 +676,8 @@ s3cmd is here: http://sourceforge.net/projects/s3tools/files/
 Configure
 ^^^^^^^^^^^^
 
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`. You need to set 'Endpoint' and 'Port'.
+
 ::
 
   $ s3cmd --configure
@@ -603,8 +714,6 @@ Configure
     HTTP Proxy server port: ${PORT}
 
   Test access with supplied credentials? [Y/n]
-
-.. note:: You need to set 'Endpoint' and 'Port'.
 
 
 Commands
