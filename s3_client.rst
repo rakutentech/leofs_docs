@@ -489,9 +489,11 @@ Sample Code
 Getting Started with Python: 'boto'
 -------------------------------------
 
-Boto is a Python interface to Amazon Web Services. You can use it against LeoFS too.
+Boto is a Python interface to Amazon Web Services. You can use it for LeoFS, too.
 Repository: https://github.com/boto/boto
 Documentation: http://docs.pythonboto.org/en/latest/index.html
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
 
 Install boto
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -571,6 +573,8 @@ Sample Code
 
 Getting Started with Node: 'knox'
 -------------------------------------
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
 
 Install knox
 ^^^^^^^^^^^^^^
