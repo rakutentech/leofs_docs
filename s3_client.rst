@@ -595,7 +595,7 @@ Sample Code
     key: "YOUR ACCESS KEY ID",
     secret: "YOUR SECRET ACCESS KEY",
     bucket: "bucket",
-    endpoint: "bucket.localhost",
+    endpoint: "bucket.localhost", // ${bucket_name}.localhost
     port: 8080
   });
   
