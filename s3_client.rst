@@ -577,6 +577,13 @@ Install knox
 
   npm install knox
 
+Edit /etc/hosts
+^^^^^^^^^^^^^^^
+
+::
+
+  127.0.0.1 ${bucket_name}.localhost
+
 Sample Code
 ^^^^^^^^^^^^
  
