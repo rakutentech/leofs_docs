@@ -484,86 +484,88 @@ Sample Code
   ));
   ?>
 
-.. Getting Started with Python: 'boto'
-.. -------------------------------------
+.. _boto-label:
 
-.. Boto is a Python interface to Amazon Web Services. You can use it against LeoFS too.
-.. Repository: https://github.com/boto/boto
-.. Documentation: http://docs.pythonboto.org/en/latest/index.html
+Getting Started with Python: 'boto'
+-------------------------------------
 
-.. Install boto
-.. ^^^^^^^^^^^^^^^^^^^^^^
+Boto is a Python interface to Amazon Web Services. You can use it against LeoFS too.
+Repository: https://github.com/boto/boto
+Documentation: http://docs.pythonboto.org/en/latest/index.html
 
-.. setup.py
-.. """"""""
-.. ::
+Install boto
+^^^^^^^^^^^^^^^^^^^^^^
 
-..   git clone https://github.com/boto/boto.git; cd boto; sudo python setup.py install
+setup.py
+""""""""
+::
 
-.. easy_install
-.. """"""""""""
-.. ::
+  git clone https://github.com/boto/boto.git; cd boto; sudo python setup.py install
 
-..   sudo easy_install boto
+easy_install
+""""""""""""
+::
 
-.. Sample Code
-.. """""""""""
+  sudo easy_install boto
 
-.. .. code-block:: python
+Sample Code
+"""""""""""
 
-..   #!/usr/bin/python
-..   # coding: utf8
+.. code-block:: python
 
-..   from boto.s3.connection import S3Connection, OrdinaryCallingFormat
-..   from boto.s3.bucket import Bucket
-..   from boto.s3.key import Key
+  #!/usr/bin/python
+  # coding: utf8
 
-..   AWS_ACCESS_KEY = "YOUR_ACCESS_KEY_ID"
-..   AWS_SECRET_ACCESS_KEY = "YOUR_SECRET_ACCESS_KEY"
+  from boto.s3.connection import S3Connection, OrdinaryCallingFormat
+  from boto.s3.bucket import Bucket
+  from boto.s3.key import Key
 
-..   conn = S3Connection(AWS_ACCESS_KEY,
-..                       AWS_SECRET_ACCESS_KEY,
-..                       host = "example.com",
-..                       port = 8080,
-..                       calling_format = OrdinaryCallingFormat(),
-..                       is_secure = False
-..          )
+  AWS_ACCESS_KEY = "YOUR_ACCESS_KEY_ID"
+  AWS_SECRET_ACCESS_KEY = "YOUR_SECRET_ACCESS_KEY"
 
-..   # create bucket
-..   bucket = conn.create_bucket("leofs-bucket")
+  conn = S3Connection(AWS_ACCESS_KEY,
+                      AWS_SECRET_ACCESS_KEY,
+                      host = "example.com",
+                      port = 8080,
+                      calling_format = OrdinaryCallingFormat(),
+                      is_secure = False
+         )
 
-..   # create object
-..   s3_object = bucket.new_key("image_file")
+  # create bucket
+  bucket = conn.create_bucket("leofs-bucket")
 
-..   # write
-..   s3_object.set_contents_from_string("This is a text.")
+  # create object
+  s3_object = bucket.new_key("image_file")
 
-..   # show buckets
-..   for bucket in conn.get_all_buckets():
-..     print bucket
+  # write
+  s3_object.set_contents_from_string("This is a text.")
 
-..     # show S3Objects
-..     for obj in bucket.get_all_keys():
-..       print obj
+  # show buckets
+  for bucket in conn.get_all_buckets():
+    print bucket
 
-..     print
+    # show S3Objects
+    for obj in bucket.get_all_keys():
+      print obj
 
-..   # get bucket
-..   bucket = conn.get_bucket("leofs-bucket")
-..   print bucket
+    print
 
-..   # get S3Object
-..   s3_object = bucket.get_key("image_file")
-..   print s3_object
+  # get bucket
+  bucket = conn.get_bucket("leofs-bucket")
+  print bucket
 
-..   # read
-..   print s3_object.read()
+  # get S3Object
+  s3_object = bucket.get_key("image_file")
+  print s3_object
 
-..   # write from file
-..   #s3_object.set_contents_from_filename("filename")
+  # read
+  print s3_object.read()
 
-..   # delete S3Object
-..   s3_object.delete()
+  # write from file
+  #s3_object.set_contents_from_filename("filename")
+
+  # delete S3Object
+  s3_object.delete()
 
 .. _knox-label:
 
