@@ -126,6 +126,46 @@ HEAD an object from the LeoFS
   p metadata.to_hash
 
 
+Multi-part upload into the LeoFS
+"""""""""""""""""""""""""""""""""
+
+.. code-block:: ruby
+
+  require 'aws-sdk'
+
+  Endpoint = "leofs.org"
+  Port = 8080
+
+  class LeoFSHandler < AWS::Core::Http::NetHttpHandler
+    def handle(request, response)
+      request.port = ::Port
+      super
+    end
+  end
+
+  AWS.config(
+    :access_key_id => 'access-key-id',
+    :secret_access_key => 'secret-access-key',
+    s3_endpoint: Endpoint,
+    http_handler: LeoFSHandler.new,
+    s3_force_path_style: true,
+    use_ssl: false
+  )
+
+  file_path_for_multipart_upload = '/path/to/file'
+  bucket = AWS::S3.new.buckets['bucket-name']
+
+  open(file_path_for_multipart_upload) do |file|
+    uploading_object = bucket.objects[File.basename(file.path)]
+    uploading_object.multipart_upload do |upload|
+      while !file.eof?
+        upload.add_part(file.read 5242880) ## 5MB ##
+        p('Aborted') if upload.aborted?
+      end
+    end
+  end
+
+
 .. _aws-s3-ruby-label:
 
 Getting Started with Ruby: 'aws-s3'
@@ -428,40 +468,40 @@ Sample Code
 ^^^^^^^^^^^^
 
 .. code-block:: php
-  
+
   <?php
   require "vendor/autoload.php";
-  
+
   use Aws\Common\Enum\Region;
   use Aws\S3\S3Client;
-  
+
   $client = S3Client::factory(array(
     "key" => "YOUR ACCESS KEY ID",
     "secret" => "YOUR SECRET ACCESS KEY",
     "region" => Region::US_EAST_1,
     "scheme" => "http",
   ));
-  
+
   // list buckets
   $buckets = $client->listBuckets()->toArray();
-  
+
   foreach($buckets as $bucket){
     print_r($bucket);
   }
   print("\n\n");
-  
+
   // create bucket
   $result = $client->createBucket(array(
     "Bucket" => "test"
   ));
-  
+
   // PUT object
   $client->putObject(array(
     "Bucket" => "test",
     "Key" => "key-test",
     "Body" => "Hello, world!"
   ));
-  
+
   // GET object
   $object = $client->getObject(array(
     "Bucket" => "test",
@@ -469,14 +509,14 @@ Sample Code
   ));
   print($object->get("Body"));
   print("\n\n");
-  
+
   // HEAD object
   $headers = $client->headObject(array(
     "Bucket" => "test",
     "Key" => "key-test"
   ));
   print_r($headers->toArray());
-  
+
   // DELETE object
   $client->deleteObject(array(
     "Bucket" => "test",
@@ -592,11 +632,11 @@ Edit /etc/hosts
 
 Sample Code
 ^^^^^^^^^^^^
- 
+
 .. code-block:: javascript
 
   Var knox = require("knox")
-  
+
   var client = knox.createClient({
     key: "YOUR ACCESS KEY ID",
     secret: "YOUR SECRET ACCESS KEY",
@@ -604,26 +644,26 @@ Sample Code
     endpoint: "bucket.localhost", // ${bucket_name}.localhost
     port: 8080
   });
-  
+
   // PUT object
   var string = "Hello, world!";
   client.put("key", {
     "Content-Length": string.length,
     "Content-Type": "application/json"
   }).end(string);
-  
+
   // HEAD object
   client.headFile("key", function(err, res) {
     console.log("Headers:\n", res.headers);
   });
-  
+
   // GET object
   client.getFile("key", function(err, res) {
     res.on('data', function(chunk){
       console.log(chunk.toString());
     });
   });
-  
+
   // DELETE object
   client.deleteFile("key", function(err, res) {
     console.log(res.statusCode);
