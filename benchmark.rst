@@ -15,6 +15,9 @@ Benchmark
 Set up basho_bench
 --------------------------------
 
+Install
+^^^^^^^^
+
 * Basho basho_bench <https://github.com/basho/basho_bench/>
 * Commands to set up basho_bench are following.
 
@@ -26,6 +29,18 @@ Set up basho_bench
     cp -i ../leofs/test/src/*.erl src/
     cp -i ../leofs/test/include/*.hrl include/
     make all
+
+
+Edit /etc/hosts
+^^^^^^^^^^^^^^^
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+
+::
+
+  127.0.0.1 localhost
+  127.0.0.1 test_bucket.localhost
+
 
 .. index::
     pair: Configuration file for basho_bench; Configuration file for basho_bench

@@ -126,6 +126,46 @@ HEAD an object from the LeoFS
   p metadata.to_hash
 
 
+Multi-part upload into the LeoFS
+"""""""""""""""""""""""""""""""""
+
+.. code-block:: ruby
+
+  require 'aws-sdk'
+
+  Endpoint = "leofs.org"
+  Port = 8080
+
+  class LeoFSHandler < AWS::Core::Http::NetHttpHandler
+    def handle(request, response)
+      request.port = ::Port
+      super
+    end
+  end
+
+  AWS.config(
+    :access_key_id => 'access-key-id',
+    :secret_access_key => 'secret-access-key',
+    s3_endpoint: Endpoint,
+    http_handler: LeoFSHandler.new,
+    s3_force_path_style: true,
+    use_ssl: false
+  )
+
+  file_path_for_multipart_upload = '/path/to/file'
+  bucket = AWS::S3.new.buckets['bucket-name']
+
+  open(file_path_for_multipart_upload) do |file|
+    uploading_object = bucket.objects[File.basename(file.path)]
+    uploading_object.multipart_upload do |upload|
+      while !file.eof?
+        upload.add_part(file.read 5242880) ## 5MB ##
+        p('Aborted') if upload.aborted?
+      end
+    end
+  end
+
+
 .. _aws-s3-ruby-label:
 
 Getting Started with Ruby: 'aws-s3'
@@ -316,8 +356,6 @@ Sample Code
 Getting Started with PHP: 'aws-sdk'
 ------------------------------------------------------
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
-
 Install aws-sdk for PHP
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -337,6 +375,8 @@ aws-sdk for PHP
 
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
 
 ::
 
@@ -389,8 +429,6 @@ Sample Code
 Getting Started with PHP: 'aws-sdk version 2'
 ------------------------------------------------------
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
-
 Install aws-sdk for PHP 2
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -419,6 +457,8 @@ aws-sdk for PHP
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
 
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+
 ::
 
   127.0.0.1 s3.amazonaws.com
@@ -428,40 +468,40 @@ Sample Code
 ^^^^^^^^^^^^
 
 .. code-block:: php
-  
+
   <?php
   require "vendor/autoload.php";
-  
+
   use Aws\Common\Enum\Region;
   use Aws\S3\S3Client;
-  
+
   $client = S3Client::factory(array(
     "key" => "YOUR ACCESS KEY ID",
     "secret" => "YOUR SECRET ACCESS KEY",
     "region" => Region::US_EAST_1,
     "scheme" => "http",
   ));
-  
+
   // list buckets
   $buckets = $client->listBuckets()->toArray();
-  
+
   foreach($buckets as $bucket){
     print_r($bucket);
   }
   print("\n\n");
-  
+
   // create bucket
   $result = $client->createBucket(array(
     "Bucket" => "test"
   ));
-  
+
   // PUT object
   $client->putObject(array(
     "Bucket" => "test",
     "Key" => "key-test",
     "Body" => "Hello, world!"
   ));
-  
+
   // GET object
   $object = $client->getObject(array(
     "Bucket" => "test",
@@ -469,14 +509,14 @@ Sample Code
   ));
   print($object->get("Body"));
   print("\n\n");
-  
+
   // HEAD object
   $headers = $client->headObject(array(
     "Bucket" => "test",
     "Key" => "key-test"
   ));
   print_r($headers->toArray());
-  
+
   // DELETE object
   $client->deleteObject(array(
     "Bucket" => "test",
@@ -484,89 +524,150 @@ Sample Code
   ));
   ?>
 
-.. Getting Started with Python: 'boto'
-.. -------------------------------------
+.. _boto-label:
 
-.. Boto is a Python interface to Amazon Web Services. You can use it against LeoFS too.
-.. Repository: https://github.com/boto/boto
-.. Documentation: http://docs.pythonboto.org/en/latest/index.html
+Getting Started with Python: 'boto'
+-------------------------------------
 
-.. Install boto
-.. ^^^^^^^^^^^^^^^^^^^^^^
+Boto is a Python interface to Amazon Web Services. You can use it for LeoFS, too.
+Repository: https://github.com/boto/boto
+Documentation: http://docs.pythonboto.org/en/latest/index.html
 
-.. setup.py
-.. """"""""
-.. ::
+Install boto
+^^^^^^^^^^^^^^^^^^^^^^
 
-..   git clone https://github.com/boto/boto.git; cd boto; sudo python setup.py install
+setup.py
+""""""""
+::
 
-.. easy_install
-.. """"""""""""
-.. ::
+  git clone https://github.com/boto/boto.git; cd boto; sudo python setup.py install
 
-..   sudo easy_install boto
+easy_install
+""""""""""""
+::
 
-.. Sample Code
-.. """""""""""
+  sudo easy_install boto
 
-.. .. code-block:: python
+Sample Code
+"""""""""""
 
-..   #!/usr/bin/python
-..   # coding: utf8
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
 
-..   from boto.s3.connection import S3Connection, OrdinaryCallingFormat
-..   from boto.s3.bucket import Bucket
-..   from boto.s3.key import Key
+.. code-block:: python
 
-..   AWS_ACCESS_KEY = "YOUR_ACCESS_KEY_ID"
-..   AWS_SECRET_ACCESS_KEY = "YOUR_SECRET_ACCESS_KEY"
+  #!/usr/bin/python
+  # coding: utf8
 
-..   conn = S3Connection(AWS_ACCESS_KEY,
-..                       AWS_SECRET_ACCESS_KEY,
-..                       host = "example.com",
-..                       port = 8080,
-..                       calling_format = OrdinaryCallingFormat(),
-..                       is_secure = False
-..          )
+  from boto.s3.connection import S3Connection, OrdinaryCallingFormat
+  from boto.s3.bucket import Bucket
+  from boto.s3.key import Key
 
-..   # create bucket
-..   bucket = conn.create_bucket("leofs-bucket")
+  AWS_ACCESS_KEY = "YOUR_ACCESS_KEY_ID"
+  AWS_SECRET_ACCESS_KEY = "YOUR_SECRET_ACCESS_KEY"
 
-..   # create object
-..   s3_object = bucket.new_key("image_file")
+  conn = S3Connection(AWS_ACCESS_KEY,
+                      AWS_SECRET_ACCESS_KEY,
+                      host = "example.com",
+                      port = 8080,
+                      calling_format = OrdinaryCallingFormat(),
+                      is_secure = False
+         )
 
-..   # write
-..   s3_object.set_contents_from_string("This is a text.")
+  # create bucket
+  bucket = conn.create_bucket("leofs-bucket")
 
-..   # show buckets
-..   for bucket in conn.get_all_buckets():
-..     print bucket
+  # create object
+  s3_object = bucket.new_key("image_file")
 
-..     # show S3Objects
-..     for obj in bucket.get_all_keys():
-..       print obj
+  # write
+  s3_object.set_contents_from_string("This is a text.")
 
-..     print
+  # show buckets
+  for bucket in conn.get_all_buckets():
+    print bucket
 
-..   # get bucket
-..   bucket = conn.get_bucket("leofs-bucket")
-..   print bucket
+    # show S3Objects
+    for obj in bucket.get_all_keys():
+      print obj
 
-..   # get S3Object
-..   s3_object = bucket.get_key("image_file")
-..   print s3_object
+    print
 
-..   # read
-..   print s3_object.read()
+  # get bucket
+  bucket = conn.get_bucket("leofs-bucket")
+  print bucket
 
-..   # write from file
-..   #s3_object.set_contents_from_filename("filename")
+  # get S3Object
+  s3_object = bucket.get_key("image_file")
+  print s3_object
 
-..   # delete S3Object
-..   s3_object.delete()
+  # read
+  print s3_object.read()
 
-.. Getting Started with Node: 'knox'
-.. -------------------------------------
+  # write from file
+  #s3_object.set_contents_from_filename("filename")
+
+  # delete S3Object
+  s3_object.delete()
+
+.. _knox-label:
+
+Getting Started with Node.js - 'Knox'
+-------------------------------------
+
+Install Knox
+^^^^^^^^^^^^^^
+
+::
+
+  npm install knox
+
+Edit /etc/hosts
+^^^^^^^^^^^^^^^
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+
+::
+
+  127.0.0.1 ${bucket_name}.localhost
+
+Sample Code
+^^^^^^^^^^^^
+
+.. code-block:: javascript
+
+  Var knox = require("knox")
+
+  var client = knox.createClient({
+    key: "YOUR ACCESS KEY ID",
+    secret: "YOUR SECRET ACCESS KEY",
+    bucket: "bucket",
+    endpoint: "bucket.localhost", // ${bucket_name}.localhost
+    port: 8080
+  });
+
+  // PUT object
+  var string = "Hello, world!";
+  client.put("key", {
+    "Content-Length": string.length,
+    "Content-Type": "application/json"
+  }).end(string);
+
+  // HEAD object
+  client.headFile("key", function(err, res) {
+    console.log("Headers:\n", res.headers);
+  });
+
+  // GET object
+  client.getFile("key", function(err, res) {
+    res.on('data', function(chunk){
+      console.log(chunk.toString());
+    });
+  });
+
+  // DELETE object
+  client.deleteFile("key", function(err, res) {
+    console.log(res.statusCode);
+  });
 
 .. _s3fs-c-label:
 
