@@ -356,8 +356,6 @@ Sample Code
 Getting Started with PHP: 'aws-sdk'
 ------------------------------------------------------
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
-
 Install aws-sdk for PHP
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -377,6 +375,8 @@ aws-sdk for PHP
 
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
 
 ::
 
@@ -429,8 +429,6 @@ Sample Code
 Getting Started with PHP: 'aws-sdk version 2'
 ------------------------------------------------------
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
-
 Install aws-sdk for PHP 2
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -458,6 +456,8 @@ aws-sdk for PHP
 
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
 
 ::
 
@@ -533,8 +533,6 @@ Boto is a Python interface to Amazon Web Services. You can use it for LeoFS, too
 Repository: https://github.com/boto/boto
 Documentation: http://docs.pythonboto.org/en/latest/index.html
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
-
 Install boto
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -552,6 +550,8 @@ easy_install
 
 Sample Code
 """""""""""
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
 
 .. code-block:: python
 
@@ -611,12 +611,10 @@ Sample Code
 
 .. _knox-label:
 
-Getting Started with Node: 'knox'
+Getting Started with Node.js - 'Knox'
 -------------------------------------
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
-
-Install knox
+Install Knox
 ^^^^^^^^^^^^^^
 
 ::
@@ -625,6 +623,8 @@ Install knox
 
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
 
 ::
 

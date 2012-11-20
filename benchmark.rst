@@ -30,10 +30,11 @@ Install
     cp -i ../leofs/test/include/*.hrl include/
     make all
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
 
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
+
+.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
 
 ::
 
