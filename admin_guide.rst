@@ -212,7 +212,7 @@ Command List
 +-----------------------------------+------------------------------------------------------------+
 | purge ${filepath}                 | Purge a cached file if the specified file existed in cache |
 +-----------------------------------+------------------------------------------------------------+
-| s3-gen-key ${user-id}             | Generate a S3 key pair(AccessKeyID and SecretAccessKey)    |
+| s3-creaate-key ${user-id}         | Generate a S3 key pair(AccessKeyID and SecretAccessKey)    |
 +-----------------------------------+------------------------------------------------------------+
 | s3-set-endpoint ${endpoint}       | Register a new S3 Endpoint                                 |
 +-----------------------------------+------------------------------------------------------------+
@@ -409,19 +409,19 @@ Paths used by `purge` are governed by :ref:`this rule <s3-path-label>`
     purge leofs.org/is/s3/comaptible/storage.key
     OK
 
-.. _s3-gen-key:
+.. _s3-create-key:
 
 .. index::
-   s3-gen-key-command
+   s3-create-key-command
 
-**'s3-gen-key'** - Generate a S3 key pair(AccessKeyID and SecretAccessKey)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+**'s3-create-key'** - Generate a S3 key pair(AccessKeyID and SecretAccessKey)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Specify a user-id which must be unique across the whole system
 
 ::
 
-   s3-gen-key test
+   s3-create-key test
    access-key-id: be8111173c8218aaf1c3
    secret-access-key: 929b09f9b794832142c59218f2907cd1c35ac163
 

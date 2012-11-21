@@ -146,12 +146,12 @@ Modify “/ets/hosts”
 7. Getting Your S3-API's Key from LeoFS's Manager-Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Using command is ``s3-gen-key`` on LeoFS's manager-console
+* Using command is ``s3-create-key`` on LeoFS's manager-console
 
 ::
 
     $ telnet 127.0.0.1 10010
-    > s3-gen-key ${YOUR_NAME}
+    > s3-create-key ${YOUR_NAME}
     access-key-id: 05dcba94333c7590a635
     secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
