@@ -84,6 +84,8 @@ Build for Linux (CentOS, Debian and Others)
                  --disable-sctp \
                  --enable-threads \
                  --with-libatomic_ops=/usr/local/lib
+   $ make
+   $ sudo make install
 
 Confirm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
