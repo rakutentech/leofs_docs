@@ -212,7 +212,7 @@ Command List
 +-----------------------------------+------------------------------------------------------------+
 | purge ${filepath}                 | Purge a cached file if the specified file existed in cache |
 +-----------------------------------+------------------------------------------------------------+
-| s3-creaate-key ${user-id}         | Generate a S3 key pair(AccessKeyID and SecretAccessKey)    |
+| s3-create-key ${user-id}          | Generate a S3 key pair(AccessKeyID and SecretAccessKey)    |
 +-----------------------------------+------------------------------------------------------------+
 | s3-set-endpoint ${endpoint}       | Register a new S3 Endpoint                                 |
 +-----------------------------------+------------------------------------------------------------+
