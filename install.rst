@@ -36,6 +36,13 @@ Install OS-related libraries (Ubuntu Server 12.04 LTS)
 
    # sudo apt-get install libtool libncurses5-dev libssl-dev
 
+   [for R15B02 - Install libatomic_ops]
+   $ wget http://www.hpl.hp.com/research/linux/atomic_ops/download/libatomic_ops-7.2d.tar.gz
+   $ cd libatomic_ops-7.2d
+   $ tar xzvf libatomic_ops-7.2d
+   $ ./configure --prefix=/usr/local/lib
+   $ make
+   $ sudo make install
 
 Download "Erlang R14B04"
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -48,6 +55,7 @@ Build for Linux (CentOS, Debian and Others)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
+   [R14B04]
    $ tar xzf otp_src_R14B04.tar.gz
    $ cd otp_src_R14B04
    $ ./configure --prefix=/usr/local/erlang/R14B04 \
@@ -63,14 +71,36 @@ Build for Linux (CentOS, Debian and Others)
    $ make
    $ sudo make install
 
+   [R15B02]
+   $ tar xzf otp_src_R15B02.tar.gz
+   $ cd otp_src_R15B02
+   $ ./configure --prefix=/usr/local/erlang/R15B02 \
+                 --enable-smp-support \
+                 --enable-halfword-emulator \
+                 --enable-kernel-poll \
+                 --without-javac \
+                 --disable-native-libs \
+                 --disable-hipe \
+                 --disable-sctp \
+                 --enable-threads \
+                 --with-libatomic_ops=/usr/local/lib
+
 Confirm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
+    [R14B04]
     $ erl
     Erlang R14B04 (erts-5.8.4) [source] [64-bit] [smp:2:2] [rq:2] [async-threads:0] [kernel-poll:false]
-
+    
     Eshell V5.8.5  (abort with ^G)
+    1>
+    
+    [R15B02]
+    $ erl
+    Erlang R15B02 (erts-5.9.2) [source] [64-bit halfword] [smp:2:2] [async-threads:0] [kernel-poll:false]
+    
+    Eshell V5.9.2  (abort with ^G)
     1>
 
 
