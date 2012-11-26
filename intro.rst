@@ -40,8 +40,7 @@ Milestones
         * Bucket-related
 * 0.12 (Oct - Dec 2012)
     * Large Object Support (incl.Streaming/Multi-part/Range requests)
-    * Object Expiration
-    * Multi-layer Cache (Using SSD)
+    * Object Expiration into the bucket
     * Web GUI-Console (LeoTamer)
         * Cluster manager/monitor
         * Log Analysis/Search
@@ -51,6 +50,5 @@ Milestones
 
 * Future Works (2013)
     * Multi-Datacenter for Geographical Optimization
-    * HBase integration
-        * Distributed Lock Mechanism
+    * Multi-layer Cache (Using SSD)
 

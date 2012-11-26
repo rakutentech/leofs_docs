@@ -321,8 +321,7 @@ After executed make-command
       |      |--- leo_storage/
       |      |--- lz4/
       |      |--- meck/
-      |      |--- proper/
-      |      `--- snappy/
+      |      `--- proper/
       |---- doc/
       |---- rebar
       |---- rebar.config
