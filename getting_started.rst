@@ -13,6 +13,7 @@ LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS and CentOS
 most Linux platforms with the following software:
 
 * Erlang OTP R14B04 <http://www.erlang.org/download_release/12>
+* Erlang OTP R15B02 <http://www.erlang.org/download_release/15>
 
 And the following erlang libraries:
 
