@@ -34,19 +34,19 @@ Goals
 Milestones
 --------------------------------
 
-* 0.10 (Aug - Sep 2012)
-    * Enhance S3-API
-        * Authentication
-        * Bucket-related
-* 0.12 (Oct - Dec 2012)
+* 0.12 (Oct 2012 - Jan 2013)
     * Large Object Support (incl.Streaming/Multi-part/Range requests)
-    * Object Expiration into the bucket
-    * Web GUI-Console (LeoTamer)
+    * Web GUI-Console (LeoTamer - Optional)
         * Cluster manager/monitor
         * Log Analysis/Search
 
 .. image:: _static/images/leofs-web-console.png
    :width: 480px
+
+* 0.14 (Feb 2013 - Apr)
+    * Objects Expiration into the bucket
+    * Job Scheduler on the Manager
+    * QoS System (LeoDenebola - Optional)
 
 * Future Works (2013)
     * Multi-Datacenter for Geographical Optimization
