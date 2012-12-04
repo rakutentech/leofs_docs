@@ -99,14 +99,14 @@ Confirm
     [R14B04]
     $ erl
     Erlang R14B04 (erts-5.8.5) [source] [64-bit halfword] [smp:2:2] [rq:2] [async-threads:0] [kernel-poll:false]
-    
+
     Eshell V5.8.5  (abort with ^G)
     1>
-    
+
     [R15B02]
     $ erl
     Erlang R15B02 (erts-5.9.2) [source] [64-bit halfword] [smp:2:2] [async-threads:0] [kernel-poll:false]
-    
+
     Eshell V5.9.2  (abort with ^G)
     1>
 
@@ -931,13 +931,22 @@ Gateway's Properties for launch
                               {ssl_keyfile,  "./etc/server_key.pem" },
 
                               %% == large-object related ==
-                              {acceptable_max_obj_len, 2147483648 }, %% 2GB
-                              {chunked_obj_len,        4194304    }, %% 4MB
-                              {threshold_obj_len,      5242880    }, %% 5MB
+                              %% NOTE:
+                              %% * When multipart upload:
+                              %% * Total length = ${max_chunked_objs} * ${max_len_for_obj}
+                              %% # of chunked objects
+                              {max_chunked_objs,      1000 },
+                              %% Max length an object (default: 500GB)
+                              {max_len_for_obj,       524288000 },
+
+                              %% length of a chunked object (default: 5.0MB)
+                              {chunked_obj_len,       5242880 },
+                              %% threshold of length of a chunked object (default: 5.5MB)
+                              {threshold_obj_len,     5767168 },
 
                               %% == Cache related ==
-                              %% Name of the cache plugin
-                              {cache_plugin, ${CACHE_PLUGIN} },
+                              %% Method of cache [http | inner]
+                              {cache_method, http },
 
                               %% Cache expire time. Unit is minutes.
                               %% Unit is minutes - 300 = 5min
