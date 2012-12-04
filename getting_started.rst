@@ -20,6 +20,7 @@ And the following erlang libraries:
 * Basho Bitcask <https://github.com/basho/bitcask>
 * Ninenines Cowboy <https://github.com/extend/cowboy>
 * Boundary Folsom <https://github.com/boundary/folsom>
+* Szktty Erlang LZ4 <https://github.com/szktty/erlang-lz4>
 
 And we recommend you to use on 64bit builds because of having to handle large files.
 
