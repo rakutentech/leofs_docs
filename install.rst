@@ -36,7 +36,7 @@ Install OS-related libraries (Ubuntu Server 12.04 LTS)
 
    # sudo apt-get install libtool libncurses5-dev libssl-dev
 
-Install "libatomic_ops" for R15B02  *(both CentOS and Ubuntu)*
+Install "libatomic_ops" for R15B03  *(both CentOS and Ubuntu)*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 ::
@@ -80,10 +80,10 @@ Build for Linux (CentOS, Debian and Others)
    $ make
    $ sudo make install
 
-   [R15B02]
-   $ tar xzf otp_src_R15B02.tar.gz
-   $ cd otp_src_R15B02
-   $ ./configure --prefix=/usr/local/erlang/R15B02 \
+   [R15B03]
+   $ tar xzf otp_src_R15B03.tar.gz
+   $ cd otp_src_R15B03
+   $ ./configure --prefix=/usr/local/erlang/R15B03 \
                  --enable-smp-support \
                  --enable-m64-build \
                  --enable-halfword-emulator \
@@ -108,11 +108,11 @@ Confirm
     Eshell V5.8.5  (abort with ^G)
     1>
 
-    [R15B02]
+    [R15B03]
     $ erl
-    Erlang R15B02 (erts-5.9.2) [source] [64-bit halfword] [smp:2:2] [async-threads:0] [kernel-poll:false]
+    Erlang R15B03 (erts-5.9.3) [source] [64-bit halfword] [smp:2:2] [async-threads:0] [kernel-poll:false]
 
-    Eshell V5.9.2  (abort with ^G)
+    Eshell V5.9.3  (abort with ^G)
     1>
 
 
