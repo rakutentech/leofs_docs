@@ -36,15 +36,19 @@ Install OS-related libraries (Ubuntu Server 12.04 LTS)
 
    # sudo apt-get install libtool libncurses5-dev libssl-dev
 
-   [Install "libatomic_ops" for R15B02]
+Install "libatomic_ops" for R15B02  *(both CentOS and Ubuntu)*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+::
+
    $ wget http://www.hpl.hp.com/research/linux/atomic_ops/download/libatomic_ops-7.2d.tar.gz
    $ cd libatomic_ops-7.2d
    $ tar xzvf libatomic_ops-7.2d
-   $ ./configure --prefix=/usr/local/lib
+   $ ./configure --prefix=/usr/local
    $ make
    $ sudo make install
 
-Download "Erlang R14B04" / "Erlang R15B02"
+Download "Erlang R14B04" / "Erlang R15B03"
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
@@ -52,9 +56,9 @@ Download "Erlang R14B04" / "Erlang R15B02"
    $ cd $WORK_DIR
    $ wget http://www.erlang.org/download/otp_src_R14B04.tar.gz
 
-   [R15B02]
+   [R15B03]
    $ cd $WORK_DIR
-   $ wget http://www.erlang.org/download/otp_src_R15B02.tar.gz
+   $ wget http://www.erlang.org/download/otp_src_R15B03.tar.gz
 
 Build for Linux (CentOS, Debian and Others)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -81,6 +85,7 @@ Build for Linux (CentOS, Debian and Others)
    $ cd otp_src_R15B02
    $ ./configure --prefix=/usr/local/erlang/R15B02 \
                  --enable-smp-support \
+                 --enable-m64-build \
                  --enable-halfword-emulator \
                  --enable-kernel-poll \
                  --without-javac \
@@ -88,7 +93,7 @@ Build for Linux (CentOS, Debian and Others)
                  --disable-hipe \
                  --disable-sctp \
                  --enable-threads \
-                 --with-libatomic_ops=/usr/local/lib
+                 --with-libatomic_ops=/usr/local
    $ make
    $ sudo make install
 
