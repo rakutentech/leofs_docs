@@ -81,7 +81,7 @@ LeoFS Manager Console on **LeoFS-Manager Master** node
 
     status
     [system config]
-                 version : 0.12.0
+                 version : 0.12.5
      # of replicas       : 3
      # of successes of R : 1
      # of successes of W : 2
@@ -115,7 +115,7 @@ Confirm#1 by **LeoFS-Manager** node's console
 
     status
     [system config]
-                 version : 0.12.0
+                 version : 0.12.5
      # of replicas       : 3
      # of successes of R : 1
      # of successes of W : 2
@@ -150,7 +150,7 @@ Confirm#2 by **LeoFS-Manager** master node's console
 
     status
     [system config]
-                 version : 0.12.0
+                 version : 0.12.5
      # of replicas       : 3
      # of successes of R : 1
      # of successes of W : 2
@@ -187,41 +187,47 @@ Command List
 
 \
 
-+-----------------------------------+------------------------------------------------------------+
-| Command                           | Explanation                                                |
-+===================================+============================================================+
-| detach ${storage-node}            | Remove a storage node from the cluster                     |
-+-----------------------------------+------------------------------------------------------------+
-| resume ${storage-node}            | Restarting - 'nodedown' or 'stop' - storage node           |
-+-----------------------------------+------------------------------------------------------------+
-| suspend ${storage-node}           | Suspend a storage node                                     |
-+-----------------------------------+------------------------------------------------------------+
-| start                             | Launch the cluster                                         |
-+-----------------------------------+------------------------------------------------------------+
-| rebalance                         | Rebalance files into the cluster                           |
-+-----------------------------------+------------------------------------------------------------+
-| history                           | Retrieve operation histories                               |
-+-----------------------------------+------------------------------------------------------------+
-| compact ${storage-node}           | Compact raw files used by the LeoFS Storage subsystem      |
-+-----------------------------------+------------------------------------------------------------+
-| du ${storage-node}                | Display disk usages(like xnix du command)                  |
-+-----------------------------------+------------------------------------------------------------+
-| status                            | Retrieve status of the cluster                             |
-+-----------------------------------+------------------------------------------------------------+
-| whereis ${filepath}               | Retrieve status of an assigned file                        |
-+-----------------------------------+------------------------------------------------------------+
-| purge ${filepath}                 | Purge a cached file if the specified file existed in cache |
-+-----------------------------------+------------------------------------------------------------+
-| s3-create-key ${user-id}          | Generate a S3 key pair(AccessKeyID and SecretAccessKey)    |
-+-----------------------------------+------------------------------------------------------------+
-| s3-set-endpoint ${endpoint}       | Register a new S3 Endpoint                                 |
-+-----------------------------------+------------------------------------------------------------+
-| s3-delete-endpoint ${endpoint}    | Delete a S3 Endpoint                                       |
-+-----------------------------------+------------------------------------------------------------+
-| s3-get-endpoints                  | Retrieve all of S3 Endpoints registered                    |
-+-----------------------------------+------------------------------------------------------------+
-| s3-get-buckets                    | Retrieve all of Buckets registered                         |
-+-----------------------------------+------------------------------------------------------------+
++------------------------------------------+------------------------------------------------------------+
+| Command                                  | Explanation                                                |
++==========================================+============================================================+
+| detach ${storage-node}                   | Remove a storage node from the cluster                     |
++------------------------------------------+------------------------------------------------------------+
+| resume ${storage-node}                   | Restarting - 'nodedown' or 'stop' - storage node           |
++------------------------------------------+------------------------------------------------------------+
+| suspend ${storage-node}                  | Suspend a storage node                                     |
++------------------------------------------+------------------------------------------------------------+
+| start                                    | Launch the cluster                                         |
++------------------------------------------+------------------------------------------------------------+
+| rebalance                                | Move or Copy files into the cluster                        |
++------------------------------------------+------------------------------------------------------------+
+| history                                  | Retrieve operation histories                               |
++------------------------------------------+------------------------------------------------------------+
+| compact ${storage-node}                  | Compact raw files used by the LeoFS Storage subsystem      |
++------------------------------------------+------------------------------------------------------------+
+| du ${storage-node}                       | Display disk usages(like xnix du command)                  |
++------------------------------------------+------------------------------------------------------------+
+| status                                   | Retrieve status of the cluster                             |
++------------------------------------------+------------------------------------------------------------+
+| whereis ${file-path}                     | Retrieve status of an assigned file                        |
++------------------------------------------+------------------------------------------------------------+
+| purge ${file-path}                       | Purge a cached file if the specified file existed in cache |
++------------------------------------------+------------------------------------------------------------+
+| s3-create-user ${user-id}                | Generate a S3 key pair(AccessKeyID and SecretAccessKey)    |
++------------------------------------------+------------------------------------------------------------+
+| s3-delete-user ${user-id}                | Remove a user                                              |
++------------------------------------------+------------------------------------------------------------+
+| s3-get-users                             | Retrieve all of registered users                           |
++------------------------------------------+------------------------------------------------------------+
+| s3-set-endpoint ${endpoint}              | Register a new S3 Endpoint                                 |
++------------------------------------------+------------------------------------------------------------+
+| s3-delete-endpoint ${endpoint}           | Delete a S3 Endpoint                                       |
++------------------------------------------+------------------------------------------------------------+
+| s3-get-endpoints                         | Retrieve all of S3 Endpoints registered                    |
++------------------------------------------+------------------------------------------------------------+
+| s3-add-bucket ${bucket} ${access_key_id} | Create a bucket                                            |
++------------------------------------------+------------------------------------------------------------+
+| s3-get-buckets                           | Retrieve all of registered buckets                         |
++------------------------------------------+------------------------------------------------------------+
 
 
 .. index::
@@ -229,6 +235,8 @@ Command List
 
 **'detach'** - Storage node is removed from the LeoFS-Cluster
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Command: *detach ${storage-node}*
 
 ::
 
@@ -243,6 +251,8 @@ Command List
 **'resume'** - Resume a storage node
 """"""""""""""""""""""""""""""""""""""""""
 
+Command: *resume ${storage-node}*
+
 ::
 
     resume storage_0@127.0.0.1
@@ -253,6 +263,8 @@ Command List
 
 **'suspend'** - Suspend a storage node
 """"""""""""""""""""""""""""""""""""""""""
+
+Command: *suspend ${storage-node}*
 
 ::
 
@@ -266,6 +278,10 @@ Command List
 **'rebalance'** - Rebalance files into the cluster
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
+Command: *rebalance*
+
+::
+
     rebalance
     OK
 
@@ -274,6 +290,8 @@ Command List
 
 **'history'** - Retrieve operation histories
 """""""""""""""""""""""""""""""""""""""""""""""
+
+Command: *history*
 
 ::
 
@@ -293,6 +311,8 @@ Command List
 **'compact'** - Remove logical deleted objects and metadata from Object-Storage and Metadata-Storage, respectively
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+Command: *compact ${storage-node}*
+
 ::
 
     compact storage_0@127.0.0.1
@@ -303,48 +323,13 @@ Command List
 **'du'** - Retrieve a number of objects from Object-Storage
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+Command: *du ${storage-node}*
+
 a. summary
 ::
 
     du storage_0@127.0.0.1
-                  file size: 3762871
      number of total object: 14
-
-b. detail
-::
-
-    du detail storage_0@127.0.0.1
-               file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_7.avs
-               file size: 48234060240
-  number of total object: 9873
-
-               file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_6.avs
-               file size: 48234060240
-  number of total object: 9873
-
-               file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_5.avs
-               file size: 48234060240
-  number of total object: 8013
-
-               file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_4.avs
-               file size: 48234060240
-  number of total object: 8973
-
-               file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_3.avs
-               file size: 48234060240
-  number of total object: 8099
-
-               file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_2.avs
-               file size: 48234060240
-  number of total object: 9673
-
-               file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_1.avs
-               file size: 48234060240
-  number of total object: 9973
-
-               file path: /usr/local/leofs/avs/storage_0/vol1/object/leofs_object_storage_0_0.avs
-               file size: 48234060240
-  number of total object: 10240
 
 
 .. index::
@@ -353,10 +338,13 @@ b. detail
 **'status'** - Retrieve status of the cluster
 """""""""""""""""""""""""""""""""""""""""""""""
 
+Command-1: *status*
+
 ::
 
+    status
     [system config]
-                 version : 0.12.0
+                 version : 0.12.5
      # of replicas       : 1
      # of successes of R : 1
      # of successes of W : 1
@@ -375,6 +363,29 @@ b. detail
      S    storage_3@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:18:00 +0900
      G    gateway_0@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:23:26 +0900
 
+
+Command-2: *status ${storage-node}* | *status ${gateway-node}*
+
+::
+
+    status storage_0@127.0.0.1
+    [config]
+                version : 0.12.5
+          obj-container : [[{path,"./avs"},{num_of_containers,64}]]
+                log-dir : ./log
+      ring state (cur)  : 64212f2d
+      ring state (prev) : 64212f2d
+    
+    [erlang-vm status]
+             vm version : 5.8.5
+        total mem usage : 15523984
+       system mem usage : 5832420
+        procs mem usage : 5832420
+          ets mem usage : 568724
+                  procs : 328/1048576
+            kernel_poll : true
+       thread_pool_size : 32
+
 .. _whereis:
 
 .. index::
@@ -384,6 +395,8 @@ b. detail
 """""""""""""""
 
 Paths used by `whereis` are governed by :ref:`this rule <s3-path-label>`
+
+Command: *whereis ${file-path}*
 
 ::
 
@@ -404,26 +417,74 @@ Paths used by `whereis` are governed by :ref:`this rule <s3-path-label>`
 
 Paths used by `purge` are governed by :ref:`this rule <s3-path-label>`
 
+Command: *purge ${file-path}*
+
 ::
 
     purge leofs.org/is/s3/comaptible/storage.key
     OK
 
-.. _s3-create-key:
+.. ### CREATE USER ###
+
+.. _s3-create-user:
 
 .. index::
-   s3-create-key-command
+   s3-create-user-command
 
-**'s3-create-key'** - Generate a S3 key pair(AccessKeyID and SecretAccessKey)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+**'s3-create-user'** - Create a user and generate a S3 key pair(AccessKeyID and SecretAccessKey)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Specify a user-id which must be unique across the whole system
 
+Command: *s3-create-user ${user-id}*
+
 ::
 
-   s3-create-key test
+   s3-create-user test
    access-key-id: be8111173c8218aaf1c3
    secret-access-key: 929b09f9b794832142c59218f2907cd1c35ac163
+
+
+.. ### DELETE USER ###
+
+.. _s3-delete-user:
+
+.. index::
+   s3-delete-user-command
+
+**'s3-delete-user'** - Remove a user from LeoFS manager's db
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Command: *s3-delete-user ${user-id}*
+
+::
+
+   s3-delete-user test
+   ok
+
+
+.. ### GET USERS ###
+
+.. _s3-get-users:
+
+.. index::
+   s3-get-users-command
+
+**'s3-get-users'** - Retrieve users from LeoFS manager's db
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Command: *s3-get-users*
+
+::
+
+   s3-get-users
+   user_id     | access_key_id          | created_at
+   ------------+------------------------+---------------------------
+   _test_leofs | 05236                  | 2012-12-07 10:27:39 +0900
+   leo         | 39bbad4f3b837ed209fb   | 2012-12-07 10:27:39 +0900
+
+
+.. ### SET ENDPOINT ###
 
 .. _s3-set-endpoint:
 
@@ -433,12 +494,17 @@ Specify a user-id which must be unique across the whole system
 **'s3-set-endpoint'** - Register a new S3 Endpoint
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+Command: *s3-set-endpoint ${endpoint}*
+
 Specify a new endpoint to be registered
 
 ::
 
    s3-set-endpoint test
    OK
+
+
+.. ### DELETE ENDPOINTS ###
 
 .. _s3-delete-endpoint:
 
@@ -448,12 +514,15 @@ Specify a new endpoint to be registered
 **'s3-delete-endpoint'** - Delete a S3 Endpoint
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Specify a endpoint to be deleted
+Command: *s3-delete-endpoint ${endpoint}*
 
 ::
 
    s3-delete-endpoint test
    OK
+
+
+.. ### GET ENDPOINTS ###
 
 .. _s3-get-endpoints:
 
@@ -462,6 +531,8 @@ Specify a endpoint to be deleted
 
 **'s3-get-endpoints'** - Retrieve all of S3 Endpoints registered
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Command: *s3-get-endpoints*
 
 ::
 
@@ -472,6 +543,26 @@ Specify a endpoint to be deleted
     localhost        | 2012-09-12 14:09:52 +0900
     leofs.org        | 2012-09-12 14:09:52 +0900
 
+.. ### ADD BUCKET ###
+
+.. _s3-add-bucket:
+
+.. index::
+    s3-add-bucket-command
+
+**'s3-add-bucket'** - Insert a bucket into LeoFS manager's db
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Command: *s3-add-bucket ${bucket} ${access_key_id}*
+
+::
+
+    s3-add-bucket backup 05236
+    OK
+
+
+.. ### GET BUCKETS ###
+
 .. _s3-get-buckets:
 
 .. index::
@@ -479,6 +570,8 @@ Specify a endpoint to be deleted
 
 **'s3-get-buckets'** - Retrieve all of Buckets registered
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Command: *s3-get-buckets*
 
 ::
 
@@ -666,7 +759,7 @@ b. SNMPA-Items
 +------------------+------------------------------------+
 | 17               | # of DELETEs                       |
 +------------------+------------------------------------+
-| **# of objects**  (plan to support with 0.12.0)       |
+| **# of objects**                                      |
 +------------------+------------------------------------+
 | 18               | # of active objects                |
 +------------------+------------------------------------+
