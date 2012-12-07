@@ -36,18 +36,35 @@ Install OS-related libraries (Ubuntu Server 12.04 LTS)
 
    # sudo apt-get install libtool libncurses5-dev libssl-dev
 
+Install "libatomic_ops" for R15B03  *(both CentOS and Ubuntu)*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Download "Erlang R14B04"
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
+   $ wget http://www.hpl.hp.com/research/linux/atomic_ops/download/libatomic_ops-7.2d.tar.gz
+   $ cd libatomic_ops-7.2d
+   $ tar xzvf libatomic_ops-7.2d
+   $ ./configure --prefix=/usr/local
+   $ make
+   $ sudo make install
+
+Download "Erlang R14B04" / "Erlang R15B03"
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+::
+
+   [R14B04]
    $ cd $WORK_DIR
    $ wget http://www.erlang.org/download/otp_src_R14B04.tar.gz
+
+   [R15B03]
+   $ cd $WORK_DIR
+   $ wget http://www.erlang.org/download/otp_src_R15B03.tar.gz
 
 Build for Linux (CentOS, Debian and Others)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
+   [R14B04]
    $ tar xzf otp_src_R14B04.tar.gz
    $ cd otp_src_R14B04
    $ ./configure --prefix=/usr/local/erlang/R14B04 \
@@ -63,14 +80,39 @@ Build for Linux (CentOS, Debian and Others)
    $ make
    $ sudo make install
 
+   [R15B03]
+   $ tar xzf otp_src_R15B03.tar.gz
+   $ cd otp_src_R15B03
+   $ ./configure --prefix=/usr/local/erlang/R15B03 \
+                 --enable-smp-support \
+                 --enable-m64-build \
+                 --enable-halfword-emulator \
+                 --enable-kernel-poll \
+                 --without-javac \
+                 --disable-native-libs \
+                 --disable-hipe \
+                 --disable-sctp \
+                 --enable-threads \
+                 --with-libatomic_ops=/usr/local
+   $ make
+   $ sudo make install
+
 Confirm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
+    [R14B04]
     $ erl
-    Erlang R14B04 (erts-5.8.4) [source] [64-bit] [smp:2:2] [rq:2] [async-threads:0] [kernel-poll:false]
+    Erlang R14B04 (erts-5.8.5) [source] [64-bit halfword] [smp:2:2] [rq:2] [async-threads:0] [kernel-poll:false]
 
     Eshell V5.8.5  (abort with ^G)
+    1>
+
+    [R15B03]
+    $ erl
+    Erlang R15B03 (erts-5.9.3) [source] [64-bit halfword] [smp:2:2] [async-threads:0] [kernel-poll:false]
+
+    Eshell V5.9.3  (abort with ^G)
     1>
 
 
@@ -284,8 +326,7 @@ After executed make-command
       |      |--- leo_storage/
       |      |--- lz4/
       |      |--- meck/
-      |      |--- proper/
-      |      `--- snappy/
+      |      `--- proper/
       |---- doc/
       |---- rebar
       |---- rebar.config
@@ -895,13 +936,22 @@ Gateway's Properties for launch
                               {ssl_keyfile,  "./etc/server_key.pem" },
 
                               %% == large-object related ==
-                              {acceptable_max_obj_len, 2147483648 }, %% 2GB
-                              {chunked_obj_len,        4194304    }, %% 4MB
-                              {threshold_obj_len,      5242880    }, %% 5MB
+                              %% NOTE:
+                              %% * When multipart upload:
+                              %% * Total length = ${max_chunked_objs} * ${max_len_for_obj}
+                              %% # of chunked objects
+                              {max_chunked_objs,      1000 },
+                              %% Max length an object (default: 500GB)
+                              {max_len_for_obj,       524288000 },
+
+                              %% length of a chunked object (default: 5.0MB)
+                              {chunked_obj_len,       5242880 },
+                              %% threshold of length of a chunked object (default: 5.5MB)
+                              {threshold_obj_len,     5767168 },
 
                               %% == Cache related ==
-                              %% Name of the cache plugin
-                              {cache_plugin, ${CACHE_PLUGIN} },
+                              %% Method of cache [http | inner]
+                              {cache_method, http },
 
                               %% Cache expire time. Unit is minutes.
                               %% Unit is minutes - 300 = 5min

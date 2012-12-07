@@ -13,12 +13,14 @@ LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS and CentOS
 most Linux platforms with the following software:
 
 * Erlang OTP R14B04 <http://www.erlang.org/download_release/12>
+* Erlang OTP R15B03 <http://www.erlang.org/download_release/16>
 
 And the following erlang libraries:
 
 * Basho Bitcask <https://github.com/basho/bitcask>
 * Ninenines Cowboy <https://github.com/extend/cowboy>
 * Boundary Folsom <https://github.com/boundary/folsom>
+* Szktty Erlang LZ4 <https://github.com/szktty/erlang-lz4>
 
 And we recommend you to use on 64bit builds because of having to handle large files.
 
@@ -146,12 +148,12 @@ Modify “/ets/hosts”
 7. Getting Your S3-API's Key from LeoFS's Manager-Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Using command is ``s3-gen-key`` on LeoFS's manager-console
+* Using command is ``s3-create-key`` on LeoFS's manager-console
 
 ::
 
     $ telnet 127.0.0.1 10010
-    > s3-gen-key ${YOUR_NAME}
+    > s3-create-key ${YOUR_NAME}
     access-key-id: 05dcba94333c7590a635
     secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
