@@ -856,50 +856,62 @@ Gateway's Properties for launch
 
 * **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/gateway/etc/app.config**
 
-+--------------------+--------------------------------------------------------+
-|Property            | Configuration                                          |
-+====================+========================================================+
-|${LISTENING_PORT}   | Gateway's listening port number                        |
-+--------------------+--------------------------------------------------------+
-|${NUM_OF_LISTENNER} | Numbers of Gateway's listening processes               |
-+--------------------+--------------------------------------------------------+
-|${MANAGER_MASTER_IP}| Manager-master node's IP-address                       |
-+--------------------+--------------------------------------------------------+
-|${MANAGER_SLAVE_IP} | Manager-slave node's IP-address                        |
-+--------------------+--------------------------------------------------------+
-|${CACHE_PLUGIN}     | (Optional) Http Cache Module(mochiweb_mod_cache)       |
-+--------------------+--------------------------------------------------------+
-|${CACHE_EXPIRE}     | (Optional) Http Cache Expire in second                 |
-|                    | (ex. 60 means one minute)                              |
-+--------------------+--------------------------------------------------------+
-|${CACHE_MAX_C_LEN}  | (Optional) Http Cache Max Content Length in byte       |
-|                    |                                                        |
-|                    | (ex. 8192 means caching if contents was less than 8KB) |
-+--------------------+--------------------------------------------------------+
-|${CACHE_C_TYPE}     | (Optional) Http Cache Content Type                     |
-|                    |                                                        |
-|                    | (ex. ["image/png", "image/jpeg"] means caching only if |
-|                    |                                                        |
-|                    | its Content-Type was "image/png" or "image/jpeg"       |
-+--------------------+--------------------------------------------------------+
-|${CACHE_PATH_PAT}   | (Optional) Http Cache Path Pattern(regular expression) |
-|                    |                                                        |
-|                    | (ex. ["/img/.+", "/css/.+" means caching only if       |
-|                    |                                                        |
-|                    | its path was "/img/*" or "/css/*"                      |
-+--------------------+--------------------------------------------------------+
-|${SNMPA-DIR}        | SNMPA configuration files directory                    |
-|                    |                                                        |
-|                    | - ref:${LEOFS_SRC}/apps/leo_gateway/snmp/              |
-|                    |                                                        |
-|                    | - [snmpa_gateway_0|snmpa_gateway_1|snmpa_gateway_0]    |
-+--------------------+--------------------------------------------------------+
-|${CACHE_TOTAL_SIZE} | Total Memory Cache Size in byte                        |
-|                    | (ex. 4000000000 means using 4GB memory cache)          |
-+--------------------+--------------------------------------------------------+
-|${USE_S3_AUTH}      | Whether using S3 Authentication or not in Bool         |
-|                    | default true.                                          |
-+--------------------+--------------------------------------------------------+
++--------------------+----------------------------------------------------------------------------------+
+|Property            | Configuration                                                                    |
++====================+==================================================================================+
+|${LISTENING_PORT}   | Gateway's listening port number                                                  |
++--------------------+----------------------------------------------------------------------------------+
+|${NUM_OF_LISTENNER} | Numbers of Gateway's listening processes                                         |
++--------------------+----------------------------------------------------------------------------------+
+|${MANAGER_MASTER_IP}| Manager-master node's IP-address                                                 |
++--------------------+----------------------------------------------------------------------------------+
+|${MANAGER_SLAVE_IP} | Manager-slave node's IP-address                                                  |
++--------------------+----------------------------------------------------------------------------------+
+|${CACHE_METHOD}     | Method of chache - **http** OR **inner**                                         |
+|                    |                                                                                  |
+|                    | +-----+---------------------------------------------------------------------+    |
+|                    | |http |Like a *Varnish* OR *Squid*                                          |    |
+|                    | +-----+---------------------------------------------------------------------+    |
+|                    | |inner|Stored objects into the gateway's memory. When READ, , The *Etag* of |    |
+|                    | |     |cache is comapared with backend-storage's *Etag*.                    |    |
+|                    | +-----+---------------------------------------------------------------------+    |
++--------------------+----------------------------------------------------------------------------------+
+|${CACHE_EXPIRE}     | [**cache-mode:http**] Http Cache Expire in second                                |
++--------------------+----------------------------------------------------------------------------------+
+|${CACHE_MAX_C_LEN}  | [**cache-mode:http**] Http Cache Max Content Length in byte                      |
++--------------------+----------------------------------------------------------------------------------+
+|${CACHE_C_TYPE}     | [**cache-mode:http**] Http Cache Content Type                                    |
+|                    |                                                                                  |
+|                    | ex-1) ["image/png", "image/jpeg"]                                                |
+|                    |                                                                                  |
+|                    |       Caching only if its Content-Type was *"image/png"* OR *"image/jpeg"*       |
+|                    |                                                                                  |
+|                    | ex-2) []                                                                         |
+|                    |                                                                                  |
+|                    |       When rule is empty, all objects are cached.                                |
++--------------------+----------------------------------------------------------------------------------+
+|${CACHE_PATH_PAT}   | [**cache-mode:http**] Http Cache Path Pattern(regular expression)                |
+|                    |                                                                                  |
+|                    | ex-1) ["/img/.+", "/css/.+"]                                                     |
+|                    |                                                                                  |
+|                    |       Caching only if its path was *"/img/\*"* or *"/css/\*"*                    |
+|                    |                                                                                  |
+|                    | ex-2) []                                                                         |
+|                    |                                                                                  |
+|                    |       When rule is empty, all objects are cached.                                |
++--------------------+----------------------------------------------------------------------------------+
+|${SNMPA-DIR}        | SNMPA configuration files directory                                              |
+|                    |                                                                                  |
+|                    | - ref:${LEOFS_SRC}/apps/leo_gateway/snmp/                                        |
+|                    |                                                                                  |
+|                    | - [snmpa_gateway_0|snmpa_gateway_1|snmpa_gateway_0]                              |
++--------------------+----------------------------------------------------------------------------------+
+|${CACHE_TOTAL_SIZE} | Total Memory Cache Size in byte                                                  |
+|                    | (ex. 4000000000 means using 4GB memory cache)                                    |
++--------------------+----------------------------------------------------------------------------------+
+|${USE_S3_AUTH}      | Whether using S3 Authentication or not in Bool                                   |
+|                    | default true.                                                                    |
++--------------------+----------------------------------------------------------------------------------+
 
 .. code-block:: erlang
 
@@ -950,8 +962,8 @@ Gateway's Properties for launch
                               {threshold_obj_len,     5767168 },
 
                               %% == Cache related ==
-                              %% Method of cache [http | inner]
-                              {cache_method, http },
+                              %% Method of cache [http | inner], - default is 'http'
+                              {cache_method, ${CACHE_METHOD} },
 
                               %% Cache expire time. Unit is minutes.
                               %% Unit is minutes - 300 = 5min
