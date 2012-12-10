@@ -368,7 +368,7 @@ Getting Started with PHP: 'aws-sdk version 2'
 ------------------------------------------------------
 
 Install aws-sdk for PHP 2
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 php5-curl (Debian)
 """"""""""""""""""
