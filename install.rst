@@ -968,6 +968,13 @@ Gateway's Properties for launch
                               {cachable_path_pattern, ${CACHE_PATH_PAT} }
                              ]},
 
+                   %% == Timeout (msec) when request from gateway to storage ==
+                   {timeout_level_1,  5000}, %%       0B         ..   65535B
+                   {timeout_level_2,  7000}, %%   65536B ( 64KB) ..  131071B
+                   {timeout_level_3, 10000}, %%  131072B (128KB) ..  524287B
+                   {timeout_level_4, 20000}, %%  524288B (512KB) .. 1048575B
+                   {timeout_level_5, 30000}, %% 1048576B (1MB    .. more
+
                    %% == Manager ==
                    %% leo-manager's nodes
                    {managers, ["manager_0@127.0.0.1", "manager_1@127.0.0.1"] },
