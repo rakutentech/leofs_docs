@@ -34,7 +34,7 @@ Install
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
 
 ::
 

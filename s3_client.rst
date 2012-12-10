@@ -42,7 +42,7 @@ Sample Code
 Connect to LeoFS
 """""""""""""""""
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`. You need to rewrite 'Endpoint' and 'Port' as follows:
+.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`. You need to rewrite 'Endpoint' and 'Port' as follows:
 
 
 .. code-block:: ruby
@@ -176,7 +176,7 @@ Getting AWS SDK for Java
 
 "SDK for Java" is here: http://aws.amazon.com/sdkforjava/
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`. You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
+.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`. You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
 
 
 Sample Code
@@ -314,7 +314,7 @@ aws-sdk for PHP
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
 
 ::
 
@@ -395,7 +395,7 @@ aws-sdk for PHP
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
 
 ::
 
@@ -489,7 +489,7 @@ easy_install
 Sample Code
 """""""""""
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
 
 .. code-block:: python
 
@@ -562,7 +562,7 @@ Install Knox
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
 
 ::
 
@@ -636,7 +636,7 @@ Modify "/ets/hosts"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Add a LeoFS's domain in ``/ets/hosts``
-* LeoFS's domains are governed by :ref:`this rule <s3-path-label>`
+* LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`
 
 ::
 
@@ -668,7 +668,7 @@ Mount "LeoFS"
 Connect LeoFS from DragonDisk
 ------------------------------------------------------
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`.
+.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
 
 DragonDisk is a powerful file manager for Amazon S3 Compatible Storage.
 
@@ -715,7 +715,7 @@ s3cmd is here: http://sourceforge.net/projects/s3tools/files/
 Configure
 ^^^^^^^^^^^^
 
-.. note:: LeoFS's domains are governed by :ref:`this rule <s3-path-label>`. You need to set 'Endpoint' and 'Port'.
+.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`. You need to set 'Endpoint' and 'Port'.
 
 ::
 

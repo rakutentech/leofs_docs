@@ -394,7 +394,7 @@ Command-2: *status ${storage-node}* | *status ${gateway-node}*
 **'whereis'**
 """""""""""""""
 
-Paths used by `whereis` are governed by :ref:`this rule <s3-path-label>`
+Paths used by `whereis` are ruled by :ref:`this rule <s3-path-label>`
 
 Command: *whereis ${file-path}*
 
@@ -415,7 +415,7 @@ Command: *whereis ${file-path}*
 **'purge'**
 """"""""""""""""
 
-Paths used by `purge` are governed by :ref:`this rule <s3-path-label>`
+Paths used by `purge` are ruled by :ref:`this rule <s3-path-label>`
 
 Command: *purge ${file-path}*
 

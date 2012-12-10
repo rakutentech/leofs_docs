@@ -78,7 +78,7 @@ Modify “/ets/hosts”
 """""""""""""""""""""""
 
 * Add a LeoFS's domain in ``/ets/hosts``
-* LeoFS's domains are governed by :ref:`this rule <s3-path-label>`
+* LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`
 
 ::
 
