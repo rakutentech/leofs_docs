@@ -36,7 +36,7 @@ Install OS-related libraries (Ubuntu Server 12.04 LTS)
 
    # sudo apt-get install libtool libncurses5-dev libssl-dev
 
-Install "libatomic_ops" for R15B03  *(both CentOS and Ubuntu)*
+Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 ::
@@ -48,7 +48,7 @@ Install "libatomic_ops" for R15B03  *(both CentOS and Ubuntu)*
    $ make
    $ sudo make install
 
-Download "Erlang R14B04" / "Erlang R15B03"
+Download "Erlang R14B04" / "Erlang R15B03-1"
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
@@ -58,7 +58,7 @@ Download "Erlang R14B04" / "Erlang R15B03"
 
    [R15B03]
    $ cd $WORK_DIR
-   $ wget http://www.erlang.org/download/otp_src_R15B03.tar.gz
+   $ wget http://www.erlang.org/download/otp_src_R15B03-1.tar.gz
 
 Build for Linux (CentOS, Debian and Others)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -80,9 +80,9 @@ Build for Linux (CentOS, Debian and Others)
    $ make
    $ sudo make install
 
-   [R15B03]
-   $ tar xzf otp_src_R15B03.tar.gz
-   $ cd otp_src_R15B03
+   [R15B03-1]
+   $ tar xzf otp_src_R15B03-1.tar.gz
+   $ cd otp_src_R15B03-1
    $ ./configure --prefix=/usr/local/erlang/R15B03 \
                  --enable-smp-support \
                  --enable-m64-build \
@@ -108,7 +108,7 @@ Confirm
     Eshell V5.8.5  (abort with ^G)
     1>
 
-    [R15B03]
+    [R15B03-1]
     $ erl
     Erlang R15B03 (erts-5.9.3) [source] [64-bit halfword] [smp:2:2] [async-threads:0] [kernel-poll:false]
 
