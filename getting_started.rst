@@ -164,7 +164,6 @@ Modify “/ets/hosts”
 
 * LeoFS uses any S3-Clients as follows:
     * :ref:`Ruby - ‘aws-sdk’ <aws-sdk-ruby-label>`
-    * :ref:`Ruby - ‘aws-s3’ <aws-s3-ruby-label>`
     * :ref:`FUSE - ‘S3FS-C’ <s3fs-c-label>`
     * :ref:`GUI  - ‘Dragon Disk’ <dragondisk-label>`
 

@@ -37,7 +37,7 @@ Install OS-related libraries (Ubuntu Server 12.04 LTS)
    # sudo apt-get install libtool libncurses5-dev libssl-dev
 
 Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 ::
 
@@ -49,7 +49,7 @@ Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
    $ sudo make install
 
 Download "Erlang R14B04" / "Erlang R15B03-1"
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
    [R14B04]
