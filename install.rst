@@ -870,10 +870,15 @@ Gateway's Properties for launch
 |${CACHE_METHOD}     | Method of chache - **http** OR **inner**                                         |
 |                    |                                                                                  |
 |                    | +-----+---------------------------------------------------------------------+    |
-|                    | |http |Like a *Varnish* OR *Squid*                                          |    |
+|                    | |http |HTTP-base cache server - Like a *Varnish* OR *Squid*                 |    |
 |                    | +-----+---------------------------------------------------------------------+    |
-|                    | |inner|Stored objects into the gateway's memory. When READ, , The *Etag* of |    |
-|                    | |     |cache is comapared with backend-storage's *Etag*.                    |    |
+|                    | |inner|Stored objects into the gateway's memory. When READ, the *Etag* of   |    |
+|                    | |     |a cache is comapared with backend-storage's *Etag*.                  |    |
+|                    | |     | +----------+--------------------------------------------+           |    |
+|                    | |     | |matched   | Return a cache                             |           |    |
+|                    | |     | +----------+--------------------------------------------+           |    |
+|                    | |     | |unmatched | Return an original-object from the storage |           |    |
+|                    | |     | +----------+--------------------------------------------+           |    |
 |                    | +-----+---------------------------------------------------------------------+    |
 +--------------------+----------------------------------------------------------------------------------+
 |${CACHE_EXPIRE}     | [**cache-mode:http**] Http Cache Expire in second                                |
