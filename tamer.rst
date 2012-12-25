@@ -6,6 +6,9 @@ LeoTamer is a admin tool for LeoFS on browsers.
 Install
 ---------
 
+Install LeoTamer
+^^^^^^^^^^^^^^^^
+
 ruby 1.9.3-p327 or higher is required.
 
 ::
@@ -15,8 +18,8 @@ ruby 1.9.3-p327 or higher is required.
   cd leo_tamer
   bundle install
 
-Setup
----------
+Create Admin User
+^^^^^^^^^^^^^^^^^
 
 Only admin user of LeoFS can use LeoTamer now.
 Therefore, you have to create admin user before use LeoTamer.
@@ -31,7 +34,7 @@ Therefore, you have to create admin user before use LeoTamer.
   OK
 
 Config
----------
+^^^^^^^
 
 Edit config.yml.
 
@@ -43,4 +46,39 @@ Edit config.yml.
   :credential:
     :access_key_id: ${YOUR_ACCESS_KEY_ID}
     :secret_access_key: ${YOUR_SECRET_ACCESS_KEY}
- 
+
+Start LeoTamer on Console
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+  ruby config.ru ${PORT}
+
+Features
+---------
+
+Node Status
+^^^^^^^^^^^
+
+.. image:: _static/screenshots/tamer/node_status.png
+
+In 'Node Status' tab, you can see node status and execute operations resume/suspend/detach on storage nodes.
+To execute operations, click 'Change Status' button.
+
+Admin
+^^^^^^^
+
+Buckets
+"""""""""
+
+.. image:: _static/screenshots/tamer/buckets.png
+
+Endpoints
+""""""""""
+
+.. image:: _static/screenshots/tamer/endpoints.png
+
+Users
+"""""""""
+
+.. image:: _static/screenshots/tamer/users.png
