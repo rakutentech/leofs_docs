@@ -60,10 +60,11 @@ Features
 Node Status
 ^^^^^^^^^^^
 
-.. image:: _static/screenshots/tamer/node_status.png
-
 In 'Node Status' tab, you can see node status and execute operations resume/suspend/detach on storage nodes.
 To execute operations, click 'Change Status' button.
+
+.. image:: _static/screenshots/tamer/node_status.png
+   :width: 720px
 
 Admin
 ^^^^^^^
@@ -72,13 +73,16 @@ Buckets
 """""""""
 
 .. image:: _static/screenshots/tamer/buckets.png
+   :width: 720px
 
 Endpoints
 """"""""""
 
 .. image:: _static/screenshots/tamer/endpoints.png
+   :width: 720px
 
 Users
 """""""""
 
 .. image:: _static/screenshots/tamer/users.png
+   :width: 720px
