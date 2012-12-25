@@ -60,8 +60,8 @@ Features
 Node Status
 ^^^^^^^^^^^
 
-In 'Node Status' tab, you can see node status and execute operations resume/suspend/detach on storage nodes.
-To execute operations, click 'Change Status' button.
+- node list
+- execute resume/suspend/detach operations on strage node (click 'Change Status' button)
 
 .. image:: _static/screenshots/tamer/node_status.png
    :width: 720px
@@ -72,17 +72,27 @@ Admin
 Buckets
 """""""""
 
+- buckets list
+- add buckets
+
 .. image:: _static/screenshots/tamer/buckets.png
    :width: 720px
 
 Endpoints
 """"""""""
 
+- endpoints list
+- add/delete endpoints
+
 .. image:: _static/screenshots/tamer/endpoints.png
    :width: 720px
 
 Users
 """""""""
+
+- users list
+- add/delete users
+- update user's role
 
 .. image:: _static/screenshots/tamer/users.png
    :width: 720px
