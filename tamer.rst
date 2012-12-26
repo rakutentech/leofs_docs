@@ -73,6 +73,8 @@ it enables admin users to execute resume/suspend/detach operations against strag
 Admin
 ^^^^^^^
 
+This tab provides tools for admin users to manage users, buckets and endpoints.
+
 Users
 """""""""
 
