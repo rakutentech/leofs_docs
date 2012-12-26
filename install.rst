@@ -867,7 +867,7 @@ Gateway's Properties for launch
 +--------------------+----------------------------------------------------------------------------------+
 |${MANAGER_SLAVE_IP} | Manager-slave node's IP-address                                                  |
 +--------------------+----------------------------------------------------------------------------------+
-|${CACHE_METHOD}     | Method of chache - **http** OR **inner**                                         |
+|${CACHE_METHOD}     | Method of chache - **http** OR **inner** *(default)*                             |
 |                    |                                                                                  |
 |                    | +-----+---------------------------------------------------------------------+    |
 |                    | |http |HTTP-base cache server - Like a *Varnish* OR *Squid*                 |    |
@@ -884,6 +884,8 @@ Gateway's Properties for launch
 |${CACHE_EXPIRE}     | [**cache-mode:http**] Http Cache Expire in second                                |
 +--------------------+----------------------------------------------------------------------------------+
 |${CACHE_MAX_C_LEN}  | [**cache-mode:http**] Http Cache Max Content Length in byte                      |
+|                    |                                                                                  |
+|                    | Note: *LeoFS-gateway can cache up to 1MB*                                        |
 +--------------------+----------------------------------------------------------------------------------+
 |${CACHE_C_TYPE}     | [**cache-mode:http**] Http Cache Content Type                                    |
 |                    |                                                                                  |
