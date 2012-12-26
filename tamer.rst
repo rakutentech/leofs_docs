@@ -9,7 +9,7 @@ Install
 Install LeoTamer
 ^^^^^^^^^^^^^^^^
 
-* **Ruby 1.9.3-p327** or higher is required.
+* **Ruby 1.9.3-p362** or higher is required.
 * Download URL: http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p362.tar.gz
 
 ::
