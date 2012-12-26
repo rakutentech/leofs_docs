@@ -65,7 +65,7 @@ Node Status
 ^^^^^^^^^^^
 
 Node status view shows each node's status and
-it enables admin users to execute resume/suspend/detach operations on a strage node (click 'Change Status' button)
+it enables admin users to execute resume/suspend/detach operations on a storage node (click 'Change Status' button)
 
 .. image:: _static/screenshots/tamer/node_status.png
    :width: 720px
