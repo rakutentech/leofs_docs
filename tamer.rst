@@ -64,8 +64,8 @@ Features
 Node Status
 ^^^^^^^^^^^
 
-Node status view shows each node's detail status in detail and
-it enables admin users to execute resume/suspend/detach operations against strage node (click 'Change Status' button)
+Node status view shows each node's status and
+it enables admin users to execute resume/suspend/detach operations on strage node (click 'Change Status' button)
 
 .. image:: _static/screenshots/tamer/node_status.png
    :width: 720px
@@ -73,7 +73,7 @@ it enables admin users to execute resume/suspend/detach operations against strag
 Admin
 ^^^^^^^
 
-This tab provides tools for admin users to manage users, buckets and endpoints.
+This tab provides tools for administrators to manage users, buckets and endpoints.
 
 Users
 """""""""
