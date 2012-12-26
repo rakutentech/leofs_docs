@@ -65,7 +65,7 @@ Node Status
 ^^^^^^^^^^^
 
 Node status view shows each node's status and
-it enables admin users to execute resume/suspend/detach operations on strage node (click 'Change Status' button)
+it enables admin users to execute resume/suspend/detach operations on a strage node (click 'Change Status' button)
 
 .. image:: _static/screenshots/tamer/node_status.png
    :width: 720px
@@ -80,7 +80,7 @@ Users
 
 Users view shows each user's id, role, access_key_id and when the user was created.
 You can create new users and delete them.
-'Update Role' button enables update user's role from general to admin or from admin to general.
+'Update Role' button enables admin users to update user's role from general to admin or from admin to general.
 
 .. image:: _static/screenshots/tamer/users.png
    :width: 720px
@@ -89,7 +89,7 @@ Buckets
 """""""""
 
 Buckets view shows which buckets each users have and
-you can add bucket on this view.
+you can add a bucket on this view.
 
 .. image:: _static/screenshots/tamer/buckets.png
    :width: 720px
@@ -97,7 +97,7 @@ you can add bucket on this view.
 Endpoints
 """"""""""
 
-Endpoints view shows list of endpoints.
+Endpoints view shows the list of endpoints.
 You can also add and delete endpoints.
 
 .. image:: _static/screenshots/tamer/endpoints.png
