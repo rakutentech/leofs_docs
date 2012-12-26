@@ -36,8 +36,8 @@ Install OS-related libraries (Ubuntu Server 12.04 LTS)
 
    # sudo apt-get install libtool libncurses5-dev libssl-dev
 
-Install "libatomic_ops" for R15B03  *(both CentOS and Ubuntu)*
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 ::
 
@@ -48,8 +48,8 @@ Install "libatomic_ops" for R15B03  *(both CentOS and Ubuntu)*
    $ make
    $ sudo make install
 
-Download "Erlang R14B04" / "Erlang R15B03"
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Download "Erlang R14B04" / "Erlang R15B03-1"
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
    [R14B04]
@@ -58,7 +58,7 @@ Download "Erlang R14B04" / "Erlang R15B03"
 
    [R15B03]
    $ cd $WORK_DIR
-   $ wget http://www.erlang.org/download/otp_src_R15B03.tar.gz
+   $ wget http://www.erlang.org/download/otp_src_R15B03-1.tar.gz
 
 Build for Linux (CentOS, Debian and Others)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -80,9 +80,9 @@ Build for Linux (CentOS, Debian and Others)
    $ make
    $ sudo make install
 
-   [R15B03]
-   $ tar xzf otp_src_R15B03.tar.gz
-   $ cd otp_src_R15B03
+   [R15B03-1]
+   $ tar xzf otp_src_R15B03-1.tar.gz
+   $ cd otp_src_R15B03-1
    $ ./configure --prefix=/usr/local/erlang/R15B03 \
                  --enable-smp-support \
                  --enable-m64-build \
@@ -108,7 +108,7 @@ Confirm
     Eshell V5.8.5  (abort with ^G)
     1>
 
-    [R15B03]
+    [R15B03-1]
     $ erl
     Erlang R15B03 (erts-5.9.3) [source] [64-bit halfword] [smp:2:2] [async-threads:0] [kernel-poll:false]
 
@@ -856,50 +856,69 @@ Gateway's Properties for launch
 
 * **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/gateway/etc/app.config**
 
-+--------------------+--------------------------------------------------------+
-|Property            | Configuration                                          |
-+====================+========================================================+
-|${LISTENING_PORT}   | Gateway's listening port number                        |
-+--------------------+--------------------------------------------------------+
-|${NUM_OF_LISTENNER} | Numbers of Gateway's listening processes               |
-+--------------------+--------------------------------------------------------+
-|${MANAGER_MASTER_IP}| Manager-master node's IP-address                       |
-+--------------------+--------------------------------------------------------+
-|${MANAGER_SLAVE_IP} | Manager-slave node's IP-address                        |
-+--------------------+--------------------------------------------------------+
-|${CACHE_PLUGIN}     | (Optional) Http Cache Module(mochiweb_mod_cache)       |
-+--------------------+--------------------------------------------------------+
-|${CACHE_EXPIRE}     | (Optional) Http Cache Expire in second                 |
-|                    | (ex. 60 means one minute)                              |
-+--------------------+--------------------------------------------------------+
-|${CACHE_MAX_C_LEN}  | (Optional) Http Cache Max Content Length in byte       |
-|                    |                                                        |
-|                    | (ex. 8192 means caching if contents was less than 8KB) |
-+--------------------+--------------------------------------------------------+
-|${CACHE_C_TYPE}     | (Optional) Http Cache Content Type                     |
-|                    |                                                        |
-|                    | (ex. ["image/png", "image/jpeg"] means caching only if |
-|                    |                                                        |
-|                    | its Content-Type was "image/png" or "image/jpeg"       |
-+--------------------+--------------------------------------------------------+
-|${CACHE_PATH_PAT}   | (Optional) Http Cache Path Pattern(regular expression) |
-|                    |                                                        |
-|                    | (ex. ["/img/.+", "/css/.+" means caching only if       |
-|                    |                                                        |
-|                    | its path was "/img/*" or "/css/*"                      |
-+--------------------+--------------------------------------------------------+
-|${SNMPA-DIR}        | SNMPA configuration files directory                    |
-|                    |                                                        |
-|                    | - ref:${LEOFS_SRC}/apps/leo_gateway/snmp/              |
-|                    |                                                        |
-|                    | - [snmpa_gateway_0|snmpa_gateway_1|snmpa_gateway_0]    |
-+--------------------+--------------------------------------------------------+
-|${CACHE_TOTAL_SIZE} | Total Memory Cache Size in byte                        |
-|                    | (ex. 4000000000 means using 4GB memory cache)          |
-+--------------------+--------------------------------------------------------+
-|${USE_S3_AUTH}      | Whether using S3 Authentication or not in Bool         |
-|                    | default true.                                          |
-+--------------------+--------------------------------------------------------+
++--------------------+----------------------------------------------------------------------------------+
+|Property            | Configuration                                                                    |
++====================+==================================================================================+
+|${LISTENING_PORT}   | Gateway's listening port number                                                  |
++--------------------+----------------------------------------------------------------------------------+
+|${NUM_OF_LISTENNER} | Numbers of Gateway's listening processes                                         |
++--------------------+----------------------------------------------------------------------------------+
+|${MANAGER_MASTER_IP}| Manager-master node's IP-address                                                 |
++--------------------+----------------------------------------------------------------------------------+
+|${MANAGER_SLAVE_IP} | Manager-slave node's IP-address                                                  |
++--------------------+----------------------------------------------------------------------------------+
+|${CACHE_METHOD}     | Method of chache - **http** OR **inner** *(default)*                             |
+|                    |                                                                                  |
+|                    | +-----+---------------------------------------------------------------------+    |
+|                    | |http |HTTP-base cache server - Like a *Varnish* OR *Squid*                 |    |
+|                    | +-----+---------------------------------------------------------------------+    |
+|                    | |inner|Stored objects into the gateway's memory. When READ, the *Etag* of   |    |
+|                    | |     |a cache is comapared with backend-storage's *Etag*.                  |    |
+|                    | |     | +----------+--------------------------------------------+           |    |
+|                    | |     | |matched   | Return a cache                             |           |    |
+|                    | |     | +----------+--------------------------------------------+           |    |
+|                    | |     | |unmatched | Return an original-object from the storage |           |    |
+|                    | |     | +----------+--------------------------------------------+           |    |
+|                    | +-----+---------------------------------------------------------------------+    |
++--------------------+----------------------------------------------------------------------------------+
+|${CACHE_EXPIRE}     | [**cache-mode:http**] Http Cache Expire in second                                |
++--------------------+----------------------------------------------------------------------------------+
+|${CACHE_MAX_C_LEN}  | [**cache-mode:http**] Http Cache Max Content Length in byte                      |
+|                    |                                                                                  |
+|                    | Note: *LeoFS-gateway can cache up to 1MB*                                        |
++--------------------+----------------------------------------------------------------------------------+
+|${CACHE_C_TYPE}     | [**cache-mode:http**] Http Cache Content Type                                    |
+|                    |                                                                                  |
+|                    | ex-1) ["image/png", "image/jpeg"]                                                |
+|                    |                                                                                  |
+|                    |       Caching only if its Content-Type was *"image/png"* OR *"image/jpeg"*       |
+|                    |                                                                                  |
+|                    | ex-2) []                                                                         |
+|                    |                                                                                  |
+|                    |       When rule is empty, all objects are cached.                                |
++--------------------+----------------------------------------------------------------------------------+
+|${CACHE_PATH_PAT}   | [**cache-mode:http**] Http Cache Path Pattern(regular expression)                |
+|                    |                                                                                  |
+|                    | ex-1) ["/img/.+", "/css/.+"]                                                     |
+|                    |                                                                                  |
+|                    |       Caching only if its path was *"/img/\*"* or *"/css/\*"*                    |
+|                    |                                                                                  |
+|                    | ex-2) []                                                                         |
+|                    |                                                                                  |
+|                    |       When rule is empty, all objects are cached.                                |
++--------------------+----------------------------------------------------------------------------------+
+|${SNMPA-DIR}        | SNMPA configuration files directory                                              |
+|                    |                                                                                  |
+|                    | - ref:${LEOFS_SRC}/apps/leo_gateway/snmp/                                        |
+|                    |                                                                                  |
+|                    | - [snmpa_gateway_0|snmpa_gateway_1|snmpa_gateway_0]                              |
++--------------------+----------------------------------------------------------------------------------+
+|${CACHE_TOTAL_SIZE} | Total Memory Cache Size in byte                                                  |
+|                    | (ex. 4000000000 means using 4GB memory cache)                                    |
++--------------------+----------------------------------------------------------------------------------+
+|${USE_S3_AUTH}      | Whether using S3 Authentication or not in Bool                                   |
+|                    | default true.                                                                    |
++--------------------+----------------------------------------------------------------------------------+
 
 .. code-block:: erlang
 
@@ -950,8 +969,8 @@ Gateway's Properties for launch
                               {threshold_obj_len,     5767168 },
 
                               %% == Cache related ==
-                              %% Method of cache [http | inner]
-                              {cache_method, http },
+                              %% Method of cache [http | inner], - default is 'http'
+                              {cache_method, ${CACHE_METHOD} },
 
                               %% Cache expire time. Unit is minutes.
                               %% Unit is minutes - 300 = 5min
@@ -967,6 +986,13 @@ Gateway's Properties for launch
                               %% Cache: Acceptable URL-Pattern(s)
                               {cachable_path_pattern, ${CACHE_PATH_PAT} }
                              ]},
+
+                   %% == Timeout (msec) when request from gateway to storage ==
+                   {timeout_level_1,  5000}, %%       0B         ..   65535B
+                   {timeout_level_2,  7000}, %%   65536B ( 64KB) ..  131071B
+                   {timeout_level_3, 10000}, %%  131072B (128KB) ..  524287B
+                   {timeout_level_4, 20000}, %%  524288B (512KB) .. 1048575B
+                   {timeout_level_5, 30000}, %% 1048576B (1MB    .. more
 
                    %% == Manager ==
                    %% leo-manager's nodes

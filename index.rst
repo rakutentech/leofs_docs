@@ -24,4 +24,4 @@ LeoFS v0.12 Manual
    s3_api
    s3_client
    benchmark
-
+   tamer

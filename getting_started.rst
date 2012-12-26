@@ -13,7 +13,7 @@ LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS and CentOS
 most Linux platforms with the following software:
 
 * Erlang OTP R14B04 <http://www.erlang.org/download_release/12>
-* Erlang OTP R15B03 <http://www.erlang.org/download_release/16>
+* Erlang OTP R15B03-1 <http://www.erlang.org/download_release/16>
 
 And the following erlang libraries:
 
@@ -78,7 +78,7 @@ Modify “/ets/hosts”
 """""""""""""""""""""""
 
 * Add a LeoFS's domain in ``/ets/hosts``
-* LeoFS's domains are governed by :ref:`this rule <s3-path-label>`
+* LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`
 
 ::
 
@@ -164,7 +164,6 @@ Modify “/ets/hosts”
 
 * LeoFS uses any S3-Clients as follows:
     * :ref:`Ruby - ‘aws-sdk’ <aws-sdk-ruby-label>`
-    * :ref:`Ruby - ‘aws-s3’ <aws-s3-ruby-label>`
     * :ref:`FUSE - ‘S3FS-C’ <s3fs-c-label>`
     * :ref:`GUI  - ‘Dragon Disk’ <dragondisk-label>`
 
