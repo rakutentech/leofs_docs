@@ -61,26 +61,25 @@ Start LeoTamer
 Features
 ---------
 
-Node Status
-^^^^^^^^^^^
+Node Status View
+^^^^^^^^^^^^^^^^
 
-Node status view shows each node's status and
-it enables admin users to execute resume/suspend/detach operations on a storage node (click 'Change Status' button)
+* You can confirm each node-status
+* Administrators can change ``storage-staus`` with ``Change Status button``
+    * storage-status: [resume, suspend, detach]
 
 .. image:: _static/screenshots/tamer/node_status.png
    :width: 720px
 
-Admin
-^^^^^^^
-
-This tab provides tools for administrators to manage users, buckets and endpoints.
+Administration-related views
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Users
 """""""""
 
-Users view shows each user's id, role, access_key_id and when the user was created.
-You can create new users and delete them.
-'Update Role' button enables admin users to update user's role from general to admin or from admin to general.
+* You can confirm the registered list of users
+    * Able to create a user and delete it
+    * Able to change a user role with ``Update Role button``
 
 .. image:: _static/screenshots/tamer/users.png
    :width: 720px
@@ -88,8 +87,9 @@ You can create new users and delete them.
 Buckets
 """""""""
 
-Buckets view shows which buckets each users have and
-you can add a bucket on this view.
+.. note:: A bucket as root directory belongs to a user
+
+* You can show list of buckets
 
 .. image:: _static/screenshots/tamer/buckets.png
    :width: 720px
@@ -97,8 +97,7 @@ you can add a bucket on this view.
 Endpoints
 """"""""""
 
-Endpoints view shows the list of endpoints.
-You can also add and delete endpoints.
+* You can confirm the registered list of endpoints
 
 .. image:: _static/screenshots/tamer/endpoints.png
    :width: 720px
