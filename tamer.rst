@@ -51,8 +51,8 @@ Update ``config.yml`` for connecting LeoFS-Manager
     :secret_access_key: ${YOUR_SECRET_ACCESS_KEY}
 
 
-Start LeoTamer on Console
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Start LeoTamer
+^^^^^^^^^^^^^^
 
 ::
 
