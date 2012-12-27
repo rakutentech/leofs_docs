@@ -317,7 +317,7 @@ Command: *history*
 
 Command: *compact ${storage-node} [${num-of-exec-concurrence}]*
 
-.. note:: Default ${num-of-exec-concurrence} is '3'
+.. note:: Default ${num-of-exec-concurrence} is '3' - You can control the number of process to execute compaction in parallel. It enables you to get maximum performance by setting a appropriate number corresponding with number of cores.
 
 ::
 
