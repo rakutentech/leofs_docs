@@ -36,8 +36,9 @@ Create Admin User
   update-user-role new_admin 9 # set user role as admin
   OK
 
-Config
-^^^^^^^
+
+Configuration
+^^^^^^^^^^^^^
 
 Update ``config.yml`` for connecting LeoFS-Manager
 
@@ -89,7 +90,8 @@ Buckets
 
 .. note:: A bucket as root directory belongs to a user
 
-* You can show list of buckets
+* You can confirm the registered list of buckets
+    * Able to create a bucket
 
 .. image:: _static/screenshots/tamer/buckets.png
    :width: 720px
@@ -98,6 +100,7 @@ Endpoints
 """"""""""
 
 * You can confirm the registered list of endpoints
+    * Able to create an endpoint and delete it
 
 .. image:: _static/screenshots/tamer/endpoints.png
    :width: 720px
