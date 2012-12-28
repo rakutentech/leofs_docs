@@ -1,12 +1,12 @@
-LeoTamer
-==========
+LeoTamer v0.2.5
+===============
 
-**LeoTamer** is an administration tool for LeoFS on your browser. You can easily operate LeoFS.
+**LeoTamer** is LeoFS's GUI console on your browser. You can easily operate LeoFS.
 
 Install
 ---------
 
-Install LeoTamer
+Install LeoTamer 
 ^^^^^^^^^^^^^^^^
 
 * **Ruby 1.9.3-p362** or higher is required.
@@ -22,9 +22,7 @@ Install LeoTamer
 Create Admin User
 ^^^^^^^^^^^^^^^^^
 
-.. note:: Current LeoTamer, Only LeoFS's administrator can use it. You need to create an administrator.
-
-* You need to create a user as ``admin`` on LeoFS-Manager's console.
+* You need to create a user as ``administrator`` on LeoFS-Manager's console.
 
 ::
 
@@ -36,8 +34,9 @@ Create Admin User
   update-user-role new_admin 9 # set user role as admin
   OK
 
-Config
-^^^^^^^
+
+Configuration
+^^^^^^^^^^^^^
 
 Update ``config.yml`` for connecting LeoFS-Manager
 
@@ -61,15 +60,70 @@ Start LeoTamer
 Features
 ---------
 
+Your Credentials
+^^^^^^^^^^^^^^^^
+
+* You can confirm your credentials with ``Security Credentials`` on the form of top right
+
+.. image:: _static/screenshots/tamer/menu_for_user.png
+   :width: 720px
+
+\
+
+.. image:: _static/screenshots/tamer/user_credential.png
+   :width: 720px
+
+
+Bucket Status View
+^^^^^^^^^^^^^^^^^^
+
+* You can confirm your belonging buckets
+    * Able to create a bucket
+    * ``Deletion of a bucket`` plan to support with ``LeoTamer v0.2.6``
+
+.. image:: _static/screenshots/tamer/bucket_status.png
+   :width: 720px
+
+
 Node Status View
 ^^^^^^^^^^^^^^^^
 
 * You can confirm each node-status
-* Administrators can change ``storage-staus`` with ``Change Status button``
-    * storage-status: [resume, suspend, detach]
 
 .. image:: _static/screenshots/tamer/node_status.png
    :width: 720px
+
+* Administrators can change ``storage-staus`` with ``Change Status button``
+    * storage-status: [resume, suspend, detach]
+
+\
+
+.. image:: _static/screenshots/tamer/node_status_operation.png
+   :width: 720px
+
+\
+
+
+Table - Changeable Status
+"""""""""""""""""""""""""
+
+\
+
++-----------------+--------------------------+
+|Current Status   |Changeable Status         |
++=================+==========================+
+| running         | suspend, detach          |
++-----------------+--------------------------+
+| suspend         | resume                   |
++-----------------+--------------------------+
+| restarted       | resume                   |
++-----------------+--------------------------+
+| stop            | detach                   |
++-----------------+--------------------------+
+
+\
+
+
 
 Administration-related views
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -89,7 +143,8 @@ Buckets
 
 .. note:: A bucket as root directory belongs to a user
 
-* You can show list of buckets
+* You can confirm the registered list of buckets
+    * Able to create a bucket
 
 .. image:: _static/screenshots/tamer/buckets.png
    :width: 720px
@@ -98,6 +153,7 @@ Endpoints
 """"""""""
 
 * You can confirm the registered list of endpoints
+    * Able to create an endpoint and delete it
 
 .. image:: _static/screenshots/tamer/endpoints.png
    :width: 720px
