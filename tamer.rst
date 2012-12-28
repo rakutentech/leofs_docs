@@ -1,7 +1,7 @@
 LeoTamer v0.2.5
 ===============
 
-**LeoTamer** is an administration tool for LeoFS on your browser. You can easily operate LeoFS.
+**LeoTamer** is LeoFS's GUI console on your browser. You can easily operate LeoFS.
 
 Install
 ---------
