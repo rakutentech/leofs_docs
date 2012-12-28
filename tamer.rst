@@ -22,9 +22,7 @@ Install LeoTamer
 Create Admin User
 ^^^^^^^^^^^^^^^^^
 
-.. note:: Current LeoTamer, Only LeoFS's administrator can use it. You need to create an administrator.
-
-* You need to create a user as ``admin`` on LeoFS-Manager's console.
+* You need to create a user as ``administrator`` on LeoFS-Manager's console.
 
 ::
 
