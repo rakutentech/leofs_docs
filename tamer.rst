@@ -1,12 +1,12 @@
-LeoTamer
-==========
+LeoTamer v0.2.5
+===============
 
 **LeoTamer** is an administration tool for LeoFS on your browser. You can easily operate LeoFS.
 
 Install
 ---------
 
-Install LeoTamer
+Install LeoTamer 
 ^^^^^^^^^^^^^^^^
 
 * **Ruby 1.9.3-p362** or higher is required.
@@ -62,15 +62,70 @@ Start LeoTamer
 Features
 ---------
 
+Your Credentials
+^^^^^^^^^^^^^^^^
+
+* You can confirm your credentials with ``Security Credentials`` on the form of top right
+
+.. image:: _static/screenshots/tamer/menu_for_user.png
+   :width: 720px
+
+\
+
+.. image:: _static/screenshots/tamer/user_credential.png
+   :width: 720px
+
+
+Bucket Status View
+^^^^^^^^^^^^^^^^^^
+
+* You can confirm your belonging buckets
+    * Able to create a bucket
+    * ``Deletion of a bucket`` plan to support with ``LeoTamer v0.2.6``
+
+.. image:: _static/screenshots/tamer/bucket_status.png
+   :width: 720px
+
+
 Node Status View
 ^^^^^^^^^^^^^^^^
 
 * You can confirm each node-status
-* Administrators can change ``storage-staus`` with ``Change Status button``
-    * storage-status: [resume, suspend, detach]
 
 .. image:: _static/screenshots/tamer/node_status.png
    :width: 720px
+
+* Administrators can change ``storage-staus`` with ``Change Status button``
+    * storage-status: [resume, suspend, detach]
+
+\
+
+.. image:: _static/screenshots/tamer/node_status_operation.png
+   :width: 720px
+
+\
+
+
+Table - Changeable Status
+"""""""""""""""""""""""""
+
+\
+
++-----------------+--------------------------+
+|Current Status   |Changeable Status         |
++=================+==========================+
+| running         | suspend, detach          |
++-----------------+--------------------------+
+| suspend         | resume                   |
++-----------------+--------------------------+
+| restarted       | resume                   |
++-----------------+--------------------------+
+| stop            | detach                   |
++-----------------+--------------------------+
+
+\
+
+
 
 Administration-related views
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
