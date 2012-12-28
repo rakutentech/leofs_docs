@@ -298,9 +298,9 @@ Command: ``whereis ${file-path}``
 +======================================================+================================================================+
 | du ${storage-node}                                   | Display disk usages(like xnix du command)                      |
 +------------------------------------------------------+----------------------------------------------------------------+
-| compact ${storage-node} [${num-of-exec-concurrence}] | Compact raw files used by the LeoFS Storage subsystem          |
+| compact ${storage-node} [${num_of_compact_proc}]     | Compact raw files used by the LeoFS Storage subsystem          |
 |                                                      |                                                                |
-|                                                      | Default ${num-of-exec-concurrence} is '3'                      |
+|                                                      | Default ${num_of_compact_proc} is '3'                          |
 +------------------------------------------------------+----------------------------------------------------------------+
 
 .. index:: du-command
@@ -322,9 +322,9 @@ a. summary
 **'compact'** - Remove logical deleted objects and metadata from Object-Storage and Metadata-Storage, respectively
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Command: ``compact ${storage-node} [${num-of-exec-concurrence}]``
+Command: ``compact ${storage-node} [${num_of_compact_proc}]``
 
-.. note:: Default ${num-of-exec-concurrence} is '3' - You can control the number of process to execute compaction in parallel. It enables you to get maximum performance by setting a appropriate number corresponding with number of cores.
+.. note:: Default ${num_of_compact_proc} is '3' - You can control the number of process to execute compaction in parallel. It enables you to get maximum performance by setting a appropriate number corresponding with number of cores.
 
 ::
 
