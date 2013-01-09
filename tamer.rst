@@ -6,11 +6,12 @@ LeoTamer v0.2.6
 Install
 ---------
 
-Install LeoTamer 
+Install LeoTamer
 ^^^^^^^^^^^^^^^^
 
+* **LeoTamer's Repository**: https://github.com/leo-project/leo_tamer
 * **Ruby 1.9.3-p362** or higher is required.
-* Download URL: http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p362.tar.gz
+    * Download URL: http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p362.tar.gz
 
 ::
 
@@ -40,7 +41,7 @@ Configuration
 
 Update ``config.yml`` for connecting LeoFS-Manager
 
-:: 
+::
 
   :managers:
     - "localhost:10020" # leofs manager - master node's host/port
@@ -157,3 +158,32 @@ Endpoints
 
 .. image:: _static/screenshots/tamer/endpoints.png
    :width: 720px
+
+
+Milestones
+----------
+
+* 0.2.x (Dec 2012 - Jan 2013)
+    * Administration tools
+        * User management
+        * Bucket management
+        * Endpoint management
+    * Node Status
+        * Status/Operation
+    * Bucket status
+        * Belonging bucket-list
+
+* 0.4.x (Jan 2013)
+    *  User Group
+        * Sharing LeoFS's credential-keys in the group
+        * User management in the group
+
+* 0.6.x (Feb 2013)
+    * Log Search/Analysis (Option)
+
+* 0.8.x (Mar 2013)
+    * Link QoS (Quality of Service - LeoDenebola)
+        * Bucket status
+            * total of files
+            * total used disk capacity
+
