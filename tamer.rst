@@ -1,4 +1,4 @@
-LeoTamer v0.2.5
+LeoTamer v0.2.6
 ===============
 
 **LeoTamer** is LeoFS's GUI console on your browser. You can easily operate LeoFS.
@@ -55,7 +55,7 @@ Start LeoTamer
 
 ::
 
-  ruby config.ru ${LEO-TAMER-PORT}
+  ruby config_webrick.ru ${LEO-TAMER-PORT}
 
 Features
 ---------
@@ -79,7 +79,7 @@ Bucket Status View
 
 * You can confirm your belonging buckets
     * Able to create a bucket
-    * ``Deletion of a bucket`` plan to support with ``LeoTamer v0.2.6``
+    * ``Deletion of a bucket`` plan to support with ``LeoTamer v0.2.7``
 
 .. image:: _static/screenshots/tamer/bucket_status.png
    :width: 720px
