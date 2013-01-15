@@ -6,6 +6,12 @@ LeoTamer v0.2.6
 Install
 ---------
 
+Requirement
+^^^^^^^^^^^
+
+* **LeoFS v0.12.7** or higher is required.
+
+
 Install LeoTamer
 ^^^^^^^^^^^^^^^^
 
