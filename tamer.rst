@@ -56,13 +56,37 @@ Update ``config.yml`` for connecting LeoFS-Manager
     :access_key_id: ${YOUR_ACCESS_KEY_ID}
     :secret_access_key: ${YOUR_SECRET_ACCESS_KEY}
 
+Update ``unicorn.conf`` for Unicorn if you use it
+
+::
+
+  listen ${UNICORN_PORT}
+
+Sample ``nginx.conf``
+
+::
+  server {
+    location / {
+      proxy_pass http://localhost:${UNICORN_PORT};
+    }
+  }
 
 Start LeoTamer
 ^^^^^^^^^^^^^^
 
+On WEBrick
+"""""""""""
+
 ::
 
   ruby config_webrick.ru ${LEO-TAMER-PORT}
+
+On Unicorn
+""""""""""
+
+::
+
+  unicorn -c unicorn.conf config_unicorn.ru
 
 Features
 ---------
