@@ -1,4 +1,4 @@
-LeoTamer v0.2.6
+LeoTamer v0.2.8
 ===============
 
 **LeoTamer** is LeoFS's GUI console on your browser. You can easily operate LeoFS.
@@ -17,7 +17,7 @@ Install LeoTamer
 
 * **LeoTamer's Repository**: https://github.com/leo-project/leo_tamer
 * **Ruby 1.9.3-p362** or higher is required.
-    * Download URL: http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p362.tar.gz
+    * Download URL: http://www.ruby-lang.org/en/downloads/
 
 ::
 
@@ -38,7 +38,7 @@ Create Admin User
     access-key-id: ab96d56258e0e9d3621a
     secret-access-key: 5c3d9c188d3e4c4372e414dbd325da86ecaa8068
 
-  update-user-role new_admin 9 # set user role as admin
+  update-user-role new_admin 9 ## Set user's role as 'Admin'
   OK
 
 
@@ -56,37 +56,26 @@ Update ``config.yml`` for connecting LeoFS-Manager
     :access_key_id: ${YOUR_ACCESS_KEY_ID}
     :secret_access_key: ${YOUR_SECRET_ACCESS_KEY}
 
-Update ``unicorn.conf`` for Unicorn if you use it
 
-::
-
-  listen ${UNICORN_PORT}
-
-Sample ``nginx.conf``
-
-::
-  server {
-    location / {
-      proxy_pass http://localhost:${UNICORN_PORT};
-    }
-  }
-
-Start LeoTamer
-^^^^^^^^^^^^^^
+Launch LeoTamer
+^^^^^^^^^^^^^^^
 
 On WEBrick
 """""""""""
 
 ::
 
-  ruby config_webrick.ru ${LEO-TAMER-PORT}
+  $ ruby config_webrick.ru ${LEO-TAMER-PORT}
 
-On Unicorn
-""""""""""
+On Unicorn (Unicorn is an HTTP server for Rack applications)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+* Web site: http://unicorn.bogomips.org/
+* Ruby Gems: https://rubygems.org/gems/unicorn
 
 ::
 
-  unicorn -c unicorn.conf config_unicorn.ru
+  $ unicorn -c unicorn.conf config_unicorn.ru
 
 Features
 ---------
@@ -96,12 +85,12 @@ Your Credentials
 
 * You can confirm your credentials with ``Security Credentials`` on the form of top right
 
-.. image:: _static/screenshots/tamer/menu_for_user.png
+.. image:: _static/screenshots/tamer/userinfo_0.png
    :width: 720px
 
 \
 
-.. image:: _static/screenshots/tamer/user_credential.png
+.. image:: _static/screenshots/tamer/userinfo_1.png
    :width: 720px
 
 
@@ -110,18 +99,28 @@ Bucket Status View
 
 * You can confirm your belonging buckets
     * Able to create a bucket
-    * ``Deletion of a bucket`` plan to support with ``LeoTamer v0.2.7``
+    * ``Deletion of a bucket`` plan to support with ``LeoTamer v0.4.0``
 
-.. image:: _static/screenshots/tamer/bucket_status.png
+.. image:: _static/screenshots/tamer/bucket_status_0.png
    :width: 720px
 
 
 Node Status View
 ^^^^^^^^^^^^^^^^
 
-* You can confirm each node-status
+* You can confirm each node-status with ``Group by type`` OR ``Group by status``
+* Group by type View:
 
-.. image:: _static/screenshots/tamer/node_status.png
+\
+
+.. image:: _static/screenshots/tamer/nodestatus_0.png
+   :width: 720px
+
+* Group by status View:
+
+\
+
+.. image:: _static/screenshots/tamer/nodestatus_2.png
    :width: 720px
 
 * Administrators can change ``storage-staus`` with ``Change Status button``
@@ -129,7 +128,7 @@ Node Status View
 
 \
 
-.. image:: _static/screenshots/tamer/node_status_operation.png
+.. image:: _static/screenshots/tamer/nodestatus_3.png
    :width: 720px
 
 \
@@ -155,38 +154,49 @@ Table - Changeable Status
 \
 
 
+Rebalance into the storage-cluster
+""""""""""""""""""""""""""""""""""
 
-Administration-related views
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. note:: Existing status of ``attached`` OR ``detached`` into the storage-cluster that ``Rebalance (button)`` becomes active.
 
-Users
-"""""""""
+\
+
+.. image:: _static/screenshots/tamer/nodestatus_rebalance_0.png
+   :width: 720px
+
+
+
+Administration Tools
+^^^^^^^^^^^^^^^^^^^^
+
+Users View
+""""""""""
 
 * You can confirm the registered list of users
     * Able to create a user and delete it
     * Able to change a user role with ``Update Role button``
 
-.. image:: _static/screenshots/tamer/users.png
+.. image:: _static/screenshots/tamer/admintools_users.png
    :width: 720px
 
-Buckets
-"""""""""
+Buckets View
+""""""""""""
 
 .. note:: A bucket as root directory belongs to a user
 
 * You can confirm the registered list of buckets
     * Able to create a bucket
 
-.. image:: _static/screenshots/tamer/buckets.png
+.. image:: _static/screenshots/tamer/admintools_buckets.png
    :width: 720px
 
-Endpoints
-""""""""""
+Endpoints View
+""""""""""""""
 
 * You can confirm the registered list of endpoints
     * Able to create an endpoint and delete it
 
-.. image:: _static/screenshots/tamer/endpoints.png
+.. image:: _static/screenshots/tamer/admintools_endpoints.png
    :width: 720px
 
 
