@@ -757,58 +757,51 @@ Storage's Properties for launch
 
 .. code-block:: erlang
 
-    [
-        {sasl, [
-                {sasl_error_logger, {file, "./log/sasl-error.log"}},
-                {errlog_type, error},
-                {error_logger_mf_dir, "./log/sasl"},
-                {error_logger_mf_maxbytes, 10485760}, % 10 MB max file size
-                {error_logger_mf_maxfiles, 5}         % 5 files max
-               ]},
-        {leo_storage,
-                 [
-                  %% == Storage Configuration ==
-                  %%
-                  %% Object containers properties:
-                  %% @param path              - Directory of object-containers
-                  %% @param num_of_containers - # of object-containers
-                  %%
-                  %% Notes:
-                  %%   If you set up LeoFS on 'development', default value - "./avs" - is OK.
-                  %%   If you set up LeoFS on 'production' or 'staging', You should need to change "volume",
-                  %%       And We recommend volume's partition is XFS.
-                  %%
-                  {obj_containers,     [{path, "${OBJECT_STORAGE_DIR}"}, {num_of_containers, 64}] },
+    {leo_storage, [
+                   %% == Storage Configuration ==
+                   %%
+                   %% Object containers properties:
+                   %% @param path              - Directory of object-containers
+                   %% @param num_of_containers - # of object-containers
+                   %%
+                   %% Notes:
+                   %%   If you set up LeoFS on 'development', default value - "./avs" - is OK.
+                   %%   If you set up LeoFS on 'production' or 'staging', You should need to change "volume",
+                   %%       And We recommend volume's partition is XFS.
+                   %%
+                   {obj_containers,     [[{path, "./avs"}, {num_of_containers, 64}]] },
 
-                  %% leo-manager's nodes
-                  {managers,           ["manager_0@${MANAGER_MASTER_IP}", "manager_1@${MANAGER_SLAVE_IP}"] },
+                   %% leo-manager's nodes
+                   {managers,           ["manager_0@127.0.0.1", "manager_1@127.0.0.1"] },
 
-                  %% # of virtual-nodes
-                  {num_of_vnodes,      64 },
+                   %% # of virtual-nodes
+                   {num_of_vnodes,      168 },
 
-                  %% # of file-replication-server's processes
-                  {num_of_replicators, 32 },
-                  %% # of read-repair-server's processes
-                  {num_of_repairers,   32 },
-                  %% # of mq-server's processes
-                  {num_of_mq_procs,    8 },
+                   %% # of mq-server's processes
+                   {num_of_mq_procs,    8 },
 
-                  %% Size of stacked objects (bytes)
-                  {size_of_stacked_objs,    10485760 },
-                  %% Stacking timeout (msec)
-                  {stacking_timeout,        5000 },
+                   %% == For Ordning-Reda ==
+                   %% Size of stacked objects (bytes)
+                   {size_of_stacked_objs,    10485760 },
+                   %% Stacking timeout (msec)
+                   {stacking_timeout,        10000 },
 
-                  %% Log-specific properties.
-                  {log_level,    1 },
-                  {log_appender, [file]},
+                   %% == Log-specific properties ==
+                   %%
+                   {log_level,    1 },
+                   {log_appender, [
+                                   {file, [{path, "./log/app"}]}
+                                  ]},
 
-                  %% Directories
-                  {log_dir,     "./log"},
-                  {queue_dir,   "./work/queue"},
-                  {snmp_agent,  "./snmp/${SNMPA-DIR}/LEO-STORAGE"}
-                 ]},
-                 .
-                 .
+                   %% == Directories ==
+                   %%
+                   %% Directory of log output
+                   {log_dir,     "./log"},
+                   %% Directory of mq's db-files
+                   {queue_dir,   "./work/queue"},
+                   %% Directory of SNMP-Agent
+                   {snmp_agent,  "./snmp/snmpa_storage_0/LEO-STORAGE"}
+                  ]},
 
 * **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/storage/etc/vm.args**
 
