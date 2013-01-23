@@ -169,6 +169,16 @@ Rebalance into the storage-cluster
 Administration Tools
 ^^^^^^^^^^^^^^^^^^^^
 
+System Conf View
+""""""""""""""""
+
+* You can confirm configuration of the LeoFS
+* Please see :ref:`LeoFS’s system-configuration <system-configuration-label>`
+
+.. image:: _static/screenshots/tamer/admintools_system_conf.png
+   :width: 720px
+
+
 Users View
 """"""""""
 
