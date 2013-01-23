@@ -56,6 +56,59 @@ Update ``config.yml`` for connecting LeoFS-Manager
     :access_key_id: ${YOUR_ACCESS_KEY_ID}
     :secret_access_key: ${YOUR_SECRET_ACCESS_KEY}
 
+Update ``unicorn.conf``
+
+::
+
+  listen "/tmp/LeoTamer.sock" # Unix domain socket
+  listen ${LEO-TAMER-PORT} # TCP
+
+Nginx + Unicorn
+""""""""""""""""
+
+Via TCP
+-------
+
+Update ``/etc/nginx/sites-available/default``
+
+::
+
+  server {
+    root /usr/share/nginx/www;
+    index index.html index.htm;
+    server_name localhost;
+
+    location / {
+      proxy_pass http://localhost:8082;
+    }
+  }
+
+Via Unix domain socket
+-----------------------
+
+Update ``/etc/nginx/nginx.conf``
+
+::
+
+  http {
+    upstream LeoTamer {
+      server unix:/tmp/LeoTamer.sock;
+    }
+  }
+
+Update ``/etc/nginx/sites-available/default``
+
+::
+
+  server {
+    root /usr/share/nginx/www;
+    index index.html index.htm;
+    server_name localhost;
+
+    location / {
+      proxy_pass http://LeoTamer;
+    }
+  }
 
 Launch LeoTamer
 ^^^^^^^^^^^^^^^
