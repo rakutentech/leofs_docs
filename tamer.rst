@@ -192,17 +192,22 @@ Table - Changeable Status
 
 \
 
-+-----------------+--------------------------+
-|Current Status   |Changeable Status         |
-+=================+==========================+
-| running         | suspend, detach          |
-+-----------------+--------------------------+
-| suspend         | resume                   |
-+-----------------+--------------------------+
-| restarted       | resume                   |
-+-----------------+--------------------------+
-| stop            | detach                   |
-+-----------------+--------------------------+
++-----------------------+----------------------------+
+|Current Status         | Changeable Status          |
++=======================+============================+
+| |running| running     | suspend, detach            |
++-----------------------+----------------------------+
+| |suspend| suspend     | resume                     |
++-----------------------+----------------------------+
+| |restarted| restarted | resume                     |
++-----------------------+----------------------------+
+| |stop| stop           | detach                     |
++-----------------------+----------------------------+
+
+.. |running| image:: _static/images/tamer-icons/available.png
+.. |suspend| image:: _static/images/tamer-icons/warn.png
+.. |restarted| image:: _static/images/tamer-icons/add.png
+.. |stop| image:: _static/images/tamer-icons/fire.png
 
 \
 
