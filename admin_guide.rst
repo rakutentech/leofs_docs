@@ -293,43 +293,128 @@ Command: ``whereis ${file-path}``
 
 \
 
-+------------------------------------------------------+----------------------------------------------------------------+
-| Command                                              | Explanation                                                    |
-+======================================================+================================================================+
-| du ${storage-node}                                   | Display disk usages(like xnix du command)                      |
-+------------------------------------------------------+----------------------------------------------------------------+
-| compact ${storage-node} [${num_of_compact_proc}]     | Compact raw files used by the LeoFS Storage subsystem          |
-|                                                      |                                                                |
-|                                                      | Default ${num_of_compact_proc} is '3'                          |
-+------------------------------------------------------+----------------------------------------------------------------+
++-------------------------------------------------------+----------------------------------------------------------------+
+| Command                                               | Explanation                                                    |
++=======================================================+================================================================+
+| du ${storage-node}                                    | Display disk usages(like xnix du command)                      |
++-------------------------------------------------------+----------------------------------------------------------------+
+| du detail ${storage-node}                             | Display disk usages in detail (like xnix du command)           |
++-------------------------------------------------------+----------------------------------------------------------------+
+| compact start ${storage-node} all|${storage_pids}     | Compact raw files used by the LeoFS Storage subsystem          |
+| [${num_of_compact_proc}]                              |                                                                |
+|                                                       | Default ${num_of_compact_proc} is '3'                          |
++-------------------------------------------------------+----------------------------------------------------------------+
+| compact suspend ${storage-node}                       | Suspend a compaction job in progress                           |
++-------------------------------------------------------+----------------------------------------------------------------+
+| compact resume  ${storage-node}                       | Resume a compaction job under suspension                       |
++-------------------------------------------------------+----------------------------------------------------------------+
+| compact status  ${storage-node}                       | Display compation statuses                                     |
++-------------------------------------------------------+----------------------------------------------------------------+
 
 .. index:: du-command
 
-**'du'** - Retrieve a number of objects from Object-Storage
+**'du'** - Display disk usage(summary)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Command: ``du ${storage-node}``
 
-a. summary
 ::
 
     du storage_0@127.0.0.1
-     number of total object: 14
+     active number of objects: 19968
+      total number of objects: 39936
+       active size of objects: 168256974.0
+        total size of objects: 254725020.0
+        last compaction start: ----/--/-- --:--:--
+          last compaction end: ----/--/-- --:--:--
 
+.. index:: du-detail-command
 
-.. index:: compact-command
+**'du detail'** - Display disk usage in detail(per raw file)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-**'compact'** - Remove logical deleted objects and metadata from Object-Storage and Metadata-Storage, respectively
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Command: ``du detail ${storage-node}``
 
-Command: ``compact ${storage-node} [${num_of_compact_proc}]``
+::
+
+    du detail storage_0@127.0.0.1
+    [du(storage stats)]
+                  file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/0.avs
+     active number of objects: 320
+      total number of objects: 640
+       active size of objects: 2696378.0
+        total size of objects: 4082036.0
+        last compaction start: ----/--/-- --:--:--
+          last compaction end: ----/--/-- --:--:--
+    
+    --- (snipped) ---
+    
+                  file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/63.avs
+     active number of objects: 293
+      total number of objects: 586
+       active size of objects: 2468909.0
+        total size of objects: 3737690.0
+        last compaction start: ----/--/-- --:--:--
+          last compaction end: ----/--/-- --:--:--
+
+.. index:: compact-start-command
+
+**'compact start'** - Remove logical deleted objects and metadata from Object-Storage and Metadata-Storage, respectively
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Command: ``compact start ${storage-node} all|${storage_pids} [${num_of_compact_proc}]``
 
 .. note:: Default ${num_of_compact_proc} is '3' - You can control the number of process to execute compaction in parallel. It enables you to get maximum performance by setting a appropriate number corresponding with number of cores.
 
 ::
 
-    compact storage_0@127.0.0.1
+    ## all storage processes will be compacted with 3(default) concurrent processes
+    compact start storage_0@127.0.0.1 all
     OK
+
+::
+
+    ## leo_object_storage_0[1-2] will be compacted with 2 concurrent processes
+    compact start storage_0@127.0.0.1 leo_object_storage_01,leo_object_storage_02 2
+    OK
+
+.. index:: compact-suspend-command
+
+**'compact suspend'** - Suspend a compaction job in progress
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Command: ``compact suspend ${storage-node}``
+
+::
+
+    compact suspend storage_0@127.0.0.1
+    OK
+
+.. index:: compact-resume-command
+
+**'compact resume'** - Resume a compaction job under suspension
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Command: ``compact resume ${storage-node}``
+
+::
+
+    compact resume storage_0@127.0.0.1
+    OK
+
+.. index:: compact-status-command
+
+**'compact status'** - Display compation statuses
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Command: ``compact status ${storage-node}``
+
+::
+
+    compact status storage_0@127.0.0.1
+    last compaction start: 2013-02-01 07:26:31 +0000
+        rest of jobs(pid): leo_object_storage_22, leo_object_storage_23, leo_object_storage_24
+     ongoing of jobs(pid): leo_object_storage_21, leo_object_storage_20
 
 \
 \
