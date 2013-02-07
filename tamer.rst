@@ -118,7 +118,7 @@ On WEBrick
 
 ::
 
-  $ ruby config_webrick.ru ${LEO-TAMER-PORT}
+  $ rackup config_webrick.ru
 
 On Unicorn (Unicorn is an HTTP server for Rack applications)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
