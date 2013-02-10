@@ -66,9 +66,8 @@ You need modify ``unicorn.conf``
 Nginx + Unicorn
 """"""""""""""""
 
-* Via TCP
-
-You need to modify ``/etc/nginx/sites-available/default``
+* Case of using ``TCP/IP``
+    * You need to modify ``/etc/nginx/sites-available/default``
 
 ::
 
@@ -82,11 +81,12 @@ You need to modify ``/etc/nginx/sites-available/default``
     }
   }
 
-* Via Unix domain socket
-
-You need to modify ``/etc/nginx/nginx.conf``
+* Case of Using ``Unix-domain-socket``
+    * You need to modify ``/etc/nginx/nginx.conf`` and ``/etc/nginx/sites-available/default``
 
 ::
+
+  ## /etc/nginx/nginx.conf
 
   http {
     upstream LeoTamer {
@@ -94,9 +94,8 @@ You need to modify ``/etc/nginx/nginx.conf``
     }
   }
 
-You need to modify ``/etc/nginx/sites-available/default``
 
-::
+  ## /etc/nginx/sites-available/default
 
   server {
     root /usr/share/nginx/www;
