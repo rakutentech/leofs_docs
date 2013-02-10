@@ -1,10 +1,10 @@
-LeoTamer v0.2.8
-===============
+LeoTamer v0.2.10
+================
 
 **LeoTamer** is LeoFS's GUI console on your browser. You can easily operate LeoFS.
 
-Install
----------
+Install and Setup
+-----------------
 
 Requirement
 ^^^^^^^^^^^
@@ -45,7 +45,7 @@ Create Admin User
 Configuration
 ^^^^^^^^^^^^^
 
-Update ``config.yml`` for connecting LeoFS-Manager
+You need to modify ``config.yml`` for connecting LeoFS-Manager
 
 ::
 
@@ -56,7 +56,7 @@ Update ``config.yml`` for connecting LeoFS-Manager
     :access_key_id: ${YOUR_ACCESS_KEY_ID}
     :secret_access_key: ${YOUR_SECRET_ACCESS_KEY}
 
-Update ``unicorn.conf``
+You need modify ``unicorn.conf``
 
 ::
 
@@ -66,10 +66,9 @@ Update ``unicorn.conf``
 Nginx + Unicorn
 """"""""""""""""
 
-Via TCP
--------
+* Via TCP
 
-Update ``/etc/nginx/sites-available/default``
+You need to modify ``/etc/nginx/sites-available/default``
 
 ::
 
@@ -83,10 +82,9 @@ Update ``/etc/nginx/sites-available/default``
     }
   }
 
-Via Unix domain socket
------------------------
+* Via Unix domain socket
 
-Update ``/etc/nginx/nginx.conf``
+You need to modify ``/etc/nginx/nginx.conf``
 
 ::
 
@@ -96,7 +94,7 @@ Update ``/etc/nginx/nginx.conf``
     }
   }
 
-Update ``/etc/nginx/sites-available/default``
+You need to modify ``/etc/nginx/sites-available/default``
 
 ::
 
@@ -110,18 +108,20 @@ Update ``/etc/nginx/sites-available/default``
     }
   }
 
-Launch LeoTamer
-^^^^^^^^^^^^^^^
 
-On WEBrick
-"""""""""""
+
+Launch
+------
+
+When using WEBrick
+^^^^^^^^^^^^^^^^^^
 
 ::
 
   $ rackup config_webrick.ru
 
-On Unicorn (Unicorn is an HTTP server for Rack applications)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+When using Unicorn (Unicorn is an HTTP server for Rack applications)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Web site: http://unicorn.bogomips.org/
 * Ruby Gems: https://rubygems.org/gems/unicorn
@@ -129,6 +129,7 @@ On Unicorn (Unicorn is an HTTP server for Rack applications)
 ::
 
   $ unicorn -c unicorn.conf config_unicorn.ru
+
 
 Features
 ---------
