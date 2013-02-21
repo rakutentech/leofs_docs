@@ -55,6 +55,17 @@ You need to modify ``config.yml`` for connecting LeoFS-Manager
   :credential:
     :access_key_id: ${YOUR_ACCESS_KEY_ID}
     :secret_access_key: ${YOUR_SECRET_ACCESS_KEY}
+  :session:
+  #  :redis:
+  #    :url: "redis://localhost:6379/0"
+  #    #:expire_after: 600
+    :local:
+      :secret: ""
+      :expire_after: 300
+  :snmp: # list of data in Node Status SNMP Chart
+    - ETS memory usage (1-min Averages)
+    - Processes memory usage (1-min Averages)
+    - System memory usage (1-min Averages)
 
 You need modify ``unicorn.conf``
 
