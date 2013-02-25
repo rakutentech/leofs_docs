@@ -13,11 +13,11 @@ You can get S3-API's Keys from ``LeoFS's Manager Console``.
   Connected to 127.0.0.1.
   Escape character is '^]'.
 
-'s3-create-key ${USER-ID}' command generates your s3 key.
+'create-user ${USER-ID}' command generates your s3 key.
 
 ::
 
-  s3-create-key ${USER-ID}
+  create-user ${USER-ID}
   access-key-id: 05dcba94333c7590a635
   secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
