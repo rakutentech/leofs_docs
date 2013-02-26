@@ -20,7 +20,6 @@ LeoFS v0.12 Manual
    getting_started
    install
    admin_guide
-   s3
    s3_api
    s3_client
    benchmark
