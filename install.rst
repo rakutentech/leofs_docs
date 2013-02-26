@@ -42,8 +42,8 @@ Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
 ::
 
    $ wget http://www.hpl.hp.com/research/linux/atomic_ops/download/libatomic_ops-7.2d.tar.gz
+   $ tar xzvf libatomic_ops-7.2d.tar.gz
    $ cd libatomic_ops-7.2d
-   $ tar xzvf libatomic_ops-7.2d
    $ ./configure --prefix=/usr/local
    $ make
    $ sudo make install
