@@ -12,15 +12,15 @@ System Requirements
 LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS and CentOS 6.x, but should work on
 most Linux platforms with the following software:
 
-* Erlang OTP R14B04 <http://www.erlang.org/download_release/12>
-* Erlang OTP R15B03-1 <http://www.erlang.org/download_release/16>
+* `Erlang OTP R14B04 <http://www.erlang.org/download_release/12>`_
+* `Erlang OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
 
 And the following erlang libraries:
 
-* Basho Bitcask <https://github.com/basho/bitcask>
-* Ninenines Cowboy <https://github.com/extend/cowboy>
-* Boundary Folsom <https://github.com/boundary/folsom>
-* Szktty Erlang LZ4 <https://github.com/szktty/erlang-lz4>
+* `Basho Bitcask <https://github.com/basho/bitcask>`_
+* `Ninenines Cowboy <https://github.com/extend/cowboy>`_
+* `Boundary Folsom <https://github.com/boundary/folsom>`_
+* `Szktty Erlang LZ4 <https://github.com/szktty/erlang-lz4>`_
 
 And we recommend you to use on 64bit builds because of having to handle large files.
 

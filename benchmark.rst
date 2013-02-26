@@ -18,7 +18,7 @@ Set up basho_bench
 Install
 ^^^^^^^^
 
-* Basho basho_bench <https://github.com/basho/basho_bench/>
+* `Basho basho_bench <https://github.com/basho/basho_bench/>`_
 * Commands to set up basho_bench are following.
 
 ::

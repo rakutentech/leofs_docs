@@ -226,8 +226,8 @@ Reboot
 Execute 'Format partition'
 """""""""""""""""""""""""""
 
-* Reference(EN): <http://www.ibm.com/developerworks/linux/library/l-fs10/index.html>
-* Reference(JP): <http://www.ibm.com/developerworks/jp/linux/library/l-fs10/index.html>
+* `Reference(EN) <http://www.ibm.com/developerworks/linux/library/l-fs10/index.html>`_
+* `Reference(JP) <http://www.ibm.com/developerworks/jp/linux/library/l-fs10/index.html>`_
 
 ::
 
@@ -409,7 +409,7 @@ Log Dir and Working Dir
 | work/queue  | For Message Queue's data which is stored into 'bitcask'|
 +-------------+--------------------------------------------------------+
 
-- ref: Basho bitcask <https://github.com/basho/bitcask>
+- ref: `Basho bitcask <https://github.com/basho/bitcask>`_
 
 
 ::
