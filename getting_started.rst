@@ -43,6 +43,8 @@ Quick Start -1 All in one for Application Development
 Erlang (CentOS, Ubuntu, Other Linux OS)
 """""""""""""""""""""""""""""""""""""""""""
 
+.. note:: If you already installed "Erlang", You need to remove that.
+
 ::
 
    ##
@@ -74,6 +76,17 @@ Erlang (CentOS, Ubuntu, Other Linux OS)
                  --with-libatomic_ops=/usr/local
    $ make
    $ sudo make install
+
+   ##
+   ## 3. Set PATH
+   ##
+   $ vi ~/.profile
+       ## append the follows:
+       export ERL_HOME=/usr/local/erlang/R15B03
+       export PATH=$PATH:$ERL_HOME/bin
+
+   $ source ~/.profile
+
 
 LeoFS
 """""""""
