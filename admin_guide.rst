@@ -81,7 +81,7 @@ LeoFS Manager Console on **LeoFS-Manager Master** node
 
     status
     [system config]
-                 version : 0.12.5
+                 version : 0.12.7
      # of replicas       : 3
      # of successes of R : 1
      # of successes of W : 2
@@ -115,7 +115,7 @@ Confirm#1 by **LeoFS-Manager** node's console
 
     status
     [system config]
-                 version : 0.12.5
+                 version : 0.12.7
      # of replicas       : 3
      # of successes of R : 1
      # of successes of W : 2
@@ -150,7 +150,7 @@ Confirm#2 by **LeoFS-Manager** master node's console
 
     status
     [system config]
-                 version : 0.12.5
+                 version : 0.12.7
      # of replicas       : 3
      # of successes of R : 1
      # of successes of W : 2
@@ -666,7 +666,7 @@ Command-1: ``status``
 
     status
     [system config]
-                 version : 0.12.5
+                 version : 0.12.7
      # of replicas       : 1
      # of successes of R : 1
      # of successes of W : 1
@@ -691,7 +691,7 @@ Command-2: ``status ${storage-node}`` OR ``status ${gateway-node}``
 
     status storage_0@127.0.0.1
     [config]
-                version : 0.12.5
+                version : 0.12.7
           obj-container : [[{path,"./avs"},{num_of_containers,64}]]
                 log-dir : ./log
       ring state (cur)  : 64212f2d

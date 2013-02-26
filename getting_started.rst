@@ -45,10 +45,23 @@ Erlang (CentOS, Ubuntu, Other Linux OS)
 
 ::
 
-   $ wget http://www.erlang.org/download/otp_src_R14B04.tar.gz
-   $ tar xzf otp_src_R14B04.tar.gz
-   $ cd otp_src_R14B04
-   $ ./configure --prefix=/usr/local/erlang/R14B04 \
+   ##
+   ## 1. Install libatomic
+   ##
+   $ wget http://www.hpl.hp.com/research/linux/atomic_ops/download/libatomic_ops-7.2d.tar.gz
+   $ tar xzvf libatomic_ops-7.2d.tar.gz
+   $ cd libatomic_ops-7.2d
+   $ ./configure --prefix=/usr/local
+   $ make
+   $ sudo make install
+
+   ##
+   ## 2. Install Erlang
+   ##
+   $ wget http://www.erlang.org/download/otp_src_R15B03-1.tar.gz
+   $ tar xzf otp_src_R15B03-1.tar.gz
+   $ cd otp_src_R15B03-1
+   $ ./configure --prefix=/usr/local/erlang/R15B03 \
                  --enable-smp-support \
                  --enable-m64-build \
                  --enable-halfword-emulator \
@@ -57,7 +70,8 @@ Erlang (CentOS, Ubuntu, Other Linux OS)
                  --disable-native-libs \
                  --disable-hipe \
                  --disable-sctp \
-                 --enable-threads
+                 --enable-threads \
+                 --with-libatomic_ops=/usr/local
    $ make
    $ sudo make install
 
@@ -128,14 +142,16 @@ Modify “/ets/hosts”
 
     $ telnet 127.0.0.1 10010
     > status
+    status
     [system config]
-                 version : 0.10.0
+                 version : 0.12.7
      # of replicas       : 1
      # of successes of R : 1
      # of successes of W : 1
      # of successes of D : 1
                ring size : 2^128
-              ring state : 1428891014
+        ring hash (cur)  : 1428891014
+        ring hash (prev) : 1428891014
 
     [node(s) state]
     ------------------------------------------------------------------------------------------------
