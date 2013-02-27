@@ -19,6 +19,9 @@ LeoFS's system launch is very easy and simple as follows.
 
 Operation
 """"""""""
+
+\
+
 +-------------+------------------------------------+------------------------------------------------------------+
 | Order       | Command                            | Explanation                                                |
 +=============+====================================+============================================================+
@@ -192,21 +195,28 @@ LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
 
 \
 
-+------------------------------------------------------+----------------------------------------------------------------+
-| Command                                              | Explanation                                                    |
-+======================================================+================================================================+
-| detach ${storage-node}                               | Remove a storage node from the cluster                         |
-+------------------------------------------------------+----------------------------------------------------------------+
-| resume ${storage-node}                               | Restarting - 'nodedown' or 'stop' - storage node               |
-+------------------------------------------------------+----------------------------------------------------------------+
-| suspend ${storage-node}                              | Suspend a storage node                                         |
-+------------------------------------------------------+----------------------------------------------------------------+
-| start                                                | Launch the cluster                                             |
-+------------------------------------------------------+----------------------------------------------------------------+
-| rebalance                                            | Move or Copy files into the cluster                            |
-+------------------------------------------------------+----------------------------------------------------------------+
-| whereis ${file-path}                                 | Retrieve status of an assigned file                            |
-+------------------------------------------------------+----------------------------------------------------------------+
++-----------------------------+---------------------------------------------------------------------------------------------------+
+| Command                     | Explanation                                                                                       |
++=============================+===================================================================================================+
+| **Storage-node related commands:**                                                                                              |
++-----------------------------+---------------------------------------------------------------------------------------------------+
+| detach `${storage-node}`    | * Remove a storage-node from the LeoFS storage-cluster                                            |
+|                             | * Current status: ``running`` | ``stop``                                                          |
++-----------------------------+---------------------------------------------------------------------------------------------------+
+| suspend `${storage-node}`   | * Suspend a storage-node for maintenance, Also this command does NOT change "routing-table (RING)"|
+|                             | * Current status: ``running``                                                                     |
++-----------------------------+---------------------------------------------------------------------------------------------------+
+| resume `${storage-node}`    | * Resume a storage-node                                                                           |
+|                             | * Current status: ``suspended`` | ``stop`` | ``restarted``                                        |
++-----------------------------+---------------------------------------------------------------------------------------------------+
+| **Storage-cluster related commands:**                                                                                           |
++-----------------------------+---------------------------------------------------------------------------------------------------+
+| start                       | * Launch LeoFS after distributed "routing-table (RING)" from Manager to Storage and Gateway       |
++-----------------------------+---------------------------------------------------------------------------------------------------+
+| rebalance                   | * Move or Copy files into the LeoFS storage-cluster due to changed RING                           |
++-----------------------------+---------------------------------------------------------------------------------------------------+
+| whereis `${file-path}`      | * Retrieve status of an assigned file                                                             |
++-----------------------------+---------------------------------------------------------------------------------------------------+
 
 .. index::
    detach-command
@@ -224,19 +234,6 @@ Command: ``detach ${storage-node}``
     OK
 
 .. index::
-   resume-command
-
-**'resume'** - Resume a storage node
-""""""""""""""""""""""""""""""""""""""""""
-
-Command: ``resume ${storage-node}``
-
-::
-
-    resume storage_0@127.0.0.1
-    OK
-
-.. index::
    suspend-command
 
 **'suspend'** - Suspend a storage node
@@ -249,6 +246,18 @@ Command: ``suspend ${storage-node}``
     suspend storage_0@127.0.0.1
     OK
 
+.. index::
+   resume-command
+
+**'resume'** - Resume a storage node
+""""""""""""""""""""""""""""""""""""""""""
+
+Command: ``resume ${storage-node}``
+
+::
+
+    resume storage_0@127.0.0.1
+    OK
 
 .. index::
    rebalance-command
@@ -296,19 +305,18 @@ Command: ``whereis ${file-path}``
 +-------------------------------------------------------+----------------------------------------------------------------+
 | Command                                               | Explanation                                                    |
 +=======================================================+================================================================+
-| du ${storage-node}                                    | Display disk usages(like xnix du command)                      |
+| du `${storage-node}`                                  | * Display disk usages(like xnix du command)                    |
 +-------------------------------------------------------+----------------------------------------------------------------+
-| du detail ${storage-node}                             | Display disk usages in detail (like xnix du command)           |
+| du detail `${storage-node}`                           | * Display disk usages in detail (like xnix du command)         |
 +-------------------------------------------------------+----------------------------------------------------------------+
-| compact start ${storage-node} all|${storage_pids}     | Compact raw files used by the LeoFS Storage subsystem          |
-| [${num_of_compact_proc}]                              |                                                                |
-|                                                       | Default ${num_of_compact_proc} is '3'                          |
+| compact start `${storage-node}` `all|${storage_pids}` | * Compact raw files used by the LeoFS Storage subsystem        |
+| `[${num_of_compact_proc}]`                            | * Default ${num_of_compact_proc} is '3'                        |
 +-------------------------------------------------------+----------------------------------------------------------------+
-| compact suspend ${storage-node}                       | Suspend a compaction job in progress                           |
+| compact suspend `${storage-node}`                     | * Suspend a compaction job in progress                         |
 +-------------------------------------------------------+----------------------------------------------------------------+
-| compact resume  ${storage-node}                       | Resume a compaction job under suspension                       |
+| compact resume  `${storage-node}`                     | * Resume a compaction job under suspension                     |
 +-------------------------------------------------------+----------------------------------------------------------------+
-| compact status  ${storage-node}                       | Display compation statuses                                     |
+| compact status  `${storage-node}`                     | * Display compation statuses                                   |
 +-------------------------------------------------------+----------------------------------------------------------------+
 
 .. index:: du-command
@@ -325,8 +333,8 @@ Command: ``du ${storage-node}``
       total number of objects: 39936
        active size of objects: 168256974.0
         total size of objects: 254725020.0
-        last compaction start: ----/--/-- --:--:--
-          last compaction end: ----/--/-- --:--:--
+        last compaction start: ____-__-__ __:__:__
+          last compaction end: ____-__-__ __:__:__
 
 .. index:: du-detail-command
 
@@ -344,18 +352,18 @@ Command: ``du detail ${storage-node}``
       total number of objects: 640
        active size of objects: 2696378.0
         total size of objects: 4082036.0
-        last compaction start: ----/--/-- --:--:--
-          last compaction end: ----/--/-- --:--:--
-    
+        last compaction start: ____-__-__ __:__:__
+          last compaction end: ____-__-__ __:__:__
+
     --- (snipped) ---
-    
+
                   file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/63.avs
      active number of objects: 293
       total number of objects: 586
        active size of objects: 2468909.0
         total size of objects: 3737690.0
-        last compaction start: ----/--/-- --:--:--
-          last compaction end: ----/--/-- --:--:--
+        last compaction start: ____-__-__ __:__:__
+          last compaction end: ____-__-__ __:__:__
 
 .. index:: compact-start-command
 
@@ -428,7 +436,7 @@ Command: ``compact status ${storage-node}``
 +------------------------------------------------------+----------------------------------------------------------------+
 | Command                                              | Explanation                                                    |
 +======================================================+================================================================+
-| purge ${file-path}                                   | Purge a cached file if the specified file existed in cache     |
+| purge ${file-path}                                   | * Purge a cached file if the specified file existed in cache   |
 +------------------------------------------------------+----------------------------------------------------------------+
 
 .. _purge:
@@ -457,27 +465,26 @@ Command: ``purge ${file-path}``
 
 \
 
-+------------------------------------------------------+----------------------------------------------------------------+
-| Command                                              | Explanation                                                    |
-+======================================================+================================================================+
-| create-user ${user-id}                               | Generate a S3 key pair(AccessKeyID and SecretAccessKey)        |
-+------------------------------------------------------+----------------------------------------------------------------+
-| delete-user ${user-id}                               | Remove a user                                                  |
-+------------------------------------------------------+----------------------------------------------------------------+
-| get-users                                            | Retrieve all of registered users                               |
-+------------------------------------------------------+----------------------------------------------------------------+
-| set-endpoint ${endpoint}                             | Register a new S3 Endpoint                                     |
-|                                                      |                                                                |
-|                                                      | LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`. |
-+------------------------------------------------------+----------------------------------------------------------------+
-| delete-endpoint ${endpoint}                          | Delete a S3 Endpoint                                           |
-+------------------------------------------------------+----------------------------------------------------------------+
-| get-endpoints                                        | Retrieve all of S3 Endpoints registered                        |
-+------------------------------------------------------+----------------------------------------------------------------+
-| add-bucket ${bucket} ${access_key_id}                | Create a bucket                                                |
-+------------------------------------------------------+----------------------------------------------------------------+
-| get-buckets                                          | Retrieve all of registered buckets                             |
-+------------------------------------------------------+----------------------------------------------------------------+
++------------------------------------------------------+-----------------------------------------------------------------+
+| Command                                              | Explanation                                                     |
++======================================================+=================================================================+
+| create-user `${user-id}`                             | * Generate a S3 key pair(AccessKeyID and SecretAccessKey)       |
++------------------------------------------------------+-----------------------------------------------------------------+
+| delete-user `${user-id}`                             | * Remove a user                                                 |
++------------------------------------------------------+-----------------------------------------------------------------+
+| get-users                                            | * Retrieve all of registered users                              |
++------------------------------------------------------+-----------------------------------------------------------------+
+| set-endpoint `${endpoint}`                           | * Register a new S3 Endpoint                                    |
+|                                                      | * LeoFS's domains are ruled by :ref:`this rule <s3-path-label>` |
++------------------------------------------------------+-----------------------------------------------------------------+
+| delete-endpoint `${endpoint}`                        | * Delete a S3 Endpoint                                          |
++------------------------------------------------------+-----------------------------------------------------------------+
+| get-endpoints                                        | * Retrieve all of S3 Endpoints registered                       |
++------------------------------------------------------+-----------------------------------------------------------------+
+| add-bucket `${bucket}` `${access_key_id}`            | * Create a bucket                                               |
++------------------------------------------------------+-----------------------------------------------------------------+
+| get-buckets                                          | * Retrieve all of registered buckets                            |
++------------------------------------------------------+-----------------------------------------------------------------+
 
 
 .. ### CREATE USER ###

@@ -59,7 +59,7 @@ Samples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Some samples are included in leofs repo where path is ${LEOFS_ROOT}/test/conf/leofs_*.config
-    * `basho_bench's configuration <http://docs.basho.com/riak/latest/cookbooks/Benchmarking/#Configuration>`_
+    * You can see more detail - `basho_bench's configuration <http://docs.basho.com/riak/latest/cookbooks/Benchmarking/#Configuration>`_
 
 .. code-block:: erlang
 
@@ -101,8 +101,6 @@ Description
   |                   |                                                        |
   |                   | (Only for developers)                                  |
   +-------------------+--------------------------------------------------------+
-
-These are covered more in detail on the `Basho wiki <http://wiki.basho.com/Benchmarking-with-Basho-Bench.html>`_.
 
 .. index::
     pair: Run basho_bench; Run basho_bench
