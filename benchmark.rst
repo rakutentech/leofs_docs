@@ -18,10 +18,11 @@ Set up basho_bench
 Install
 ^^^^^^^^
 
-* `Basho basho_bench <https://github.com/basho/basho_bench/>`_
+* `Basho basho_bench's repository <https://github.com/basho/basho_bench/>`_
+* `Basho basho_bench's docs <http://docs.basho.com/riak/latest/cookbooks/Benchmarking>`_
 * Commands to set up basho_bench are following.
 
-::
+.. code-block:: bash
 
     git clone git://github.com/basho/basho_bench.git
     git clone https://github.com/leo-project/leofs.git
@@ -30,11 +31,11 @@ Install
     cp -i ../leofs/test/include/*.hrl include/
     make all
 
-Configuration
-^^^^^^^^^^^^^
+Prepare before the tests
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Put a bucket for the tests
-""""""""""""""""""""""""""""
+""""""""""""""""""""""""""
 
 .. note:: After launch LeoFS, You need to put ``bucket`` on "manager-console" before the tests. In this example, the bucket-name is ``test`` and a user, ``_test_leofs`` as "test-user" is registered already into LeoFS.
 
@@ -48,19 +49,6 @@ Put a bucket for the tests
     add-bucket test 05236
 
 
-Edit `"/etc/hosts"`
-"""""""""""""""""""
-
-.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
-
-* You need to modify ``/etc/hosts`` before the tests because basho_bench cannot reach LeoFS-Gateway. 
-
-::
-
-  127.0.0.1 localhost
-  127.0.0.1 test.localhost
-
-
 .. index::
     pair: Configuration file for basho_bench; Configuration file for basho_bench
 
@@ -70,38 +58,47 @@ Configuration file for basho_bench
 Samples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Some samples are included in leofs repo where path is ${LEOFS_ROOT}/test/conf/leofs_*.config
+* Some samples are included in leofs repo where path is ${LEOFS_ROOT}/test/conf/leofs_*.config
+    * `basho_bench's configuration <http://docs.basho.com/riak/latest/cookbooks/Benchmarking/#Configuration>`_
 
 .. code-block:: erlang
 
     {mode,      max}.
-    {duration,   3}.
-    {concurrent, 48}.
-    
+    {duration,   10}.
+    {concurrent, 50}.
+
     {driver, basho_bench_driver_leofs}.
     {code_paths, ["deps/ibrowse"]}.
-    
+
     {http_raw_ips, ["${HOST_NAME}"]}.
     {http_raw_port, 8080}.
-    {http_raw_path, "/${BUCKET}"}.
-    
+    {http_raw_path, "/test"}.
+    %% {http_raw_path, "/${BUCKET}"}.
+
     {key_generator,   {partitioned_sequential_int, 1000000}}.
     {value_generator, {fixed_bin, 16384}}. %% 16KB
-    {operations, [{put,1}]}. %% PUT:100%
+    {operations, [{put,1}]}.               %% PUT:100%
+    %%{operations, [{put,1}, {get, 4}]}.   %% PUT:20%, GET:80%
+
+    {check_integrity, false}.
+
 
 Description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  +---------------+--------------------------------------------------------+
-  | Key           | Value                                                  |
-  +===============+========================================================+
-  | http_raw_ips  | Target hosts which are equal to `Gateway Nodes`        |
-  +---------------+--------------------------------------------------------+
-  | http_raw_port | Target port listening on Gateway Nodes                 |
-  +---------------+--------------------------------------------------------+
-  | http_raw_path | URL path prefix. First level of path MUST be matched a |
-  |               | BUCKET name                                            |
-  +---------------+--------------------------------------------------------+
+  +-----------------+--------------------------------------------------------+
+  | Key             | Value                                                  |
+  +=================+========================================================+
+  | http_raw_ips    | Target hosts which are equal to `Gateway Nodes`        |
+  +-----------------+--------------------------------------------------------+
+  | http_raw_port   | Target port listening on Gateway Nodes                 |
+  +-----------------+--------------------------------------------------------+
+  | http_raw_path   | URL path prefix. First level of path MUST be matched a |
+  |                 | BUCKET name                                            |
+  +-----------------+--------------------------------------------------------+
+  | check_integrity | Check integrity of registered object -                 |
+  |                 | compare an original-MD5 with a retrieving object's MD5 |
+  +-----------------+--------------------------------------------------------+
 
 These are covered more in detail on the `Basho wiki <http://wiki.basho.com/Benchmarking-with-Basho-Bench.html>`_.
 
@@ -119,4 +116,4 @@ Commands to run basho_bench are following.
     cd basho_bench
     ./basho_bench ../leofs/test/conf/leofs_16K_LOAD1M.config
 
- 
+
