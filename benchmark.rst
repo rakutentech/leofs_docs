@@ -24,12 +24,12 @@ Install
 
 .. code-block:: bash
 
-    git clone git://github.com/basho/basho_bench.git
-    git clone https://github.com/leo-project/leofs.git
-    cd basho_bench
-    cp -i ../leofs/test/src/*.erl src/
-    cp -i ../leofs/test/include/*.hrl include/
-    make all
+    $ git clone git://github.com/basho/basho_bench.git
+    $ git clone https://github.com/leo-project/leofs.git
+    $ cd basho_bench
+    $ cp -i ../leofs/test/src/*.erl src/
+    $ cp -i ../leofs/test/include/*.hrl include/
+    $ make all
 
 Prepare before the tests
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -39,7 +39,7 @@ Put a bucket for the tests
 
 .. note:: After launch LeoFS, You need to put ``bucket`` on "manager-console" before the tests. In this example, the bucket-name is ``test`` and a user, ``_test_leofs`` as "test-user" is registered already into LeoFS.
 
-::
+.. code-block:: bash
 
     $ telnet ${MANAGER_CONSOLE_IP} 10010
     Trying 127.0.0.1...
@@ -47,6 +47,12 @@ Put a bucket for the tests
     Escape character is '^]'.
 
     add-bucket test 05236
+    OK
+
+    get-buckets
+    bucket   | owner       | created at
+    ---------+-------------+---------------------------
+    test     | _test_leofs | 2013-02-27 14:06:54 +0900
 
 
 .. index::
