@@ -30,16 +30,35 @@ Install
     cp -i ../leofs/test/include/*.hrl include/
     make all
 
+Configuration
+^^^^^^^^^^^^^
 
-Edit /etc/hosts
-^^^^^^^^^^^^^^^
+Put a bucket for the tests
+""""""""""""""""""""""""""""
+
+.. note:: After launch LeoFS, You need to put ``bucket`` on "manager-console" before the tests. In this example, the bucket-name is ``test`` and a user, ``_test_leofs`` as "test-user" is registered already into LeoFS.
+
+::
+
+    $ telnet ${MANAGER_CONSOLE_IP} 10010
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+
+    add-bucket test 05236
+
+
+Edit `"/etc/hosts"`
+"""""""""""""""""""
 
 .. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
+
+* You need to modify ``/etc/hosts`` before the tests because basho_bench cannot reach LeoFS-Gateway. 
 
 ::
 
   127.0.0.1 localhost
-  127.0.0.1 test_bucket.localhost
+  127.0.0.1 test.localhost
 
 
 .. index::
@@ -53,7 +72,7 @@ Samples
 
 Some samples are included in leofs repo where path is ${LEOFS_ROOT}/test/conf/leofs_*.config
 
-::
+.. code-block:: erlang
 
     {mode,      max}.
     {duration,   3}.
