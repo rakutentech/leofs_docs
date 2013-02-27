@@ -86,19 +86,21 @@ Samples
 Description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  +-----------------+--------------------------------------------------------+
-  | Key             | Value                                                  |
-  +=================+========================================================+
-  | http_raw_ips    | Target hosts which are equal to `Gateway Nodes`        |
-  +-----------------+--------------------------------------------------------+
-  | http_raw_port   | Target port listening on Gateway Nodes                 |
-  +-----------------+--------------------------------------------------------+
-  | http_raw_path   | URL path prefix. First level of path MUST be matched a |
-  |                 | BUCKET name                                            |
-  +-----------------+--------------------------------------------------------+
-  | check_integrity | Check integrity of registered object -                 |
-  |                 | compare an original-MD5 with a retrieving object's MD5 |
-  +-----------------+--------------------------------------------------------+
+  +-------------------+--------------------------------------------------------+
+  | Key               | Value                                                  |
+  +===================+========================================================+
+  | http_raw_ips      | Target hosts which are equal to `Gateway Nodes`        |
+  +-------------------+--------------------------------------------------------+
+  | http_raw_port     | Target port listening on Gateway Nodes                 |
+  +-------------------+--------------------------------------------------------+
+  | http_raw_path     | URL path prefix. First level of path MUST be matched a |
+  |                   | BUCKET name                                            |
+  +-------------------+--------------------------------------------------------+
+  | check_integrity   | Check integrity of registered object -                 |
+  | `(default:false)` | compare an original-MD5 with a retrieving object's MD5 |
+  |                   |                                                        |
+  |                   | (Only for developers)                                  |
+  +-------------------+--------------------------------------------------------+
 
 These are covered more in detail on the `Basho wiki <http://wiki.basho.com/Benchmarking-with-Basho-Bench.html>`_.
 
@@ -110,10 +112,8 @@ Run basho_bench
 
 Commands to run basho_bench are following.
 
-::
+.. code-block:: bash
 
     ### Loading 1M records each size is 16KB
     cd basho_bench
     ./basho_bench ../leofs/test/conf/leofs_16K_LOAD1M.config
-
-
