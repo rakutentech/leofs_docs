@@ -12,15 +12,15 @@ System Requirements
 LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS and CentOS 6.x, but should work on
 most Linux platforms with the following software:
 
-* Erlang OTP R14B04 <http://www.erlang.org/download_release/12>
-* Erlang OTP R15B03-1 <http://www.erlang.org/download_release/16>
+* `Erlang OTP R14B04 <http://www.erlang.org/download_release/12>`_
+* `Erlang OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
 
 And the following erlang libraries:
 
-* Basho Bitcask <https://github.com/basho/bitcask>
-* Ninenines Cowboy <https://github.com/extend/cowboy>
-* Boundary Folsom <https://github.com/boundary/folsom>
-* Szktty Erlang LZ4 <https://github.com/szktty/erlang-lz4>
+* `Basho Bitcask <https://github.com/basho/bitcask>`_
+* `Ninenines Cowboy <https://github.com/extend/cowboy>`_
+* `Boundary Folsom <https://github.com/boundary/folsom>`_
+* `Szktty Erlang LZ4 <https://github.com/szktty/erlang-lz4>`_
 
 And we recommend you to use on 64bit builds because of having to handle large files.
 
@@ -43,12 +43,27 @@ Quick Start -1 All in one for Application Development
 Erlang (CentOS, Ubuntu, Other Linux OS)
 """""""""""""""""""""""""""""""""""""""""""
 
+.. note:: If you already installed "Erlang", You need to remove that.
+
 ::
 
-   $ wget http://www.erlang.org/download/otp_src_R14B04.tar.gz
-   $ tar xzf otp_src_R14B04.tar.gz
-   $ cd otp_src_R14B04
-   $ ./configure --prefix=/usr/local/erlang/R14B04 \
+   ##
+   ## 1. Install libatomic
+   ##
+   $ wget http://www.hpl.hp.com/research/linux/atomic_ops/download/libatomic_ops-7.2d.tar.gz
+   $ tar xzvf libatomic_ops-7.2d.tar.gz
+   $ cd libatomic_ops-7.2d
+   $ ./configure --prefix=/usr/local
+   $ make
+   $ sudo make install
+
+   ##
+   ## 2. Install Erlang
+   ##
+   $ wget http://www.erlang.org/download/otp_src_R15B03-1.tar.gz
+   $ tar xzf otp_src_R15B03-1.tar.gz
+   $ cd otp_src_R15B03-1
+   $ ./configure --prefix=/usr/local/erlang/R15B03 \
                  --enable-smp-support \
                  --enable-m64-build \
                  --enable-halfword-emulator \
@@ -57,9 +72,21 @@ Erlang (CentOS, Ubuntu, Other Linux OS)
                  --disable-native-libs \
                  --disable-hipe \
                  --disable-sctp \
-                 --enable-threads
+                 --enable-threads \
+                 --with-libatomic_ops=/usr/local
    $ make
    $ sudo make install
+
+   ##
+   ## 3. Set PATH
+   ##
+   $ vi ~/.profile
+       ## append the follows:
+       export ERL_HOME=/usr/local/erlang/R15B03
+       export PATH=$PATH:$ERL_HOME/bin
+
+   $ source ~/.profile
+
 
 LeoFS
 """""""""
@@ -128,14 +155,16 @@ Modify “/ets/hosts”
 
     $ telnet 127.0.0.1 10010
     > status
+    status
     [system config]
-                 version : 0.10.0
+                 version : 0.12.7
      # of replicas       : 1
      # of successes of R : 1
      # of successes of W : 1
      # of successes of D : 1
                ring size : 2^128
-              ring state : 1428891014
+        ring hash (cur)  : 1428891014
+        ring hash (prev) : 1428891014
 
     [node(s) state]
     ------------------------------------------------------------------------------------------------
@@ -148,12 +177,12 @@ Modify “/ets/hosts”
 7. Getting Your S3-API's Key from LeoFS's Manager-Console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Using command is ``s3-create-key`` on LeoFS's manager-console
+* Using command is ``create-user`` on LeoFS's manager-console
 
 ::
 
     $ telnet 127.0.0.1 10010
-    > s3-create-key ${YOUR_NAME}
+    > create-user ${YOUR_NAME}
     access-key-id: 05dcba94333c7590a635
     secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 

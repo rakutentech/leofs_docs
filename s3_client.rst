@@ -13,11 +13,11 @@ You can get S3-API's Keys from ``LeoFS's Manager Console``.
   Connected to 127.0.0.1.
   Escape character is '^]'.
 
-'s3-create-key ${USER-ID}' command generates your s3 key.
+'create-user ${USER-ID}' command generates your s3 key.
 
 ::
 
-  s3-create-key ${USER-ID}
+  create-user ${USER-ID}
   access-key-id: 05dcba94333c7590a635
   secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
@@ -27,7 +27,7 @@ You can get S3-API's Keys from ``LeoFS's Manager Console``.
 Getting Started with Ruby: 'aws-sdk'
 ------------------------------------------------------
 
-A part of the Ruby's library, ``aws-sdk``, is available against the LeoFS as a client. It's made by Amazon. The official document of ``aws-sdk`` is here: http://aws.amazon.com/sdkforruby/.
+A part of the Ruby's library, ``aws-sdk``, is available against the LeoFS as a client. It's made by Amazon. The official document of `aws-sdk <http://aws.amazon.com/sdkforruby/>`_
 
 Install AWS-SDK for Ruby
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -174,7 +174,7 @@ Getting Started with Java: 'aws-sdk'
 Getting AWS SDK for Java
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-"SDK for Java" is here: http://aws.amazon.com/sdkforjava/
+URL: `SDK for Java <http://aws.amazon.com/sdkforjava/>`_
 
 .. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`. You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
 
@@ -467,9 +467,9 @@ Sample Code
 Getting Started with Python: 'boto'
 -------------------------------------
 
-Boto is a Python interface to Amazon Web Services. You can use it for LeoFS, too.
-Repository: https://github.com/boto/boto
-Documentation: http://docs.pythonboto.org/en/latest/index.html
+* Boto is a Python interface to Amazon Web Services. You can use it for LeoFS, too.
+    * `Repository <https://github.com/boto/boto>`_
+    * `Documentation <http://docs.pythonboto.org/en/latest/index.html>`_
 
 Install boto
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -670,10 +670,7 @@ Connect LeoFS from DragonDisk
 
 .. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
 
-DragonDisk is a powerful file manager for Amazon S3 Compatible Storage.
-
-URL: http://www.dragondisk.com/
-
+`DragonDisk <http://www.dragondisk.com/>`_ is a powerful file manager for Amazon S3 Compatible Storage.
 
 Setting up LeoFS account details
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -707,10 +704,8 @@ Operating files from  main view
 Connect LeoFS from s3cmd
 ------------------------------------------------------
 
-Getting "s3cmd"
-^^^^^^^^^^^^^^^
-
-s3cmd is here: http://sourceforge.net/projects/s3tools/files/
+Getting `s3cmd <http://sourceforge.net/projects/s3tools/files/>`_
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Configure
 ^^^^^^^^^^^^

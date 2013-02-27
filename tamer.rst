@@ -1,10 +1,10 @@
-LeoTamer v0.2.8
-===============
+LeoTamer v0.2.10
+================
 
 **LeoTamer** is LeoFS's GUI console on your browser. You can easily operate LeoFS.
 
-Install
----------
+Install and Setup
+-----------------
 
 Requirement
 ^^^^^^^^^^^
@@ -45,7 +45,7 @@ Create Admin User
 Configuration
 ^^^^^^^^^^^^^
 
-Update ``config.yml`` for connecting LeoFS-Manager
+You need to modify ``config.yml`` for connecting LeoFS-Manager
 
 ::
 
@@ -55,20 +55,83 @@ Update ``config.yml`` for connecting LeoFS-Manager
   :credential:
     :access_key_id: ${YOUR_ACCESS_KEY_ID}
     :secret_access_key: ${YOUR_SECRET_ACCESS_KEY}
+  :session:
+  #  :redis:
+  #    :url: "redis://localhost:6379/0"
+  #    #:expire_after: 600
+    :local:
+      :secret: ""
+      :expire_after: 300
+  :snmp: # list of data in Node Status SNMP Chart
+    - ETS memory usage (1-min Averages)
+    - Processes memory usage (1-min Averages)
+    - System memory usage (1-min Averages)
 
-
-Launch LeoTamer
-^^^^^^^^^^^^^^^
-
-On WEBrick
-"""""""""""
+You need modify ``unicorn.conf``
 
 ::
 
-  $ ruby config_webrick.ru ${LEO-TAMER-PORT}
+  listen "/tmp/LeoTamer.sock" # Unix domain socket
+  listen ${LEO-TAMER-PORT} # TCP
 
-On Unicorn (Unicorn is an HTTP server for Rack applications)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Nginx + Unicorn
+""""""""""""""""
+
+* Case of using ``TCP/IP``
+    * You need to modify ``/etc/nginx/sites-available/default``
+
+::
+
+  server {
+    root /usr/share/nginx/www;
+    index index.html index.htm;
+    server_name localhost;
+
+    location / {
+      proxy_pass http://localhost:8082;
+    }
+  }
+
+* Case of Using ``Unix-domain-socket``
+    * You need to modify ``/etc/nginx/nginx.conf`` and ``/etc/nginx/sites-available/default``
+
+::
+
+  ## /etc/nginx/nginx.conf
+
+  http {
+    upstream LeoTamer {
+      server unix:/tmp/LeoTamer.sock;
+    }
+  }
+
+
+  ## /etc/nginx/sites-available/default
+
+  server {
+    root /usr/share/nginx/www;
+    index index.html index.htm;
+    server_name localhost;
+
+    location / {
+      proxy_pass http://LeoTamer;
+    }
+  }
+
+
+
+Launch
+------
+
+When using WEBrick
+^^^^^^^^^^^^^^^^^^
+
+::
+
+  $ rackup config_webrick.ru
+
+When using Unicorn (Unicorn is an HTTP server for Rack applications)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Web site: http://unicorn.bogomips.org/
 * Ruby Gems: https://rubygems.org/gems/unicorn
@@ -76,6 +139,7 @@ On Unicorn (Unicorn is an HTTP server for Rack applications)
 ::
 
   $ unicorn -c unicorn.conf config_unicorn.ru
+
 
 Features
 ---------
@@ -139,17 +203,22 @@ Table - Changeable Status
 
 \
 
-+-----------------+--------------------------+
-|Current Status   |Changeable Status         |
-+=================+==========================+
-| running         | suspend, detach          |
-+-----------------+--------------------------+
-| suspend         | resume                   |
-+-----------------+--------------------------+
-| restarted       | resume                   |
-+-----------------+--------------------------+
-| stop            | detach                   |
-+-----------------+--------------------------+
++-----------------------+----------------------------+
+|Current Status         | Changeable Status          |
++=======================+============================+
+| |running| running     | suspend, detach            |
++-----------------------+----------------------------+
+| |suspend| suspend     | resume                     |
++-----------------------+----------------------------+
+| |restarted| restarted | resume                     |
++-----------------------+----------------------------+
+| |stop| stop           | detach                     |
++-----------------------+----------------------------+
+
+.. |running| image:: _static/images/tamer-icons/available.png
+.. |suspend| image:: _static/images/tamer-icons/warn.png
+.. |restarted| image:: _static/images/tamer-icons/add.png
+.. |stop| image:: _static/images/tamer-icons/fire.png
 
 \
 
@@ -168,6 +237,16 @@ Rebalance into the storage-cluster
 
 Administration Tools
 ^^^^^^^^^^^^^^^^^^^^
+
+System Conf View
+""""""""""""""""
+
+* You can confirm configuration of the LeoFS
+* Please see :ref:`LeoFS’s system-configuration <system-configuration-label>`
+
+.. image:: _static/screenshots/tamer/admintools_system_conf.png
+   :width: 720px
+
 
 Users View
 """"""""""

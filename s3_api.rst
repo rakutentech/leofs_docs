@@ -3,14 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Amazon S3 API
-================================
+Amazon S3 API and Interface
+---------------------------
 
 Table of S3-API
---------------------------
+^^^^^^^^^^^^^^^
 
 Objects-API
-^^^^^^^^^^^^
+"""""""""""
 
  +----+----------------------------------+--------------------------------------+
  |    | Method                           | Status                               |
@@ -49,7 +49,7 @@ Objects-API
  +----+----------------------------------+--------------------------------------+
 
 Buckets-API
-^^^^^^^^^^^^
+"""""""""""
 
  +----+--------------------------------+--------------------------------------+
  |    | Method                         | Status                               |
@@ -64,7 +64,7 @@ Buckets-API
  +----+--------------------------------+--------------------------------------+
  | 5  | **GET Bucket (List Objects)**  | **Yes**                              |
  +----+--------------------------------+--------------------------------------+
- | 6  | GET Bucket acl                 | Plans to support with 0.12           |
+ | 6  | GET Bucket acl                 | Plans to support with 0.14           |
  +----+--------------------------------+--------------------------------------+
  | 7  | GET Bucket lifecycle           | No                                   |
  +----+--------------------------------+--------------------------------------+
@@ -90,7 +90,7 @@ Buckets-API
  +----+--------------------------------+--------------------------------------+
  | 18 | **PUT Bucket**                 | **Yes**                              |
  +----+--------------------------------+--------------------------------------+
- | 19 | PUT Bucket acl                 | Plans to support with 0.12           |
+ | 19 | PUT Bucket acl                 | Plans to support with 0.14           |
  +----+--------------------------------+--------------------------------------+
  | 20 | PUT Bucket lifecycle           | No                                   |
  +----+--------------------------------+--------------------------------------+
@@ -106,4 +106,78 @@ Buckets-API
  +----+--------------------------------+--------------------------------------+
  | 25 | PUT Bucket website             | No                                   |
  +----+--------------------------------+--------------------------------------+
+
+
+Amazon S3 Infterface
+^^^^^^^^^^^^^^^^^^^^
+
+.. index::
+   pair: Official Documents; Amazon S3 Infterface
+
+Amazon S3 Official Documents
+""""""""""""""""""""""""""""
+
+* `The official documents <http://docs.amazonwebservices.com/AmazonS3/2006-03-01/dev/Welcome.html?r=7602>`_
+
+.. _s3-path-label:
+
+How to determine the name of Bucket
+"""""""""""""""""""""""""""""""""""
+
+.. index::
+   pair: How to determine the name of Bucket; Installation
+
+*  `Virtual Hosting of Buckets <http://docs.amazonwebservices.com/AmazonS3/2006-03-01/dev/VirtualHosting.html>`_
+* Stuffs used for determining
+    * S3 have used a **HTTP Host header** or a **Path in HTTP request line**.
+    * How S3 determines which stuff depends on **Domain name**.
+* Patterns
+
+1. **http://s3.amazonaws.com/bucket/path_to_file**
+
+  In this case, The name of bucket is the first level of path.
+
+  `bucket`
+
+  +--------------+--------------------------------------------------------+
+  | Stuff        | Value                                                  |
+  +==============+========================================================+
+  | request line | GET /bucket/path_to_file HTTP/1.1                      |
+  +--------------+--------------------------------------------------------+
+  | Host header  | Host: s3.amazonaws.com                                 |
+  +--------------+--------------------------------------------------------+
+
+  A argument of LeoFS's :ref:`whereis <whereis>` | :ref:`purge <purge>` command should be `bucket/path_to_file`.
+
+2. **http://www.example.com.s3.amazonaws.com/path_to_file**
+
+  In this case, The name of bucket is a part of subdomain removed `.s3.amazonaws.com`.
+
+  `www.example.com`
+
+  +--------------+--------------------------------------------------------+
+  | Stuff        | Value                                                  |
+  +==============+========================================================+
+  | request line | GET /path_to_file HTTP/1.1                             |
+  +--------------+--------------------------------------------------------+
+  | Host header  | Host: www.example.com.s3.amazonaws.com                 |
+  +--------------+--------------------------------------------------------+
+
+  A argument of LeoFS's :ref:`whereis <whereis>` | :ref:`purge <purge>` command should be `www.example.com/path_to_file`.
+
+3. **http://www.example.com/path_to_file**
+
+  In this case, The name of bucket is equal to FQDN.
+
+    `www.example.com`
+
+  +--------------+--------------------------------------------------------+
+  | Stuff        | Value                                                  |
+  +==============+========================================================+
+  | request line | GET /path_to_file HTTP/1.1                             |
+  +--------------+--------------------------------------------------------+
+  | Host header  | Host: www.example.com                                  |
+  +--------------+--------------------------------------------------------+
+
+  A argument of LeoFS's :ref:`whereis <whereis>` | :ref:`purge <purge>` command should be `www.example.com/path_to_file`.
 
