@@ -655,7 +655,8 @@ Command: ``get-buckets``
 +------------------------------------------------------+----------------------------------------------------------------+
 | Command                                              | Explanation                                                    |
 +======================================================+================================================================+
-| status                                               | Retrieve status of the cluster                                 |
+| status [${NODE}]                                     | * Retrieve status of the cluster                               |
+|                                                      | * Retrieve status of the node                                  |
 +------------------------------------------------------+----------------------------------------------------------------+
 | history                                              | Retrieve operation histories                                   |
 +------------------------------------------------------+----------------------------------------------------------------+
@@ -698,22 +699,51 @@ Command-2: ``status ${storage-node}`` OR ``status ${gateway-node}``
 
     status storage_0@127.0.0.1
     [config]
-                version : 0.12.7
+                version : 0.14.0-RC1
           obj-container : [[{path,"./avs"},{num_of_containers,64}]]
                 log-dir : ./log
+
+   [status-1: ring]
       ring state (cur)  : 64212f2d
       ring state (prev) : 64212f2d
 
-    [erlang-vm status]
-             vm version : 5.8.5
-        total mem usage : 15523984
-       system mem usage : 5832420
-        procs mem usage : 5832420
-          ets mem usage : 568724
-                  procs : 328/1048576
+    [status-2: erlang-vm]
+             vm version : 5.9.3
+        total mem usage : 16283920
+       system mem usage : 7120494
+        procs mem usage : 9156034
+          ets mem usage : 583724
+                  procs : 309/1048576
             kernel_poll : true
        thread_pool_size : 32
 
+    [status-3: # of msgs]
+       replication msgs : 0
+        vnode-sync msgs : 0
+         rebalance msgs : 0
+
+
+::
+
+    status gateway_0@127.0.0.1
+    [config]
+                version : 0.14.0-RC-1
+          obj-container : []
+                log-dir : ./log
+
+    [status-1: ring]
+      ring state (cur)  : 64212f2d
+      ring state (prev) : 64212f2d
+
+    [status-2: erlang-vm]
+             vm version : 5.9.3
+        total mem usage : 32657896
+       system mem usage : 22054624
+        procs mem usage : 10623448
+          ets mem usage : 1083004
+                  procs : 504/1048576
+            kernel_poll : true
+       thread_pool_size : 32
 
 .. index::
    history-command
