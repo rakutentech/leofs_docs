@@ -355,7 +355,7 @@ Build "LeoFS"
       |      |--- gateway/
       |      |        |--- bin/
       |      |        |--- erts-5.8.5/
-      |      |        |--- ets/
+      |      |        |--- etc/
       |      |        |--- lib/
       |      |        |--- log/
       |      |        |--- releases/
@@ -364,7 +364,7 @@ Build "LeoFS"
       |      |--- manager_0/
       |      |        |--- bin/
       |      |        |--- erts-5.8.5/
-      |      |        |--- ets/
+      |      |        |--- etc/
       |      |        |--- lib/
       |      |        |--- log/
       |      |        |--- releases/
@@ -373,7 +373,7 @@ Build "LeoFS"
       |      |--- manager_1/
       |      |        |--- bin/
       |      |        |--- erts-5.8.5/
-      |      |        |--- ets/
+      |      |        |--- etc/
       |      |        |--- lib/
       |      |        |--- log/
       |      |        |--- releases/
@@ -382,7 +382,7 @@ Build "LeoFS"
       |      `--- storage/
       |               |--- bin/
       |               |--- erts-5.8.5/
-      |               |--- ets/
+      |               |--- etc/
       |               |--- lib/
       |               |--- log/
       |               |--- releases/
@@ -421,7 +421,7 @@ Log Dir and Working Dir
      |      `--- storage/
      |               |--- bin/
      |               |--- erts-5.8.5/
-     |               |--- ets/
+     |               |--- etc/
      |               |--- lib/
      |               |--- log/
      |               |     |--- app/
