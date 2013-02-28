@@ -101,15 +101,15 @@ LeoFS
 2. Configuration
 ^^^^^^^^^^^^^^^^^
 
-Modify “/ets/hosts”
+Modify “/etc/hosts”
 """""""""""""""""""""""
 
-* Add a LeoFS's domain in ``/ets/hosts``
+* Add a LeoFS's domain in ``/etc/hosts``
 * LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`
 
 ::
 
-    $ sudo vi /ets/hosts
+    $ sudo vi /etc/hosts
 
     ## Add a LeoFS's domain ##
     127.0.0.1 localhost ${BUCKET_NAME}.localhost
