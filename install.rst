@@ -48,14 +48,10 @@ Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
    $ make
    $ sudo make install
 
-Download "Erlang R14B04" / "Erlang R15B03-1"
+Download "Erlang R15B03-1"
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
-
-   ## [R14B04]
-   $ cd $WORK_DIR
-   $ wget http://www.erlang.org/download/otp_src_R14B04.tar.gz
 
    ## [R15B03]
    $ cd $WORK_DIR
@@ -65,22 +61,6 @@ Build for Linux (CentOS, Debian and Others)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
-
-   ## [R14B04]
-   $ tar xzf otp_src_R14B04.tar.gz
-   $ cd otp_src_R14B04
-   $ ./configure --prefix=/usr/local/erlang/R14B04 \
-                 --enable-smp-support \
-                 --enable-m64-build \
-                 --enable-halfword-emulator \
-                 --enable-kernel-poll \
-                 --without-javac \
-                 --disable-native-libs \
-                 --disable-hipe \
-                 --disable-sctp \
-                 --enable-threads
-   $ make
-   $ sudo make install
 
    ## [R15B03-1]
    $ tar xzf otp_src_R15B03-1.tar.gz
@@ -103,13 +83,6 @@ Confirm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
-
-    ## [R14B04]
-    $ erl
-    Erlang R14B04 (erts-5.8.5) [source] [64-bit halfword] [smp:2:2] [rq:2] [async-threads:0] [kernel-poll:false]
-
-    Eshell V5.8.5  (abort with ^G)
-    1>
 
     ## [R15B03-1]
     $ erl
