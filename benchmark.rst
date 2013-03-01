@@ -76,7 +76,7 @@ Samples
     {driver, basho_bench_driver_leofs}.
     {code_paths, ["deps/ibrowse"]}.
 
-    {http_raw_ips, ["${HOST_NAME}"]}.
+    {http_raw_ips, ["${HOST_NAME_OF_LEOFS_GATEWAY}"]}.
     {http_raw_port, 8080}.
     {http_raw_path, "/test"}.
     %% {http_raw_path, "/${BUCKET}"}.
@@ -111,13 +111,84 @@ Description
 .. index::
     pair: Run basho_bench; Run basho_bench
 
-Run basho_bench
+Run basho_bench(1)
 --------------------------------
 
-Commands to run basho_bench are following.
+.. note:: In this example, ``LeoFS`` and ``basho_bench`` are installed into "local".
+
+* Commands to run basho_bench are following.
 
 .. code-block:: bash
 
     ### Loading 1M records each size is 16KB
     cd basho_bench
     ./basho_bench ../leofs/test/conf/leofs_16K_LOAD1M.config
+
+\
+
+Run basho_bench(2)
+--------------------------------
+
+.. note:: In this example, ``LeoFS`` and ``basho_bench`` are installed into respective hosts.
+
+
+Set ``endpoint`` on LeoFS-Manager console
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* From basho_bench's requests needs to reach `${HOST_NAME_OF_LEOFS_GATEWAY}`
+
+.. code-block:: bash
+
+    $ telnet ${MANAGER_CONSOLE_IP} 10010
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
+
+    set-endpoint ${HOST_NAME_OF_LEOFS_GATEWAY}
+    OK
+
+    get-endpoints
+    endpoint                      | created at
+    ------------------------------+---------------------------
+    localhost                     | 2013-03-01 00:14:04 +0000
+    s3.amazonaws.com              | 2013-03-01 00:14:04 +0000
+    ${HOST_NAME_OF_LEOFS_GATEWAY} | 2013-03-01 00:14:04 +0000
+
+
+
+Edit LeoFS-benchmark's configutation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* You need to modify configuration's items of ``http_raw_ips`` and ``http_raw_port``
+
+.. code-block:: erlang
+
+    {mode,      max}.
+    {duration,   10}.
+    {concurrent, 50}.
+
+    {driver, basho_bench_driver_leofs}.
+    {code_paths, ["deps/ibrowse"]}.
+
+    {http_raw_ips, ["${HOST_NAME_OF_LEOFS_GATEWAY}"]}. %% able to set plural nodes
+    {http_raw_port, ${PORT}}. %% default: 8080
+    {http_raw_path, "/test"}.
+    %% {http_raw_path, "/${BUCKET}"}.
+
+    {key_generator,   {partitioned_sequential_int, 1000000}}.
+    {value_generator, {fixed_bin, 16384}}. %% 16KB
+    {operations, [{put,1}]}.               %% PUT:100%
+    %%{operations, [{put,1}, {get, 4}]}.   %% PUT:20%, GET:80%
+
+    {check_integrity, false}.
+
+Run
+^^^
+
+.. code-block:: bash
+
+    ### Loading 1M records each size is 16KB
+    cd basho_bench
+    ./basho_bench ../leofs/test/conf/leofs_16K_LOAD1M.config
+
+

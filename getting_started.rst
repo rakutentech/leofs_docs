@@ -12,7 +12,6 @@ System Requirements
 LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS and CentOS 6.x, but should work on
 most Linux platforms with the following software:
 
-* `Erlang OTP R14B04 <http://www.erlang.org/download_release/12>`_
 * `Erlang OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
 
 And the following erlang libraries:
@@ -37,15 +36,15 @@ Getting LeoFS
 Quick Start -1 All in one for Application Development
 ------------------------------------------------------
 
+.. note:: In this example, ``LeoFS-Storage``, ``LeoFS-Gateway`` and ``LeoFS-Manager``, all applications are installed into ``"local"``.
+
 1. Install
 ^^^^^^^^^^
 
 Erlang (CentOS, Ubuntu, Other Linux OS)
 """""""""""""""""""""""""""""""""""""""""""
 
-.. note:: If you already installed "Erlang", You need to remove that.
-
-::
+.. code-block:: bash
 
    ##
    ## 1. Install libatomic
@@ -58,7 +57,7 @@ Erlang (CentOS, Ubuntu, Other Linux OS)
    $ sudo make install
 
    ##
-   ## 2. Install Erlang
+   ## 2. Install Erlang (R15B03-1)
    ##
    $ wget http://www.erlang.org/download/otp_src_R15B03-1.tar.gz
    $ tar xzf otp_src_R15B03-1.tar.gz
