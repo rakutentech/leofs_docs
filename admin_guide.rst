@@ -302,22 +302,22 @@ Command: ``whereis ${file-path}``
 
 \
 
-+-------------------------------------------------------+----------------------------------------------------------------+
-| Command                                               | Explanation                                                    |
-+=======================================================+================================================================+
-| du `${storage-node}`                                  | * Display disk usages(like xnix du command)                    |
-+-------------------------------------------------------+----------------------------------------------------------------+
-| du detail `${storage-node}`                           | * Display disk usages in detail (like xnix du command)         |
-+-------------------------------------------------------+----------------------------------------------------------------+
-| compact start `${storage-node}` `all|${storage_pids}` | * Compact raw files used by the LeoFS Storage subsystem        |
-| `[${num_of_compact_proc}]`                            | * Default ${num_of_compact_proc} is '3'                        |
-+-------------------------------------------------------+----------------------------------------------------------------+
-| compact suspend `${storage-node}`                     | * Suspend a compaction job in progress                         |
-+-------------------------------------------------------+----------------------------------------------------------------+
-| compact resume  `${storage-node}`                     | * Resume a compaction job under suspension                     |
-+-------------------------------------------------------+----------------------------------------------------------------+
-| compact status  `${storage-node}`                     | * Display compation statuses                                   |
-+-------------------------------------------------------+----------------------------------------------------------------+
++-----------------------------------------------------------+----------------------------------------------------------------+
+| Command                                                   | Explanation                                                    |
++===========================================================+================================================================+
+| du `${storage-node}`                                      | * Display disk usages(like xnix du command)                    |
++-----------------------------------------------------------+----------------------------------------------------------------+
+| du detail `${storage-node}`                               | * Display disk usages in detail (like xnix du command)         |
++-----------------------------------------------------------+----------------------------------------------------------------+
+| compact start `${storage-node}` `all | ${num_of_targets}` | * Compact raw files used by the LeoFS Storage subsystem        |
+| `[${num_of_compact_proc}]`                                | * Default ${num_of_compact_proc} is '3'                        |
++-----------------------------------------------------------+----------------------------------------------------------------+
+| compact suspend `${storage-node}`                         | * Suspend a compaction job in progress                         |
++-----------------------------------------------------------+----------------------------------------------------------------+
+| compact resume  `${storage-node}`                         | * Resume a compaction job under suspension                     |
++-----------------------------------------------------------+----------------------------------------------------------------+
+| compact status  `${storage-node}`                         | * Display compation statuses                                   |
++-----------------------------------------------------------+----------------------------------------------------------------+
 
 .. index:: du-command
 
@@ -373,9 +373,9 @@ Command: ``du detail ${storage-node}``
 **'compact start'** - Remove logical deleted objects and metadata from Object-Storage and Metadata-Storage, respectively
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Command: ``compact start ${storage-node} all|${storage_pids} [${num_of_compact_proc}]``
+Command: ``compact start ${storage-node} all | ${num_of_targets} [${num_of_compact_proc}]``
 
-.. note:: Default ${num_of_compact_proc} is '3' - You can control the number of process to execute compaction in parallel. It enables you to get maximum performance by setting a appropriate number corresponding with number of cores.
+.. note:: Default ``${num_of_compact_proc}`` is '3' - You can control the number of process to execute compaction in parallel. It enables you to get maximum performance by setting a appropriate number corresponding with number of cores.
 
 ::
 
