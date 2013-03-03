@@ -331,8 +331,9 @@ Command: ``du ${storage-node}``
     du storage_0@127.0.0.1
      active number of objects: 19968
       total number of objects: 39936
-       active size of objects: 168256974.0
+       active size of objects: 198256974.0
         total size of objects: 254725020.0
+         ratio of active size: 77.83%
         last compaction start: ____-__-__ __:__:__
           last compaction end: ____-__-__ __:__:__
 
@@ -347,21 +348,23 @@ Command: ``du detail ${storage-node}``
 
     du detail storage_0@127.0.0.1
     [du(storage stats)]
-                  file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/0.avs
+                    file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/0.avs
      active number of objects: 320
       total number of objects: 640
-       active size of objects: 2696378.0
+       active size of objects: 3206378.0
         total size of objects: 4082036.0
+         ratio of active size: 78.55%
         last compaction start: ____-__-__ __:__:__
           last compaction end: ____-__-__ __:__:__
-
-    --- (snipped) ---
-
-                  file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/63.avs
+    .
+    .
+    .
+                    file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/63.avs
      active number of objects: 293
       total number of objects: 586
-       active size of objects: 2468909.0
+       active size of objects: 2968909.0
         total size of objects: 3737690.0
+         ratio of active size: 79.43%
         last compaction start: ____-__-__ __:__:__
           last compaction end: ____-__-__ __:__:__
 
@@ -376,14 +379,15 @@ Command: ``compact start ${storage-node} all|${storage_pids} [${num_of_compact_p
 
 ::
 
-    ## all storage processes will be compacted with 3(default) concurrent processes
+    ## All compaction-targets will be executed with 3 concurrent processes
+    ## (default concurrents is 3)
     compact start storage_0@127.0.0.1 all
     OK
 
 ::
 
-    ## leo_object_storage_0[1-2] will be compacted with 2 concurrent processes
-    compact start storage_0@127.0.0.1 leo_object_storage_01,leo_object_storage_02 2
+    ## Number of compaction-targets will be executed with 2 concurrent processes
+    compact start storage_0@127.0.0.1 5 2
     OK
 
 .. index:: compact-suspend-command
@@ -421,8 +425,9 @@ Command: ``compact status ${storage-node}``
 
     compact status storage_0@127.0.0.1
     last compaction start: 2013-02-01 07:26:31 +0000
-        rest of jobs(pid): leo_object_storage_22, leo_object_storage_23, leo_object_storage_24
-     ongoing of jobs(pid): leo_object_storage_21, leo_object_storage_20
+ total of vector-storages: 64
+          rest of targets: 3
+       ongoing of targets: 2
 
 \
 \
