@@ -13,7 +13,7 @@ Order of system launch
 LeoFS's system launch is very easy and simple as follows.
 
 .. image:: _static/images/leofs-order-of-system-launch.png
-   :width: 720px
+   :width: 640px
 
 
 
@@ -182,7 +182,7 @@ LeoFS-cluster's operation commands
 LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
 
 .. image:: _static/images/leofs-life-cycle.png
-   :width: 720px
+   :width: 640px
 
 
 
@@ -317,6 +317,7 @@ Command: ``whereis ${file-path}``
 | compact resume  `${storage-node}`                         | * Resume a compaction job under suspension                     |
 +-----------------------------------------------------------+----------------------------------------------------------------+
 | compact status  `${storage-node}`                         | * Display compation statuses                                   |
+|                                                           | * Compaction's status: ``idle``, ``running``, ``suspend``      |
 +-----------------------------------------------------------+----------------------------------------------------------------+
 
 .. index:: du-command
@@ -373,6 +374,13 @@ Command: ``du detail ${storage-node}``
 **'compact start'** - Remove logical deleted objects and metadata from Object-Storage and Metadata-Storage, respectively
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+\
+
+.. image:: _static/images/leofs-compaction-state-transition.png
+   :width: 640px
+
+\
+
 Command: ``compact start ${storage-node} all | ${num_of_targets} [${num_of_compact_proc}]``
 
 .. note:: Default ``${num_of_compact_proc}`` is '3' - You can control the number of process to execute compaction in parallel. It enables you to get maximum performance by setting a appropriate number corresponding with number of cores.
@@ -416,18 +424,23 @@ Command: ``compact resume ${storage-node}``
 
 .. index:: compact-status-command
 
-**'compact status'** - Display compation statuses
+**'compact status'** - Retrieve compation statuses
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Command: ``compact status ${storage-node}``
 
+* Compaction's status: ``idle``, ``running``, ``suspend``
+
 ::
 
-    compact status storage_0@127.0.0.1
-    last compaction start: 2013-02-01 07:26:31 +0000
- total of vector-storages: 64
-          rest of targets: 3
-       ongoing of targets: 2
+  compact status storage_0@127.0.0.1
+          current status: running
+   last compaction start: 2013-03-04 12:39:47 +0900
+           total targets: 64
+         pending targets: 61
+         ongoing targets: 3
+
+
 
 \
 \
@@ -786,13 +799,13 @@ Command: ``history``
 \
 
 .. image:: _static/images/leofs-order-of-attach.png
-   :width: 720px
+   :width: 640px
 
 .. index::
    detach-storage
 
 .. image:: _static/images/leofs-order-of-detach.png
-   :width: 720px
+   :width: 640px
 
 
 Setup SNMPA
