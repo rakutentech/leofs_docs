@@ -437,9 +437,9 @@ Command: ``compact status ${storage-node}``
           current status: running
    last compaction start: 2013-03-04 12:39:47 +0900
            total targets: 64
-         pending targets: 61
-         ongoing targets: 3
-
+    # of pending targets: 5
+    # of ongoing targets: 3
+    # of out of targets : 56
 
 
 \
