@@ -551,7 +551,7 @@ LeoFS Manager-Master
                 {error_logger_mf_maxfiles, 5}         % 5 files max
                ]},
         {mnesia, [
-                  {dir, "./work/mnesia"},
+                  {dir, "./work/mnesia/${IP}"},
                   {dump_log_write_threshold, 50000},
                   {dc_dump_limit,            40}
                  ]},
