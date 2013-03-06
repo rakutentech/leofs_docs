@@ -207,7 +207,7 @@ LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
 |                             | * Current status: ``running``                                                                     |
 +-----------------------------+---------------------------------------------------------------------------------------------------+
 | resume `${storage-node}`    | * Resume a storage-node                                                                           |
-|                             | * Current status: ``suspended`` | ``stop`` | ``restarted``                                        |
+|                             | * Current status: ``suspended`` | ``restarted``                                                   |
 +-----------------------------+---------------------------------------------------------------------------------------------------+
 | **Storage-cluster related commands:**                                                                                           |
 +-----------------------------+---------------------------------------------------------------------------------------------------+
@@ -335,8 +335,8 @@ Command: ``du ${storage-node}``
        active size of objects: 198256974.0
         total size of objects: 254725020.0
          ratio of active size: 77.83%
-        last compaction start: ____-__-__ __:__:__
-          last compaction end: ____-__-__ __:__:__
+        last compaction start: 2013-03-04 12:39:47 +0900
+          last compaction end: 2013-03-04 12:39:55 +0900
 
 .. index:: du-detail-command
 
@@ -355,8 +355,8 @@ Command: ``du detail ${storage-node}``
        active size of objects: 3206378.0
         total size of objects: 4082036.0
          ratio of active size: 78.55%
-        last compaction start: ____-__-__ __:__:__
-          last compaction end: ____-__-__ __:__:__
+        last compaction start: 2013-03-04 12:39:47 +0900
+          last compaction end: 2013-03-04 12:39:55 +0900
     .
     .
     .
