@@ -970,8 +970,17 @@ Gateway's Properties for launch
                          {http_cache, ${IS_HTTP_CACHE}},
                          %% # of Cache workers
                          {cache_workers, 128 },
-                         %% Total of Cache capacity (MB)
-                         {cache_capacity, ${CACHE_TOTAL_SIZE} },
+
+                         %% Total of Cache capacity into the RAM (MB)
+                         {cache_ram_capacity,  ${CACHE_TOTAL_RAM_SIZE} },
+                         %% Total of Cache capacity into the Disc (MB)
+                         {cache_disc_capacity, ${CACHE_TOTAL_DISC_SIZE} },
+
+                         %% Disc-cache's chunked object size
+                         {cache_disc_chunk_size, 16384 },
+                         %% Disc-cache's directory
+                         {cache_disc_dir, "./cache" },
+
                          %% Cache expire time. (sec)
                          {cache_expire, ${CACHE_EXPIRE} },
                          %% Acceptable maximum content length (MB)
