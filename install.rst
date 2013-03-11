@@ -979,7 +979,8 @@ Gateway's Properties for launch
                          %% Disc-cache's chunked object size
                          {cache_disc_chunk_size, 16384 },
                          %% Disc-cache's directory
-                         {cache_disc_dir, "./cache" },
+                         {cache_disc_dir_data,    "./cache/data" },
+                         {cache_disc_dir_journal, "./cache/journal" },
 
                          %% Cache expire time. (sec)
                          {cache_expire, ${CACHE_EXPIRE} },
