@@ -857,71 +857,80 @@ Gateway's Properties for launch
 
 * **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/gateway/etc/app.config**
 
-+--------------------+----------------------------------------------------------------------------------+
-|Property            | Configuration                                                                    |
-+====================+==================================================================================+
-|${LISTENING_PORT}   | Gateway's listening port number                                                  |
-+--------------------+----------------------------------------------------------------------------------+
-|${NUM_OF_LISTENNER} | Numbers of Gateway's listening processes                                         |
-+--------------------+----------------------------------------------------------------------------------+
-|${MANAGER_MASTER_IP}| Manager-master node's IP-address                                                 |
-+--------------------+----------------------------------------------------------------------------------+
-|${MANAGER_SLAVE_IP} | Manager-slave node's IP-address                                                  |
-+--------------------+----------------------------------------------------------------------------------+
-|${SNMPA-DIR}        | SNMPA configuration files directory                                              |
-|                    |                                                                                  |
-|                    | - ref:${LEOFS_SRC}/apps/leo_gateway/snmp/                                        |
-|                    |                                                                                  |
-|                    | - [snmpa_gateway_0|snmpa_gateway_1|snmpa_gateway_0]                              |
-+--------------------+----------------------------------------------------------------------------------+
-|${USE_S3_AUTH}      | Whether using S3 Authentication or not.                                          |
-|                    | *Default value is 'true'*                                                        |
-+--------------------+----------------------------------------------------------------------------------+
-| *Cache related items*                                                                                 |
-+--------------------+----------------------------------------------------------------------------------+
-|${IS_HTTP_CACHE}    | Method of chache - **http** OR **inner** *(default)*                             |
-|                    |                                                                                  |
-|                    | +-----+---------------------------------------------------------------------+    |
-|                    | |true |HTTP-base cache server - Like a *Varnish* OR *Squid*                 |    |
-|                    | +-----+---------------------------------------------------------------------+    |
-|                    | |false|Stored objects into the gateway's memory. When READ, the *Etag* of   |    |
-|                    | |     |a cache is comapared with backend-storage's *Etag*.                  |    |
-|                    | |     | +----------+--------------------------------------------+           |    |
-|                    | |     | |matched   | Return a cache                             |           |    |
-|                    | |     | +----------+--------------------------------------------+           |    |
-|                    | |     | |unmatched | Return an original-object from the storage |           |    |
-|                    | |     | +----------+--------------------------------------------+           |    |
-|                    | +-----+---------------------------------------------------------------------+    |
-+--------------------+----------------------------------------------------------------------------------+
-|${CACHE_TOTAL_SIZE} | Total Memory Cache Size in byte                                                  |
-|                    | (ex. 4000000000 means using 4GB memory cache)                                    |
-+--------------------+----------------------------------------------------------------------------------+
-|${CACHE_EXPIRE}     | [**cache-mode:http**] Http Cache Expire in second                                |
-+--------------------+----------------------------------------------------------------------------------+
-|${CACHE_MAX_C_LEN}  | [**cache-mode:http**] Http Cache Max Content Length in byte                      |
-|                    |                                                                                  |
-|                    | Note: *LeoFS-gateway can cache up to 1MB*                                        |
-+--------------------+----------------------------------------------------------------------------------+
-|${CACHE_C_TYPE}     | [**cache-mode:http**] Http Cache Content Type                                    |
-|                    |                                                                                  |
-|                    | ex-1) ["image/png", "image/jpeg"]                                                |
-|                    |                                                                                  |
-|                    |       Caching only if its Content-Type was *"image/png"* OR *"image/jpeg"*       |
-|                    |                                                                                  |
-|                    | ex-2) []                                                                         |
-|                    |                                                                                  |
-|                    |       When rule is empty, all objects are cached.                                |
-+--------------------+----------------------------------------------------------------------------------+
-|${CACHE_PATH_PAT}   | [**cache-mode:http**] Http Cache Path Pattern(regular expression)                |
-|                    |                                                                                  |
-|                    | ex-1) ["/img/.+", "/css/.+"]                                                     |
-|                    |                                                                                  |
-|                    |       Caching only if its path was *"/img/\*"* or *"/css/\*"*                    |
-|                    |                                                                                  |
-|                    | ex-2) []                                                                         |
-|                    |                                                                                  |
-|                    |       When rule is empty, all objects are cached.                                |
-+--------------------+----------------------------------------------------------------------------------+
++---------------------------+----------------------------------------------------------------------------------+
+|Property                   | Configuration                                                                    |
++===========================+==================================================================================+
+|${LISTENING_PORT}          | Gateway's listening port number                                                  |
++---------------------------+----------------------------------------------------------------------------------+
+|${NUM_OF_LISTENNER}        | Numbers of Gateway's listening processes                                         |
++---------------------------+----------------------------------------------------------------------------------+
+|${MANAGER_MASTER_IP}       | Manager-master node's IP-address                                                 |
++---------------------------+----------------------------------------------------------------------------------+
+|${MANAGER_SLAVE_IP}        | Manager-slave node's IP-address                                                  |
++---------------------------+----------------------------------------------------------------------------------+
+|${SNMPA-DIR}               | SNMPA configuration files directory                                              |
+|                           |                                                                                  |
+|                           | - ref:${LEOFS_SRC}/apps/leo_gateway/snmp/                                        |
+|                           |                                                                                  |
+|                           | - [snmpa_gateway_0|snmpa_gateway_1|snmpa_gateway_0]                              |
++---------------------------+----------------------------------------------------------------------------------+
+|${USE_S3_AUTH}             | Whether using S3 Authentication or not.                                          |
+|                           | *Default value is 'true'*                                                        |
++---------------------------+----------------------------------------------------------------------------------+
+| *Cache related items*                                                                                        |
++---------------------------+----------------------------------------------------------------------------------+
+|${IS_HTTP_CACHE}           | Method of chache - **http** OR **inner** *(default)*                             |
+|                           |                                                                                  |
+|                           | +-----+---------------------------------------------------------------------+    |
+|                           | |true |HTTP-base cache server - Like a *Varnish* OR *Squid*                 |    |
+|                           | +-----+---------------------------------------------------------------------+    |
+|                           | |false|Stored objects into the gateway's memory. When READ, the *Etag* of   |    |
+|                           | |     |a cache is comapared with backend-storage's *Etag*.                  |    |
+|                           | |     | +----------+--------------------------------------------+           |    |
+|                           | |     | |matched   | Return a cache                             |           |    |
+|                           | |     | +----------+--------------------------------------------+           |    |
+|                           | |     | |unmatched | Return an original-object from the storage |           |    |
+|                           | |     | +----------+--------------------------------------------+           |    |
+|                           | +-----+---------------------------------------------------------------------+    |
++---------------------------+----------------------------------------------------------------------------------+
+|${CACHE_RAM_CAPACITY}      | Memory-cache capacity in byte                                                    |
+|                           | (ex. 4000000000 means using 4GB memory cache)                                    |
++---------------------------+----------------------------------------------------------------------------------+
+|${CACHE_DISC_CAPACITY}     | Disc-cache capacity Size in byte                                                 |
+|                           | (ex. 4000000000 means using 4GB memory cache)                                    |
++---------------------------+----------------------------------------------------------------------------------+
+|${CACHE_DISC_THRESHOLD_LEN}| When a length of object exceed this value, the object is stored into the disc    |
++---------------------------+----------------------------------------------------------------------------------+
+|${CACHE_DISC_DIR_DATA}     | Disc-cache's directory for data - storing desctination is SSD (or HDD)           |
++---------------------------+----------------------------------------------------------------------------------+
+|${CACHE_DISC_DIR_JOURNAL}  | Disc-cache's directory for journal                                               |
++---------------------------+----------------------------------------------------------------------------------+
+|${CACHE_EXPIRE}            | [**cache-mode:http**] Http Cache Expire in second                                |
++---------------------------+----------------------------------------------------------------------------------+
+|${CACHE_MAX_C_LEN}         | [**cache-mode:http**] Http Cache Max Content Length in byte                      |
+|                           |                                                                                  |
+|                           | Note: *LeoFS-gateway can cache up to 1MB*                                        |
++---------------------------+----------------------------------------------------------------------------------+
+|${CACHE_C_TYPE}            | [**cache-mode:http**] Http Cache Content Type                                    |
+|                           |                                                                                  |
+|                           | ex-1) ["image/png", "image/jpeg"]                                                |
+|                           |                                                                                  |
+|                           |       Caching only if its Content-Type was *"image/png"* OR *"image/jpeg"*       |
+|                           |                                                                                  |
+|                           | ex-2) []                                                                         |
+|                           |                                                                                  |
+|                           |       When rule is empty, all objects are cached.                                |
++---------------------------+----------------------------------------------------------------------------------+
+|${CACHE_PATH_PATTERNS}     | [**cache-mode:http**] Http Cache Path Pattern(regular expression)                |
+|                           |                                                                                  |
+|                           | ex-1) ["/img/.+", "/css/.+"]                                                     |
+|                           |                                                                                  |
+|                           |       Caching only if its path was *"/img/\*"* or *"/css/\*"*                    |
+|                           |                                                                                  |
+|                           | ex-2) []                                                                         |
+|                           |                                                                                  |
+|                           |       When rule is empty, all objects are cached.                                |
++---------------------------+----------------------------------------------------------------------------------+
 
 
 .. code-block:: erlang
@@ -972,15 +981,16 @@ Gateway's Properties for launch
                          {cache_workers, 128 },
 
                          %% Total of Cache capacity into the RAM (MB)
-                         {cache_ram_capacity,  ${CACHE_TOTAL_RAM_SIZE} },
+                         {cache_ram_capacity,  ${CACHE_RAM_CAPACITY} },
                          %% Total of Cache capacity into the Disc (MB)
-                         {cache_disc_capacity, ${CACHE_TOTAL_DISC_SIZE} },
+                         {cache_disc_capacity, ${CACHE_DISC_CAPACITY} },
 
-                         %% Disc-cache's chunked object size
-                         {cache_disc_chunk_size, 16384 },
+                         %% Disc-cache's threshold length which value is exceeded
+                         %% when an object is stored into the disc
+                         {cache_disc_threshold_len, ${CACHE_DISC_THRESHOLD_LEN} },
                          %% Disc-cache's directory
-                         {cache_disc_dir_data,    "./cache/data" },
-                         {cache_disc_dir_journal, "./cache/journal" },
+                         {cache_disc_dir_data,    ${CACHE_DISC_DIR_DATA} },
+                         {cache_disc_dir_journal, ${CACHE_DISC_DIR_JOURNAL} },
 
                          %% Cache expire time. (sec)
                          {cache_expire, ${CACHE_EXPIRE} },
@@ -989,7 +999,7 @@ Gateway's Properties for launch
                          %% Acceptable content-type(s)
                          {cachable_content_type, ${CACHE_C_TYPE} },
                          %% Acceptable URL-Pattern(s)
-                         {cachable_path_pattern, ${CACHE_PATH_PAT} }
+                         {cachable_path_pattern, ${CACHE_PATH_PATTERNS} }
                         ]},
 
                 %% Timeout when request from gateway to storage ==
