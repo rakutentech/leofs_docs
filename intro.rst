@@ -43,12 +43,12 @@ Milestones
 .. image:: _static/images/leofs-web-console.png
    :width: 480px
 
-* 0.14 (Feb 2013 - Apr)
+* 0.14 (Feb 2013 - June)
+    * Multi-layer Cache (Using SSD)
     * Objects Expiration into the bucket
     * Job Scheduler on the Manager
     * QoS System (LeoDenebola - Optional)
 
 * Future Works (2013)
     * Multi-Datacenter for Geographical Optimization
-    * Multi-layer Cache (Using SSD)
 

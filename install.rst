@@ -896,8 +896,7 @@ Gateway's Properties for launch
 |${CACHE_RAM_CAPACITY}      | Memory-cache capacity in byte                                                    |
 |                           | (ex. 4000000000 means using 4GB memory cache)                                    |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_DISC_CAPACITY}     | Disc-cache capacity Size in byte                                                 |
-|                           | (ex. 4000000000 means using 4GB memory cache)                                    |
+|${CACHE_DISC_CAPACITY}     | Disc-cache capacity Size in byte - default: 0Byte (disabled)                     |
 +---------------------------+----------------------------------------------------------------------------------+
 |${CACHE_DISC_THRESHOLD_LEN}| When a length of object exceed this value, the object is stored into the disc    |
 +---------------------------+----------------------------------------------------------------------------------+
@@ -968,9 +967,9 @@ Gateway's Properties for launch
                 %% Large-object-related properties:
                 {large_object, [
                                 {max_chunked_objs,  1000  },
-                                {max_len_for_obj,   524288000 },
-                                {chunked_obj_len,   5242880 },
-                                {threshold_obj_len, 5767168 }
+                                {max_len_for_obj,   524288000 }, %% 500.0MB
+                                {chunked_obj_len,   5242880 },   %% 5.0MB
+                                {threshold_obj_len, 5767168 }    %% 5.5MB
                                ]},
 
                 %% Cache-related properties:
