@@ -1,5 +1,5 @@
-LeoTamer v0.2.10
-================
+LeoTamer v0.4.0
+===============
 
 **LeoTamer** is LeoFS's GUI console on your browser. You can easily operate LeoFS.
 
@@ -9,7 +9,7 @@ Install and Setup
 Requirement
 ^^^^^^^^^^^
 
-* **LeoFS v0.12.7** or higher is required.
+* **LeoFS v0.14.0** or higher is required.
 
 
 Install LeoTamer
@@ -282,7 +282,7 @@ Endpoints View
 Milestones
 ----------
 
-* 0.2.x (Dec 2012 - Jan 2013)
+* 0.2 (Dec 2012 - Feb 2013)
     * Administration tools
         * User management
         * Bucket management
@@ -292,15 +292,15 @@ Milestones
     * Bucket status
         * Belonging bucket-list
 
-* 0.4.x (Jan 2013)
+* 0.4 (Mar - Apr 2013)
     *  User Group
         * Sharing LeoFS's credential-keys in the group
         * User management in the group
 
-* 0.6.x (Feb 2013)
+* 0.6 (May 2013)
     * Log Search/Analysis (Option)
 
-* 0.8.x (Mar 2013)
+* 0.8 (June 2013)
     * Link QoS (Quality of Service - LeoDenebola)
         * Bucket status
             * total of files
