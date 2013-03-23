@@ -11,7 +11,7 @@ LeoFS Overview
 
 **"LeoFS"** is highly scalable, fault-tolerant distributed file system (DFS) for the Web. Different than traditional distributed file system and other DFS — **"LeoFS"** offers a number of unique benefits to users:
 
-* High Cost Performance
+* High Cost Performance Ratio
 * High Reliability
 * High Scalability
 
