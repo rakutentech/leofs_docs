@@ -8,8 +8,8 @@ LeoFS v0.14 Manual
 
 **"LeoFS"** is a highly available, distributed, eventually consistent object/blob store. Organizations can use **"LeoFS"** to store lots of data efficiently, safely, and inexpensive.
 
-.. image:: _static/images/leofs-architecture.000.png
-   :width: 720px
+.. .. image:: _static/images/leofs-architecture.000.png
+..    :width: 720px
 
 **Table of Contents:**
 
