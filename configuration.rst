@@ -1,7 +1,7 @@
 .. LeoFS documentation
 
 Configuration of LeoFS
-================================
+======================
 
 .. index::
    pair: Configuration; Relationship of configuration files
