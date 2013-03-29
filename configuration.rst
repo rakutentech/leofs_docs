@@ -583,3 +583,12 @@ Gateway's Properties for launch
     ## set up the node with the -hidden flag
     -hidden
 
+
+.. index::
+   pair: Configuration; LeoFS's Use Case - Without load-balancer
+
+LeoFS's Use Case (1) - Without load-balancer
+--------------------------------------------
+
+.. image:: _static/images/leofs-usecase-without-lb.png
+   :width: 700px
