@@ -19,6 +19,8 @@ Relationship of configuration files
 .. index::
    pair: Configuration; LeoFS Manager-Master
 
+.. _conf_manager_label:
+
 LeoFS Manager-Master
 --------------------
 
@@ -234,6 +236,8 @@ Manager-Slave's Properties for launch
 .. index::
    pair: Configuration; LeoFS Storage
 
+.. _conf_storage_label:
+
 LeoFS Storage
 -------------
 
@@ -355,6 +359,8 @@ Storage's Properties for launch
 
 .. index::
    pair: Configuration; LeoFS Gateway
+
+.. _conf_gateway_label:
 
 LeoFS Gateway
 -------------
@@ -592,3 +598,31 @@ LeoFS's Use Case (1) - Without load-balancer
 
 .. image:: _static/images/leofs-usecase-without-lb.png
    :width: 700px
+
+* Example:
+    * Endpoint: ``yourhost.com``
+    * bucket: ``test``
+* Client(s)
+    * You need to edit ``/etc/hosts`` in your client machine(s)
+    * You can use any clients as the follows:
+        * :ref:`Program Lang's clients <aws-sdk-ruby-label>`
+        * :ref:`s3fs-c <s3fs-c-label>`
+        * :ref:`s3cmd <s3cmd-label>`
+        * :ref:`DragonDisk <dragondisk-label>`
+* Each server's configuration (only `ip` and `name`)
+    * :ref:`Manager <conf_manager_label>`
+        * IP: 192.168.1.7, 192.168.1.8
+        * Name: manager_0@192.168.1.7, manager_1@192.168.1.8
+    * :ref:`Gateway <conf_gateway_label>`
+        * IP: 192.168.1.3
+        * Name: gateway_0@192.168.1.3
+    * :ref:`Storage <conf_storage_label>`
+        * IP: 192.168.1.4 .. 192.168.1.6
+        * Name: storage_0@192.168.1.4 .. storage_2@192.168.1.6
+* Set an endpoint - ``yourhost.com`` on LeoFS-Manager's console
+
+::
+
+    $ telnet 127.0.0.1 10010
+    > set-endpoint yourhost.com
+
