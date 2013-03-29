@@ -1,4 +1,4 @@
-LeoTamer v0.4.0
+LeoTamer v0.4.1
 ===============
 
 **LeoTamer** is LeoFS's GUI console on your browser. You can easily operate LeoFS.

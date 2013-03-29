@@ -11,7 +11,7 @@ LeoFS Overview
 
 **"LeoFS"** is highly scalable, fault-tolerant distributed file system (DFS) for the Web. Different than traditional distributed file system and other DFS — **"LeoFS"** offers a number of unique benefits to users:
 
-* High Cost Performance
+* High Cost Performance Ratio
 * High Reliability
 * High Scalability
 
@@ -22,7 +22,7 @@ Goals
 --------------------------------
 
 * LeoFS aims to provide the following advantages:
-    * HIGH Cost Performance
+    * HIGH Cost Performance Ratio
         * Fast - Over 200MB/sec into 10GE
         * A lower cost than other storage
         * Provide easy management and easy operation
