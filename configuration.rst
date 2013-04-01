@@ -619,10 +619,16 @@ LeoFS's Use Case (1) - Without load-balancer
     * :ref:`Storage <conf_storage_label>`
         * IP: 192.168.1.4 .. 192.168.1.6
         * Name: storage_0@192.168.1.4 .. storage_2@192.168.1.6
-* Set an endpoint - ``yourhost.com`` on LeoFS-Manager's console
+* Execute commands on LeoFS-Manager's console for the authentication
+    * Set an endpoint - ``yourhost.com``
+    * Create a user   - ``yourname``
 
 ::
 
     $ telnet 127.0.0.1 10010
     > set-endpoint yourhost.com
+    OK
+    > create-user yourname
+    access-key-id: 05dcba94333c7590a635
+    secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
