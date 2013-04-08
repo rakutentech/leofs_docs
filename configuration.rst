@@ -57,7 +57,7 @@ LeoFS Manager-Master
                  ]},
         {leo_manager, [
                    %% == System Ver ==
-                   {system_version, "0.14.0-RC1" },
+                   {system_version, "0.14.1" },
 
                    %% == System Configuration ==
                    %%
@@ -265,7 +265,7 @@ Storage's Properties for launch
 
     {leo_storage, [
                    %% == System Ver ==
-                   {system_version, "0.14.0-RC1" },
+                   {system_version, "0.14.1" },
 
                    %% == Storage Configuration ==
                    %%
@@ -386,8 +386,7 @@ Gateway's Properties for launch
 |                           |                                                                                  |
 |                           | - [snmpa_gateway_0|snmpa_gateway_1|snmpa_gateway_0]                              |
 +---------------------------+----------------------------------------------------------------------------------+
-|${USE_S3_AUTH}             | Whether using S3 Authentication or not.                                          |
-|                           | *Default value is 'true'*                                                        |
+|${HTTP_HANDLER}            | Gateway's Http handler(API) which are ``s3`` (default) and ``rest``              |
 +---------------------------+----------------------------------------------------------------------------------+
 | *Cache related items*                                                                                        |
 +---------------------------+----------------------------------------------------------------------------------+
@@ -398,6 +397,7 @@ Gateway's Properties for launch
 |                           | +-----+---------------------------------------------------------------------+    |
 |                           | |false|Stored objects into the gateway's memory. When READ, the *Etag* of   |    |
 |                           | |     |a cache is comapared with backend-storage's *Etag*.                  |    |
+|                           | |     |                                                                     |    |
 |                           | |     | +----------+--------------------------------------------+           |    |
 |                           | |     | |matched   | Return a cache                             |           |    |
 |                           | |     | +----------+--------------------------------------------+           |    |
@@ -406,6 +406,7 @@ Gateway's Properties for launch
 |                           | +-----+---------------------------------------------------------------------+    |
 +---------------------------+----------------------------------------------------------------------------------+
 |${CACHE_RAM_CAPACITY}      | Memory-cache capacity in byte                                                    |
+|                           |                                                                                  |
 |                           | (ex. 4000000000 means using 4GB memory cache)                                    |
 +---------------------------+----------------------------------------------------------------------------------+
 |${CACHE_DISC_CAPACITY}     | Disc-cache capacity Size in byte - default: 0Byte (disabled)                     |
@@ -457,13 +458,12 @@ Gateway's Properties for launch
 
         {leo_gateway, [
                 %% System Ver
-                {system_version, "0.14.0-RC1" },
+                {system_version, "0.14.1" },
 
                 %% Gateway Properties:
-                {listener, leo_s3_http},
                 {http, [
-                        %% Use S3-API ? (OR Rest-API)
-                        {s3_api, ${USE_S3_AUTH}},
+                        %% http-handler (API) - [s3 or rest]:
+                        {handler, ${HTTP_HANDLER}},
                         %% Gateway port number:
                         {port, ${LISTENING_PORT} },
                         %% # of acceptors:
