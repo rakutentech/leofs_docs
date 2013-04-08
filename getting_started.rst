@@ -200,4 +200,4 @@ Modify “/etc/hosts”
 Quick Start -2 Cluster
 ---------------------------
 
-...under construction...
+(under construction)
