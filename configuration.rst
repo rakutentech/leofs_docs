@@ -589,46 +589,312 @@ Gateway's Properties for launch
     ## set up the node with the -hidden flag
     -hidden
 
+\
+
 
 .. index::
-   pair: Configuration; LeoFS's Use Case - Without load-balancer
+    SNMP
 
-LeoFS's Use Case (1) - Without load-balancer
---------------------------------------------
+Setup SNMPA
+-----------
 
-.. image:: _static/images/leofs-usecase-without-lb.png
-   :width: 700px
+Manager
+^^^^^^^
 
-* Example:
-    * Endpoint: ``yourhost.com``
-    * bucket: ``test``
-* Client(s)
-    * You need to edit ``/etc/hosts`` in your client machine(s)
-    * You can use any clients as the follows:
-        * :ref:`Program Lang's clients <aws-sdk-ruby-label>`
-        * :ref:`s3fs-c <s3fs-c-label>`
-        * :ref:`s3cmd <s3cmd-label>`
-        * :ref:`DragonDisk <dragondisk-label>`
-* Each server's configuration (only `ip` and `name`)
-    * :ref:`Manager <conf_manager_label>`
-        * IP: 192.168.1.7, 192.168.1.8
-        * Name: manager_0@192.168.1.7, manager_1@192.168.1.8
-    * :ref:`Gateway <conf_gateway_label>`
-        * IP: 192.168.1.3
-        * Name: gateway_0@192.168.1.3
-    * :ref:`Storage <conf_storage_label>`
-        * IP: 192.168.1.4 .. 192.168.1.6
-        * Name: storage_0@192.168.1.4 .. storage_2@192.168.1.6
-* Execute commands on LeoFS-Manager's console for the authentication
-    * Set an endpoint - ``yourhost.com``
-    * Create a user   - ``yourname``
+a. SNMPA-Properties
+
+\
+
++------------------+------------------------------------+
+| Property         | Value / Range                      |
++==================+====================================+
+| Port             | 4020 .. 4022                       |
++------------------+------------------------------------+
+| Branch           | 1.3.6.1.4.1.35450.11               |
++------------------+------------------------------------+
+| snmpa_manager_0  | Port: 4020                         |
++------------------+------------------------------------+
+| snmpa_manager_1  | Port: 4021                         |
++------------------+------------------------------------+
+| snmpa_manager_2  | Port: 4022                         |
++------------------+------------------------------------+
+
+b. SNMPA-Items
+
+\
+
++------------------+------------------------------------+
+| Branch Number    | Explanation                        |
++==================+====================================+
+| 1                | Node name                          |
++------------------+------------------------------------+
+| **1-min Averages**                                    |
++------------------+------------------------------------+
+| 2                | # of processes                     |
++------------------+------------------------------------+
+| 3                | Total memory usage                 |
++------------------+------------------------------------+
+| 4                | System memory usage                |
++------------------+------------------------------------+
+| 5                | Processes memory usage             |
++------------------+------------------------------------+
+| 6                | ETS memory usage                   |
++------------------+------------------------------------+
+| **5-min Averages**                                    |
++------------------+------------------------------------+
+| 7                | # of processes                     |
++------------------+------------------------------------+
+| 8                | Total memory usage                 |
++------------------+------------------------------------+
+| 9                | Sysem memory usage                 |
++------------------+------------------------------------+
+| 10               | Processes memory usage             |
++------------------+------------------------------------+
+| 11               | ETS memory usage                   |
++------------------+------------------------------------+
+
+c. Method of confirmation
 
 ::
 
-    $ telnet 127.0.0.1 10010
-    > set-endpoint yourhost.com
-    OK
-    > create-user yourname
-    access-key-id: 05dcba94333c7590a635
-    secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
+    $ snmpwalk -v 2c -c public 127.0.0.1:4020 .1.3.6.1.4.1.35450.11
+    SNMPv2-SMI::enterprises.35450.11.1.0 = STRING: "manager_0@127.0.0.1"
+    SNMPv2-SMI::enterprises.35450.11.2.0 = Gauge32: 123
+    SNMPv2-SMI::enterprises.35450.11.3.0 = Gauge32: 30289989
+    SNMPv2-SMI::enterprises.35450.11.4.0 = Gauge32: 24256857
+    SNMPv2-SMI::enterprises.35450.11.5.0 = Gauge32: 6033132
+    SNMPv2-SMI::enterprises.35450.11.6.0 = Gauge32: 1914017
+    SNMPv2-SMI::enterprises.35450.11.7.0 = Gauge32: 123
+    SNMPv2-SMI::enterprises.35450.11.8.0 = Gauge32: 30309552
+    SNMPv2-SMI::enterprises.35450.11.9.0 = Gauge32: 24278377
+    SNMPv2-SMI::enterprises.35450.11.10.0 = Gauge32: 6031175
+    SNMPv2-SMI::enterprises.35450.11.11.0 = Gauge32: 1935758
 
+
+Storage
+^^^^^^^
+
+a. SNMPA-Properties
+
+\
+
++------------------+------------------------------------+
+| Property         | Value / Range                      |
++==================+====================================+
+| Port             | 4010 .. 4013                       |
++------------------+------------------------------------+
+| Branch           | 1.3.6.1.4.1.35450.24               |
++------------------+------------------------------------+
+| snmpa_storage_0  | Port: 4010                         |
++------------------+------------------------------------+
+| snmpa_storage_1  | Port: 4011                         |
++------------------+------------------------------------+
+| snmpa_storage_2  | Port: 4012                         |
++------------------+------------------------------------+
+| snmpa_storage_3  | Port: 4013                         |
++------------------+------------------------------------+
+
+b. SNMPA-Items
+
+\
+
++------------------+------------------------------------+
+| Branch Number    | Explanation                        |
++==================+====================================+
+| 1                | Node name                          |
++------------------+------------------------------------+
+| **VM-related values (1-min Averages)**                |
++------------------+------------------------------------+
+| 2                | # of processes                     |
++------------------+------------------------------------+
+| 3                | Total memory usage                 |
++------------------+------------------------------------+
+| 4                | System memory usage                |
++------------------+------------------------------------+
+| 5                | Processes memory usage             |
++------------------+------------------------------------+
+| 6                | ETS memory usage                   |
++------------------+------------------------------------+
+| **VM-related values (5-min Averages)**                |
++------------------+------------------------------------+
+| 7                | # of processes                     |
++------------------+------------------------------------+
+| 8                | Total memory usage                 |
++------------------+------------------------------------+
+| 9                | Sysem memory usage                 |
++------------------+------------------------------------+
+| 10               | Processes memory usage             |
++------------------+------------------------------------+
+| 11               | ETS memory usage                   |
++------------------+------------------------------------+
+| **Request-Counter (1-min Averages)**                  |
++------------------+------------------------------------+
+| 12               | # of WRITEs                        |
++------------------+------------------------------------+
+| 13               | # of READs                         |
++------------------+------------------------------------+
+| 14               | # of DELETEs                       |
++------------------+------------------------------------+
+| **Request-Counter (5-min Averages)**                  |
++------------------+------------------------------------+
+| 15               | # of WRITEs                        |
++------------------+------------------------------------+
+| 16               | # of READs                         |
++------------------+------------------------------------+
+| 17               | # of DELETEs                       |
++------------------+------------------------------------+
+| **# of objects**                                      |
++------------------+------------------------------------+
+| 18               | # of active objects                |
++------------------+------------------------------------+
+| 19               | Total objects                      |
++------------------+------------------------------------+
+| 20               | Total size of active objects       |
++------------------+------------------------------------+
+| 21               | Total size                         |
++------------------+------------------------------------+
+| **MQ-related**                                        |
++------------------+------------------------------------+
+| 22               | # of replication messages          |
++------------------+------------------------------------+
+| 23               | # of sync-vnode messages           |
++------------------+------------------------------------+
+| 24               | # of rebalance messages            |
++------------------+------------------------------------+
+
+
+c. Method of confirmation
+
+::
+
+    $ snmpwalk -v 2c -c public 127.0.0.1:4010 .1.3.6.1.4.1.35450.24
+    SNMPv2-SMI::enterprises.35450.24.1.0 = STRING: "storage_0@127.0.0.1"
+    SNMPv2-SMI::enterprises.35450.24.2.0 = Gauge32: 227
+    SNMPv2-SMI::enterprises.35450.24.3.0 = Gauge32: 33165164
+    SNMPv2-SMI::enterprises.35450.24.4.0 = Gauge32: 24504020
+    SNMPv2-SMI::enterprises.35450.24.5.0 = Gauge32: 8661144
+    SNMPv2-SMI::enterprises.35450.24.6.0 = Gauge32: 1952903
+    SNMPv2-SMI::enterprises.35450.24.7.0 = Gauge32: 227
+    SNMPv2-SMI::enterprises.35450.24.8.0 = Gauge32: 33379629
+    SNMPv2-SMI::enterprises.35450.24.9.0 = Gauge32: 24493694
+    SNMPv2-SMI::enterprises.35450.24.10.0 = Gauge32: 8885935
+    SNMPv2-SMI::enterprises.35450.24.11.0 = Gauge32: 1941680
+    SNMPv2-SMI::enterprises.35450.24.12.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.24.13.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.24.14.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.24.15.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.24.16.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.24.17.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.24.18.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.24.19.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.24.20.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.24.21.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.24.22.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.24.23.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.24.24.0 = Gauge32: 0
+
+Gateway
+^^^^^^^
+
+a. SNMPA-Properties
+
+\
+
++------------------+------------------------------------+
+| Item             | Value / Range                      |
++==================+====================================+
+| Port             | 4000 .. 4001                       |
++------------------+------------------------------------+
+| Branch           | 1.3.6.1.4.1.35450.27               |
++------------------+------------------------------------+
+| snmpa_gateway_0  | Port: 4000                         |
++------------------+------------------------------------+
+| snmpa_gateway_1  | Port: 4001                         |
++------------------+------------------------------------+
+
+b. SNMPA-Items
+
+\
+
++------------------+------------------------------------+
+| Branch Number    | Explanation                        |
++==================+====================================+
+| 1                | Node name                          |
++------------------+------------------------------------+
+| **VM-related values (1-min Averages)**                |
++------------------+------------------------------------+
+| 2                | # of processes                     |
++------------------+------------------------------------+
+| 3                | Total memory usage                 |
++------------------+------------------------------------+
+| 4                | System memory usage                |
++------------------+------------------------------------+
+| 5                | Processes memory usage             |
++------------------+------------------------------------+
+| 6                | ETS memory usage                   |
++------------------+------------------------------------+
+| **VM-related values (5-min Averages)**                |
++------------------+------------------------------------+
+| 7                | # of processes                     |
++------------------+------------------------------------+
+| 8                | Total memory usage                 |
++------------------+------------------------------------+
+| 9                | Sysem memory usage                 |
++------------------+------------------------------------+
+| 10               | Processes memory usage             |
++------------------+------------------------------------+
+| 11               | ETS memory usage                   |
++------------------+------------------------------------+
+| **Request-Counter (1-min Averages)**                  |
++------------------+------------------------------------+
+| 12               | # of WRITEs                        |
++------------------+------------------------------------+
+| 13               | # of READs                         |
++------------------+------------------------------------+
+| 14               | # of DELETEs                       |
++------------------+------------------------------------+
+| **Request-Counter (5-min Averages)**                  |
++------------------+------------------------------------+
+| 15               | # of WRITEs                        |
++------------------+------------------------------------+
+| 16               | # of READs                         |
++------------------+------------------------------------+
+| 17               | # of DELETEs                       |
++------------------+------------------------------------+
+| **Cache-related**                                     |
++------------------+------------------------------------+
+| 18               | Count of cache-hit                 |
++------------------+------------------------------------+
+| 19               | Count of cache-miss                |
++------------------+------------------------------------+
+| 20               | Total of files (objects)           |
++------------------+------------------------------------+
+| 21               | Total cached size                  |
++------------------+------------------------------------+
+
+c. Method of confirmation
+
+::
+
+    $ snmpwalk -v 2c -c public 127.0.0.1:4000 .1.3.6.1.4.1.35450.21
+    SNMPv2-SMI::enterprises.35450.21.1.0 = STRING: "gateway_0@127.0.0.1"
+    SNMPv2-SMI::enterprises.35450.21.2.0 = Gauge32: 279
+    SNMPv2-SMI::enterprises.35450.21.3.0 = Gauge32: 45266128
+    SNMPv2-SMI::enterprises.35450.21.4.0 = Gauge32: 36653905
+    SNMPv2-SMI::enterprises.35450.21.5.0 = Gauge32: 8612223
+    SNMPv2-SMI::enterprises.35450.21.6.0 = Gauge32: 2276519
+    SNMPv2-SMI::enterprises.35450.21.7.0 = Gauge32: 279
+    SNMPv2-SMI::enterprises.35450.21.8.0 = Gauge32: 45157433
+    SNMPv2-SMI::enterprises.35450.21.9.0 = Gauge32: 36385227
+    SNMPv2-SMI::enterprises.35450.21.10.0 = Gauge32: 8772210
+    SNMPv2-SMI::enterprises.35450.21.11.0 = Gauge32: 2261105
+    SNMPv2-SMI::enterprises.35450.21.12.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.21.13.0 = Gauge32: 13
+    SNMPv2-SMI::enterprises.35450.21.14.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.21.15.0 = Gauge32: 3
+    SNMPv2-SMI::enterprises.35450.21.16.0 = Gauge32: 24
+    SNMPv2-SMI::enterprises.35450.21.17.0 = Gauge32: 0
+    SNMPv2-SMI::enterprises.35450.21.18.0 = Gauge32: 21
+    SNMPv2-SMI::enterprises.35450.21.19.0 = Gauge32: 39
+    SNMPv2-SMI::enterprises.35450.21.20.0 = Gauge32: 3
+    SNMPv2-SMI::enterprises.35450.21.21.0 = Gauge32: 565700

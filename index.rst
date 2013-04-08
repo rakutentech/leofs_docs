@@ -21,6 +21,7 @@ LeoFS v0.14 Manual
    install
    configuration
    admin_guide
+   use_case
    rest_api
    s3_api
    s3_client

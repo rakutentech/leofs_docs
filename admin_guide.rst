@@ -5,10 +5,9 @@
 
 Administration Guide
 ================================
-System Operation
---------------------------------
+
 Order of system launch
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 LeoFS's system launch is very easy and simple as follows.
 
@@ -18,7 +17,7 @@ LeoFS's system launch is very easy and simple as follows.
 
 
 Operation
-""""""""""
+^^^^^^^^^
 
 \
 
@@ -43,13 +42,14 @@ Operation
 +-------------+------------------------------------+------------------------------------------------------------+
 
 
-Detail of system launch
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Detail of System launch
+-----------------------
+
 .. index::
    pair: Operation; System Launch
 
 Operate starting manager-master on **LeoFS-Manager Master** node
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -57,7 +57,7 @@ Operate starting manager-master on **LeoFS-Manager Master** node
     $ manager_0/bin/leo_manager start
 
 Operate starting manager-slave on **LeoFS-Manager Slave** node
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -65,7 +65,7 @@ Operate starting manager-slave on **LeoFS-Manager Slave** node
     $ manager_1/bin/leo_manager start
 
 Operate starting storage on each **LeoFS-Storage** node
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -73,7 +73,7 @@ Operate starting storage on each **LeoFS-Storage** node
     $ storage/bin/leo_storage start
 
 LeoFS Manager Console on **LeoFS-Manager Master** node
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * 'status' command - Inspect LeoFS-cluster ::
 
@@ -103,8 +103,8 @@ LeoFS Manager Console on **LeoFS-Manager Master** node
      S    storage_3@127.0.0.1     attached                                2012-09-12 14:18:00 +0900
 
 
-**'start' command** - Launch LeoFS-cluster.
-"""""""""""""""""""""""""""""""""""""""""""""
+**'start' command** - Launch LeoFS-cluster
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -112,7 +112,7 @@ LeoFS Manager Console on **LeoFS-Manager Master** node
     OK
 
 Confirm#1 by **LeoFS-Manager** node's console
-"""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -137,8 +137,8 @@ Confirm#1 by **LeoFS-Manager** node's console
      S    storage_3@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:18:00 +0900
 
 
-Launch Gateway on each **LeoFS-Gateway** node.
-"""""""""""""""""""""""""""""""""""""""""""""""""""
+Launch Gateway on each **LeoFS-Gateway** node
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -147,7 +147,7 @@ Launch Gateway on each **LeoFS-Gateway** node.
 
 
 Confirm#2 by **LeoFS-Manager** master node's console
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -172,9 +172,10 @@ Confirm#2 by **LeoFS-Manager** master node's console
      S    storage_3@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:18:00 +0900
      G    gateway_0@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:23:26 +0900
 
+\
 
-LeoFS-cluster's operation commands
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Storage-cluster Operation Commands
+----------------------------------
 
 .. index::
    pair: Operation; Command
@@ -190,8 +191,8 @@ LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
    Storage-cluster-related-commands
 
 
-**Storage-cluster related commands**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Table of Storage-cluster's Commands
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 \
 
@@ -222,7 +223,7 @@ LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
    detach-command
 
 **'detach'** - Storage node is removed from the LeoFS-Cluster
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``detach ${storage-node}``
 
@@ -237,7 +238,7 @@ Command: ``detach ${storage-node}``
    suspend-command
 
 **'suspend'** - Suspend a storage node
-""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``suspend ${storage-node}``
 
@@ -250,7 +251,7 @@ Command: ``suspend ${storage-node}``
    resume-command
 
 **'resume'** - Resume a storage node
-""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``resume ${storage-node}``
 
@@ -263,7 +264,7 @@ Command: ``resume ${storage-node}``
    rebalance-command
 
 **'rebalance'** - Rebalance files into the cluster
-"""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``rebalance``
 
@@ -278,7 +279,7 @@ Command: ``rebalance``
    whereis-command
 
 **'whereis'**
-"""""""""""""""
+^^^^^^^^^^^^^
 
 Paths used by `whereis` are ruled by :ref:`this rule <s3-path-label>`
 
@@ -286,7 +287,7 @@ Command: ``whereis ${file-path}``
 
 ::
 
-    whereis leofs.org/is/s3/comaptible/storage.key
+    whereis leo/fast/storage.key
     -----------------------------------------------------------------------------------------------------------------------
      del? node                 ring address    size   # of chunks  checksum    vclock            when
     -----------------------------------------------------------------------------------------------------------------------
@@ -297,17 +298,21 @@ Command: ``whereis ${file-path}``
 \
 
 
-**For Storage Commands**
-^^^^^^^^^^^^^^^^^^^^^^^^
+Storage Maintenance Commands
+----------------------------
 
 \
 
 +-----------------------------------------------------------+----------------------------------------------------------------+
 | Command                                                   | Explanation                                                    |
 +===========================================================+================================================================+
+| **Disk Usage**                                                                                                             |
++-----------------------------------------------------------+----------------------------------------------------------------+
 | du `${storage-node}`                                      | * Display disk usages(like xnix du command)                    |
 +-----------------------------------------------------------+----------------------------------------------------------------+
 | du detail `${storage-node}`                               | * Display disk usages in detail (like xnix du command)         |
++-----------------------------------------------------------+----------------------------------------------------------------+
+| **Compaction**                                                                                                             |
 +-----------------------------------------------------------+----------------------------------------------------------------+
 | compact start `${storage-node}` `all | ${num_of_targets}` | * Compact raw files used by the LeoFS Storage subsystem        |
 | `[${num_of_compact_proc}]`                                | * Default ${num_of_compact_proc} is '3'                        |
@@ -319,11 +324,23 @@ Command: ``whereis ${file-path}``
 | compact status  `${storage-node}`                         | * Display compation statuses                                   |
 |                                                           | * Compaction's status: ``idle``, ``running``, ``suspend``      |
 +-----------------------------------------------------------+----------------------------------------------------------------+
+| **Recover**                                                                                                                |
++-----------------------------------------------------------+----------------------------------------------------------------+
+| recover file `${file-path}`                               | * Synchronize an object between nodes in charge                |
++-----------------------------------------------------------+----------------------------------------------------------------+
+| recover node `${storage-node}`                            | * Recover belonging targe-node's objects                       |
++-----------------------------------------------------------+----------------------------------------------------------------+
+| recover ring `${storage-node}`                            | * Synchronize target-node's RING with Manager's RING           |
++-----------------------------------------------------------+----------------------------------------------------------------+
+
+\
+
+**du** - Disk Usage
+^^^^^^^^^^^^^^^^^^^
 
 .. index:: du-command
 
 **'du'** - Display disk usage(summary)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Command: ``du ${storage-node}``
 
@@ -341,7 +358,6 @@ Command: ``du ${storage-node}``
 .. index:: du-detail-command
 
 **'du detail'** - Display disk usage in detail(per raw file)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Command: ``du detail ${storage-node}``
 
@@ -369,10 +385,10 @@ Command: ``du detail ${storage-node}``
         last compaction start: ____-__-__ __:__:__
           last compaction end: ____-__-__ __:__:__
 
-.. index:: compact-start-command
+\
 
-**'compact start'** - Remove logical deleted objects and metadata from Object-Storage and Metadata-Storage, respectively
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+**compact** - Remove logical deleted objects and metadata
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 \
 
@@ -380,6 +396,11 @@ Command: ``du detail ${storage-node}``
    :width: 640px
 
 \
+\
+
+.. index:: compact-start-command
+
+**'compact start'** - Start doing compaction raw-files with targets and a number of compaction-processes
 
 Command: ``compact start ${storage-node} all | ${num_of_targets} [${num_of_compact_proc}]``
 
@@ -398,10 +419,11 @@ Command: ``compact start ${storage-node} all | ${num_of_targets} [${num_of_compa
     compact start storage_0@127.0.0.1 5 2
     OK
 
+\
+
 .. index:: compact-suspend-command
 
 **'compact suspend'** - Suspend a compaction job in progress
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Command: ``compact suspend ${storage-node}``
 
@@ -410,10 +432,11 @@ Command: ``compact suspend ${storage-node}``
     compact suspend storage_0@127.0.0.1
     OK
 
+\
+
 .. index:: compact-resume-command
 
 **'compact resume'** - Resume a compaction job under suspension
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Command: ``compact resume ${storage-node}``
 
@@ -422,10 +445,11 @@ Command: ``compact resume ${storage-node}``
     compact resume storage_0@127.0.0.1
     OK
 
+\
+
 .. index:: compact-status-command
 
 **'compact status'** - Retrieve compation statuses
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Command: ``compact status ${storage-node}``
 
@@ -441,13 +465,48 @@ Command: ``compact status ${storage-node}``
     # of ongoing targets: 3
     # of out of targets : 56
 
-
-\
 \
 
+**recover** - Recover an object, belonging targe-node's objects and RING
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**For Gateway Commands**
-^^^^^^^^^^^^^^^^^^^^^^^^
+.. index:: recover-file-command
+
+**'recover file'** - Synchronize an object between nodes in charge
+
+::
+
+  recover file leo/fast/storage.key
+  OK
+
+\
+
+.. index:: recover-node-command
+
+**'recover node'** - Recover belonging targe-node's objects
+
+::
+
+  recover node storage_0@127.0.0.1
+  OK
+
+\
+
+
+.. index:: recover-ring-command
+
+**'recover ring'** - Synchronize target-node's RING with Manager's RING
+
+::
+
+  recover ring storage_0@127.0.0.1
+  OK
+
+\
+
+
+Gateway Maintenance Commands
+----------------------------
 
 \
 
@@ -463,7 +522,7 @@ Command: ``compact status ${storage-node}``
    purge-command
 
 **'purge'**
-""""""""""""""""
+^^^^^^^^^^^
 
 Paths used by `purge` are ruled by :ref:`this rule <s3-path-label>`
 
@@ -478,8 +537,8 @@ Command: ``purge ${file-path}``
 \
 
 
-**S3-API releated commands**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+S3-API Commands
+---------------
 
 \
 
@@ -513,7 +572,7 @@ Command: ``purge ${file-path}``
    create-user-command
 
 **'create-user'** - Create a user and generate a S3 key pair(AccessKeyID and SecretAccessKey)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``create-user ${user-id}``
 
@@ -532,7 +591,7 @@ Command: ``create-user ${user-id}``
    delete-user-command
 
 **'delete-user'** - Remove a user from LeoFS manager's db
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``delete-user ${user-id}``
 
@@ -550,7 +609,7 @@ Command: ``delete-user ${user-id}``
    get-users-command
 
 **'get-users'** - Retrieve users from LeoFS manager's db
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``get-users``
 
@@ -571,7 +630,7 @@ Command: ``get-users``
    set-endpoint-command
 
 **'set-endpoint'** - Register a new Endpoint
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`
 
@@ -591,7 +650,7 @@ Command: ``set-endpoint ${endpoint}``
    delete-endpoint-command
 
 **'delete-endpoint'** - Remove an Endpoint
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``delete-endpoint ${endpoint}``
 
@@ -609,7 +668,7 @@ Command: ``delete-endpoint ${endpoint}``
    get-endpoints-command
 
 **'get-endpoints'** - Retrieve all of Endpoints registered
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``get-endpoints``
 
@@ -630,7 +689,7 @@ Command: ``get-endpoints``
     add-bucket-command
 
 **'add-bucket'** - Create a bucket
-""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``add-bucket ${bucket} ${access_key_id}``
 
@@ -648,7 +707,7 @@ Command: ``add-bucket ${bucket} ${access_key_id}``
    get-buckets-command
 
 **'get-buckets'** - Retrieve list of Buckets registered
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``get-buckets``
 
@@ -665,8 +724,8 @@ Command: ``get-buckets``
 \
 \
 
-**Miscellaneous Commands**
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Miscellaneous Commands
+----------------------
 
 \
 
@@ -684,7 +743,7 @@ Command: ``get-buckets``
    status-command
 
 **'status'** - Retrieve status of the cluster
-"""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command-1: ``status``
 
@@ -767,7 +826,7 @@ Command-2: ``status ${storage-node}`` OR ``status ${gateway-node}``
    history-command
 
 **'history'** - Retrieve operation histories
-"""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``history``
 
@@ -794,8 +853,9 @@ Command: ``history``
 \
 
 
-**Attach/Detach node from the cluster during in operation**
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Attach/Detach node into the Storage-cluster during in operation
+---------------------------------------------------------------
+
 \
 
 .. image:: _static/images/leofs-order-of-attach.png
@@ -807,319 +867,3 @@ Command: ``history``
 .. image:: _static/images/leofs-order-of-detach.png
    :width: 640px
 
-
-Setup SNMPA
---------------------------------
-
-.. index::
-    SNMP
-
-Manager
-^^^^^^^^^^^
-
-a. SNMPA-Properties
-""""""""""""""""""""
-
-\
-
-+------------------+------------------------------------+
-| Property         | Value / Range                      |
-+==================+====================================+
-| Port             | 4020 .. 4022                       |
-+------------------+------------------------------------+
-| Branch           | 1.3.6.1.4.1.35450.11               |
-+------------------+------------------------------------+
-| snmpa_manager_0  | Port: 4020                         |
-+------------------+------------------------------------+
-| snmpa_manager_1  | Port: 4021                         |
-+------------------+------------------------------------+
-| snmpa_manager_2  | Port: 4022                         |
-+------------------+------------------------------------+
-
-b. SNMPA-Items
-""""""""""""""
-
-\
-
-+------------------+------------------------------------+
-| Branch Number    | Explanation                        |
-+==================+====================================+
-| 1                | Node name                          |
-+------------------+------------------------------------+
-| **1-min Averages**                                    |
-+------------------+------------------------------------+
-| 2                | # of processes                     |
-+------------------+------------------------------------+
-| 3                | Total memory usage                 |
-+------------------+------------------------------------+
-| 4                | System memory usage                |
-+------------------+------------------------------------+
-| 5                | Processes memory usage             |
-+------------------+------------------------------------+
-| 6                | ETS memory usage                   |
-+------------------+------------------------------------+
-| **5-min Averages**                                    |
-+------------------+------------------------------------+
-| 7                | # of processes                     |
-+------------------+------------------------------------+
-| 8                | Total memory usage                 |
-+------------------+------------------------------------+
-| 9                | Sysem memory usage                 |
-+------------------+------------------------------------+
-| 10               | Processes memory usage             |
-+------------------+------------------------------------+
-| 11               | ETS memory usage                   |
-+------------------+------------------------------------+
-
-c. Method of confirmation
-"""""""""""""""""""""""""
-
-::
-
-    $ snmpwalk -v 2c -c public 127.0.0.1:4020 .1.3.6.1.4.1.35450.11
-    SNMPv2-SMI::enterprises.35450.11.1.0 = STRING: "manager_0@127.0.0.1"
-    SNMPv2-SMI::enterprises.35450.11.2.0 = Gauge32: 123
-    SNMPv2-SMI::enterprises.35450.11.3.0 = Gauge32: 30289989
-    SNMPv2-SMI::enterprises.35450.11.4.0 = Gauge32: 24256857
-    SNMPv2-SMI::enterprises.35450.11.5.0 = Gauge32: 6033132
-    SNMPv2-SMI::enterprises.35450.11.6.0 = Gauge32: 1914017
-    SNMPv2-SMI::enterprises.35450.11.7.0 = Gauge32: 123
-    SNMPv2-SMI::enterprises.35450.11.8.0 = Gauge32: 30309552
-    SNMPv2-SMI::enterprises.35450.11.9.0 = Gauge32: 24278377
-    SNMPv2-SMI::enterprises.35450.11.10.0 = Gauge32: 6031175
-    SNMPv2-SMI::enterprises.35450.11.11.0 = Gauge32: 1935758
-
-
-Storage
-^^^^^^^^^^^
-
-a. SNMPA-Properties
-"""""""""""""""""""
-
-\
-
-+------------------+------------------------------------+
-| Property         | Value / Range                      |
-+==================+====================================+
-| Port             | 4010 .. 4013                       |
-+------------------+------------------------------------+
-| Branch           | 1.3.6.1.4.1.35450.24               |
-+------------------+------------------------------------+
-| snmpa_storage_0  | Port: 4010                         |
-+------------------+------------------------------------+
-| snmpa_storage_1  | Port: 4011                         |
-+------------------+------------------------------------+
-| snmpa_storage_2  | Port: 4012                         |
-+------------------+------------------------------------+
-| snmpa_storage_3  | Port: 4013                         |
-+------------------+------------------------------------+
-
-b. SNMPA-Items
-""""""""""""""
-
-\
-
-+------------------+------------------------------------+
-| Branch Number    | Explanation                        |
-+==================+====================================+
-| 1                | Node name                          |
-+------------------+------------------------------------+
-| **VM-related values (1-min Averages)**                |
-+------------------+------------------------------------+
-| 2                | # of processes                     |
-+------------------+------------------------------------+
-| 3                | Total memory usage                 |
-+------------------+------------------------------------+
-| 4                | System memory usage                |
-+------------------+------------------------------------+
-| 5                | Processes memory usage             |
-+------------------+------------------------------------+
-| 6                | ETS memory usage                   |
-+------------------+------------------------------------+
-| **VM-related values (5-min Averages)**                |
-+------------------+------------------------------------+
-| 7                | # of processes                     |
-+------------------+------------------------------------+
-| 8                | Total memory usage                 |
-+------------------+------------------------------------+
-| 9                | Sysem memory usage                 |
-+------------------+------------------------------------+
-| 10               | Processes memory usage             |
-+------------------+------------------------------------+
-| 11               | ETS memory usage                   |
-+------------------+------------------------------------+
-| **Request-Counter (1-min Averages)**                  |
-+------------------+------------------------------------+
-| 12               | # of WRITEs                        |
-+------------------+------------------------------------+
-| 13               | # of READs                         |
-+------------------+------------------------------------+
-| 14               | # of DELETEs                       |
-+------------------+------------------------------------+
-| **Request-Counter (5-min Averages)**                  |
-+------------------+------------------------------------+
-| 15               | # of WRITEs                        |
-+------------------+------------------------------------+
-| 16               | # of READs                         |
-+------------------+------------------------------------+
-| 17               | # of DELETEs                       |
-+------------------+------------------------------------+
-| **# of objects**                                      |
-+------------------+------------------------------------+
-| 18               | # of active objects                |
-+------------------+------------------------------------+
-| 19               | Total objects                      |
-+------------------+------------------------------------+
-| 20               | Total size of active objects       |
-+------------------+------------------------------------+
-| 21               | Total size                         |
-+------------------+------------------------------------+
-| **MQ-related**                                        |
-+------------------+------------------------------------+
-| 22               | # of replication messages          |
-+------------------+------------------------------------+
-| 23               | # of sync-vnode messages           |
-+------------------+------------------------------------+
-| 24               | # of rebalance messages            |
-+------------------+------------------------------------+
-
-
-c. Method of confirmation
-""""""""""""""""""""""""""
-
-::
-
-    $ snmpwalk -v 2c -c public 127.0.0.1:4010 .1.3.6.1.4.1.35450.24
-    SNMPv2-SMI::enterprises.35450.24.1.0 = STRING: "storage_0@127.0.0.1"
-    SNMPv2-SMI::enterprises.35450.24.2.0 = Gauge32: 227
-    SNMPv2-SMI::enterprises.35450.24.3.0 = Gauge32: 33165164
-    SNMPv2-SMI::enterprises.35450.24.4.0 = Gauge32: 24504020
-    SNMPv2-SMI::enterprises.35450.24.5.0 = Gauge32: 8661144
-    SNMPv2-SMI::enterprises.35450.24.6.0 = Gauge32: 1952903
-    SNMPv2-SMI::enterprises.35450.24.7.0 = Gauge32: 227
-    SNMPv2-SMI::enterprises.35450.24.8.0 = Gauge32: 33379629
-    SNMPv2-SMI::enterprises.35450.24.9.0 = Gauge32: 24493694
-    SNMPv2-SMI::enterprises.35450.24.10.0 = Gauge32: 8885935
-    SNMPv2-SMI::enterprises.35450.24.11.0 = Gauge32: 1941680
-    SNMPv2-SMI::enterprises.35450.24.12.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.24.13.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.24.14.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.24.15.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.24.16.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.24.17.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.24.18.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.24.19.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.24.20.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.24.21.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.24.22.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.24.23.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.24.24.0 = Gauge32: 0
-
-Gateway
-^^^^^^^^^^^
-
-a. SNMPA-Properties
-""""""""""""""""""""
-
-\
-
-+------------------+------------------------------------+
-| Item             | Value / Range                      |
-+==================+====================================+
-| Port             | 4000 .. 4001                       |
-+------------------+------------------------------------+
-| Branch           | 1.3.6.1.4.1.35450.27               |
-+------------------+------------------------------------+
-| snmpa_gateway_0  | Port: 4000                         |
-+------------------+------------------------------------+
-| snmpa_gateway_1  | Port: 4001                         |
-+------------------+------------------------------------+
-
-b. SNMPA-Items
-""""""""""""""
-
-\
-
-+------------------+------------------------------------+
-| Branch Number    | Explanation                        |
-+==================+====================================+
-| 1                | Node name                          |
-+------------------+------------------------------------+
-| **VM-related values (1-min Averages)**                |
-+------------------+------------------------------------+
-| 2                | # of processes                     |
-+------------------+------------------------------------+
-| 3                | Total memory usage                 |
-+------------------+------------------------------------+
-| 4                | System memory usage                |
-+------------------+------------------------------------+
-| 5                | Processes memory usage             |
-+------------------+------------------------------------+
-| 6                | ETS memory usage                   |
-+------------------+------------------------------------+
-| **VM-related values (5-min Averages)**                |
-+------------------+------------------------------------+
-| 7                | # of processes                     |
-+------------------+------------------------------------+
-| 8                | Total memory usage                 |
-+------------------+------------------------------------+
-| 9                | Sysem memory usage                 |
-+------------------+------------------------------------+
-| 10               | Processes memory usage             |
-+------------------+------------------------------------+
-| 11               | ETS memory usage                   |
-+------------------+------------------------------------+
-| **Request-Counter (1-min Averages)**                  |
-+------------------+------------------------------------+
-| 12               | # of WRITEs                        |
-+------------------+------------------------------------+
-| 13               | # of READs                         |
-+------------------+------------------------------------+
-| 14               | # of DELETEs                       |
-+------------------+------------------------------------+
-| **Request-Counter (5-min Averages)**                  |
-+------------------+------------------------------------+
-| 15               | # of WRITEs                        |
-+------------------+------------------------------------+
-| 16               | # of READs                         |
-+------------------+------------------------------------+
-| 17               | # of DELETEs                       |
-+------------------+------------------------------------+
-| **Cache-related**                                     |
-+------------------+------------------------------------+
-| 18               | Count of cache-hit                 |
-+------------------+------------------------------------+
-| 19               | Count of cache-miss                |
-+------------------+------------------------------------+
-| 20               | Total of files (objects)           |
-+------------------+------------------------------------+
-| 21               | Total cached size                  |
-+------------------+------------------------------------+
-
-c. Method of confirmation
-""""""""""""""""""""""""""
-
-::
-
-    $ snmpwalk -v 2c -c public 127.0.0.1:4000 .1.3.6.1.4.1.35450.21
-    SNMPv2-SMI::enterprises.35450.21.1.0 = STRING: "gateway_0@127.0.0.1"
-    SNMPv2-SMI::enterprises.35450.21.2.0 = Gauge32: 279
-    SNMPv2-SMI::enterprises.35450.21.3.0 = Gauge32: 45266128
-    SNMPv2-SMI::enterprises.35450.21.4.0 = Gauge32: 36653905
-    SNMPv2-SMI::enterprises.35450.21.5.0 = Gauge32: 8612223
-    SNMPv2-SMI::enterprises.35450.21.6.0 = Gauge32: 2276519
-    SNMPv2-SMI::enterprises.35450.21.7.0 = Gauge32: 279
-    SNMPv2-SMI::enterprises.35450.21.8.0 = Gauge32: 45157433
-    SNMPv2-SMI::enterprises.35450.21.9.0 = Gauge32: 36385227
-    SNMPv2-SMI::enterprises.35450.21.10.0 = Gauge32: 8772210
-    SNMPv2-SMI::enterprises.35450.21.11.0 = Gauge32: 2261105
-    SNMPv2-SMI::enterprises.35450.21.12.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.21.13.0 = Gauge32: 13
-    SNMPv2-SMI::enterprises.35450.21.14.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.21.15.0 = Gauge32: 3
-    SNMPv2-SMI::enterprises.35450.21.16.0 = Gauge32: 24
-    SNMPv2-SMI::enterprises.35450.21.17.0 = Gauge32: 0
-    SNMPv2-SMI::enterprises.35450.21.18.0 = Gauge32: 21
-    SNMPv2-SMI::enterprises.35450.21.19.0 = Gauge32: 39
-    SNMPv2-SMI::enterprises.35450.21.20.0 = Gauge32: 3
-    SNMPv2-SMI::enterprises.35450.21.21.0 = Gauge32: 565700
