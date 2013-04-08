@@ -196,28 +196,36 @@ Table of Storage-cluster's Commands
 
 \
 
-+-----------------------------+---------------------------------------------------------------------------------------------------+
-| Command                     | Explanation                                                                                       |
-+=============================+===================================================================================================+
-| **Storage-node related commands:**                                                                                              |
-+-----------------------------+---------------------------------------------------------------------------------------------------+
-| detach `${storage-node}`    | * Remove a storage-node from the LeoFS storage-cluster                                            |
-|                             | * Current status: ``running`` | ``stop``                                                          |
-+-----------------------------+---------------------------------------------------------------------------------------------------+
-| suspend `${storage-node}`   | * Suspend a storage-node for maintenance, Also this command does NOT change "routing-table (RING)"|
-|                             | * Current status: ``running``                                                                     |
-+-----------------------------+---------------------------------------------------------------------------------------------------+
-| resume `${storage-node}`    | * Resume a storage-node                                                                           |
-|                             | * Current status: ``suspended`` | ``restarted``                                                   |
-+-----------------------------+---------------------------------------------------------------------------------------------------+
-| **Storage-cluster related commands:**                                                                                           |
-+-----------------------------+---------------------------------------------------------------------------------------------------+
-| start                       | * Launch LeoFS after distributed "routing-table (RING)" from Manager to Storage and Gateway       |
-+-----------------------------+---------------------------------------------------------------------------------------------------+
-| rebalance                   | * Move or Copy files into the LeoFS storage-cluster due to changed RING                           |
-+-----------------------------+---------------------------------------------------------------------------------------------------+
-| whereis `${file-path}`      | * Retrieve status of an assigned file                                                             |
-+-----------------------------+---------------------------------------------------------------------------------------------------+
++--------------------------------+---------------------------------------------------------------------------------------------------+
+| Command                        | Explanation                                                                                       |
++================================+===================================================================================================+
+| **Storage-node related commands:**                                                                                                 |
++--------------------------------+---------------------------------------------------------------------------------------------------+
+| detach `${storage-node}`       | * Remove a storage-node from the LeoFS storage-cluster                                            |
+|                                | * Current status: ``running`` | ``stop``                                                          |
++--------------------------------+---------------------------------------------------------------------------------------------------+
+| suspend `${storage-node}`      | * Suspend a storage-node for maintenance, Also this command does NOT change "routing-table (RING)"|
+|                                | * Current status: ``running``                                                                     |
++--------------------------------+---------------------------------------------------------------------------------------------------+
+| resume `${storage-node}`       | * Resume a storage-node                                                                           |
+|                                | * Current status: ``suspended`` | ``restarted``                                                   |
++--------------------------------+---------------------------------------------------------------------------------------------------+
+| **Storage-cluster related commands:**                                                                                              |
++--------------------------------+---------------------------------------------------------------------------------------------------+
+| start                          | * Launch LeoFS after distributed "routing-table (RING)" from Manager to Storage and Gateway       |
++--------------------------------+---------------------------------------------------------------------------------------------------+
+| rebalance                      | * Move or Copy files into the LeoFS storage-cluster due to changed RING                           |
++--------------------------------+---------------------------------------------------------------------------------------------------+
+| whereis `${file-path}`         | * Retrieve status of an assigned file                                                             |
++--------------------------------+---------------------------------------------------------------------------------------------------+
+| **Recover**                                                                                                                        |
++--------------------------------+---------------------------------------------------------------------------------------------------+
+| recover file `${file-path}`    | * Synchronize an object between nodes in charge                                                   |
++--------------------------------+---------------------------------------------------------------------------------------------------+
+| recover node `${storage-node}` | * Recover belonging targe-node's objects                                                          |
++--------------------------------+---------------------------------------------------------------------------------------------------+
+| recover ring `${storage-node}` | * Synchronize target-node's RING with Manager's RING                                              |
++--------------------------------+---------------------------------------------------------------------------------------------------+
 
 .. index::
    detach-command
@@ -295,8 +303,45 @@ Command: ``whereis ${file-path}``
           storage_0@127.0.0.1  207643840133    35409  0             4116193149  1332407492290951  2012-06-29 14:23:31 +0900
 
 \
+
 \
 
+**recover** - Recover an object, belonging targe-node's objects and RING
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. index:: recover-file-command
+
+**'recover file'** - Synchronize an object between nodes in charge
+
+::
+
+  recover file leo/fast/storage.key
+  OK
+
+\
+
+.. index:: recover-node-command
+
+**'recover node'** - Recover belonging targe-node's objects
+
+::
+
+  recover node storage_0@127.0.0.1
+  OK
+
+\
+
+.. index:: recover-ring-command
+
+**'recover ring'** - Synchronize target-node's RING with Manager's RING
+
+::
+
+  recover ring storage_0@127.0.0.1
+  OK
+
+\
+\
 
 Storage Maintenance Commands
 ----------------------------
@@ -323,14 +368,6 @@ Storage Maintenance Commands
 +-----------------------------------------------------------+----------------------------------------------------------------+
 | compact status  `${storage-node}`                         | * Display compation statuses                                   |
 |                                                           | * Compaction's status: ``idle``, ``running``, ``suspend``      |
-+-----------------------------------------------------------+----------------------------------------------------------------+
-| **Recover**                                                                                                                |
-+-----------------------------------------------------------+----------------------------------------------------------------+
-| recover file `${file-path}`                               | * Synchronize an object between nodes in charge                |
-+-----------------------------------------------------------+----------------------------------------------------------------+
-| recover node `${storage-node}`                            | * Recover belonging targe-node's objects                       |
-+-----------------------------------------------------------+----------------------------------------------------------------+
-| recover ring `${storage-node}`                            | * Synchronize target-node's RING with Manager's RING           |
 +-----------------------------------------------------------+----------------------------------------------------------------+
 
 \
@@ -465,44 +502,6 @@ Command: ``compact status ${storage-node}``
     # of ongoing targets: 3
     # of out of targets : 56
 
-\
-
-**recover** - Recover an object, belonging targe-node's objects and RING
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. index:: recover-file-command
-
-**'recover file'** - Synchronize an object between nodes in charge
-
-::
-
-  recover file leo/fast/storage.key
-  OK
-
-\
-
-.. index:: recover-node-command
-
-**'recover node'** - Recover belonging targe-node's objects
-
-::
-
-  recover node storage_0@127.0.0.1
-  OK
-
-\
-
-
-.. index:: recover-ring-command
-
-**'recover ring'** - Synchronize target-node's RING with Manager's RING
-
-::
-
-  recover ring storage_0@127.0.0.1
-  OK
-
-\
 
 
 Gateway Maintenance Commands
