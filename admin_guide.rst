@@ -792,51 +792,62 @@ Command-2: ``status ${storage-node}`` OR ``status ${gateway-node}``
 
     status storage_0@127.0.0.1
     [config]
-                version : 0.14.0-RC1
+                version : 0.14.1
           obj-container : [[{path,"./avs"},{num_of_containers,64}]]
-                log-dir : ./log
-
-   [status-1: ring]
+                log dir : ./log
+    [status-1: ring]
       ring state (cur)  : 64212f2d
       ring state (prev) : 64212f2d
-
     [status-2: erlang-vm]
-             vm version : 5.9.3
-        total mem usage : 16283920
-       system mem usage : 7120494
-        procs mem usage : 9156034
-          ets mem usage : 583724
-                  procs : 309/1048576
+             vm version : 5.9.3.1
+        total mem usage : 30886632
+       system mem usage : 12774309
+        procs mem usage : 18178027
+          ets mem usage : 1154464
+                  procs : 326/1048576
             kernel_poll : true
        thread_pool_size : 32
-
     [status-3: # of msgs]
        replication msgs : 0
         vnode-sync msgs : 0
          rebalance msgs : 0
 
-
 ::
 
     status gateway_0@127.0.0.1
-    [config]
-                version : 0.14.0-RC-1
-          obj-container : []
-                log-dir : ./log
-
+    [config-1]
+                          version : 0.14.1
+                          log dir : ./log
+    [config-2]
+                              api : s3
+                             port : 8080
+                         ssl port : 8443
+                   # of_acceptors : 0
+                       http cache : false
+               # of cache_workers : 128
+                     cache expire : 300
+               cache ram capacity : 1073741824
+              cache disc capacity : 0
+             cache disc threshold : 1048576
+           cache disc data dir    : ./cache/data
+           cache disc journal dir : ./cache/journal
+            cache max content len : 1048576
+            max # of chunked objs : 1000
+                max object length : 524288000
+            chunked object length : 5242880
+     threshold chunked obj length : 5767168
     [status-1: ring]
-      ring state (cur)  : 64212f2d
-      ring state (prev) : 64212f2d
-
+                ring state (cur)  : 64212f2d
+                ring state (prev) : 64212f2d
     [status-2: erlang-vm]
-             vm version : 5.9.3
-        total mem usage : 32657896
-       system mem usage : 22054624
-        procs mem usage : 10623448
-          ets mem usage : 1083004
-                  procs : 504/1048576
-            kernel_poll : true
-       thread_pool_size : 32
+                       vm version : 5.9.3.1
+                  total mem usage : 58499968
+                 system mem usage : 40136989
+                  procs mem usage : 18381443
+                    ets mem usage : 2237112
+                            procs : 762/1048576
+                      kernel_poll : true
+                 thread_pool_size : 32
 
 .. index::
    history-command
