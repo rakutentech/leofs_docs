@@ -626,7 +626,7 @@ Install "S3FS-C"
 
 ::
 
-    git clone https://github.com/tongwang/s3fs-c.git
+    git clone https://github.com/leo-project/s3fs-c.git
     cd s3fs-c
     ./configure
     make
