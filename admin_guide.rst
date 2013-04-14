@@ -819,33 +819,38 @@ Command-2: ``status ${storage-node}`` OR ``status ${gateway-node}``
                           version : 0.14.1
                           log dir : ./log
     [config-2]
-                              api : s3
-                             port : 8080
-                         ssl port : 8443
+      -- http-server-related --
+              using api [s3|rest] : s3
+                   listening port : 8080
+               listening ssl port : 8443
                    # of_acceptors : 0
-                       http cache : false
+      -- cache-related --
+          http cache [true|false] : false
                # of cache_workers : 128
                      cache expire : 300
-               cache ram capacity : 1073741824
-              cache disc capacity : 0
-             cache disc threshold : 1048576
-           cache disc data dir    : ./cache/data
-           cache disc journal dir : ./cache/journal
             cache max content len : 1048576
+               ram cache capacity : 1073741824
+           disc cache capacity    : 0
+           disc cache threshold   : 1048576
+           disc cache data dir    : ./cache/data
+           disc cache journal dir : ./cache/journal
+      -- large-object-related --
             max # of chunked objs : 1000
                 max object length : 524288000
             chunked object length : 5242880
      threshold chunked obj length : 5767168
-    [status-1: ring]
+
+     [status-1: ring]
                 ring state (cur)  : 64212f2d
                 ring state (prev) : 64212f2d
+
     [status-2: erlang-vm]
                        vm version : 5.9.3.1
-                  total mem usage : 58499968
-                 system mem usage : 40136989
-                  procs mem usage : 18381443
-                    ets mem usage : 2237112
-                            procs : 762/1048576
+                  total mem usage : 48095776
+                 system mem usage : 34839664
+                  procs mem usage : 13261128
+                    ets mem usage : 1195144
+                            procs : 504/1048576
                       kernel_poll : true
                  thread_pool_size : 32
 
