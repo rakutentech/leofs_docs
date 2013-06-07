@@ -84,14 +84,16 @@ LeoFS Manager Console on **LeoFS-Manager Master** node
 
     status
     [system config]
-                 version : 0.12.7
-     # of replicas       : 3
-     # of successes of R : 1
-     # of successes of W : 2
-     # of successes of D : 2
-               ring size : 2^128
-        ring hash (cur)  : -1
-        ring hash (prev) : -1
+                   system version : 0.14.2
+                   total replicas : 1
+              # of successes of R : 1
+              # of successes of W : 1
+              # of successes of D : 1
+    # of awareness replicas [DC]  : 0
+    # of awareness replicas [Rack]: 0
+                        ring size : 2^128
+                 ring hash (cur)  : -1
+                 ring hash (prev) : -1
 
     [node(s) state]
     -------------------------------------------------------------------------------------------------
@@ -118,14 +120,16 @@ Confirm#1 by **LeoFS-Manager** node's console
 
     status
     [system config]
-                 version : 0.12.7
-     # of replicas       : 3
-     # of successes of R : 1
-     # of successes of W : 2
-     # of successes of D : 2
-               ring size : 2^128
-        ring hash (cur)  : 1428891014
-        ring hash (prev) : 1428891014
+                system version : 0.14.2
+                total replicas : 1
+           # of successes of R : 1
+           # of successes of W : 1
+           # of successes of D : 1
+ # of awareness replicas [DC]  : 0
+ # of awareness replicas [Rack]: 0
+                     ring size : 2^128
+              ring hash (cur)  : 1428891014
+              ring hash (prev) : 1428891014
 
     [node(s) state]
     -------------------------------------------------------------------------------------------------
@@ -153,14 +157,16 @@ Confirm#2 by **LeoFS-Manager** master node's console
 
     status
     [system config]
-                 version : 0.12.7
-     # of replicas       : 3
-     # of successes of R : 1
-     # of successes of W : 2
-     # of successes of D : 2
-               ring size : 2^128
-        ring hash (cur)  : 1428891014
-        ring hash (prev) : 1428891014
+                system version : 0.14.2
+                total replicas : 1
+           # of successes of R : 1
+           # of successes of W : 1
+           # of successes of D : 1
+ # of awareness replicas [DC]  : 0
+ # of awareness replicas [Rack]: 0
+                     ring size : 2^128
+              ring hash (cur)  : 1428891014
+              ring hash (prev) : 1428891014
 
     [node(s) state]
     -------------------------------------------------------------------------------------------------
@@ -509,11 +515,13 @@ Gateway Maintenance Commands
 
 \
 
-+------------------------------------------------------+----------------------------------------------------------------+
-| Command                                              | Explanation                                                    |
-+======================================================+================================================================+
-| purge ${file-path}                                   | * Purge a cached file if the specified file existed in cache   |
-+------------------------------------------------------+----------------------------------------------------------------+
++------------------------------------------------------+-----------------------------------------------------------------------------------+
+| Command                                              | Explanation                                                                       |
++======================================================+===================================================================================+
+| purge ${file-path}                                   | * Purge a cached file if the specified file existed in cache                      |
++------------------------------------------------------+-----------------------------------------------------------------------------------+
+| remove ${gateway-node}                               | * Able to remove gateway-node from manager when state of specified node is 'stop' |
++------------------------------------------------------+-----------------------------------------------------------------------------------+
 
 .. _purge:
 
@@ -534,6 +542,20 @@ Command: ``purge ${file-path}``
 
 \
 \
+
+Manager Maintenance Commands
+----------------------------
+
++------------------------------------------------------+----------------------------------------------------------------+
+| Command                                              | Explanation                                                    |
++======================================================+================================================================+
+| update-managers ${manager-master} ${manager-slave}   | * Update manager's nodes to specified master/slave nodes       |
++------------------------------------------------------+----------------------------------------------------------------+
+| backup-mnesia ${backup-filepath}                     | * Backup mnesia-data to specified filepath                     |
++------------------------------------------------------+----------------------------------------------------------------+
+| restore-mnesia ${backup-filepath}                    | * Restore mnesia-data from specified filepath                  |
++------------------------------------------------------+----------------------------------------------------------------+
+
 
 
 S3-API Commands
