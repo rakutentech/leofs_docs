@@ -21,7 +21,7 @@ Install OS-related libraries (CentOS 6.2)
 
 ::
 
-   # yum install libuuid-devel
+   # yum install libuuid-devel cmake
 
 Install OS-related libraries (Ubuntu Server 12.04 LTS)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -32,7 +32,7 @@ Install OS-related libraries (Ubuntu Server 12.04 LTS)
 
 ::
 
-   # sudo apt-get install libtool libncurses5-dev libssl-dev
+   # sudo apt-get install libtool libncurses5-dev libssl-dev cmake
 
 Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -413,19 +413,23 @@ Set up LeoFS's system-configuration (Only LeoFS-Manager)
 
 .. note::  **Consistency Level** is decided by this configuration file. Also, It should not modify in operation.
 
-+-------------+--------------------------------------------------------+
-| Property    | Explanation                                            |
-+=============+========================================================+
-| n           | # of replicas                                          |
-+-------------+--------------------------------------------------------+
-| r           | # of replicas needed for a successful READ operation   |
-+-------------+--------------------------------------------------------+
-| w           | # of replicas needed for a successful WRITE operation  |
-+-------------+--------------------------------------------------------+
-| d           | # of replicas needed for a successful DELETE operation |
-+-------------+--------------------------------------------------------+
-| bit_of_ring | # of bits of hash-ring (fixed 128bit)                  |
-+-------------+--------------------------------------------------------+
++-------------+---------------------------------------------------------+
+| Property    | Explanation                                             |
++=============+=========================================================+
+| n           | # of replicas                                           |
++-------------+---------------------------------------------------------+
+| r           | # of replicas needed for a successful READ operation    |
++-------------+---------------------------------------------------------+
+| w           | # of replicas needed for a successful WRITE operation   |
++-------------+---------------------------------------------------------+
+| d           | # of replicas needed for a successful DELETE operation  |
++-------------+---------------------------------------------------------+
+| level_1     | # of dc-awareness replicas (Plan to support with v1.0.0)|
++-------------+---------------------------------------------------------+
+| level_2     | # of rack-awareness replicas                            |
++-------------+---------------------------------------------------------+
+| bit_of_ring | # of bits of hash-ring (fixed 128bit)                   |
++-------------+---------------------------------------------------------+
 
 * A reference consistency level
 
@@ -453,6 +457,8 @@ Set up LeoFS's system-configuration (Only LeoFS-Manager)
                             {w, 2 },  %% # of replicas needed for a successful WRITE  operation
                             {r, 1 },  %% # of replicas needed for a successful READ   operation
                             {d, 2 },  %% # of replicas needed for a successful DELETE operation
+                            {level_1, 0}, %% # of DC-awareness replicas (Plan to support with v1.0.0)
+                            {level_2, 0}, %% # of rack-awareness replicas
                             {bit_of_ring, 128}
                            ]},
                   %% Manager Configuration

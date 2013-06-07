@@ -1,7 +1,7 @@
-LeoTamer v0.4.1
-===============
+LeoFS Console v0.4.1
+====================
 
-**LeoTamer** is LeoFS's GUI console on your browser. You can easily operate LeoFS.
+**LeoFS Console** is LeoFS's GUI console on your browser. You can easily operate LeoFS.
 
 Install and Setup
 -----------------
@@ -12,18 +12,18 @@ Requirement
 * **LeoFS v0.14.0** or higher is required.
 
 
-Install LeoTamer
-^^^^^^^^^^^^^^^^
+Install LeoFS Console
+^^^^^^^^^^^^^^^^^^^^^
 
-* **LeoTamer's Repository**: https://github.com/leo-project/leo_tamer
+* **LeoFS-Console's Repository**: https://github.com/leo-project/leofs_console
 * **Ruby 1.9.3-p362** or higher is required.
     * Download URL: http://www.ruby-lang.org/en/downloads/
 
 ::
 
   gem install bundler
-  git clone https://github.com/leo-project/leo_tamer.git
-  cd leo_tamer
+  git clone https://github.com/leo-project/leofs_console.git
+  cd leofs_console
   bundle install
 
 Create Admin User
@@ -71,8 +71,8 @@ You need modify ``unicorn.conf``
 
 ::
 
-  listen "/tmp/LeoTamer.sock" # Unix domain socket
-  listen ${LEO-TAMER-PORT} # TCP
+  listen "/tmp/leofs-console.sock" # Unix domain socket
+  listen ${LEOFS-CONSOLE-PORT} # TCP
 
 Nginx + Unicorn
 """"""""""""""""
@@ -100,8 +100,8 @@ Nginx + Unicorn
   ## /etc/nginx/nginx.conf
 
   http {
-    upstream LeoTamer {
-      server unix:/tmp/LeoTamer.sock;
+    upstream leofs_console {
+      server unix:/tmp/leofs-console.sock;
     }
   }
 
@@ -114,7 +114,7 @@ Nginx + Unicorn
     server_name localhost;
 
     location / {
-      proxy_pass http://LeoTamer;
+      proxy_pass http://leofs_console;
     }
   }
 
@@ -149,12 +149,12 @@ Your Credentials
 
 * You can confirm your credentials with ``Security Credentials`` on the form of top right
 
-.. image:: _static/screenshots/tamer/userinfo_0.png
+.. image:: _static/screenshots/leofs_console/userinfo_0.png
    :width: 720px
 
 \
 
-.. image:: _static/screenshots/tamer/userinfo_1.png
+.. image:: _static/screenshots/leofs_console/userinfo_1.png
    :width: 720px
 
 
@@ -163,9 +163,9 @@ Bucket Status View
 
 * You can confirm your belonging buckets
     * Able to create a bucket
-    * ``Deletion of a bucket`` plan to support with ``LeoTamer v0.4.0``
+    * ``Deletion of a bucket`` plan to support with ``LeoFS-Console v0.4.2``
 
-.. image:: _static/screenshots/tamer/bucket_status_0.png
+.. image:: _static/screenshots/leofs_console/bucket_status_0.png
    :width: 720px
 
 
@@ -177,14 +177,14 @@ Node Status View
 
 \
 
-.. image:: _static/screenshots/tamer/nodestatus_0.png
+.. image:: _static/screenshots/leofs_console/nodestatus_0.png
    :width: 720px
 
 * Group by status View:
 
 \
 
-.. image:: _static/screenshots/tamer/nodestatus_2.png
+.. image:: _static/screenshots/leofs_console/nodestatus_2.png
    :width: 720px
 
 * Administrators can change ``storage-staus`` with ``Change Status button``
@@ -192,7 +192,7 @@ Node Status View
 
 \
 
-.. image:: _static/screenshots/tamer/nodestatus_3.png
+.. image:: _static/screenshots/leofs_console/nodestatus_3.png
    :width: 720px
 
 \
@@ -215,10 +215,10 @@ Table - Changeable Status
 | |stop| stop           | detach                     |
 +-----------------------+----------------------------+
 
-.. |running| image:: _static/images/tamer-icons/available.png
-.. |suspend| image:: _static/images/tamer-icons/warn.png
-.. |restarted| image:: _static/images/tamer-icons/add.png
-.. |stop| image:: _static/images/tamer-icons/fire.png
+.. |running| image:: _static/images/leofs-console-icons/available.png
+.. |suspend| image:: _static/images/leofs-console-icons/warn.png
+.. |restarted| image:: _static/images/leofs-console-icons/add.png
+.. |stop| image:: _static/images/leofs-console-icons/fire.png
 
 \
 
@@ -230,7 +230,7 @@ Rebalance into the storage-cluster
 
 \
 
-.. image:: _static/screenshots/tamer/nodestatus_rebalance_0.png
+.. image:: _static/screenshots/leofs_console/nodestatus_rebalance_0.png
    :width: 720px
 
 
@@ -244,7 +244,7 @@ System Conf View
 * You can confirm configuration of the LeoFS
 * Please see :ref:`LeoFS’s system-configuration <system-configuration-label>`
 
-.. image:: _static/screenshots/tamer/admintools_system_conf.png
+.. image:: _static/screenshots/leofs_console/admintools_system_conf.png
    :width: 720px
 
 
@@ -255,7 +255,7 @@ Users View
     * Able to create a user and delete it
     * Able to change a user role with ``Update Role button``
 
-.. image:: _static/screenshots/tamer/admintools_users.png
+.. image:: _static/screenshots/leofs_console/admintools_users.png
    :width: 720px
 
 Buckets View
@@ -266,7 +266,7 @@ Buckets View
 * You can confirm the registered list of buckets
     * Able to create a bucket
 
-.. image:: _static/screenshots/tamer/admintools_buckets.png
+.. image:: _static/screenshots/leofs_console/admintools_buckets.png
    :width: 720px
 
 Endpoints View
@@ -275,14 +275,14 @@ Endpoints View
 * You can confirm the registered list of endpoints
     * Able to create an endpoint and delete it
 
-.. image:: _static/screenshots/tamer/admintools_endpoints.png
+.. image:: _static/screenshots/leofs_console/admintools_endpoints.png
    :width: 720px
 
 
 Milestones
 ----------
 
-* 0.2 (Dec 2012 - Feb 2013)
+* 0.2 (Dec 2012 - Feb 2013) - *DONE*
     * Administration tools
         * User management
         * Bucket management
@@ -292,17 +292,17 @@ Milestones
     * Bucket status
         * Belonging bucket-list
 
-* 0.4 (Mar - Apr 2013)
+* 0.4 (Mar - June 2013)
     *  User Group
         * Sharing LeoFS's credential-keys in the group
         * User management in the group
 
-* 0.6 (May 2013)
-    * Log Search/Analysis (Option)
-
-* 0.8 (June 2013)
-    * Link QoS (Quality of Service - LeoDenebola)
+* 0.6 (July 2013)
+    * Link LeoFS-QoS *(Quality of Service - Denebola)*
         * Bucket status
             * total of files
             * total used disk capacity
+
+* 0.8 (August 2013)
+    * Log Search/Analysis (Option)
 
