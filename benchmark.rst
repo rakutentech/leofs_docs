@@ -6,21 +6,21 @@
 .. index::
     pair: Benchmark; Benchmark
 
-Benchmark
+Benchmarking
 ================================
 
 .. index::
     pair: Set up basho_bench; Set up basho_bench
 
-Set up basho_bench
+Setting up basho_bench
 --------------------------------
 
-Install
-^^^^^^^^
+Installation
+^^^^^^^^^^^^
 
-* `Basho basho_bench's repository <https://github.com/basho/basho_bench/>`_
-* `Basho basho_bench's docs <http://docs.basho.com/riak/latest/cookbooks/Benchmarking>`_
-* Commands to set up basho_bench are following.
+* `Basho's basho_bench's repository <https://github.com/basho/basho_bench/>`_
+* `Basho's basho_bench's documentation <http://docs.basho.com/riak/latest/cookbooks/Benchmarking>`_
+* Use the following commands to set up basho_bench.
 
 .. code-block:: bash
 
@@ -31,13 +31,13 @@ Install
     $ cp -i ../leofs/test/include/*.hrl include/
     $ make all
 
-Prepare before the tests
-^^^^^^^^^^^^^^^^^^^^^^^^
+Preparations before testing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Put a bucket for the tests
-""""""""""""""""""""""""""
+Create a test bucket
+""""""""""""""""""""
 
-.. note:: After launch LeoFS, You need to put ``bucket`` on "manager-console" before the tests. In this example, the bucket-name is ``test`` and a user, ``_test_leofs`` as "test-user" is registered already into LeoFS.
+.. note:: After starting LeoFS, you need to create a ``bucket`` on "manager-console" that will be used for testing. In this example, the bucket name is ``test``. It is owned by the user ``_test_leofs`` that is already registered internally by LeoFS.
 
 .. code-block:: bash
 
@@ -61,11 +61,11 @@ Put a bucket for the tests
 Configuration file for basho_bench
 -------------------------------------
 
-Samples
+Examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Some samples are included in leofs repo where path is ${LEOFS_ROOT}/test/conf/leofs_*.config
-    * You can see more detail - `basho_bench's configuration <http://docs.basho.com/riak/latest/cookbooks/Benchmarking/#Configuration>`_
+* Some examples are included in the leofs repository at ${LEOFS_ROOT}/test/conf/leofs_*.config
+    * `Learn more about basho_bench's configuration <http://docs.basho.com/riak/latest/cookbooks/Benchmarking/#Configuration>`_
 
 .. code-block:: erlang
 
@@ -95,15 +95,15 @@ Description
   +-------------------+--------------------------------------------------------+
   | Key               | Value                                                  |
   +===================+========================================================+
-  | http_raw_ips      | Target hosts which are equal to `Gateway Nodes`        |
+  | http_raw_ips      | The `Gateway nodes` we want to benchmark               |
   +-------------------+--------------------------------------------------------+
-  | http_raw_port     | Target port listening on Gateway Nodes                 |
+  | http_raw_port     | The port used by the Gateway nodes                     |
   +-------------------+--------------------------------------------------------+
-  | http_raw_path     | URL path prefix. First level of path MUST be matched a |
+  | http_raw_path     | URL path prefix. The first path segment MUST be a      |
   |                   | BUCKET name                                            |
   +-------------------+--------------------------------------------------------+
   | check_integrity   | Check integrity of registered object -                 |
-  | `(default:false)` | compare an original-MD5 with a retrieving object's MD5 |
+  | `(default:false)` | compare an original MD5 with a retrieved object's MD5  |
   |                   |                                                        |
   |                   | (Only for developers)                                  |
   +-------------------+--------------------------------------------------------+
@@ -111,31 +111,31 @@ Description
 .. index::
     pair: Run basho_bench; Run basho_bench
 
-Run basho_bench(1)
+Running basho_bench(1)
 --------------------------------
 
-.. note:: In this example, ``LeoFS`` and ``basho_bench`` are installed into "local".
+.. note:: In this example, ``LeoFS`` and ``basho_bench`` are installed locally.
 
-* Commands to run basho_bench are following.
+* The following commands can be used to run basho_bench.
 
 .. code-block:: bash
 
-    ### Loading 1M records each size is 16KB
+    ### Loading 1M records of size 16KB
     cd basho_bench
     ./basho_bench ../leofs/test/conf/leofs_16K_LOAD1M.config
 
 \
 
-Run basho_bench(2)
+Running basho_bench(2)
 --------------------------------
 
-.. note:: In this example, ``LeoFS`` and ``basho_bench`` are installed into respective hosts.
+.. note:: In this example, ``LeoFS`` and ``basho_bench`` are installed on different hosts.
 
 
-Set ``endpoint`` on LeoFS-Manager console
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configure the ``endpoint`` on LeoFS-Manager console
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* From basho_bench's requests needs to reach `${HOST_NAME_OF_LEOFS_GATEWAY}`
+* Allows basho_bench's requests to reach `${HOST_NAME_OF_LEOFS_GATEWAY}`.
 
 .. code-block:: bash
 
@@ -156,10 +156,10 @@ Set ``endpoint`` on LeoFS-Manager console
 
 
 
-Edit LeoFS-benchmark's configutation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Edit the benchmark's configutation file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* You need to modify configuration's items of ``http_raw_ips`` and ``http_raw_port``
+* You need to modify the values for ``http_raw_ips`` and ``http_raw_port``
 
 .. code-block:: erlang
 
@@ -182,8 +182,8 @@ Edit LeoFS-benchmark's configutation
 
     {check_integrity, false}.
 
-Run
-^^^
+Running basho_bench
+^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 

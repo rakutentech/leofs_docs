@@ -4,8 +4,8 @@ Use Case
 .. index::
    pair: Configuration; LeoFS's Use Case - Without load-balancer
 
-Without load-balancer for TEST
-------------------------------
+Testing without a load balancer
+-------------------------------
 
 .. image:: _static/images/leofs-usecase-without-lb.png
    :width: 700px
@@ -15,12 +15,12 @@ Without load-balancer for TEST
     * bucket: ``test``
 * Client(s)
     * You need to edit ``/etc/hosts`` in your client machine(s)
-    * You can use any clients as the follows:
+    * You can use any S3 client, like
         * :ref:`Program Lang's clients <aws-sdk-ruby-label>`
         * :ref:`s3fs-c <s3fs-c-label>`
         * :ref:`s3cmd <s3cmd-label>`
         * :ref:`DragonDisk <dragondisk-label>`
-* Each server's configuration (only `ip` and `name`)
+* Servers configuration (only `ip` and `name`)
     * :ref:`Manager <conf_manager_label>`
         * IP: 192.168.1.7, 192.168.1.8
         * Name: manager_0@192.168.1.7, manager_1@192.168.1.8
@@ -30,7 +30,7 @@ Without load-balancer for TEST
     * :ref:`Storage <conf_storage_label>`
         * IP: 192.168.1.4 .. 192.168.1.6
         * Name: storage_0@192.168.1.4 .. storage_2@192.168.1.6
-* Execute commands on LeoFS-Manager's console for the authentication
+* Commands to execute on LeoFS-Manager's console for authentication
     * Set an endpoint - ``yourhost.com``
     * Create a user   - ``yourname``
 
@@ -45,7 +45,7 @@ Without load-balancer for TEST
 
 \
 
-With load-balancer for Production/Staging
------------------------------------------
+Production/Staging with a load balancer
+---------------------------------------
 
 (under construnction)

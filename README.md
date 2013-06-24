@@ -1,11 +1,14 @@
 leofs_docs
-===========
+==========
 
 Overview
 --------
 
-* "leofs_docs" is  LeoFS's document which is made by [Sphinx](http://sphinx.pocoo.org/).
-* The generated document can be seen [here](http://www.leofs.org/docs/).
+LeoFS uses [Sphinx](http://sphinx.pocoo.org/) for its documentation.
+It can be consulted directly from the [LeoFS website](http://www.leofs.org/docs/).
+
+The following commands can be used to download the documentation and
+generate the HTML files:
 
 ```text
 $ git clone https://github.com/leo-project/leofs_docs.git
