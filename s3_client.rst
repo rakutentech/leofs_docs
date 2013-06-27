@@ -4,7 +4,7 @@ Amazon S3 Client Tutorials
 Getting Your S3 Key
 ---------------------
 
-You can get S3-API's Keys from ``LeoFS's Manager Console``.
+You can get S3 API Keys from ``LeoFS' Manager Console``.
 
 ::
 
@@ -13,7 +13,7 @@ You can get S3-API's Keys from ``LeoFS's Manager Console``.
   Connected to 127.0.0.1.
   Escape character is '^]'.
 
-'create-user ${USER-ID}' command generates your s3 key.
+The 'create-user ${USER-ID}' command generates your s3 key.
 
 ::
 
@@ -27,22 +27,22 @@ You can get S3-API's Keys from ``LeoFS's Manager Console``.
 Getting Started with Ruby: 'aws-sdk'
 ------------------------------------------------------
 
-aws-sdk's official document is `here. <http://aws.amazon.com/sdkforruby/>`_
+aws-sdk's official documentation is `here. <http://aws.amazon.com/sdkforruby/>`_
 
 Install AWS-SDK for Ruby
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
   $ gem install aws-sdk
 
-Sample Code
+Example usage
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Connect to LeoFS
-"""""""""""""""""
+Connecting to LeoFS
+"""""""""""""""""""
 
-.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`. You need to set *Endpoint*, *Port*, *AccessKeyId* and *SecretAccessKey* as the follows:
+.. note:: LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`. You need to configure the *Endpoint*, *Port*, *AccessKeyId* and *SecretAccessKey* like in this example:
 
 
 .. code-block:: ruby
@@ -82,8 +82,8 @@ Connect to LeoFS
   s3 = AWS::S3.new
 
 
-PUT an object into the LeoFS
-"""""""""""""""""""""""""""""
+PUT an object into LeoFS
+""""""""""""""""""""""""
 
 .. code-block:: ruby
 
@@ -111,24 +111,24 @@ PUT an object into the LeoFS
   )
 
 
-GET an object from the LeoFS
-"""""""""""""""""""""""""""""
+GET an object from LeoFS
+""""""""""""""""""""""""
 
 .. code-block:: ruby
 
   image = object.read
 
 
-DELETE an object from the LeoFS
-""""""""""""""""""""""""""""""""
+DELETE an object from LeoFS
+"""""""""""""""""""""""""""
 
 .. code-block:: ruby
 
   object.delete
 
 
-HEAD an object from the LeoFS
-""""""""""""""""""""""""""""""""
+Get an object HEAD from LeoFS
+"""""""""""""""""""""""""""""
 
 .. code-block:: ruby
 
@@ -136,8 +136,8 @@ HEAD an object from the LeoFS
   p metadata.to_hash
 
 
-Multi-part upload into the LeoFS
-"""""""""""""""""""""""""""""""""
+Uploading to LeoFS using multi-part
+"""""""""""""""""""""""""""""""""""
 
 .. code-block:: ruby
 
@@ -201,7 +201,7 @@ URL: `SDK for Java <http://aws.amazon.com/sdkforjava/>`_
 .. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`. You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
 
 
-Sample Code
+Example usage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: java
@@ -317,7 +317,7 @@ Getting Started with PHP: 'aws-sdk'
 ------------------------------------------------------
 
 Install aws-sdk for PHP
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 php5-curl (Debian)
 """"""""""""""""""
@@ -343,8 +343,8 @@ Edit /etc/hosts
   127.0.0.1 s3.amazonaws.com
   127.0.0.1 ${bucket_name}.s3.amazonaws.com # if you use create_bucket
 
-Sample Code
-^^^^^^^^^^^
+Example usage
+^^^^^^^^^^^^^
 
 .. code-block:: php
 
@@ -389,8 +389,8 @@ Sample Code
 Getting Started with PHP: 'aws-sdk version 2'
 ------------------------------------------------------
 
-Install aws-sdk for PHP 2
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Install aws-sdk version 2 for PHP
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 php5-curl (Debian)
 """"""""""""""""""
@@ -424,8 +424,8 @@ Edit /etc/hosts
   127.0.0.1 s3.amazonaws.com
   127.0.0.1 ${bucket_name}.s3.amazonaws.com # if you use create_bucket
 
-Sample Code
-^^^^^^^^^^^^
+Example usage
+^^^^^^^^^^^^^
 
 .. code-block:: php
 
@@ -489,7 +489,7 @@ Sample Code
 Getting Started with Python: 'boto'
 -------------------------------------
 
-* Boto is a Python interface to Amazon Web Services. You can use it for LeoFS, too.
+* Boto is a Python interface to Amazon Web Services. You can use it for LeoFS too.
     * `Repository <https://github.com/boto/boto>`_
     * `Documentation <http://docs.pythonboto.org/en/latest/index.html>`_
 
@@ -508,8 +508,8 @@ easy_install
 
   sudo easy_install boto
 
-Sample Code
-"""""""""""
+Example usage
+"""""""""""""
 
 .. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
 
@@ -571,8 +571,8 @@ Sample Code
 
 .. _knox-label:
 
-Getting Started with Node.js - 'Knox'
--------------------------------------
+Getting Started with Node.js: 'Knox'
+------------------------------------
 
 Install Knox
 ^^^^^^^^^^^^^^
@@ -590,8 +590,8 @@ Edit /etc/hosts
 
   127.0.0.1 ${bucket_name}.localhost
 
-Sample Code
-^^^^^^^^^^^^
+Example usage
+^^^^^^^^^^^^^
 
 .. code-block:: javascript
 
@@ -658,7 +658,7 @@ Modify "/etc/hosts"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Add a LeoFS's domain in ``/etc/hosts``
-* LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`
+* LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`
 
 ::
 
@@ -687,18 +687,18 @@ Mount "LeoFS"
 
 .. _dragondisk-label:
 
-Connect LeoFS from DragonDisk
+Connecting to LeoFS using DragonDisk
 ------------------------------------------------------
 
-.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
+.. note:: LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`.
 
 `DragonDisk <http://www.dragondisk.com/>`_ is a powerful file manager for Amazon S3 Compatible Storage.
 
 Setting up LeoFS account details
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* To setup your LeoFS's account, go to the menu ``File/Accounts``.
-* If the details are valid, you can see that S3 has been added on the Root list.
+* To setup your LeoFS' account, go to the menu ``File/Accounts``.
+* If the details are valid, you can see that S3 has been added to the Root list.
 
 .. image:: _static/images/dragondisk-2.png
    :width: 320px
@@ -706,33 +706,33 @@ Setting up LeoFS account details
 Create a bucket
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* You need to create a bucket. Because each object is stored in a bucket.
-* A bucket retrieved via a unique, developer-assigned key.
+* You need to create the bucket where the objects will be stored.
+* Buckets can only be manipulated using a unique, developer-assigned key.
 
 .. image:: _static/images/dragondisk-3.png
    :width: 720px
 
 
-Operating files from  main view
+Manipulating files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* You can ``upload files`` into the LeoFS, ``download file`` from the LeoFS and operate others.
+* You can ``upload files`` into LeoFS, ``download files`` from LeoFS and do any other operations on them.
 
 .. image:: _static/images/dragondisk-1.png
    :width: 720px
 
 .. _s3cmd-label:
 
-Connect LeoFS from s3cmd
+Connecting to LeoFS using s3cmd
 ------------------------------------------------------
 
 Getting `s3cmd <http://sourceforge.net/projects/s3tools/files/>`_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Configure
-^^^^^^^^^^^^
+Configuration
+^^^^^^^^^^^^^
 
-.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`. You need to set 'Endpoint' and 'Port'.
+.. note:: LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`. You need to set 'Endpoint' and 'Port'.
 
 ::
 
@@ -782,7 +782,7 @@ Commands
  +----+-----------------------------------------------+-----------------------------------------------------+----------------+
  | 2  | Remove bucket                                 | s3cmd rb s3://BUCKET                                | **Yes**        |
  +----+-----------------------------------------------+-----------------------------------------------------+----------------+
- | 3  | List objects or bucket                        | s3cmd ls [s3://BUCKET[/PREFIX]]                     | **Yes**        |
+ | 3  | List objects or buckets                       | s3cmd ls [s3://BUCKET[/PREFIX]]                     | **Yes**        |
  +----+-----------------------------------------------+-----------------------------------------------------+----------------+
  | 4  | List all object in all buckets                | s3cmd la                                            | No             |
  +----+-----------------------------------------------+-----------------------------------------------------+----------------+
@@ -798,7 +798,7 @@ Commands
  +----+-----------------------------------------------+-----------------------------------------------------+----------------+
  | 9  | Disk usage by buckets                         | s3cmd du [s3://BUCKET[/PREFIX]]                     | No             |
  +----+-----------------------------------------------+-----------------------------------------------------+----------------+
- | 10 | Get various information about Buckets or Files| s3cmd info s3://BUCKET[/OBJECT]                     | No             |
+ | 10 | Get various infos about buckets or files      | s3cmd info s3://BUCKET[/OBJECT]                     | No             |
  +----+-----------------------------------------------+-----------------------------------------------------+----------------+
  | 11 | Copy object                                   | s3cmd cp s3://BUCKET1/OBJECT1 s3://BUCKET2[/OBJECT2]| **Yes**        |
  +----+-----------------------------------------------+-----------------------------------------------------+----------------+

@@ -9,32 +9,32 @@ REST API
 Configuration
 -------------
 
-* You need to update ``${USE_S3_AUTH}``, which value is ``false`` in :ref:`Gateway configuration <conf_gateway_label>`
+* You need to update ``${USE_S3_AUTH}`` and set its value to ``false`` in :ref:`Gateway configuration <conf_gateway_label>`
 
 Interface
 ---------
 
-Relationship betwwen HTTP-verb and LeoFS's Behaivior
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Description of LeoFS' behavior for each HTTP verb
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 \
 
 +----------------+--------------------------------------------------------+
-| HTTP Verb      | LeoFS's Behaiviour                                     |
+| HTTP Verb      | LeoFS' Behavior                                        |
 +================+========================================================+
-| PUT/POST       | Insert an object into the storage-cluster              |
+| PUT/POST       | Insert an object into the storage cluster              |
 +----------------+--------------------------------------------------------+
-| GET            | Retrieve an object from the storage-cluster            |
+| GET            | Retrieve an object from the storage cluster            |
 +----------------+--------------------------------------------------------+
-| DELETE         | Remove an object from the storage-cluster              |
+| DELETE         | Remove an object from the storage cluster              |
 +----------------+--------------------------------------------------------+
 
 URL format
 ^^^^^^^^^^
 
 * URL format: http://${HOST}:8080/**${KEY}**
-    * LeoFS uses NOT URL but ``${KEY}`` into the system
-    * You can check that an object is assigned storage-node as the follows:
+    * LeoFS will only use the ``${KEY}`` part of the URL to identify objects
+    * You can check that an object exists in the cluster by using:
 
 ::
 

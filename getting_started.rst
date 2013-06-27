@@ -14,14 +14,14 @@ most Linux platforms with the following software:
 
 * `Erlang OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
 
-And the following erlang libraries:
+LeoFS includes the following Erlang libraries:
 
 * `Basho Bitcask <https://github.com/basho/bitcask>`_
 * `Ninenines Cowboy <https://github.com/extend/cowboy>`_
 * `Boundary Folsom <https://github.com/boundary/folsom>`_
 * `Szktty Erlang LZ4 <https://github.com/szktty/erlang-lz4>`_
 
-And we recommend you to use on 64bit builds because of having to handle large files.
+We recommend that you use a 64bit system to be able to handle large files.
 
 .. index::
    pair: LeoFS; Download
@@ -36,7 +36,7 @@ Getting LeoFS
 Quick Start -1 All in one for Application Development
 ------------------------------------------------------
 
-.. note:: In this example, ``LeoFS-Storage``, ``LeoFS-Gateway`` and ``LeoFS-Manager``, all applications are installed into ``"local"``.
+.. note:: In this section, ``LeoFS-Storage``, ``LeoFS-Gateway`` and ``LeoFS-Manager`` are all installed on a single system, with no clustering.
 
 1. Install
 ^^^^^^^^^^
@@ -103,22 +103,23 @@ LeoFS
 Modify “/etc/hosts”
 """""""""""""""""""""""
 
-* Add a LeoFS's domain in ``/etc/hosts``
-* LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`
+* Add a domain for the LeoFS bucket in ``/etc/hosts``
+* Bucket names must follow :ref:`these rules <s3-path-label>`
 
 ::
 
     $ sudo vi /etc/hosts
 
-    ## Add a LeoFS's domain ##
+    ## Replace ${BUCKET_NAME} with the name of the bucket ##
     127.0.0.1 localhost ${BUCKET_NAME}.localhost
 
 
-3. Launch LeoFS's managers and storage
+3. Launch LeoFS' managers and storage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Launch master-manager, slave-manager
-* Launch a storage - ``# of replicas is ONE`` - System-configuration's details are :ref:`here <system-configuration-label>`.
+* By default there is only one replica, you may want to :ref:`configure the system <system-configuration-label>`.
+* Start master-manager, slave-manager
+* Start a storage node
 
 ::
 
@@ -128,27 +129,27 @@ Modify “/etc/hosts”
     $ storage/bin/leo_storage start
 
 
-4. Launch the system
+4. Start the system
 ^^^^^^^^^^^^^^^^^^^^^
 
-* Using command is ``start`` on LeoFS's manager-console
+* Use the command ``start`` in the LeoFS manager console
 
 ::
 
     $ telnet 127.0.0.1 10010
     > start
 
-5. Launch a LeoFS's gateway
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5. Start a LeoFS gateway node
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     $ gateway/bin/leo_gateway start
 
-6. Confirmation of the system
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+6. Confirm that the system is running
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Using command is ``status`` on LeoFS's manager-console
+* Use the command ``status`` in the LeoFS manager console
 
 ::
 
@@ -173,10 +174,11 @@ Modify “/etc/hosts”
      gateway@127.0.0.1           running     1428891014    1428891014    2012-09-07 14:24:37 +0900
 
 
-7. Getting Your S3-API's Key from LeoFS's Manager-Console
+7. Get your S3 API Key from the LeoFS manager console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Using command is ``create-user`` on LeoFS's manager-console
+* Use the command ``create-user`` in the LeoFS manager console
+* It takes the user name as its only argument
 
 ::
 
@@ -190,7 +192,7 @@ Modify “/etc/hosts”
 8. Clients
 ^^^^^^^^^^^
 
-* LeoFS uses any S3-Clients as follows:
+* You can now connect to LeoFS using any S3 client, including:
     * :ref:`Ruby - ‘aws-sdk’ <aws-sdk-ruby-label>`
     * :ref:`FUSE - ‘S3FS-C’ <s3fs-c-label>`
     * :ref:`GUI  - ‘Dragon Disk’ <dragondisk-label>`

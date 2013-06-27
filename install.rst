@@ -1,6 +1,6 @@
 .. LeoFS documentation
 
-Install LeoFS
+LeoFS installation
 ================================
 .. index::
    pair: Erlang; Installation
@@ -9,26 +9,22 @@ Install LeoFS
 Erlang
 --------------------------------
 
-Prepare
+Preparation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Install OS-related libraries (CentOS 6.2)
-"""""""""""""""""""""""""""""""""""""""""
+Install required libraries using yum (CentOS 6.2)
+"""""""""""""""""""""""""""""""""""""""""""""""""
 .. index::
    pair: CentOS-6.2; Installation
-
-* Install when using yum
 
 ::
 
    # yum install libuuid-devel cmake
 
-Install OS-related libraries (Ubuntu Server 12.04 LTS)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Install required libraries using apt-get (Ubuntu Server 12.04 LTS)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .. index::
    pair: Ubuntu-12.04; Installation
-
-* Install when using apt (Ubuntu)
 
 ::
 
@@ -51,7 +47,7 @@ Download "Erlang R15B03-1"
 
 .. code-block:: bash
 
-   ## [R15B03]
+   ## [R15B03-1]
    $ cd $WORK_DIR
    $ wget http://www.erlang.org/download/otp_src_R15B03-1.tar.gz
 
@@ -93,29 +89,27 @@ Confirm
 XFS-related
 ------------
 
-.. note:: If You deploy LeoFS on your **DEV environments**, You does NOT need this operaion, but if you deploy LeoFS on your **PRODUCTION environments**, You need to install XFS-libs and create an XFS's partition.
+.. note:: We highly recommend using an XFS partition, as it is the filesystem that shows the better results with LeoFS. This section describes the installation instructions related to XFS. If you are deploying LeoFS on a **DEV environment**, you do NOT need to perform this operation.
 
-Install OS-related libraries (CentOS 6.2) for XFS
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install required libraries for XFS with yum (CentOS 6.2)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. index::
    pair: CentOS-6.2; Installation
-
-* Install when using yum (CentOS)
 
 ::
 
    # yum --enablerepo=centosplus install kmod-xfs xfsprogs xfsprogs-devel
 
 
-Create XFS Partition (Volume)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Create an XFS Partition (Volume)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. index::
    pair: XFS; Installation
 
-Only **LeoFS-Storage node** use XFS (unix local file system). Because XFS is high I/O efficiency for Large-File. **LeoFS-Storage** is implemented on top of files stored in a single filesystem created on top of the a few TB volume.
+Only the servers running **LeoFS storage nodes** will benefit from using XFS (unix local file system). XFS provides particularly efficient I/O for large files. **LeoFS-Storage** is implemented on top of files stored in a single filesystem created on top of the a few TB volume.
 
-Create partition
+Start fdisk
 """""""""""""""""
 
 ::
@@ -139,8 +133,8 @@ Create partition
    /dev/sda1   *           1        1951    15671376   83  Linux
    /dev/sda2            1952        2472     4184932+  82  Linux swap / Solaris
 
-Execute
-""""""""
+Create partition
+""""""""""""""""
 
 ::
 
@@ -197,7 +191,7 @@ Reboot
 
    # reboot
 
-Execute 'Format partition'
+Format the partition
 """""""""""""""""""""""""""
 
 * `Reference(EN) <http://www.ibm.com/developerworks/linux/library/l-fs10/index.html>`_
@@ -207,15 +201,15 @@ Execute 'Format partition'
 
    # mkfs.xfs -d agcount=4 -l size=32m ${TARGET_PARTITION}
 
-Modify "/etc/fstab" file
-"""""""""""""""""""""""""
+Modify the "/etc/fstab" file
+""""""""""""""""""""""""""""
 
 ::
 
    # vi /etc/fstab
    /dev/sda3   /mnt/xfs   xfs   noatime,nodiratime,osyncisdsync 0 0
 
-Create mount point and Execute "mount" command
+Mount the partition
 """""""""""""""""""""""""""""""""""""""""""""""
 
 ::
@@ -235,15 +229,15 @@ Confirm
    /dev/sda3             51664400      4
 
 
-Install "LeoFS"
+LeoFS
 --------------------------------
 .. index::
    pair: LeoFS; Installation
 
-LeoFS's file structure (After decompress an LeoFS-archive)
+File structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Before executed make-command
+Before running make
 """"""""""""""""""""""""""""""""
 
 ::
@@ -264,7 +258,7 @@ Before executed make-command
              |--- leo_manager/
              `--- leo_storage/
 
-After executed make-command
+After running make
 """""""""""""""""""""""""""""""
 
 ::
@@ -309,7 +303,7 @@ After executed make-command
              |--- leo_manager/
              `--- leo_storage/
 
-Build "LeoFS"
+Building
 ^^^^^^^^^^^^^^^^^
 
 ::
@@ -370,17 +364,17 @@ Log Dir and Working Dir
 +=============+========================================================+
 | **log/**                                                             |
 +-------------+--------------------------------------------------------+
-| log/app/    | For Application logs                                   |
+| log/app/    | Application logs                                       |
 +-------------+--------------------------------------------------------+
-| log/ring    | For RING (routing-table for replication) Dump files    |
+| log/ring/   | RING (routing-table for replication) dump files        |
 +-------------+--------------------------------------------------------+
-| log/sasl    | For Erlang-SASL Logs                                   |
+| log/sasl/   | SASL (Erlang system) Logs                              |
 +-------------+--------------------------------------------------------+
 | **work/**                                                            |
 +-------------+--------------------------------------------------------+
-| work/mnesia/| For System internal info which is stored into 'Mnesia' |
+| work/mnesia/| System internal data stored into 'Mnesia'              |
 +-------------+--------------------------------------------------------+
-| work/queue  | For Message Queue's data which is stored into 'bitcask'|
+| work/queue/ | Message queue data stored into 'bitcask'               |
 +-------------+--------------------------------------------------------+
 
 - ref: `Basho bitcask <https://github.com/basho/bitcask>`_
@@ -406,12 +400,12 @@ Log Dir and Working Dir
 
 .. _system-configuration-label:
 
-Set up LeoFS's system-configuration (Only LeoFS-Manager)
+Configuring your new LeoFS system using LeoFS-Manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * File: ${LEOFS_SRC}/package/leofs/manager_0/etc/app.config
 
-.. note::  **Consistency Level** is decided by this configuration file. Also, It should not modify in operation.
+.. note::  The **Consistency Level** is configured in this file. It should not be modified while the system is running.
 
 +-------------+---------------------------------------------------------+
 | Property    | Explanation                                             |
@@ -424,11 +418,11 @@ Set up LeoFS's system-configuration (Only LeoFS-Manager)
 +-------------+---------------------------------------------------------+
 | d           | # of replicas needed for a successful DELETE operation  |
 +-------------+---------------------------------------------------------+
-| level_1     | # of dc-awareness replicas (Plan to support with v1.0.0)|
+| level_1     | # of dc-aware replicas (Supported from v1.0.0 onward)   |
 +-------------+---------------------------------------------------------+
-| level_2     | # of rack-awareness replicas                            |
+| level_2     | # of rack-aware replicas                                |
 +-------------+---------------------------------------------------------+
-| bit_of_ring | # of bits of hash-ring (fixed 128bit)                   |
+| bit_of_ring | # of bits for the hash-ring (fixed 128bit)              |
 +-------------+---------------------------------------------------------+
 
 * A reference consistency level
@@ -482,34 +476,34 @@ Firewall Rules
 +================+===========+=================+==========================+
 | Manager-Master | Incoming  | 10010/*         | Manager console          |
 +----------------+-----------+-----------------+--------------------------+
-| Manager-Master | Incoming  | 4369/*          | erlang RPC from others   |
+| Manager-Master | Incoming  | 4369/*          | Erlang RPC from others   |
 +----------------+-----------+-----------------+--------------------------+
 | Manager-Master | Incoming  | 4020/*          | SNMP Listen Port         |
 +----------------+-----------+-----------------+--------------------------+
-| Manager-Master | Outgoing  | \*/4369         | erlang RPC to others     |
+| Manager-Master | Outgoing  | \*/4369         | Erlang RPC to others     |
 +----------------+-----------+-----------------+--------------------------+
 | Manager-Slave  | Incoming  | 10011/*         | Manager console          |
 +----------------+-----------+-----------------+--------------------------+
-| Manager-Slave  | Incoming  | 4369/*          | erlang RPC from others   |
+| Manager-Slave  | Incoming  | 4369/*          | Erlang RPC from others   |
 +----------------+-----------+-----------------+--------------------------+
 | Manager-Slave  | Incoming  | 4021/*          | SNMP Listen Port         |
 +----------------+-----------+-----------------+--------------------------+
-| Manager-Slave  | Outgoing  | \*/4369         | erlang RPC to others     |
+| Manager-Slave  | Outgoing  | \*/4369         | Erlang RPC to others     |
 +----------------+-----------+-----------------+--------------------------+
-| Storage        | Incoming  | 4369/*          | erlang RPC from others   |
+| Storage        | Incoming  | 4369/*          | Erlang RPC from others   |
 +----------------+-----------+-----------------+--------------------------+
 | Storage        | Incoming  | 4010/*          | SNMP Listen Port         |
 +----------------+-----------+-----------------+--------------------------+
-| Storage        | Outgoing  | \*/4369         | erlang RPC to others     |
+| Storage        | Outgoing  | \*/4369         | Erlang RPC to others     |
 +----------------+-----------+-----------------+--------------------------+
 | Gateway        | Incoming  | 8080/*          | HTTP listen port         |
 +----------------+-----------+-----------------+--------------------------+
 | Gateway        | Incoming  | 8443/*          | HTTPS listen port        |
 +----------------+-----------+-----------------+--------------------------+
-| Gateway        | Incoming  | 4369/*          | erlang RPC from others   |
+| Gateway        | Incoming  | 4369/*          | Erlang RPC from others   |
 +----------------+-----------+-----------------+--------------------------+
 | Gateway        | Incoming  | 4000/*          | SNMP Listen Port         |
 +----------------+-----------+-----------------+--------------------------+
-| Gateway        | Outgoing  | \*/4369         | erlang RPC to others     |
+| Gateway        | Outgoing  | \*/4369         | Erlang RPC to others     |
 +----------------+-----------+-----------------+--------------------------+
 
