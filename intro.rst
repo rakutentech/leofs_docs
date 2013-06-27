@@ -9,7 +9,7 @@ Introduction
 LeoFS Overview
 --------------------------------
 
-**"LeoFS"** is highly scalable, fault-tolerant distributed file system (DFS) for the Web. Different than traditional distributed file system and other DFS — **"LeoFS"** offers a number of unique benefits to users:
+**LeoFS** is a highly scalable, fault-tolerant distributed file system (DFS) for the Web. LeoFS is the leading DFS and offers a number of unique benefits to users:
 
 * High Cost Performance Ratio
 * High Reliability
@@ -23,13 +23,13 @@ Goals
 
 * LeoFS aims to provide the following advantages:
     * HIGH Cost Performance Ratio
-        * Fast - Over 200MB/sec into 10GE
+        * Fast - Over 200MB/sec in a 10GE network
         * A lower cost than other storage
-        * Provide easy management and easy operation
+        * Easy management and easy operation
     * HIGH Reliability
-        * Nine nines - Operating ratio is 99.9999999%
+        * Nine nines - 99.9999999% availability
     * High Scalability
-        * Build "Huge Cluster" at low cost
+        * Build a huge cluster at low cost
 
 Milestones
 --------------------------------
@@ -39,23 +39,26 @@ Milestones
     * Web GUI-Console (LeoTamer - Optional)
         * Cluster manager/monitor
         * Log Analysis/Search
-* 0.14 (Feb 2013 - May)
+* 0.14 (Feb 2013 - June)
     * Multi-layer Cache (Using SSD)
+    * Rack aware replica placement
+    * Web GUI Console (Option)
+       * Support whole LeoFS Manager's commands
+    * QoS System Phase-1 (Savannah - Option)
+       * Support *statistics/analyzer*
+* 1.0 (July 2013 - )
     * Job Scheduler on the Manager
-    * API-related:
-        * Increase compatibility S3-APIs#3
-        * Support for OpenStack Swift-API
-    * QoS System Phase-1 (LeoDenebola - Option)
-    * Web-Console (Leo Tamer - Option)
-        * Log Analysis/Search
-* 1.0 (June 2013 - )
+        * Support *auto-compaction*
+        * Support *auro-recovery*
     * Multi-Datacenter Data Replication
     * OpenStack Integration
+        * Support for OpenStack Swift-API
     * Increase compatibility S3-APIs#4
         * Objects Expiration into the bucket
         * Other bucket operations
-    * QoS System Phase-2 (LeoDenebola - Option)
-    * Web-Console (Leo Tamer - Option)
+    * QoS System Phase-2 (Savannah - Option)
+       * Support *notifier*
+    * Web GUI Console (Option)
         * QoS Integration
-        * Log Analysis/Search
+        * Suport Log analysis/search
 

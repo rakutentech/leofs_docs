@@ -1,13 +1,13 @@
 LeoFS Console v0.4.1
 ====================
 
-**LeoFS Console** is LeoFS's GUI console on your browser. You can easily operate LeoFS.
+**LeoFS Console** is LeoFS' GUI console in your browser. You can use it to easily operate LeoFS.
 
-Install and Setup
------------------
+Installation and configuration
+------------------------------
 
-Requirement
-^^^^^^^^^^^
+Requirements
+^^^^^^^^^^^^
 
 * **LeoFS v0.14.0** or higher is required.
 
@@ -29,7 +29,7 @@ Install LeoFS Console
 Create Admin User
 ^^^^^^^^^^^^^^^^^
 
-* You need to create a user as ``administrator`` on LeoFS-Manager's console.
+* You must create an ``administrator`` user from LeoFS-Manager's console.
 
 ::
 
@@ -45,7 +45,7 @@ Create Admin User
 Configuration
 ^^^^^^^^^^^^^
 
-You need to modify ``config.yml`` for connecting LeoFS-Manager
+You must modify ``config.yml`` to allow LeoFS Console to connect to LeoFS-Manager.
 
 ::
 
@@ -67,17 +67,17 @@ You need to modify ``config.yml`` for connecting LeoFS-Manager
     - Processes memory usage (1-min Averages)
     - System memory usage (1-min Averages)
 
-You need modify ``unicorn.conf``
+You must also modify ``unicorn.conf``.
 
 ::
 
   listen "/tmp/leofs-console.sock" # Unix domain socket
   listen ${LEOFS-CONSOLE-PORT} # TCP
 
-Nginx + Unicorn
-""""""""""""""""
+Nginx Configuration
+"""""""""""""""""""
 
-* Case of using ``TCP/IP``
+* When using ``TCP/IP``
     * You need to modify ``/etc/nginx/sites-available/default``
 
 ::
@@ -92,7 +92,7 @@ Nginx + Unicorn
     }
   }
 
-* Case of Using ``Unix-domain-socket``
+* When using ``Unix-domain-socket``
     * You need to modify ``/etc/nginx/nginx.conf`` and ``/etc/nginx/sites-available/default``
 
 ::
@@ -120,8 +120,8 @@ Nginx + Unicorn
 
 
 
-Launch
-------
+Starting LeoFS Console
+----------------------
 
 When using WEBrick
 ^^^^^^^^^^^^^^^^^^
@@ -142,12 +142,12 @@ When using Unicorn (Unicorn is an HTTP server for Rack applications)
 
 
 Features
----------
+--------
 
 Your Credentials
 ^^^^^^^^^^^^^^^^
 
-* You can confirm your credentials with ``Security Credentials`` on the form of top right
+* You can confirm your credentials by using the ``Security Credentials`` menu on the top right of the screen.
 
 .. image:: _static/screenshots/leofs_console/userinfo_0.png
    :width: 720px
@@ -161,9 +161,9 @@ Your Credentials
 Bucket Status View
 ^^^^^^^^^^^^^^^^^^
 
-* You can confirm your belonging buckets
-    * Able to create a bucket
-    * ``Deletion of a bucket`` plan to support with ``LeoFS-Console v0.4.2``
+* You can get an overview of the buckets that belong to you.
+    * You can create new buckets.
+    * ``Deletion of a bucket`` is planned to be supported from ``LeoFS-Console v0.4.2``.
 
 .. image:: _static/screenshots/leofs_console/bucket_status_0.png
    :width: 720px
@@ -172,7 +172,7 @@ Bucket Status View
 Node Status View
 ^^^^^^^^^^^^^^^^
 
-* You can confirm each node-status with ``Group by type`` OR ``Group by status``
+* You can get an overview of the nodes in the cluster, and group them by ``type`` or ``status``.
 * Group by type View:
 
 \
@@ -187,8 +187,7 @@ Node Status View
 .. image:: _static/screenshots/leofs_console/nodestatus_2.png
    :width: 720px
 
-* Administrators can change ``storage-staus`` with ``Change Status button``
-    * storage-status: [resume, suspend, detach]
+* Administrators can use the ``Change Status button`` to suspend, resume or detach storage nodes.
 
 \
 
@@ -204,7 +203,7 @@ Table - Changeable Status
 \
 
 +-----------------------+----------------------------+
-|Current Status         | Changeable Status          |
+|Current status         | Action available           |
 +=======================+============================+
 | |running| running     | suspend, detach            |
 +-----------------------+----------------------------+
@@ -223,10 +222,10 @@ Table - Changeable Status
 \
 
 
-Rebalance into the storage-cluster
-""""""""""""""""""""""""""""""""""
+Rebalancing the storage cluster
+"""""""""""""""""""""""""""""""
 
-.. note:: Existing status of ``attached`` OR ``detached`` into the storage-cluster that ``Rebalance (button)`` becomes active.
+.. note:: The ``Rebalance button`` only becomes active when the storage status is ``attached`` or ``detached``.
 
 \
 
@@ -241,8 +240,8 @@ Administration Tools
 System Conf View
 """"""""""""""""
 
-* You can confirm configuration of the LeoFS
-* Please see :ref:`LeoFS’s system-configuration <system-configuration-label>`
+* Overview of the configuration of LeoFS
+* Please see :ref:`LeoFS’ system-configuration <system-configuration-label>`
 
 .. image:: _static/screenshots/leofs_console/admintools_system_conf.png
    :width: 720px
@@ -251,9 +250,9 @@ System Conf View
 Users View
 """"""""""
 
-* You can confirm the registered list of users
-    * Able to create a user and delete it
-    * Able to change a user role with ``Update Role button``
+* Lists the registered users
+    * You can create and delete users
+    * You can change an user's role using the ``Update Role button``
 
 .. image:: _static/screenshots/leofs_console/admintools_users.png
    :width: 720px
@@ -261,10 +260,8 @@ Users View
 Buckets View
 """"""""""""
 
-.. note:: A bucket as root directory belongs to a user
-
-* You can confirm the registered list of buckets
-    * Able to create a bucket
+* Lists the registered buckets, per owner
+    * You can create new buckets
 
 .. image:: _static/screenshots/leofs_console/admintools_buckets.png
    :width: 720px
@@ -272,8 +269,8 @@ Buckets View
 Endpoints View
 """"""""""""""
 
-* You can confirm the registered list of endpoints
-    * Able to create an endpoint and delete it
+* List of registered endpoints
+    * You can create and delete endpoints
 
 .. image:: _static/screenshots/leofs_console/admintools_endpoints.png
    :width: 720px
@@ -292,17 +289,17 @@ Milestones
     * Bucket status
         * Belonging bucket-list
 
-* 0.4 (Mar - June 2013)
+* 0.4 (Mar - July 2013)
     *  User Group
         * Sharing LeoFS's credential-keys in the group
         * User management in the group
 
-* 0.6 (July 2013)
+* 0.6 (August 2013)
     * Link LeoFS-QoS *(Quality of Service - Denebola)*
         * Bucket status
             * total of files
             * total used disk capacity
 
-* 0.8 (August 2013)
+* 0.8 (Octorber 2013)
     * Log Search/Analysis (Option)
 

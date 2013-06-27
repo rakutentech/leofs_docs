@@ -1,6 +1,6 @@
 .. LeoFS documentation
 
-Configuration of LeoFS
+LeoFS Configuration
 ======================
 
 .. index::
@@ -24,12 +24,12 @@ Relationship of configuration files
 LeoFS Manager-Master
 --------------------
 
-**Manager-Master's Properties for launch**
+**Configuration of the Manager-Master node**
 
 * **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_0/etc/app.config**
 
 +----------------+--------------------------------------------------------+
-|Property        | Configuration                                          |
+|Property        | Description                                            |
 +================+========================================================+
 |${SLAVE-IP}     | Manager-Slave node's IP-address                        |
 +----------------+--------------------------------------------------------+
@@ -120,7 +120,7 @@ LeoFS Manager-Master
 * **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_0/etc/vm.args**
 
 +----------------+--------------------------------------------------------+
-|Property        | Configuration                                          |
+|Property        | Description                                            |
 +================+========================================================+
 |${MASTER-IP  }  | Manager-Master IP                                      |
 +----------------+--------------------------------------------------------+
@@ -161,12 +161,12 @@ LeoFS Manager-Master
 LeoFS Manager-Slave
 -------------------
 
-Manager-Slave's Properties for launch
+**Configuration of the Manager-Slave node**
 
 * **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_0/etc/app.config**
 
 +----------------+--------------------------------------------------------+
-|Property        | Configuration                                          |
+|Property        | Description                                            |
 +================+========================================================+
 |${MASTER-IP}    | Manager-Master node's IP-address                       |
 +----------------+--------------------------------------------------------+
@@ -197,7 +197,7 @@ Manager-Slave's Properties for launch
 * **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_1/etc/vm.args**
 
 +----------------+--------------------------------------------------------+
-|Property        | Configuration                                          |
+|Property        | Description                                            |
 +================+========================================================+
 |${SLAVE-IP}     | Manager-Slave IP                                       |
 +----------------+--------------------------------------------------------+
@@ -241,12 +241,12 @@ Manager-Slave's Properties for launch
 LeoFS Storage
 -------------
 
-Storage's Properties for launch
+**Configuration of Storage nodes**
 
 * **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/storage/etc/app.config**
 
 +-------------------------+--------------------------------------------------------+
-|Property                 | Configuration                                          |
+|Property                 | Description                                            |
 +=========================+========================================================+
 |${OBJECT_STORAGE_DIR}    | Object Storage directory  - Default:"./avs"            |
 +-------------------------+--------------------------------------------------------+
@@ -265,7 +265,7 @@ Storage's Properties for launch
 
     {leo_storage, [
                    %% == System Ver ==
-                   {system_version, "0.14.1" },
+                   {system_version, "0.14.3" },
 
                    %% == Storage Configuration ==
                    %%
@@ -288,6 +288,23 @@ Storage's Properties for launch
 
                    %% # of mq-server's processes
                    {num_of_mq_procs,    8 },
+
+                   %% mq - queues cosumption's intervals
+                   %% - per_object
+                   {cns_interval_per_object_min, 0  },
+                   {cns_interval_per_object_max, 16 },
+                   %% - sync_by_vnode_id
+                   {cns_interval_sync_by_vnode_id_min, 0  },
+                   {cns_interval_sync_by_vnode_id_max, 16 },
+                   %% - for rebalance
+                   {cns_interval_rebalance_min, 0  },
+                   {cns_interval_rebalance_max, 16 },
+                   %% - async deletion objects (after remove a bucket)
+                   {cns_interval_async_deletion_min, 0  },
+                   {cns_interval_async_deletion_max, 16 },
+                   %% - recovery node
+                   {cns_interval_recovery_node_min,  0  },
+                   {cns_interval_recovery_node_max,  16 },
 
                    %% == For Ordning-Reda ==
                    %% Size of stacked objects (bytes)
@@ -312,11 +329,19 @@ Storage's Properties for launch
                    {snmp_agent,  ${SNMPA-DIR}}
                   ]},
 
+    {leo_object_storage, [{profile, false},
+                          {metadata_storage, 'bitcask'},
+
+                          %% Strict comparison of object's checksum with metadata's it
+                          %% (default:false)
+                          {is_strict_check, false }
+                         ]},
+
 
 * **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/storage/etc/vm.args**
 
 +-------------------------+--------------------------------------------------------+
-|Property                 | Configuration                                          |
+|Property                 | Description                                            |
 +=========================+========================================================+
 |${STORAGE_ALIAS}         | Storage node's Alias name                              |
 +-------------------------+--------------------------------------------------------+
@@ -365,16 +390,16 @@ Storage's Properties for launch
 LeoFS Gateway
 -------------
 
-Gateway's Properties for launch
+**Configuration of Gateway nodes**
 
 * **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/gateway/etc/app.config**
 
 +---------------------------+----------------------------------------------------------------------------------+
-|Property                   | Configuration                                                                    |
+|Property                   | Description                                                                      |
 +===========================+==================================================================================+
-|${LISTENING_PORT}          | Gateway's listening port number                                                  |
+|${LISTENING_PORT}          | Port number the Gateway uses for HTTP connections                                |
 +---------------------------+----------------------------------------------------------------------------------+
-|${NUM_OF_LISTENNER}        | Numbers of Gateway's listening processes                                         |
+|${NUM_OF_LISTENER}         | Numbers of processes listening for connections                                   |
 +---------------------------+----------------------------------------------------------------------------------+
 |${MANAGER_MASTER_IP}       | Manager-master node's IP-address                                                 |
 +---------------------------+----------------------------------------------------------------------------------+
@@ -386,44 +411,44 @@ Gateway's Properties for launch
 |                           |                                                                                  |
 |                           | - [snmpa_gateway_0|snmpa_gateway_1|snmpa_gateway_0]                              |
 +---------------------------+----------------------------------------------------------------------------------+
-|${HTTP_HANDLER}            | Gateway's Http handler(API) which are ``s3`` (default) and ``rest``              |
+|${HTTP_HANDLER}            | Gateway's HTTP API to use, either ``s3`` (default) or ``rest``                   |
 +---------------------------+----------------------------------------------------------------------------------+
 | *Cache related items*                                                                                        |
 +---------------------------+----------------------------------------------------------------------------------+
-|${IS_HTTP_CACHE}           | Method of chache - **http** OR **inner** *(default)*                             |
+|${IS_HTTP_CACHE}           | Cache method: **http** OR **inner** *(default)*                                  |
 |                           |                                                                                  |
 |                           | +-----+---------------------------------------------------------------------+    |
-|                           | |true |HTTP-base cache server - Like a *Varnish* OR *Squid*                 |    |
+|                           | |true |HTTP-based cache server, like *Varnish* OR *Squid*                   |    |
 |                           | +-----+---------------------------------------------------------------------+    |
-|                           | |false|Stored objects into the gateway's memory. When READ, the *Etag* of   |    |
-|                           | |     |a cache is comapared with backend-storage's *Etag*.                  |    |
+|                           | |false|Stores objects into the Gateway's memory. When READ, the *Etag* of   |    |
+|                           | |     |the cache is compared with backend storage's *Etag*.                 |    |
 |                           | |     |                                                                     |    |
 |                           | |     | +----------+--------------------------------------------+           |    |
-|                           | |     | |matched   | Return a cache                             |           |    |
+|                           | |     | |matched   | Return the cached object                   |           |    |
 |                           | |     | +----------+--------------------------------------------+           |    |
-|                           | |     | |unmatched | Return an original-object from the storage |           |    |
+|                           | |     | |unmatched | Return the object from the Storage node    |           |    |
 |                           | |     | +----------+--------------------------------------------+           |    |
 |                           | +-----+---------------------------------------------------------------------+    |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_RAM_CAPACITY}      | Memory-cache capacity in byte                                                    |
+|${CACHE_RAM_CAPACITY}      | Memory cache capacity in bytes                                                   |
 |                           |                                                                                  |
 |                           | (ex. 4000000000 means using 4GB memory cache)                                    |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_DISC_CAPACITY}     | Disc-cache capacity Size in byte - default: 0Byte (disabled)                     |
+|${CACHE_DISC_CAPACITY}     | Disk cache capacity in bytes - default: 0 Bytes (disabled)                       |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_DISC_THRESHOLD_LEN}| When a length of object exceed this value, the object is stored into the disc    |
+|${CACHE_DISC_THRESHOLD_LEN}| When the length of the object exceeds this value, store the object on disk       |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_DISC_DIR_DATA}     | Disc-cache's directory for data - storing desctination is SSD (or HDD)           |
+|${CACHE_DISC_DIR_DATA}     | Directory for the disk cache data                                                |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_DISC_DIR_JOURNAL}  | Disc-cache's directory for journal                                               |
+|${CACHE_DISC_DIR_JOURNAL}  | Directory for the disk cache journal                                             |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_EXPIRE}            | [**cache-mode:http**] Http Cache Expire in second                                |
+|${CACHE_EXPIRE}            | [**cache-mode:http**] HTTP Cache Expire in seconds                               |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_MAX_C_LEN}         | [**cache-mode:http**] Http Cache Max Content Length in byte                      |
+|${CACHE_MAX_C_LEN}         | [**cache-mode:http**] HTTP Cache Max Content Length in bytes                     |
 |                           |                                                                                  |
-|                           | Note: *LeoFS-gateway can cache up to 1MB*                                        |
+|                           | Note: *LeoFS-Gateway can cache up to 1MB*                                        |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_C_TYPE}            | [**cache-mode:http**] Http Cache Content Type                                    |
+|${CACHE_C_TYPE}            | [**cache-mode:http**] HTTP Cache Content Type                                    |
 |                           |                                                                                  |
 |                           | ex-1) ["image/png", "image/jpeg"]                                                |
 |                           |                                                                                  |
@@ -431,9 +456,9 @@ Gateway's Properties for launch
 |                           |                                                                                  |
 |                           | ex-2) []                                                                         |
 |                           |                                                                                  |
-|                           |       When rule is empty, all objects are cached.                                |
+|                           |       When value is empty, all objects are cached.                               |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_PATH_PATTERNS}     | [**cache-mode:http**] Http Cache Path Pattern(regular expression)                |
+|${CACHE_PATH_PATTERNS}     | [**cache-mode:http**] HTTP Cache Path Pattern (regular expression)               |
 |                           |                                                                                  |
 |                           | ex-1) ["/img/.+", "/css/.+"]                                                     |
 |                           |                                                                                  |
@@ -441,7 +466,7 @@ Gateway's Properties for launch
 |                           |                                                                                  |
 |                           | ex-2) []                                                                         |
 |                           |                                                                                  |
-|                           |       When rule is empty, all objects are cached.                                |
+|                           |       When value is empty, all objects are cached.                               |
 +---------------------------+----------------------------------------------------------------------------------+
 
 
@@ -467,7 +492,7 @@ Gateway's Properties for launch
                         %% Gateway port number:
                         {port, ${LISTENING_PORT} },
                         %% # of acceptors:
-                        {num_of_acceptors, ${NUM_OF_LISTENNER} },
+                        {num_of_acceptors, ${NUM_OF_LISTENER} },
                         %% max # of layer of directories:
                         {layer_of_dirs, {1, 12} },
                         %% ssl related:
@@ -549,7 +574,7 @@ Gateway's Properties for launch
 * **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/gateway/etc/vm.args**
 
 +--------------------+--------------------------------------------------------+
-|Property            | Configuration                                          |
+|Property            | Description                                            |
 +====================+========================================================+
 |${GATEWAY_ALIAS}    | Gateway node's Alias name                              |
 +--------------------+--------------------------------------------------------+
@@ -595,13 +620,13 @@ Gateway's Properties for launch
 .. index::
     SNMP
 
-Setup SNMPA
+SNMPA Setup
 -----------
 
 Manager
 ^^^^^^^
 
-a. SNMPA-Properties
+a. SNMPA Properties
 
 \
 
@@ -619,12 +644,12 @@ a. SNMPA-Properties
 | snmpa_manager_2  | Port: 4022                         |
 +------------------+------------------------------------+
 
-b. SNMPA-Items
+b. SNMPA Items
 
 \
 
 +------------------+------------------------------------+
-| Branch Number    | Explanation                        |
+| Branch Number    | Description                        |
 +==================+====================================+
 | 1                | Node name                          |
 +------------------+------------------------------------+
@@ -674,7 +699,7 @@ c. Method of confirmation
 Storage
 ^^^^^^^
 
-a. SNMPA-Properties
+a. SNMPA Properties
 
 \
 
@@ -694,12 +719,12 @@ a. SNMPA-Properties
 | snmpa_storage_3  | Port: 4013                         |
 +------------------+------------------------------------+
 
-b. SNMPA-Items
+b. SNMPA Items
 
 \
 
 +------------------+------------------------------------+
-| Branch Number    | Explanation                        |
+| Branch Number    | Description                        |
 +==================+====================================+
 | 1                | Node name                          |
 +------------------+------------------------------------+
@@ -727,7 +752,7 @@ b. SNMPA-Items
 +------------------+------------------------------------+
 | 11               | ETS memory usage                   |
 +------------------+------------------------------------+
-| **Request-Counter (1-min Averages)**                  |
+| **Request Counter (1-min Averages)**                  |
 +------------------+------------------------------------+
 | 12               | # of WRITEs                        |
 +------------------+------------------------------------+
@@ -735,7 +760,7 @@ b. SNMPA-Items
 +------------------+------------------------------------+
 | 14               | # of DELETEs                       |
 +------------------+------------------------------------+
-| **Request-Counter (5-min Averages)**                  |
+| **Request Counter (5-min Averages)**                  |
 +------------------+------------------------------------+
 | 15               | # of WRITEs                        |
 +------------------+------------------------------------+
@@ -796,7 +821,7 @@ c. Method of confirmation
 Gateway
 ^^^^^^^
 
-a. SNMPA-Properties
+a. SNMPA Properties
 
 \
 
@@ -812,7 +837,7 @@ a. SNMPA-Properties
 | snmpa_gateway_1  | Port: 4001                         |
 +------------------+------------------------------------+
 
-b. SNMPA-Items
+b. SNMPA Items
 
 \
 
@@ -845,7 +870,7 @@ b. SNMPA-Items
 +------------------+------------------------------------+
 | 11               | ETS memory usage                   |
 +------------------+------------------------------------+
-| **Request-Counter (1-min Averages)**                  |
+| **Request Counter (1-min Averages)**                  |
 +------------------+------------------------------------+
 | 12               | # of WRITEs                        |
 +------------------+------------------------------------+
@@ -853,7 +878,7 @@ b. SNMPA-Items
 +------------------+------------------------------------+
 | 14               | # of DELETEs                       |
 +------------------+------------------------------------+
-| **Request-Counter (5-min Averages)**                  |
+| **Request Counter (5-min Averages)**                  |
 +------------------+------------------------------------+
 | 15               | # of WRITEs                        |
 +------------------+------------------------------------+

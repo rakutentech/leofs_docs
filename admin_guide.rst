@@ -6,18 +6,18 @@
 Administration Guide
 ================================
 
-Order of system launch
+System launch order
 ----------------------
 
-LeoFS's system launch is very easy and simple as follows.
+LeoFS' system launch is very simple.
 
 .. image:: _static/images/leofs-order-of-system-launch.png
    :width: 640px
 
 
 
-Operation
-^^^^^^^^^
+Operations
+^^^^^^^^^^
 
 \
 
@@ -28,7 +28,7 @@ Operation
 +-------------+------------------------------------+------------------------------------------------------------+
 | 2           | $ bin/leofs_manager start          | Starting Manager Slave  **on Manager Slave Node**          |
 +-------------+------------------------------------+------------------------------------------------------------+
-| 3           | $ bin/leofs_storage start          | Startting Storage(s) **on each Storage Node**              |
+| 3           | $ bin/leofs_storage start          | Starting Storage(s) **on each Storage Nodes**              |
 +-------------+------------------------------------+------------------------------------------------------------+
 | 4           | $ telnet $manager-master 10010     | Accessing **Manager Master Console** by telnet             |
 +-------------+------------------------------------+------------------------------------------------------------+
@@ -36,44 +36,44 @@ Operation
 +-------------+------------------------------------+------------------------------------------------------------+
 | 6           | > status                           | Confirm status of the cluster on Manager Master Console #1 |
 +-------------+------------------------------------+------------------------------------------------------------+
-| 7           | $ bin/leofs_gateway start          | Startting Gateway(s) **on each Gateway Node**              |
+| 7           | $ bin/leofs_gateway start          | Starting Gateway(s) **on each Gateway Node**               |
 +-------------+------------------------------------+------------------------------------------------------------+
 | 8           | > status                           | Confirm status of the cluster on Manager Master Console #2 |
 +-------------+------------------------------------+------------------------------------------------------------+
 
 
-Detail of System launch
------------------------
+System launch step by step
+--------------------------
 
 .. index::
    pair: Operation; System Launch
 
-Operate starting manager-master on **LeoFS-Manager Master** node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Start manager-master on **LeoFS-Manager Master** node
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     $ cd $LEOFS_DEPLOYED_DIR
     $ manager_0/bin/leo_manager start
 
-Operate starting manager-slave on **LeoFS-Manager Slave** node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Start manager-slave on **LeoFS-Manager Slave** node
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     $ cd $LEOFS_DEPLOYED_DIR
     $ manager_1/bin/leo_manager start
 
-Operate starting storage on each **LeoFS-Storage** node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Start storage on each **LeoFS-Storage** node
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     $ cd $LEOFS_DEPLOYED_DIR
     $ storage/bin/leo_storage start
 
-LeoFS Manager Console on **LeoFS-Manager Master** node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Open LeoFS Manager Console on **LeoFS-Manager Master** node
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * 'status' command - Inspect LeoFS-cluster ::
 
@@ -180,7 +180,7 @@ Confirm#2 by **LeoFS-Manager** master node's console
 
 \
 
-Storage-cluster Operation Commands
+Storage Cluster Operation Commands
 ----------------------------------
 
 .. index::
@@ -197,7 +197,7 @@ LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
    Storage-cluster-related-commands
 
 
-Table of Storage-cluster's Commands
+Table of Storage Cluster's Commands
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 \
@@ -207,18 +207,18 @@ Table of Storage-cluster's Commands
 +================================+===================================================================================================+
 | **Storage-node related commands:**                                                                                                 |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
-| detach `${storage-node}`       | * Remove a storage-node from the LeoFS storage-cluster                                            |
+| detach `${storage-node}`       | * Remove a storage node from the LeoFS storage-cluster                                            |
 |                                | * Current status: ``running`` | ``stop``                                                          |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
-| suspend `${storage-node}`      | * Suspend a storage-node for maintenance, Also this command does NOT change "routing-table (RING)"|
+| suspend `${storage-node}`      | * Suspend a storage node for maintenance. This command does NOT change the "routing-table (RING)" |
 |                                | * Current status: ``running``                                                                     |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
-| resume `${storage-node}`       | * Resume a storage-node                                                                           |
+| resume `${storage-node}`       | * Resume a storage node                                                                           |
 |                                | * Current status: ``suspended`` | ``restarted``                                                   |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
 | **Storage-cluster related commands:**                                                                                              |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
-| start                          | * Launch LeoFS after distributed "routing-table (RING)" from Manager to Storage and Gateway       |
+| start                          | * Launch LeoFS after distributing the "routing-table (RING)" from Manager to Storage and Gateway  |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
 | rebalance                      | * Move or Copy files into the LeoFS storage-cluster due to changed RING                           |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
@@ -228,9 +228,9 @@ Table of Storage-cluster's Commands
 +--------------------------------+---------------------------------------------------------------------------------------------------+
 | recover file `${file-path}`    | * Synchronize an object between nodes in charge                                                   |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
-| recover node `${storage-node}` | * Recover belonging targe-node's objects                                                          |
+| recover node `${storage-node}` | * Recover belonging target node's objects                                                         |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
-| recover ring `${storage-node}` | * Synchronize target-node's RING with Manager's RING                                              |
+| recover ring `${storage-node}` | * Synchronize target node's RING with Manager's RING                                              |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
 
 .. index::
@@ -312,12 +312,12 @@ Command: ``whereis ${file-path}``
 
 \
 
-**recover** - Recover an object, belonging targe-node's objects and RING
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**recover** - Recover target node's objects and RING synchronization
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. index:: recover-file-command
 
-**'recover file'** - Synchronize an object between nodes in charge
+**'recover file'** - Synchronize an object between nodes
 
 ::
 
@@ -328,7 +328,7 @@ Command: ``whereis ${file-path}``
 
 .. index:: recover-node-command
 
-**'recover node'** - Recover belonging targe-node's objects
+**'recover node'** - Recover target node's objects
 
 ::
 
@@ -339,7 +339,7 @@ Command: ``whereis ${file-path}``
 
 .. index:: recover-ring-command
 
-**'recover ring'** - Synchronize target-node's RING with Manager's RING
+**'recover ring'** - Synchronize target node's RING with Manager's RING
 
 ::
 
@@ -359,9 +359,9 @@ Storage Maintenance Commands
 +===========================================================+================================================================+
 | **Disk Usage**                                                                                                             |
 +-----------------------------------------------------------+----------------------------------------------------------------+
-| du `${storage-node}`                                      | * Display disk usages(like xnix du command)                    |
+| du `${storage-node}`                                      | * Display disk usages (like Unix du command)                   |
 +-----------------------------------------------------------+----------------------------------------------------------------+
-| du detail `${storage-node}`                               | * Display disk usages in detail (like xnix du command)         |
+| du detail `${storage-node}`                               | * Display disk usages in details (like Unix du command)        |
 +-----------------------------------------------------------+----------------------------------------------------------------+
 | **Compaction**                                                                                                             |
 +-----------------------------------------------------------+----------------------------------------------------------------+
@@ -370,9 +370,9 @@ Storage Maintenance Commands
 +-----------------------------------------------------------+----------------------------------------------------------------+
 | compact suspend `${storage-node}`                         | * Suspend a compaction job in progress                         |
 +-----------------------------------------------------------+----------------------------------------------------------------+
-| compact resume  `${storage-node}`                         | * Resume a compaction job under suspension                     |
+| compact resume  `${storage-node}`                         | * Resume a suspended compaction job                            |
 +-----------------------------------------------------------+----------------------------------------------------------------+
-| compact status  `${storage-node}`                         | * Display compation statuses                                   |
+| compact status  `${storage-node}`                         | * Display compaction statuses                                  |
 |                                                           | * Compaction's status: ``idle``, ``running``, ``suspend``      |
 +-----------------------------------------------------------+----------------------------------------------------------------+
 
@@ -383,7 +383,7 @@ Storage Maintenance Commands
 
 .. index:: du-command
 
-**'du'** - Display disk usage(summary)
+**'du'** - Display disk usage (summary)
 
 Command: ``du ${storage-node}``
 
@@ -400,7 +400,7 @@ Command: ``du ${storage-node}``
 
 .. index:: du-detail-command
 
-**'du detail'** - Display disk usage in detail(per raw file)
+**'du detail'** - Display disk usage in details (per raw file)
 
 Command: ``du detail ${storage-node}``
 
@@ -447,7 +447,7 @@ Command: ``du detail ${storage-node}``
 
 Command: ``compact start ${storage-node} all | ${num_of_targets} [${num_of_compact_proc}]``
 
-.. note:: Default ``${num_of_compact_proc}`` is '3' - You can control the number of process to execute compaction in parallel. It enables you to get maximum performance by setting a appropriate number corresponding with number of cores.
+.. note:: Default ``${num_of_compact_proc}`` is '3' - You can control the number of processes to execute compaction in parallel. It enables you to get maximum performance by setting an appropriate number corresponding to the number of cores.
 
 ::
 
@@ -479,7 +479,7 @@ Command: ``compact suspend ${storage-node}``
 
 .. index:: compact-resume-command
 
-**'compact resume'** - Resume a compaction job under suspension
+**'compact resume'** - Resume a suspended compaction job
 
 Command: ``compact resume ${storage-node}``
 
@@ -492,7 +492,7 @@ Command: ``compact resume ${storage-node}``
 
 .. index:: compact-status-command
 
-**'compact status'** - Retrieve compation statuses
+**'compact status'** - Retrieve compaction statuses
 
 Command: ``compact status ${storage-node}``
 
@@ -518,9 +518,9 @@ Gateway Maintenance Commands
 +------------------------------------------------------+-----------------------------------------------------------------------------------+
 | Command                                              | Explanation                                                                       |
 +======================================================+===================================================================================+
-| purge ${file-path}                                   | * Purge a cached file if the specified file existed in cache                      |
+| purge ${file-path}                                   | * Purge a cached file if the specified file exists in the cache                   |
 +------------------------------------------------------+-----------------------------------------------------------------------------------+
-| remove ${gateway-node}                               | * Able to remove gateway-node from manager when state of specified node is 'stop' |
+| remove ${gateway-node}                               | * Remove the gateway node from manager when the state of the node is 'stop'       |
 +------------------------------------------------------+-----------------------------------------------------------------------------------+
 
 .. _purge:
@@ -566,18 +566,18 @@ S3-API Commands
 +------------------------------------------------------+-------------------------------------------------------------------+
 | Command                                              | Explanation                                                       |
 +======================================================+===================================================================+
-| create-user `${user-id}`                             | * Generate a S3 key pair(AccessKeyID and SecretAccessKey)         |
+| create-user `${user-id}`                             | * Generate an S3 key pair (AccessKeyID and SecretAccessKey)       |
 +------------------------------------------------------+-------------------------------------------------------------------+
 | delete-user `${user-id}`                             | * Remove a user                                                   |
 +------------------------------------------------------+-------------------------------------------------------------------+
-| get-users                                            | * Retrieve all of registered users                                |
+| get-users                                            | * Retrieve all the registered users                               |
 +------------------------------------------------------+-------------------------------------------------------------------+
 | set-endpoint `${endpoint}`                           | * Register a new S3 Endpoint                                      |
-|                                                      | * LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`   |
+|                                                      | * LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`    |
 +------------------------------------------------------+-------------------------------------------------------------------+
-| delete-endpoint `${endpoint}`                        | * Delete a S3 Endpoint                                            |
+| delete-endpoint `${endpoint}`                        | * Delete an S3 Endpoint                                           |
 +------------------------------------------------------+-------------------------------------------------------------------+
-| get-endpoints                                        | * Retrieve all of S3 Endpoints registered                         |
+| get-endpoints                                        | * Retrieve all the registered S3 Endpoints                        |
 +------------------------------------------------------+-------------------------------------------------------------------+
 | add-bucket `${bucket}` `${access_key_id}`            | * Create a bucket from Manager(s) and Gateway(s)                  |
 +------------------------------------------------------+-------------------------------------------------------------------+
@@ -594,8 +594,8 @@ S3-API Commands
 .. index::
    create-user-command
 
-**'create-user'** - Create a user and generate a S3 key pair(AccessKeyID and SecretAccessKey)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**'create-user'** - Create a user and generate an S3 key pair (AccessKeyID and SecretAccessKey)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``create-user ${user-id}``
 
@@ -613,7 +613,7 @@ Command: ``create-user ${user-id}``
 .. index::
    delete-user-command
 
-**'delete-user'** - Remove a user from LeoFS manager's db
+**'delete-user'** - Remove a user from LeoFS manager's DB
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``delete-user ${user-id}``
@@ -631,7 +631,7 @@ Command: ``delete-user ${user-id}``
 .. index::
    get-users-command
 
-**'get-users'** - Retrieve users from LeoFS manager's db
+**'get-users'** - Retrieve users from LeoFS manager's DB
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``get-users``
@@ -690,8 +690,8 @@ Command: ``delete-endpoint ${endpoint}``
 .. index::
    get-endpoints-command
 
-**'get-endpoints'** - Retrieve all of Endpoints registered
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**'get-endpoints'** - Retrieve all the registered Endpoints
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``get-endpoints``
 
@@ -773,7 +773,7 @@ Miscellaneous Commands
 | status [${NODE}]                                     | * Retrieve status of the cluster                               |
 |                                                      | * Retrieve status of the node                                  |
 +------------------------------------------------------+----------------------------------------------------------------+
-| history                                              | Retrieve operation histories                                   |
+| history                                              | Retrieve history of operations                                 |
 +------------------------------------------------------+----------------------------------------------------------------+
 
 
@@ -879,8 +879,8 @@ Command-2: ``status ${storage-node}`` OR ``status ${gateway-node}``
 .. index::
    history-command
 
-**'history'** - Retrieve operation histories
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**'history'** - Retrieve history of operations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``history``
 
@@ -907,8 +907,8 @@ Command: ``history``
 \
 
 
-Attach/Detach node into the Storage-cluster during in operation
----------------------------------------------------------------
+Attach/Detach node into a Storage-cluster in operation
+------------------------------------------------------
 
 \
 
