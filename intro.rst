@@ -39,23 +39,26 @@ Milestones
     * Web GUI-Console (LeoTamer - Optional)
         * Cluster manager/monitor
         * Log Analysis/Search
-* 0.14 (Feb 2013 - May)
+* 0.14 (Feb 2013 - June)
     * Multi-layer Cache (Using SSD)
+    * Rack aware replica placement
+    * Web GUI Console (Option)
+       * Support whole LeoFS Manager's commands
+    * QoS System Phase-1 (Savannah - Option)
+       * Support *statistics/analyzer*
+* 1.0 (July 2013 - )
     * Job Scheduler on the Manager
-    * API-related:
-        * Increase compatibility S3-APIs#3
-        * Support for OpenStack Swift-API
-    * QoS System Phase-1 (LeoDenebola - Option)
-    * Web-Console (Leo Tamer - Option)
-        * Log Analysis/Search
-* 1.0 (June 2013 - )
+        * Support *auto-compaction*
+        * Support *auro-recovery*
     * Multi-Datacenter Data Replication
     * OpenStack Integration
+        * Support for OpenStack Swift-API
     * Increase compatibility S3-APIs#4
         * Objects Expiration into the bucket
         * Other bucket operations
-    * QoS System Phase-2 (LeoDenebola - Option)
-    * Web-Console (Leo Tamer - Option)
+    * QoS System Phase-2 (Savannah - Option)
+       * Support *notifier*
+    * Web GUI Console (Option)
         * QoS Integration
-        * Log Analysis/Search
+        * Suport Log analysis/search
 

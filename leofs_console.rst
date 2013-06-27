@@ -289,17 +289,17 @@ Milestones
     * Bucket status
         * Belonging bucket-list
 
-* 0.4 (Mar - June 2013)
+* 0.4 (Mar - July 2013)
     *  User Group
         * Sharing LeoFS's credential-keys in the group
         * User management in the group
 
-* 0.6 (July 2013)
+* 0.6 (August 2013)
     * Link LeoFS-QoS *(Quality of Service - Denebola)*
         * Bucket status
             * total of files
             * total used disk capacity
 
-* 0.8 (August 2013)
+* 0.8 (Octorber 2013)
     * Log Search/Analysis (Option)
 

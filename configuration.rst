@@ -265,7 +265,7 @@ LeoFS Storage
 
     {leo_storage, [
                    %% == System Ver ==
-                   {system_version, "0.14.1" },
+                   {system_version, "0.14.3" },
 
                    %% == Storage Configuration ==
                    %%
@@ -289,6 +289,23 @@ LeoFS Storage
                    %% # of mq-server's processes
                    {num_of_mq_procs,    8 },
 
+                   %% mq - queues cosumption's intervals
+                   %% - per_object
+                   {cns_interval_per_object_min, 0  },
+                   {cns_interval_per_object_max, 16 },
+                   %% - sync_by_vnode_id
+                   {cns_interval_sync_by_vnode_id_min, 0  },
+                   {cns_interval_sync_by_vnode_id_max, 16 },
+                   %% - for rebalance
+                   {cns_interval_rebalance_min, 0  },
+                   {cns_interval_rebalance_max, 16 },
+                   %% - async deletion objects (after remove a bucket)
+                   {cns_interval_async_deletion_min, 0  },
+                   {cns_interval_async_deletion_max, 16 },
+                   %% - recovery node
+                   {cns_interval_recovery_node_min,  0  },
+                   {cns_interval_recovery_node_max,  16 },
+
                    %% == For Ordning-Reda ==
                    %% Size of stacked objects (bytes)
                    {size_of_stacked_objs,    67108864 },
@@ -311,6 +328,14 @@ LeoFS Storage
                    %% Directory of SNMP-Agent
                    {snmp_agent,  ${SNMPA-DIR}}
                   ]},
+
+    {leo_object_storage, [{profile, false},
+                          {metadata_storage, 'bitcask'},
+
+                          %% Strict comparison of object's checksum with metadata's it
+                          %% (default:false)
+                          {is_strict_check, false }
+                         ]},
 
 
 * **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/storage/etc/vm.args**
