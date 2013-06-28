@@ -289,7 +289,7 @@ LeoFS Storage
                    %% # of mq-server's processes
                    {num_of_mq_procs,    8 },
 
-                   %% mq - queues cosumption's intervals
+                   %% mq - queues consumption's intervals
                    %% - per_object
                    {cns_interval_per_object_min, 0  },
                    {cns_interval_per_object_max, 16 },
