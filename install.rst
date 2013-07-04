@@ -23,14 +23,14 @@ Installing Erlang
 Preparation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Install required libraries using yum (CentOS 6.2)
+Install required libraries using yum (CentOS 6.x)
 """""""""""""""""""""""""""""""""""""""""""""""""
 .. index::
-   pair: CentOS-6.2; Installation
+   pair: CentOS-6.x; Installation
 
 ::
 
-   # yum install libuuid-devel cmake
+   # yum install libuuid-devel cmake check check-devel
 
 Install required libraries using apt-get (Ubuntu Server 12.04 LTS)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -39,7 +39,7 @@ Install required libraries using apt-get (Ubuntu Server 12.04 LTS)
 
 ::
 
-   # sudo apt-get install libtool libncurses5-dev libssl-dev cmake
+   # sudo apt-get install libtool libncurses5-dev libssl-dev cmake check
 
 Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -129,10 +129,10 @@ XFS-related
 
 .. note:: We highly recommend using an XFS partition, as it is the filesystem that shows the better results with LeoFS. This section describes the installation instructions related to XFS. If you are deploying LeoFS on a **DEV environment**, you do NOT need to perform this operation.
 
-Install required libraries for XFS with yum (CentOS 6.2)
+Install required libraries for XFS with yum (CentOS 6.x)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. index::
-   pair: CentOS-6.2; Installation
+   pair: CentOS-6.x; Installation
 
 ::
 
