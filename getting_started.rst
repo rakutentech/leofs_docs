@@ -41,6 +41,8 @@ Quick Start -1 All in one for Application Development
 1. Install
 ^^^^^^^^^^
 
+.. _erlang-install-label:
+
 Erlang (CentOS, Ubuntu, Other Linux OS)
 """""""""""""""""""""""""""""""""""""""""""
 
@@ -86,6 +88,8 @@ Erlang (CentOS, Ubuntu, Other Linux OS)
 
    $ source ~/.profile
 
+
+.. _leofs-install-label:
 
 LeoFS
 """""""""
@@ -157,11 +161,13 @@ Modify “/etc/hosts”
     > status
     status
     [system config]
-                 version : 0.12.7
+                 version : 0.14.4
      # of replicas       : 1
      # of successes of R : 1
      # of successes of W : 1
      # of successes of D : 1
+     # of awareness replicas [DC]  : 0
+     # of awareness replicas [Rack]: 0
                ring size : 2^128
         ring hash (cur)  : 1428891014
         ring hash (prev) : 1428891014
@@ -170,8 +176,8 @@ Modify “/etc/hosts”
     ------------------------------------------------------------------------------------------------
      node                        state       ring (cur)    ring (prev)   when
     ------------------------------------------------------------------------------------------------
-     storage_0@127.0.0.1         running     1428891014    1428891014    2012-09-07 14:23:08 +0900
-     gateway@127.0.0.1           running     1428891014    1428891014    2012-09-07 14:24:37 +0900
+     storage_0@127.0.0.1         running     1428891014    1428891014    2013-07-04 11:23:08 +0900
+     gateway@127.0.0.1           running     1428891014    1428891014    2013-07-04 11:24:37 +0900
 
 
 7. Get your S3 API Key from the LeoFS manager console
@@ -202,4 +208,180 @@ Modify “/etc/hosts”
 Quick Start -2 Cluster
 ---------------------------
 
-(under construction)
+Case example
+^^^^^^^^^^^^
+
+* :ref:`Manager <conf_manager_label>`
+    * IP: 10.0.1.101, 10.0.1.102
+    * Name: manager_0@10.0.1.101, manager_1@10.0.1.102
+* :ref:`Gateway <conf_gateway_label>`
+    * IP: 10.0.1.103
+    * Name: gateway_0@10.0.1.103
+* :ref:`Storage <conf_storage_label>`
+    * IP: 10.0.1.104 .. 10.0.1.106
+    * Name: storage_0@10.0.1.104 .. storage_2@10.0.1.106
+
+
+1. Install Erlang and LeoFS each server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* :ref:`Install Erlang <erlang-install-label>`
+* :ref:`Install LeoFS <leofs-install-label>`
+
+
+2. Configuration - Edit a part of *"vm.args"* each server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Filepath: "$LEOFS_ROOL/package/leo_*/etc/vm.args"
+* Precondition
+    * ``-name`` is a unique into the LeoFS
+* Edit *Manager-master's vm.args*
+
+.. code-block:: bash
+
+    ## Name of the node
+    -name manager_0@10.0.1.101
+    ... omitted below
+
+* Edit *Manager-slave's vm.args*
+
+.. code-block:: bash
+
+    ## Name of the node
+    -name manager_0@10.0.1.102
+    ... omitted below
+
+* Edit *Gateway's vm.args*
+
+.. code-block:: bash
+
+    ## Name of the node
+    -name gateway_0@10.0.1.103
+    ... omitted below
+
+* Edit *Storage's vm.args*
+
+.. code-block:: bash
+
+    ## Name of the node
+    -name storage_0@10.0.1.104
+    ... omitted below
+
+3. Configuration - Consistency level
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Reference: :ref:`Configuring your new LeoFS system using LeoFS-Manager <system-configuration-label>`
+* Edit *Manager's app.config*
+    * "$LEOFS_ROOT/package/leo_manager_0/etc/app.config"
+
+.. code-block:: erlang
+
+    [
+        {leo_manager, [
+                   %% == System Ver ==
+                   {system_version, "0.14.4" },
+
+                   %% == System Configuration ==
+                   %% - Consistency Level
+                   {system, [{n, 2 },  %% number of replicated files is 2
+                             {w, 1 },  %% number of of successes of write-operation is 1
+                             {r, 1 },  %% number of of successes of read-operation is 1
+                             {d, 1 },  %% number of of successes of delete-operation is 1
+                             {bit_of_ring, 128} %% size of routing-table (RING)
+                            ]},
+
+
+4. Order of server launch
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Manager-master
+* Manager-slave
+* Storages
+* Gateway(s)
+
+
+5. Method of server launch
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Shell script: "$LEOFS_ROOT/package/leo_*/bin/leo_*"
+* Launch Manager-master
+
+.. code-block:: bash
+
+    $ $LEOFS_ROOT/package/leo_manager_0/bin/leo_manager start
+
+* Launch Manager-slave
+
+.. code-block:: bash
+
+    $ $LEOFS_ROOT/package/leo_manager_1/bin/leo_manager start
+
+
+* Launch each Storage
+
+.. code-block:: bash
+
+    $ $LEOFS_ROOT/package/leo_storage/bin/leo_storage start
+
+* Launch each Gateway
+
+.. code-block:: bash
+
+    $ $LEOFS_ROOT/package/leo_gateway/bin/leo_gateway start
+
+
+6. Start the system
+^^^^^^^^^^^^^^^^^^^
+
+* Use the command ``start`` in the LeoFS manager console
+
+::
+
+    $ telnet 127.0.0.1 10010
+    > start
+
+7. Confirm that the system is running
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Use the command ``status`` in the LeoFS manager console
+
+::
+
+    $ telnet 127.0.0.1 10010
+    > status
+    status
+    [system config]
+                 version : 0.14.4
+     # of replicas       : 2
+     # of successes of R : 1
+     # of successes of W : 1
+     # of successes of D : 1
+     # of awareness replicas [DC]  : 0
+     # of awareness replicas [Rack]: 0
+               ring size : 2^128
+        ring hash (cur)  : 1428891014
+        ring hash (prev) : 1428891014
+
+    [node(s) state]
+    ------------------------------------------------------------------------------------------------
+     node                        state       ring (cur)    ring (prev)   when
+    ------------------------------------------------------------------------------------------------
+     storage_0@10.0.1.104        running     1428891014    1428891014    2013-07-04 11:23:08 +0900
+     storage_1@10.0.1.105        running     1428891014    1428891014    2013-07-04 11:23:08 +0900
+     storage_2@10.0.1.106        running     1428891014    1428891014    2013-07-04 11:23:08 +0900
+     gateway_0@10.0.1.103        running     1428891014    1428891014    2013-07-04 11:24:37 +0900
+
+
+8. Get your S3 API Key from the LeoFS manager console
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Use the command ``create-user`` in the LeoFS manager console
+* It takes the user name as its only argument
+
+::
+
+    $ telnet 127.0.0.1 10010
+    > create-user ${YOUR_NAME}
+    access-key-id: 05dcba94333c7590a635
+    secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
+
