@@ -38,8 +38,8 @@ Getting LeoFS
 Quick Start -1 All in one for Application Development
 ------------------------------------------------------
 
-Pupose
-^^^^^^
+Purpose
+^^^^^^^
 
 This document is intended to give you a step by step guide to setting up LeoFS for the first time. For this tutorial, you can easily build "LeoFS stand-alone system".
 
