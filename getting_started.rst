@@ -41,7 +41,7 @@ Quick Start -1 All in one for Application Development
 Purpose
 ^^^^^^^
 
-This document is intended to give you a step by step guide to setting up LeoFS for the first time. For this tutorial, you can easily build "LeoFS stand-alone system".
+This section is a step by step guide to setting up LeoFS for the first time. By following this tutorial you can easily build a stand-alone LeoFS system.
 
 .. note:: In this section, ``LeoFS-Storage``, ``LeoFS-Gateway`` and ``LeoFS-Manager`` are all installed on a single system, with no clustering.
 
@@ -213,7 +213,7 @@ Modify “/etc/hosts”
 Wrap up
 ^^^^^^^
 
-You were able to learn building *LeoFS stand-alone system*. Make sure to have a look :ref:`Quick Start -2 Cluster <quick-start2-label>` to help you get a more understanding.
+You now know how to setup a *stand-alone LeoFS system*. Make sure to have a look at :ref:`Quick Start -2 Cluster <quick-start2-label>` to learn how to setup a LeoFS cluster.
 
 
 .. _quick-start2-label:
@@ -225,7 +225,7 @@ Quick Start -2 Cluster
 Purpose
 ^^^^^^^
 
-For this tutorial, you can easily build "LeoFS cluster". We does not explain each step in detail here, this guide is just to help you get it up and running immediately. We also recommend that you should read the LeoFS Installation, Configuration and Administration Guide to learn how to administer LeoFS. We would like you to be successful in as short a time as possible.
+This tutorial teaches you how to easily build a LeoFS cluster. All steps will not be explained in detail, it is assumed you already know how to setup a stand-alone LeoFS system. This guide exists to help you get a cluster up and running quickly. We recommend that you read the LeoFS Installation, Configuration and Administration Guide to learn how to administer your LeoFS cluster. We hope that by reading this tutorial you will be able to get a cluster started as quickly as possible.
 
 Case example
 ^^^^^^^^^^^^
@@ -241,19 +241,20 @@ Case example
     * Name: storage_0@10.0.1.104 .. storage_2@10.0.1.106
 
 
-1. Install Erlang and LeoFS each server
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. Install Erlang and LeoFS on each server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * :ref:`Install Erlang <erlang-install-label>`
 * :ref:`Install LeoFS <leofs-install-label>`
 
 
-2. Configuration - Edit a part of *"vm.args"* each server
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2. Configuration - Edit *"vm.args"* on each server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Filepath: "$LEOFS_ROOL/package/leo_*/etc/vm.args"
 * Precondition
-    * ``-name`` is a unique into the LeoFS
+    * ``-name`` must be unique for each node in the LeoFS cluster
+
 * Edit *Manager-master's vm.args*
 
 .. code-block:: bash
@@ -291,7 +292,7 @@ Case example
 
 * Reference: :ref:`The consistency level <system-configuration-label>`
 * Edit *Manager's app.config*
-    * Regarding the consistency level, You need to only modify *Manager-master*.
+    * You only need to modify *Manager-master* for the consistency level.
     * "$LEOFS_ROOT/package/leo_manager_0/etc/app.config"
 
 .. code-block:: erlang
@@ -337,13 +338,13 @@ Case example
     $ $LEOFS_ROOT/package/leo_manager_1/bin/leo_manager start
 
 
-* Launch each Storage
+* Launch each Storage nodes
 
 .. code-block:: bash
 
     $ $LEOFS_ROOT/package/leo_storage/bin/leo_storage start
 
-* Launch each Gateway
+* Launch each Gateway nodes
 
 .. code-block:: bash
 
@@ -409,5 +410,5 @@ Case example
 Wrap up
 ^^^^^^^
 
-So you were able to build *LeoFS cluster*. Make sure to have a look :ref:`LeoFS installation <leofs-installation-label>`, :ref:`LeoFS Configuration <leofs-configuration-label>` and :ref:`Administration Guide <administration-guide-label>` to help you get a deeper understanding.
+You now have a working *LeoFS cluster*. Make sure to have a look at :ref:`LeoFS installation <leofs-installation-label>`, :ref:`LeoFS Configuration <leofs-configuration-label>` and :ref:`Administration Guide <administration-guide-label>` to learn more about setting up and managing your LeoFS cluster.
 
