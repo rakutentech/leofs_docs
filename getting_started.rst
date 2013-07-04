@@ -289,7 +289,7 @@ Case example
 3. Configuration - Consistency level
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Reference: :ref:`Configuring your new LeoFS system using LeoFS-Manager <system-configuration-label>`
+* Reference: :ref:`The consistency level <system-configuration-label>`
 * Edit *Manager's app.config*
     * "$LEOFS_ROOT/package/leo_manager_0/etc/app.config"
 

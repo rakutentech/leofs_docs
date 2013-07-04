@@ -28,8 +28,8 @@ LeoFS Manager-Master
 
 .. _system-configuration-label:
 
-Consistency Level
-^^^^^^^^^^^^^^^^^
+The Consistency Level
+^^^^^^^^^^^^^^^^^^^^^
 
 .. note::  The consistency level is configured in this file. It should not be modified while the system is running.
 
