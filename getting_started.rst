@@ -9,10 +9,12 @@ Getting Started
 -------------------
 System Requirements
 -------------------
-LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS and CentOS 6.x, but should work on
+LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS|13.04 and CentOS 6.x, but should work on
 most Linux platforms with the following software:
 
 * `Erlang OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
+* `Erlang OTP R16B01 <http://www.erlang.org/download_release/19>`_
+
 
 LeoFS includes the following Erlang libraries:
 
@@ -35,6 +37,11 @@ Getting LeoFS
 ------------------------------------------------------
 Quick Start -1 All in one for Application Development
 ------------------------------------------------------
+
+Pupose
+^^^^^^
+
+This document is intended to give you a step by step guide to setting up LeoFS for the first time. For this tutorial, you can easily build "LeoFS stand-alone system".
 
 .. note:: In this section, ``LeoFS-Storage``, ``LeoFS-Gateway`` and ``LeoFS-Manager`` are all installed on a single system, with no clustering.
 
@@ -203,10 +210,22 @@ Modify “/etc/hosts”
     * :ref:`FUSE - ‘S3FS-C’ <s3fs-c-label>`
     * :ref:`GUI  - ‘Dragon Disk’ <dragondisk-label>`
 
+Wrap up
+^^^^^^^
+
+You were able to learn building *LeoFS stand-alone system*. Make sure to have a look :ref:`Quick Start -2 Cluster <quick-start2-label>` to help you get a more understanding.
+
+
+.. _quick-start2-label:
 
 ---------------------------
 Quick Start -2 Cluster
 ---------------------------
+
+Purpose
+^^^^^^^
+
+For this tutorial, you can easily build "LeoFS cluster". We does not explain each step in detail here, this guide is just to help you get it up and running immediately. We also recommend that you should read the LeoFS Installation, Configuration and Administration Guide to learn how to administer LeoFS. We would like you to be successful in as short a time as possible.
 
 Case example
 ^^^^^^^^^^^^
@@ -384,4 +403,10 @@ Case example
     > create-user ${YOUR_NAME}
     access-key-id: 05dcba94333c7590a635
     secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
+
+
+Wrap up
+^^^^^^^
+
+So you were able to build *LeoFS cluster*. Make sure to have a look :ref:`LeoFS installation <leofs-installation-label>`, :ref:`LeoFS Configuration <leofs-configuration-label>` and :ref:`Administration Guide <administration-guide-label>` to help you get a deeper understanding.
 

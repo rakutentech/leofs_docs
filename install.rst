@@ -1,13 +1,24 @@
 .. LeoFS documentation
 
+.. _leofs-installation-label:
+
 LeoFS installation
 ================================
 .. index::
    pair: Erlang; Installation
 
 
-Erlang
---------------------------------
+System Requirements
+-------------------
+LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS|13.04 and CentOS 6.x, but should work on
+most Linux platforms with the following software:
+
+* `Erlang OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
+* `Erlang OTP R16B01 <http://www.erlang.org/download_release/19>`_
+
+
+Installing Erlang
+-----------------
 
 Preparation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -262,10 +273,10 @@ LeoFS
    pair: LeoFS; Installation
 
 File structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 Before running make
-""""""""""""""""""""""""""""""""
+"""""""""""""""""""
 
 ::
 
@@ -286,7 +297,7 @@ Before running make
              `--- leo_storage/
 
 After running make
-"""""""""""""""""""""""""""""""
+""""""""""""""""""
 
 ::
 
@@ -382,7 +393,7 @@ Building
       |               `--- work/
 
 Log Dir and Working Dir
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 \
 
@@ -424,76 +435,6 @@ Log Dir and Working Dir
      |               `--- work/
      .                     |--- mnesia
      .                     `--- queue
-
-.. _system-configuration-label:
-
-Configuring your new LeoFS system using LeoFS-Manager
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* File: ${LEOFS_SRC}/package/leofs/manager_0/etc/app.config
-
-.. note::  The **Consistency Level** is configured in this file. It should not be modified while the system is running.
-
-+-------------+---------------------------------------------------------+
-| Property    | Explanation                                             |
-+=============+=========================================================+
-| n           | # of replicas                                           |
-+-------------+---------------------------------------------------------+
-| r           | # of replicas needed for a successful READ operation    |
-+-------------+---------------------------------------------------------+
-| w           | # of replicas needed for a successful WRITE operation   |
-+-------------+---------------------------------------------------------+
-| d           | # of replicas needed for a successful DELETE operation  |
-+-------------+---------------------------------------------------------+
-| level_1     | # of dc-aware replicas (Supported from v1.0.0 onward)   |
-+-------------+---------------------------------------------------------+
-| level_2     | # of rack-aware replicas                                |
-+-------------+---------------------------------------------------------+
-| bit_of_ring | # of bits for the hash-ring (fixed 128bit)              |
-+-------------+---------------------------------------------------------+
-
-* A reference consistency level
-
-+-------------+--------------------------------------------------------+
-| Level       | Configuration                                          |
-+=============+========================================================+
-| Low         | n = 3, r = 1, w = 1, d = 1                             |
-+-------------+--------------------------------------------------------+
-| Middle      | n = 3, [r = 1 | r = 2], w = 2, d = 2                   |
-+-------------+--------------------------------------------------------+
-| High        | n = 3, [r = 2 | r = 3], w = 3, d = 3                   |
-+-------------+--------------------------------------------------------+
-
-* **Example - File: ${LEOFS_SRC}/package/leofs/manager_0/etc/app.config**:
-
-.. code-block:: erlang
-
-    %% Example (Part of manager-configurations):
-    [
-
-        {leo_manager,
-                 [
-                  %% System Configuration
-                  {system, [{n, 3 },  %% # of replicas
-                            {w, 2 },  %% # of replicas needed for a successful WRITE  operation
-                            {r, 1 },  %% # of replicas needed for a successful READ   operation
-                            {d, 2 },  %% # of replicas needed for a successful DELETE operation
-                            {level_1, 0}, %% # of DC-awareness replicas (Plan to support with v1.0.0)
-                            {level_2, 0}, %% # of rack-awareness replicas
-                            {bit_of_ring, 128}
-                           ]},
-                  %% Manager Configuration
-                  {manager_mode,     master },
-                  {manager_partners, ["manager_1@127.0.0.1"] },
-                  {port,             10010 },
-                  {num_of_acceptors, 3},
-                  %% Directories
-                  {log_dir,          "./log"},
-                  {queue_dir,        "./work/queue"},
-                  {snmp_agent,       "./snmp/manager_0/LEO-MANAGER"}
-                 ]},
-
-    ].
 
 Firewall Rules
 --------------

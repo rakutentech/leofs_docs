@@ -1,5 +1,7 @@
 .. LeoFS documentation
 
+.. _leofs-configuration-label:
+
 LeoFS Configuration
 ======================
 
@@ -24,7 +26,66 @@ Relationship of configuration files
 LeoFS Manager-Master
 --------------------
 
-**Configuration of the Manager-Master node**
+.. _system-configuration-label:
+
+Consistency Level
+^^^^^^^^^^^^^^^^^
+
+.. note::  The consistency level is configured in this file. It should not be modified while the system is running.
+
++-------------+---------------------------------------------------------+
+| Property    | Explanation                                             |
++=============+=========================================================+
+| n           | # of replicas                                           |
++-------------+---------------------------------------------------------+
+| r           | # of replicas needed for a successful READ operation    |
++-------------+---------------------------------------------------------+
+| w           | # of replicas needed for a successful WRITE operation   |
++-------------+---------------------------------------------------------+
+| d           | # of replicas needed for a successful DELETE operation  |
++-------------+---------------------------------------------------------+
+| level_1     | # of dc-aware replicas (Supported from v1.0.0 onward)   |
++-------------+---------------------------------------------------------+
+| level_2     | # of rack-aware replicas                                |
++-------------+---------------------------------------------------------+
+| bit_of_ring | # of bits for the hash-ring (fixed 128bit)              |
++-------------+---------------------------------------------------------+
+
+* A reference consistency level
+
++-------------+--------------------------------------------------------+
+| Level       | Configuration                                          |
++=============+========================================================+
+| Low         | n = 3, r = 1, w = 1, d = 1                             |
++-------------+--------------------------------------------------------+
+| Middle      | n = 3, [r = 1 | r = 2], w = 2, d = 2                   |
++-------------+--------------------------------------------------------+
+| High        | n = 3, [r = 2 | r = 3], w = 3, d = 3                   |
++-------------+--------------------------------------------------------+
+
+* **Example - File: ${LEOFS_SRC}/package/leofs/manager_0/etc/app.config**:
+
+.. code-block:: erlang
+
+        {leo_manager,
+                 [
+                  %% System Configuration
+                  {system, [{n, 3 },  %% # of replicas
+                            {w, 2 },  %% # of replicas needed for a successful WRITE  operation
+                            {r, 1 },  %% # of replicas needed for a successful READ   operation
+                            {d, 2 },  %% # of replicas needed for a successful DELETE operation
+                            {level_1, 0}, %% # of DC-awareness replicas (Plan to support with v1.0.0)
+                            {level_2, 0}, %% # of rack-awareness replicas
+                            {bit_of_ring, 128}
+                           ]},
+
+
+\
+\
+
+
+Configuration of the Manager-Master node
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_0/etc/app.config**
 
