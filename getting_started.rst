@@ -267,7 +267,7 @@ Case example
 .. code-block:: bash
 
     ## Name of the node
-    -name manager_0@10.0.1.102
+    -name manager_1@10.0.1.102
     ... omitted below
 
 * Edit *Gateway's vm.args*
@@ -291,6 +291,7 @@ Case example
 
 * Reference: :ref:`The consistency level <system-configuration-label>`
 * Edit *Manager's app.config*
+    * Regarding the consistency level, You need to only modify *Manager-master*.
     * "$LEOFS_ROOT/package/leo_manager_0/etc/app.config"
 
 .. code-block:: erlang
