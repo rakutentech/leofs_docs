@@ -173,8 +173,8 @@ Modify “/etc/hosts”
      # of successes of R : 1
      # of successes of W : 1
      # of successes of D : 1
-     # of awareness replicas [DC]  : 0
-     # of awareness replicas [Rack]: 0
+     # of DC-awareness replicas   : 0
+     # of Rack-awareness replicas : 0
                ring size : 2^128
         ring hash (cur)  : 1428891014
         ring hash (prev) : 1428891014
@@ -377,8 +377,8 @@ Case example
      # of successes of R : 1
      # of successes of W : 1
      # of successes of D : 1
-     # of awareness replicas [DC]  : 0
-     # of awareness replicas [Rack]: 0
+     # of DC-awareness replicas   : 0
+     # of Rack-awareness replicas : 0
                ring size : 2^128
         ring hash (cur)  : 1428891014
         ring hash (prev) : 1428891014

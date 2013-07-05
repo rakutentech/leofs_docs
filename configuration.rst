@@ -75,7 +75,7 @@ The Consistency Level
                             {r, 1 },  %% # of replicas needed for a successful READ   operation
                             {d, 2 },  %% # of replicas needed for a successful DELETE operation
                             {level_1, 0}, %% # of DC-awareness replicas (Plan to support with v1.0.0)
-                            {level_2, 0}, %% # of rack-awareness replicas
+                            {level_2, 0}, %% # of Rack-awareness replicas
                             {bit_of_ring, 128}
                            ]},
 
