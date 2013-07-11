@@ -118,7 +118,7 @@ Configuration of the Manager-Master node
                  ]},
         {leo_manager, [
                    %% == System Ver ==
-                   {system_version, "0.14.1" },
+                   {system_version, "0.14.6" },
 
                    %% == System Configuration ==
                    %%
@@ -131,7 +131,9 @@ Configuration of the Manager-Master node
                              {w, 1 },
                              {r, 1 },
                              {d, 1 },
-                             {bit_of_ring, 128}
+                             {bit_of_ring, 128},
+                             {level_1, 0 },
+                             {level_2, 0 }
                             ]},
 
                    %% == Available Commands ==
@@ -474,6 +476,8 @@ LeoFS Gateway
 +---------------------------+----------------------------------------------------------------------------------+
 |${HTTP_HANDLER}            | Gateway's HTTP API to use, either ``s3`` (default) or ``rest``                   |
 +---------------------------+----------------------------------------------------------------------------------+
+|${MAX_KEEPALIVE}           | Max number of requests allowed in a single keep-alive session. Defaults to 1024. |
++---------------------------+----------------------------------------------------------------------------------+
 | *Cache related items*                                                                                        |
 +---------------------------+----------------------------------------------------------------------------------+
 |${IS_HTTP_CACHE}           | Cache method: **http** OR **inner** *(default)*                                  |
@@ -554,6 +558,8 @@ LeoFS Gateway
                         {port, ${LISTENING_PORT} },
                         %% # of acceptors:
                         {num_of_acceptors, ${NUM_OF_LISTENER} },
+                        %% max keep-alive:
+                        {max_keepalive, ${MAX_KEEPALIVE} },
                         %% max # of layer of directories:
                         {layer_of_dirs, {1, 12} },
                         %% ssl related:
