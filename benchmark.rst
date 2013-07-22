@@ -64,7 +64,7 @@ Configuration file for basho_bench
 Examples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Some examples are included in the leofs repository at ${LEOFS_ROOT}/test/conf/leofs_*.config
+* Some examples are included in the LeoFS repository at ${LEOFS_ROOT}/test/conf/leofs_*.config
     * `Learn more about basho_bench's configuration <http://docs.basho.com/riak/latest/cookbooks/Benchmarking/#Configuration>`_
 
 .. code-block:: erlang
@@ -156,7 +156,7 @@ Configure the ``endpoint`` on LeoFS-Manager console
 
 
 
-Edit the benchmark's configutation file
+Edit the benchmark's configuration file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * You need to modify the values for ``http_raw_ips`` and ``http_raw_port``

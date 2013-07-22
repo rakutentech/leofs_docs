@@ -62,5 +62,5 @@ Milestones
        * Support *notifier*
     * Web GUI Console (Option)
         * QoS Integration
-        * Suport Log analysis/search
+        * Support Log analysis/search
 

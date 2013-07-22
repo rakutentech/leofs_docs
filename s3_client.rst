@@ -136,7 +136,7 @@ Get an object HEAD from LeoFS
   p metadata.to_hash
 
 
-Uploading to LeoFS using multi-part
+Uploading to LeoFS using multipart
 """""""""""""""""""""""""""""""""""
 
 .. code-block:: ruby
@@ -198,7 +198,7 @@ Getting AWS SDK for Java
 
 URL: `SDK for Java <http://aws.amazon.com/sdkforjava/>`_
 
-.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`. You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
+.. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`. You need to set 'Proxy Host' and 'Proxy Port' with ClientConfiguration class.
 
 
 Example usage
@@ -336,7 +336,7 @@ aws-sdk for PHP
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
 
-.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
+.. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`.
 
 ::
 
@@ -417,7 +417,7 @@ aws-sdk for PHP
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
 
-.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
+.. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`.
 
 ::
 
@@ -511,7 +511,7 @@ easy_install
 Example usage
 """""""""""""
 
-.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
+.. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`.
 
 .. code-block:: python
 
@@ -584,7 +584,7 @@ Install Knox
 Edit /etc/hosts
 ^^^^^^^^^^^^^^^
 
-.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`.
+.. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`.
 
 ::
 
@@ -657,14 +657,14 @@ Install "S3FS-C"
 Modify "/etc/hosts"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Add a LeoFS's domain in ``/etc/hosts``
+* Add a LeoFS domain in ``/etc/hosts``
 * LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`
 
 ::
 
     $ sudo vi /etc/hosts
 
-    ## Add a LeoFS's domain ##
+    ## Add a LeoFS domain ##
     127.0.0.1 localhost ${BUCKET_NAME}.localhost
 
 Create a credential file for S3FS
@@ -756,7 +756,7 @@ Configuration
   Use HTTPS protocol [No]:
 
   On some networks all internet access must go through a HTTP proxy.
-  Try setting it here if you can't conect to S3 directly
+  Try setting it here if you can't connect to S3 directly
   HTTP Proxy server name: localhost
   HTTP Proxy server port [3128]: 8080
 
@@ -798,7 +798,7 @@ Commands
  +----+-----------------------------------------------+-----------------------------------------------------+----------------+
  | 9  | Disk usage by buckets                         | s3cmd du [s3://BUCKET[/PREFIX]]                     | No             |
  +----+-----------------------------------------------+-----------------------------------------------------+----------------+
- | 10 | Get various infos about buckets or files      | s3cmd info s3://BUCKET[/OBJECT]                     | No             |
+ | 10 | Get various info about buckets or files       | s3cmd info s3://BUCKET[/OBJECT]                     | No             |
  +----+-----------------------------------------------+-----------------------------------------------------+----------------+
  | 11 | Copy object                                   | s3cmd cp s3://BUCKET1/OBJECT1 s3://BUCKET2[/OBJECT2]| **Yes**        |
  +----+-----------------------------------------------+-----------------------------------------------------+----------------+

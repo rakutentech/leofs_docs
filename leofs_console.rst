@@ -222,8 +222,8 @@ Table - Changeable Status
 \
 
 
-Rebalancing the storage cluster
-"""""""""""""""""""""""""""""""
+Re balancing the storage cluster
+""""""""""""""""""""""""""""""""
 
 .. note:: The ``Rebalance button`` only becomes active when the storage status is ``attached`` or ``detached``.
 
@@ -291,7 +291,7 @@ Milestones
 
 * 0.4 (Mar - July 2013)
     *  User Group
-        * Sharing LeoFS's credential-keys in the group
+        * Sharing LeoFS' credential-keys in the group
         * User management in the group
 
 * 0.6 (August 2013)
@@ -300,6 +300,6 @@ Milestones
             * total of files
             * total used disk capacity
 
-* 0.8 (Octorber 2013)
+* 0.8 (October 2013)
     * Log Search/Analysis (Option)
 

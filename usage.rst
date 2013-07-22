@@ -2,7 +2,7 @@ Usage
 ========
 
 .. index::
-   pair: Configuration; LeoFS's Use Case - Without load-balancer
+   pair: Configuration; LeoFS Use Case - Without load-balancer
 
 Testing without a load balancer
 -------------------------------
@@ -48,4 +48,4 @@ Testing without a load balancer
 Production/Staging with a load balancer
 ---------------------------------------
 
-(under construnction)
+(under construction)

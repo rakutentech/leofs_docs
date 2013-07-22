@@ -13,8 +13,8 @@ System Requirements
 LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS|13.04 and CentOS 6.x, but should work on
 most Linux platforms with the following software installed:
 
-* `Erlang OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
-* `Erlang OTP R16B01 <http://www.erlang.org/download_release/19>`_
+* `Erlang/OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
+* `Erlang/OTP R16B01 <http://www.erlang.org/download_release/19>`_
 
 
 Installing Erlang
@@ -127,7 +127,7 @@ Confirm
 XFS-related
 ------------
 
-.. note:: We highly recommend using an XFS partition, as it is the filesystem that shows the better results with LeoFS. This section describes the installation instructions related to XFS. If you are deploying LeoFS on a **DEV environment**, you do NOT need to perform this operation.
+.. note:: We highly recommend using an XFS partition, as it is the file system that shows the better results with LeoFS. This section describes the installation instructions related to XFS. If you are deploying LeoFS on a **DEV environment**, you do NOT need to perform this operation.
 
 Install required libraries for XFS with yum (CentOS 6.x)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -145,7 +145,7 @@ Create an XFS Partition (Volume)
 .. index::
    pair: XFS; Installation
 
-Only the servers running **LeoFS storage nodes** will benefit from using XFS (unix local file system). XFS provides particularly efficient I/O for large files. **LeoFS-Storage** is implemented on top of files stored in a single filesystem created on top of the a few TB volume.
+Only the servers running **LeoFS storage nodes** will benefit from using XFS (unix local file system). XFS provides particularly efficient I/O for large files. **LeoFS-Storage** is implemented on top of files stored in a single file system created on top of the a few TB volume.
 
 Start fdisk
 """""""""""""""""
