@@ -12,14 +12,14 @@ System Requirements
 LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS|13.04 and CentOS 6.x, but should work on
 most Linux platforms with the following software:
 
-* `Erlang OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
-* `Erlang OTP R16B01 <http://www.erlang.org/download_release/19>`_
+* `Erlang/OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
+* `Erlang/OTP R16B01 <http://www.erlang.org/download_release/19>`_
 
 
 LeoFS includes the following Erlang libraries:
 
 * `Basho Bitcask <https://github.com/basho/bitcask>`_
-* `Ninenines Cowboy <https://github.com/extend/cowboy>`_
+* `Nine Nines Cowboy <https://github.com/extend/cowboy>`_
 * `Boundary Folsom <https://github.com/boundary/folsom>`_
 * `Szktty Erlang LZ4 <https://github.com/szktty/erlang-lz4>`_
 
@@ -251,7 +251,7 @@ Case example
 2. Configuration - Edit *"vm.args"* on each server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Filepath: "$LEOFS_ROOL/package/leo_*/etc/vm.args"
+* File path: "$LEOFS_ROOT/package/leo_*/etc/vm.args"
 * Precondition
     * ``-name`` must be unique for each node in the LeoFS cluster
 
@@ -317,7 +317,7 @@ Case example
 
 * Manager-master
 * Manager-slave
-* Storages
+* Storage nodes
 * Gateway(s)
 
 

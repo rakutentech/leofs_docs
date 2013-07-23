@@ -34,7 +34,7 @@ Operations
 +-------------+------------------------------------+------------------------------------------------------------+
 | 4           | $ telnet $manager-master 10010     | Accessing **Manager Master Console** by telnet             |
 +-------------+------------------------------------+------------------------------------------------------------+
-| 5           | > start                            | Starting LeoFS (manager and storages)                      |
+| 5           | > start                            | Starting LeoFS (manager and storage)                       |
 +-------------+------------------------------------+------------------------------------------------------------+
 | 6           | > status                           | Confirm status of the cluster on Manager Master Console #1 |
 +-------------+------------------------------------+------------------------------------------------------------+
@@ -432,8 +432,8 @@ Command: ``du detail ${storage-node}``
 
 \
 
-**compact** - Remove logical deleted objects and metadata
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**compact** - Remove logical deleted objects and meta data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 \
 
@@ -454,7 +454,7 @@ Command: ``compact start ${storage-node} all | ${num_of_targets} [${num_of_compa
 ::
 
     ## All compaction-targets will be executed with 3 concurrent processes
-    ## (default concurrents is 3)
+    ## (default concurrency is 3)
     compact start storage_0@127.0.0.1 all
     OK
 
@@ -657,7 +657,7 @@ Command: ``get-users``
 **'set-endpoint'** - Register a new Endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`
+.. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`
 
 Command: ``set-endpoint ${endpoint}``
 

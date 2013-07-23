@@ -144,7 +144,7 @@ Configuration of the Manager-Master node
                    {manager_mode,     master },
                    %% Partner of manager's alias
                    {manager_partners, ["manager_1@127.0.0.1"] },
-                   %% Manager accepatable port number
+                   %% Manager acceptable port number
                    {port_cui,         10010 },
                    {port_json,        10020 },
 
@@ -152,7 +152,7 @@ Configuration of the Manager-Master node
                    {num_of_acceptors_cui,   3},
                    {num_of_acceptors_json, 16},
 
-                   %% Compaction: # of execution of conncurrent
+                   %% Compaction: # of execution of concurrent
                    {num_of_compact_proc, 3 },
 
                    %% == Log-specific properties ==
@@ -395,7 +395,7 @@ LeoFS Storage
     {leo_object_storage, [{profile, false},
                           {metadata_storage, 'bitcask'},
 
-                          %% Strict comparison of object's checksum with metadata's it
+                          %% Strict comparison of object's checksum with its metadata
                           %% (default:false)
                           {is_strict_check, false }
                          ]},
@@ -738,7 +738,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 8                | Total memory usage                 |
 +------------------+------------------------------------+
-| 9                | Sysem memory usage                 |
+| 9                | System memory usage                |
 +------------------+------------------------------------+
 | 10               | Processes memory usage             |
 +------------------+------------------------------------+
@@ -813,7 +813,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 8                | Total memory usage                 |
 +------------------+------------------------------------+
-| 9                | Sysem memory usage                 |
+| 9                | System memory usage                |
 +------------------+------------------------------------+
 | 10               | Processes memory usage             |
 +------------------+------------------------------------+
@@ -931,7 +931,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 8                | Total memory usage                 |
 +------------------+------------------------------------+
-| 9                | Sysem memory usage                 |
+| 9                | System memory usage                |
 +------------------+------------------------------------+
 | 10               | Processes memory usage             |
 +------------------+------------------------------------+
