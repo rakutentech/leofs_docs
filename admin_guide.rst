@@ -919,10 +919,12 @@ Attach/Detach node into a Storage-cluster in operation
 
 This section describes the process of adding and removing nodes from a LeoFS Storage cluster.
 
-* When the node is running, it can be added to it. So you can use the :ref:`rebalance <rebalance-command-label>` command to stage a join request from the Manager node.
-* A node can be removed from the cluster
-    * When the node is running or stop, it can be remove from the storage cluster. So you can use the :ref:`detach <detach-command-label>` command.
-    * After that, you need to execute the :ref:`rebalance <rebalance-command-label>` command to actually remove the storage cluster that be requested from the Manager node.
+* Adding a storage node:
+    * When the node is running, it can be added to it. So you can use the :ref:`rebalance <rebalance-command-label>` command to stage a join request from the Manager node.
+* Removing a storage node:
+    * A node can be removed from the cluster
+        * When the node is running or stop, it can be remove from the storage cluster. So you can use the :ref:`detach <detach-command-label>` command.
+        * After that, you need to execute the :ref:`rebalance <rebalance-command-label>` command to actually remove the storage cluster that be requested from the Manager node.
 
 
 .. image:: _static/images/leofs-order-of-attach.png
