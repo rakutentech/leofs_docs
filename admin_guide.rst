@@ -11,15 +11,16 @@ Administration Guide
 System launch order
 ----------------------
 
-LeoFS' system launch is very simple.
+The documentation in this section outlines core administrative tasks and practices that operators of LeoFS will want to consider.
+LeoFS' system launch is very simple as the follows:
 
 .. image:: _static/images/leofs-order-of-system-launch.png
    :width: 640px
 
 
 
-Operations
-^^^^^^^^^^
+Explanation of the Operations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 \
 
@@ -238,6 +239,8 @@ Table of Storage Cluster's Commands
 .. index::
    detach-command
 
+.. _detach-command-label:
+
 **'detach'** - Storage node is removed from the LeoFS-Cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -278,6 +281,8 @@ Command: ``resume ${storage-node}``
 
 .. index::
    rebalance-command
+
+.. _rebalance-command-label:
 
 **'rebalance'** - Rebalance files into the cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -912,7 +917,13 @@ Command: ``history``
 Attach/Detach node into a Storage-cluster in operation
 ------------------------------------------------------
 
-\
+This section describes the process of adding and removing nodes from a LeoFS Storage cluster.
+
+* When the node is running, it can be added to it. So you can use the :ref:`rebalance <rebalance-command-label>` command to stage a join request from the Manager node.
+* A node can be removed from the cluster
+    * When the node is running or stop, it can be remove from the storage cluster. So you can use the :ref:`detach <detach-command-label>` command.
+    * After that, you need to execute the :ref:`rebalance <rebalance-command-label>` command to actually remove the storage cluster that be requested from the Manager node.
+
 
 .. image:: _static/images/leofs-order-of-attach.png
    :width: 640px
