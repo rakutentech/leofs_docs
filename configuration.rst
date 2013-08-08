@@ -11,11 +11,42 @@ LeoFS Configuration
 Relationship of configuration files
 -----------------------------------
 
+Each configuration refers a set value of other nodes.
+
+* Gateway and Storage refer an alias of Manager-master and an alias of Manager-slave.
+* Manager-master refer an alias of Manager-slave, on the other hand, Manager-slave refer an alias of Manager-master.
+
+
 .. image:: _static/images/leofs-conf-relationship.png
    :width: 700px
 
+
+SNMP-related configuration refers a directory name of SNMPA as the follows:
+
 .. image:: _static/images/leofs-conf-relationship-snmpa.png
    :width: 700px
+
+
+LeoFS Configuration
+--------------------
+
+Each LeoFS applicaiton has two configuration files which is located in as the follows. The files are ``app.config`` and ``vm.args``.
+
+
++---------------+---------------------------------------------------------+
+| Application   | Location                                                |
++===============+=========================================================+
+| Manager-Master| $LEOFS_HOME/package/leo_manager_0/etc/                  |
++---------------+---------------------------------------------------------+
+| Manager-Slave | $LEOFS_HOME/package/leo_manager_1/etc/                  |
++---------------+---------------------------------------------------------+
+| Storage       | $LEOFS_HOME/package/leo_storage/etc/                    |
++---------------+---------------------------------------------------------+
+| Gateway       | $LEOFS_HOME/package/leo_gateway/etc/                    |
++---------------+---------------------------------------------------------+
+
+* The ``app.config`` is used to set various attributes of the application.
+* The ``vm.args`` is used to pass parameters to the Erlang node such as the name and cookie of the Erlang node.
 
 
 .. index::
@@ -63,7 +94,7 @@ The Consistency Level
 | High        | n = 3, [r = 2 | r = 3], w = 3, d = 3                   |
 +-------------+--------------------------------------------------------+
 
-* **Example - File: ${LEOFS_SRC}/package/leofs/manager_0/etc/app.config**:
+* **Example - File: ${LEOFS_SRC}/package/manager_0/etc/app.config**:
 
 .. code-block:: erlang
 
@@ -87,7 +118,10 @@ The Consistency Level
 Configuration of the Manager-Master node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_0/etc/app.config**
+**[app.cofig]**
+
+* The ``app.config`` location: **${LEOFS_HOME}/package/manager_0/etc/app.config**
+* Modification of the required items:
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
@@ -180,7 +214,10 @@ Configuration of the Manager-Master node
     ].
 
 
-* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_0/etc/vm.args**
+**[vm.args]**
+
+* The ``vm.args`` location: **${LEOFS_HOME}/package/manager_0/etc/vm.args**
+* Modification of the required items:
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
@@ -226,7 +263,10 @@ LeoFS Manager-Slave
 
 **Configuration of the Manager-Slave node**
 
-* **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_0/etc/app.config**
+**[app.cofig]**
+
+* The ``app.config`` location: **${LEOFS_HOME}/package/manager_1/etc/app.config**
+* Modification of the required items:
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
@@ -256,8 +296,10 @@ LeoFS Manager-Slave
                  ]}
     ].
 
+**[vm.args]**
 
-* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_1/etc/vm.args**
+* The ``vm.args`` location: **${LEOFS_HOME}/package/manager_1/etc/vm.args**
+* Modification of the required items:
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
@@ -306,7 +348,10 @@ LeoFS Storage
 
 **Configuration of Storage nodes**
 
-* **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/storage/etc/app.config**
+**[app.cofig]**
+
+* The ``app.config`` location: **${LEOFS_HOME}/package/storage/etc/app.config**
+* Modification of the required items:
 
 +-------------------------+--------------------------------------------------------+
 |Property                 | Description                                            |
@@ -401,7 +446,10 @@ LeoFS Storage
                          ]},
 
 
-* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/storage/etc/vm.args**
+**[vm.args]**
+
+* The ``vm.args`` location: **${LEOFS_HOME}/package/storage/etc/vm.args**
+* Modification of the required items:
 
 +-------------------------+--------------------------------------------------------+
 |Property                 | Description                                            |
@@ -455,7 +503,10 @@ LeoFS Gateway
 
 **Configuration of Gateway nodes**
 
-* **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/gateway/etc/app.config**
+**[app.cofig]**
+
+* The ``app.config`` location: **${LEOFS_HOME}/package/gateway/etc/app.config**
+* Modification of the required items:
 
 +---------------------------+----------------------------------------------------------------------------------+
 |Property                   | Description                                                                      |
@@ -638,7 +689,10 @@ LeoFS Gateway
                ]},
 
 
-* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/gateway/etc/vm.args**
+**[vm.args]**
+
+* The ``vm.args`` location: **${LEOFS_HOME}/package/gateway/etc/vm.args**
+* Modification of the required items:
 
 +--------------------+--------------------------------------------------------+
 |Property            | Description                                            |
@@ -689,6 +743,8 @@ LeoFS Gateway
 
 SNMPA Setup
 -----------
+
+Each LeoFS application provides a built in SNMP server which allows to connect external systems, such as `Nagios <http://www.nagios.org/>`_ and `Zabbix <http://www.zabbix.com/>`_. So you can retrieve various statistics as the follows:
 
 Manager
 ^^^^^^^
