@@ -177,7 +177,7 @@ Configuration of the Manager-Master node
                    %% Mode of server - [master|slave]
                    {manager_mode,     master },
                    %% Partner of manager's alias
-                   {manager_partners, ["manager_1@127.0.0.1"] },
+                   {manager_partners, ["manager_1@${SLAVE-IP}"] },
                    %% Manager acceptable port number
                    {port_cui,         10010 },
                    {port_json,        10020 },
@@ -209,7 +209,7 @@ Configuration of the Manager-Master node
                    %% Directory of mq's db-file
                    {queue_dir,        "./work/queue"},
                    %% Directory of snmp-agent
-                   {snmp_agent,       "./snmp/snmpa_manager_0/LEO-MANAGER"}
+                   {snmp_agent,       "./snmp/${SNMPA-DIR}/LEO-MANAGER"}
                   ]},
     ].
 
