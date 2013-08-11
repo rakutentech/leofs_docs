@@ -30,7 +30,7 @@ SNMP-related configuration refers a directory name of SNMPA as the follows:
 LeoFS Configuration
 --------------------
 
-Each LeoFS applicaiton has two configuration files which is located in as the follows. The files are ``app.config`` and ``vm.args``.
+Each LeoFS node has two configuration files, ``app.config`` and ``vm.args``, which are located in the following directories:
 
 
 +---------------+---------------------------------------------------------+
@@ -45,8 +45,8 @@ Each LeoFS applicaiton has two configuration files which is located in as the fo
 | Gateway       | $LEOFS_HOME/package/leo_gateway/etc/                    |
 +---------------+---------------------------------------------------------+
 
-* The ``app.config`` is used to set various attributes of the application.
-* The ``vm.args`` is used to pass parameters to the Erlang node such as the name and cookie of the Erlang node.
+* The ``app.config`` file is used to set various attributes of the application.
+* The ``vm.args`` file is used to pass parameters to the Erlang node such as the name and cookie of the node.
 
 
 .. index::
@@ -118,7 +118,7 @@ The Consistency Level
 Configuration of the Manager-Master node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**[app.cofig]**
+**[app.config]**
 
 * The ``app.config`` location: **${LEOFS_HOME}/package/manager_0/etc/app.config**
 * Modification of the required items:
@@ -263,7 +263,7 @@ LeoFS Manager-Slave
 
 **Configuration of the Manager-Slave node**
 
-**[app.cofig]**
+**[app.config]**
 
 * The ``app.config`` location: **${LEOFS_HOME}/package/manager_1/etc/app.config**
 * Modification of the required items:
@@ -348,7 +348,7 @@ LeoFS Storage
 
 **Configuration of Storage nodes**
 
-**[app.cofig]**
+**[app.config]**
 
 * The ``app.config`` location: **${LEOFS_HOME}/package/storage/etc/app.config**
 * Modification of the required items:
@@ -503,7 +503,7 @@ LeoFS Gateway
 
 **Configuration of Gateway nodes**
 
-**[app.cofig]**
+**[app.config]**
 
 * The ``app.config`` location: **${LEOFS_HOME}/package/gateway/etc/app.config**
 * Modification of the required items:
@@ -744,7 +744,7 @@ LeoFS Gateway
 SNMPA Setup
 -----------
 
-Each LeoFS application provides a built in SNMP server which allows to connect external systems, such as `Nagios <http://www.nagios.org/>`_ and `Zabbix <http://www.zabbix.com/>`_. So you can retrieve various statistics as the follows:
+Each LeoFS node provides a built in SNMP server which allows to connect external systems, such as `Nagios <http://www.nagios.org/>`_ and `Zabbix <http://www.zabbix.com/>`_. You can retrieve various statistics as follows:
 
 Manager
 ^^^^^^^

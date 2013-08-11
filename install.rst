@@ -20,7 +20,7 @@ most Linux platforms with the following software installed:
 Installing Erlang
 -----------------
 
-.. note:: We recommend this installation method. Please make sure you should choose a suitable it for your environment.
+.. note:: We recommend this installation method. Please follow the relevant instructions for your environment.
 
 
 Preparation
@@ -445,7 +445,7 @@ Log Dir and Working Dir
 Firewall Rules
 --------------
 
-In order to work LeoFS correctly, it is necessary to set and check the firewall rules in your environment as the follows:
+In order for LeoFS to work correctly, it is necessary to set and check the firewall rules in your environment as follows:
 
 +----------------+-----------+-----------------+--------------------------+
 | Subsystem      | Direction | Ports           | Notes                    |
