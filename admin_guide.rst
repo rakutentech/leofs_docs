@@ -8,6 +8,15 @@
 Administration Guide
 ================================
 
+Operation Flow Diagram
+-----------------------
+
+The documentation is the LeoFS operation flow diagram as follows:
+
+.. image:: _static/images/leofs-flow-diagram.png
+   :width: 780px
+
+
 System launch order
 ----------------------
 
