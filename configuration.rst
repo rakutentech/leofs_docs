@@ -554,13 +554,13 @@ LeoFS Gateway
 +---------------------------+----------------------------------------------------------------------------------+
 |${CACHE_DISC_DIR_JOURNAL}  | Directory for the disk cache journal                                             |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_EXPIRE}            | [**cache-mode:http**] HTTP Cache Expire in seconds                               |
+|${CACHE_EXPIRE}            | Cache Expire in seconds                                                          |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_MAX_C_LEN}         | [**cache-mode:http**] HTTP Cache Max Content Length in bytes                     |
+|${CACHE_MAX_C_LEN}         | Cache Max Content Length in bytes                                                |
 |                           |                                                                                  |
 |                           | Note: *LeoFS-Gateway can cache up to 1MB*                                        |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_C_TYPE}            | [**cache-mode:http**] HTTP Cache Content Type                                    |
+|${CACHE_C_TYPE}            | Cache Content Type                                                               |
 |                           |                                                                                  |
 |                           | ex-1) ["image/png", "image/jpeg"]                                                |
 |                           |                                                                                  |
@@ -570,7 +570,7 @@ LeoFS Gateway
 |                           |                                                                                  |
 |                           |       When value is empty, all objects are cached.                               |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_PATH_PATTERNS}     | [**cache-mode:http**] HTTP Cache Path Pattern (regular expression)               |
+|${CACHE_PATH_PATTERNS}     | Cache Path Pattern (regular expression)                                          |
 |                           |                                                                                  |
 |                           | ex-1) ["/img/.+", "/css/.+"]                                                     |
 |                           |                                                                                  |
