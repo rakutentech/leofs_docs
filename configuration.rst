@@ -11,17 +11,13 @@ LeoFS Configuration
 Relationship of configuration files
 -----------------------------------
 
-Each configuration refers a set value of other nodes.
-
-* Gateway and Storage refer an alias of Manager-master and an alias of Manager-slave.
-* Manager-master refer an alias of Manager-slave, on the other hand, Manager-slave refer an alias of Manager-master.
-
+Each configuration of node refers a set value of other name of nodes as follows:
 
 .. image:: _static/images/leofs-conf-relationship.png
    :width: 700px
 
 
-SNMP-related configuration refers a directory name of SNMPA as the follows:
+SNMP-related configuration refers a directory name of SNMPA as follows:
 
 .. image:: _static/images/leofs-conf-relationship-snmpa.png
    :width: 700px
