@@ -13,9 +13,10 @@ Operation Flow Diagram
 
 The documentation is the LeoFS operation flow diagram as follows:
 
-.. image:: _static/images/leofs-flow-diagram.png
+.. image:: _static/images/leofs-flow-diagram.jpg
    :width: 780px
 
+* `The diagram only <http://www.leofs.org/docs/_images/leofs-flow-diagram.jpg>`_
 
 System launch order
 ----------------------
