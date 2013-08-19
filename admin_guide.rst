@@ -8,6 +8,8 @@
 Administration Guide
 ================================
 
+.. _operation-flow-diagram-label:
+
 Operation Flow Diagram
 -----------------------
 
@@ -199,11 +201,8 @@ Storage Cluster Operation Commands
 .. index::
    pair: Operation; Command
 
-LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
-
-.. image:: _static/images/leofs-life-cycle.png
-   :width: 640px
-
+* LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
+* LeoFS operation flow diagram is  :ref:`here <operation-flow-diagram-label>`.
 
 
 .. index::
@@ -218,7 +217,7 @@ Table of Storage Cluster's Commands
 +--------------------------------+---------------------------------------------------------------------------------------------------+
 | Command                        | Explanation                                                                                       |
 +================================+===================================================================================================+
-| **Storage-node related commands:**                                                                                                 |
+| *Storage-node related commands*                                                                                                    |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
 | detach `${storage-node}`       | * Remove a storage node from the LeoFS storage-cluster                                            |
 |                                | * Current status: ``running`` | ``stop``                                                          |
@@ -229,7 +228,7 @@ Table of Storage Cluster's Commands
 | resume `${storage-node}`       | * Resume a storage node                                                                           |
 |                                | * Current status: ``suspended`` | ``restarted``                                                   |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
-| **Storage-cluster related commands:**                                                                                              |
+| *Storage-cluster related commands*                                                                                                 |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
 | start                          | * Launch LeoFS after distributing the "routing-table (RING)" from Manager to Storage and Gateway  |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
