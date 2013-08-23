@@ -148,7 +148,7 @@ Configuration of the Manager-Master node
                  ]},
         {leo_manager, [
                    %% == System Ver ==
-                   {system_version, "0.14.6" },
+                   {system_version, "0.14.7" },
 
                    %% == System Configuration ==
                    %%
@@ -369,7 +369,7 @@ LeoFS Storage
 
     {leo_storage, [
                    %% == System Ver ==
-                   {system_version, "0.14.3" },
+                   {system_version, "0.14.7" },
 
                    %% == Storage Configuration ==
                    %%
@@ -595,7 +595,7 @@ LeoFS Gateway
 
         {leo_gateway, [
                 %% System Ver
-                {system_version, "0.14.1" },
+                {system_version, "0.14.7" },
 
                 %% Gateway Properties:
                 {http, [
@@ -671,6 +671,10 @@ LeoFS Gateway
                 %%         2: warning
                 %%         3: error
                 {log_level,    1 },
+
+                %% Output Access-log?
+                {is_enable_access_log, true },
+
                 %% Log appender - [file]
                 {log_appender, [
                                 {file, [{path, "./log/app"}]}
