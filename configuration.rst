@@ -1,5 +1,7 @@
 .. LeoFS documentation
 
+.. _leofs-configuration-label:
+
 LeoFS Configuration
 ======================
 
@@ -9,11 +11,38 @@ LeoFS Configuration
 Relationship of configuration files
 -----------------------------------
 
+Each configuration of node refers a set value of other name of nodes as follows:
+
 .. image:: _static/images/leofs-conf-relationship.png
    :width: 700px
 
+
+SNMP-related configuration refers a directory name of SNMPA as follows:
+
 .. image:: _static/images/leofs-conf-relationship-snmpa.png
    :width: 700px
+
+
+LeoFS Configuration
+--------------------
+
+Each LeoFS node has two configuration files, ``app.config`` and ``vm.args``, which are located in the following directories:
+
+
++---------------+---------------------------------------------------------+
+| Application   | Location                                                |
++===============+=========================================================+
+| Manager-Master| $LEOFS_HOME/package/leo_manager_0/etc/                  |
++---------------+---------------------------------------------------------+
+| Manager-Slave | $LEOFS_HOME/package/leo_manager_1/etc/                  |
++---------------+---------------------------------------------------------+
+| Storage       | $LEOFS_HOME/package/leo_storage/etc/                    |
++---------------+---------------------------------------------------------+
+| Gateway       | $LEOFS_HOME/package/leo_gateway/etc/                    |
++---------------+---------------------------------------------------------+
+
+* The ``app.config`` file is used to set various attributes of the application.
+* The ``vm.args`` file is used to pass parameters to the Erlang node such as the name and cookie of the node.
 
 
 .. index::
@@ -24,9 +53,71 @@ Relationship of configuration files
 LeoFS Manager-Master
 --------------------
 
-**Configuration of the Manager-Master node**
+.. _system-configuration-label:
 
-* **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_0/etc/app.config**
+The Consistency Level
+^^^^^^^^^^^^^^^^^^^^^
+
+.. note::  The consistency level is configured in this file. It should not be modified while the system is running.
+
++-------------+---------------------------------------------------------+
+| Property    | Explanation                                             |
++=============+=========================================================+
+| n           | # of replicas                                           |
++-------------+---------------------------------------------------------+
+| r           | # of replicas needed for a successful READ operation    |
++-------------+---------------------------------------------------------+
+| w           | # of replicas needed for a successful WRITE operation   |
++-------------+---------------------------------------------------------+
+| d           | # of replicas needed for a successful DELETE operation  |
++-------------+---------------------------------------------------------+
+| level_1     | # of dc-aware replicas (Supported from v1.0.0 onward)   |
++-------------+---------------------------------------------------------+
+| level_2     | # of rack-aware replicas                                |
++-------------+---------------------------------------------------------+
+| bit_of_ring | # of bits for the hash-ring (fixed 128bit)              |
++-------------+---------------------------------------------------------+
+
+* A reference consistency level
+
++-------------+--------------------------------------------------------+
+| Level       | Configuration                                          |
++=============+========================================================+
+| Low         | n = 3, r = 1, w = 1, d = 1                             |
++-------------+--------------------------------------------------------+
+| Middle      | n = 3, [r = 1 | r = 2], w = 2, d = 2                   |
++-------------+--------------------------------------------------------+
+| High        | n = 3, [r = 2 | r = 3], w = 3, d = 3                   |
++-------------+--------------------------------------------------------+
+
+* **Example - File: ${LEOFS_SRC}/package/manager_0/etc/app.config**:
+
+.. code-block:: erlang
+
+        {leo_manager,
+                 [
+                  %% System Configuration
+                  {system, [{n, 3 },  %% # of replicas
+                            {w, 2 },  %% # of replicas needed for a successful WRITE  operation
+                            {r, 1 },  %% # of replicas needed for a successful READ   operation
+                            {d, 2 },  %% # of replicas needed for a successful DELETE operation
+                            {level_1, 0}, %% # of DC-awareness replicas (Plan to support with v1.0.0)
+                            {level_2, 0}, %% # of Rack-awareness replicas
+                            {bit_of_ring, 128}
+                           ]},
+
+
+\
+\
+
+
+Configuration of the Manager-Master node
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**[app.config]**
+
+* The ``app.config`` location: **${LEOFS_HOME}/package/manager_0/etc/app.config**
+* Modification of the required items:
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
@@ -57,7 +148,7 @@ LeoFS Manager-Master
                  ]},
         {leo_manager, [
                    %% == System Ver ==
-                   {system_version, "0.14.1" },
+                   {system_version, "0.14.7" },
 
                    %% == System Configuration ==
                    %%
@@ -70,7 +161,9 @@ LeoFS Manager-Master
                              {w, 1 },
                              {r, 1 },
                              {d, 1 },
-                             {bit_of_ring, 128}
+                             {bit_of_ring, 128},
+                             {level_1, 0 },
+                             {level_2, 0 }
                             ]},
 
                    %% == Available Commands ==
@@ -80,8 +173,8 @@ LeoFS Manager-Master
                    %% Mode of server - [master|slave]
                    {manager_mode,     master },
                    %% Partner of manager's alias
-                   {manager_partners, ["manager_1@127.0.0.1"] },
-                   %% Manager accepatable port number
+                   {manager_partners, ["manager_1@${SLAVE-IP}"] },
+                   %% Manager acceptable port number
                    {port_cui,         10010 },
                    {port_json,        10020 },
 
@@ -89,7 +182,7 @@ LeoFS Manager-Master
                    {num_of_acceptors_cui,   3},
                    {num_of_acceptors_json, 16},
 
-                   %% Compaction: # of execution of conncurrent
+                   %% Compaction: # of execution of concurrent
                    {num_of_compact_proc, 3 },
 
                    %% == Log-specific properties ==
@@ -112,12 +205,15 @@ LeoFS Manager-Master
                    %% Directory of mq's db-file
                    {queue_dir,        "./work/queue"},
                    %% Directory of snmp-agent
-                   {snmp_agent,       "./snmp/snmpa_manager_0/LEO-MANAGER"}
+                   {snmp_agent,       "./snmp/${SNMPA-DIR}/LEO-MANAGER"}
                   ]},
     ].
 
 
-* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_0/etc/vm.args**
+**[vm.args]**
+
+* The ``vm.args`` location: **${LEOFS_HOME}/package/manager_0/etc/vm.args**
+* Modification of the required items:
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
@@ -163,7 +259,10 @@ LeoFS Manager-Slave
 
 **Configuration of the Manager-Slave node**
 
-* **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_0/etc/app.config**
+**[app.config]**
+
+* The ``app.config`` location: **${LEOFS_HOME}/package/manager_1/etc/app.config**
+* Modification of the required items:
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
@@ -193,8 +292,10 @@ LeoFS Manager-Slave
                  ]}
     ].
 
+**[vm.args]**
 
-* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/manager_1/etc/vm.args**
+* The ``vm.args`` location: **${LEOFS_HOME}/package/manager_1/etc/vm.args**
+* Modification of the required items:
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
@@ -243,7 +344,10 @@ LeoFS Storage
 
 **Configuration of Storage nodes**
 
-* **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/storage/etc/app.config**
+**[app.config]**
+
+* The ``app.config`` location: **${LEOFS_HOME}/package/storage/etc/app.config**
+* Modification of the required items:
 
 +-------------------------+--------------------------------------------------------+
 |Property                 | Description                                            |
@@ -265,7 +369,7 @@ LeoFS Storage
 
     {leo_storage, [
                    %% == System Ver ==
-                   {system_version, "0.14.3" },
+                   {system_version, "0.14.7" },
 
                    %% == Storage Configuration ==
                    %%
@@ -289,7 +393,7 @@ LeoFS Storage
                    %% # of mq-server's processes
                    {num_of_mq_procs,    8 },
 
-                   %% mq - queues cosumption's intervals
+                   %% mq - queues consumption's intervals
                    %% - per_object
                    {cns_interval_per_object_min, 0  },
                    {cns_interval_per_object_max, 16 },
@@ -332,13 +436,16 @@ LeoFS Storage
     {leo_object_storage, [{profile, false},
                           {metadata_storage, 'bitcask'},
 
-                          %% Strict comparison of object's checksum with metadata's it
+                          %% Strict comparison of object's checksum with its metadata
                           %% (default:false)
                           {is_strict_check, false }
                          ]},
 
 
-* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/storage/etc/vm.args**
+**[vm.args]**
+
+* The ``vm.args`` location: **${LEOFS_HOME}/package/storage/etc/vm.args**
+* Modification of the required items:
 
 +-------------------------+--------------------------------------------------------+
 |Property                 | Description                                            |
@@ -392,7 +499,10 @@ LeoFS Gateway
 
 **Configuration of Gateway nodes**
 
-* **File-1: ${LEOFS_DEPLOYED_DIR}/package/leofs/gateway/etc/app.config**
+**[app.config]**
+
+* The ``app.config`` location: **${LEOFS_HOME}/package/gateway/etc/app.config**
+* Modification of the required items:
 
 +---------------------------+----------------------------------------------------------------------------------+
 |Property                   | Description                                                                      |
@@ -412,6 +522,8 @@ LeoFS Gateway
 |                           | - [snmpa_gateway_0|snmpa_gateway_1|snmpa_gateway_0]                              |
 +---------------------------+----------------------------------------------------------------------------------+
 |${HTTP_HANDLER}            | Gateway's HTTP API to use, either ``s3`` (default) or ``rest``                   |
++---------------------------+----------------------------------------------------------------------------------+
+|${MAX_KEEPALIVE}           | Max number of requests allowed in a single keep-alive session. Defaults to 1024. |
 +---------------------------+----------------------------------------------------------------------------------+
 | *Cache related items*                                                                                        |
 +---------------------------+----------------------------------------------------------------------------------+
@@ -442,13 +554,13 @@ LeoFS Gateway
 +---------------------------+----------------------------------------------------------------------------------+
 |${CACHE_DISC_DIR_JOURNAL}  | Directory for the disk cache journal                                             |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_EXPIRE}            | [**cache-mode:http**] HTTP Cache Expire in seconds                               |
+|${CACHE_EXPIRE}            | Cache Expire in seconds                                                          |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_MAX_C_LEN}         | [**cache-mode:http**] HTTP Cache Max Content Length in bytes                     |
+|${CACHE_MAX_C_LEN}         | Cache Max Content Length in bytes                                                |
 |                           |                                                                                  |
 |                           | Note: *LeoFS-Gateway can cache up to 1MB*                                        |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_C_TYPE}            | [**cache-mode:http**] HTTP Cache Content Type                                    |
+|${CACHE_C_TYPE}            | Cache Content Type                                                               |
 |                           |                                                                                  |
 |                           | ex-1) ["image/png", "image/jpeg"]                                                |
 |                           |                                                                                  |
@@ -458,7 +570,7 @@ LeoFS Gateway
 |                           |                                                                                  |
 |                           |       When value is empty, all objects are cached.                               |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_PATH_PATTERNS}     | [**cache-mode:http**] HTTP Cache Path Pattern (regular expression)               |
+|${CACHE_PATH_PATTERNS}     | Cache Path Pattern (regular expression)                                          |
 |                           |                                                                                  |
 |                           | ex-1) ["/img/.+", "/css/.+"]                                                     |
 |                           |                                                                                  |
@@ -483,7 +595,7 @@ LeoFS Gateway
 
         {leo_gateway, [
                 %% System Ver
-                {system_version, "0.14.1" },
+                {system_version, "0.14.7" },
 
                 %% Gateway Properties:
                 {http, [
@@ -493,6 +605,8 @@ LeoFS Gateway
                         {port, ${LISTENING_PORT} },
                         %% # of acceptors:
                         {num_of_acceptors, ${NUM_OF_LISTENER} },
+                        %% max keep-alive:
+                        {max_keepalive, ${MAX_KEEPALIVE} },
                         %% max # of layer of directories:
                         {layer_of_dirs, {1, 12} },
                         %% ssl related:
@@ -557,6 +671,10 @@ LeoFS Gateway
                 %%         2: warning
                 %%         3: error
                 {log_level,    1 },
+
+                %% Output Access-log?
+                {is_enable_access_log, true },
+
                 %% Log appender - [file]
                 {log_appender, [
                                 {file, [{path, "./log/app"}]}
@@ -571,7 +689,10 @@ LeoFS Gateway
                ]},
 
 
-* **File-2: ${LEOFS_DEPLOYED_DIR}/package/leofs/gateway/etc/vm.args**
+**[vm.args]**
+
+* The ``vm.args`` location: **${LEOFS_HOME}/package/gateway/etc/vm.args**
+* Modification of the required items:
 
 +--------------------+--------------------------------------------------------+
 |Property            | Description                                            |
@@ -623,6 +744,8 @@ LeoFS Gateway
 SNMPA Setup
 -----------
 
+Each LeoFS node provides a built in SNMP server which allows to connect external systems, such as `Nagios <http://www.nagios.org/>`_ and `Zabbix <http://www.zabbix.com/>`_. You can retrieve various statistics as follows:
+
 Manager
 ^^^^^^^
 
@@ -671,7 +794,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 8                | Total memory usage                 |
 +------------------+------------------------------------+
-| 9                | Sysem memory usage                 |
+| 9                | System memory usage                |
 +------------------+------------------------------------+
 | 10               | Processes memory usage             |
 +------------------+------------------------------------+
@@ -746,7 +869,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 8                | Total memory usage                 |
 +------------------+------------------------------------+
-| 9                | Sysem memory usage                 |
+| 9                | System memory usage                |
 +------------------+------------------------------------+
 | 10               | Processes memory usage             |
 +------------------+------------------------------------+
@@ -864,7 +987,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 8                | Total memory usage                 |
 +------------------+------------------------------------+
-| 9                | Sysem memory usage                 |
+| 9                | System memory usage                |
 +------------------+------------------------------------+
 | 10               | Processes memory usage             |
 +------------------+------------------------------------+

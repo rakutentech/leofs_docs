@@ -3,21 +3,36 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. _administration-guide-label:
+
 Administration Guide
 ================================
+
+.. _operation-flow-diagram-label:
+
+Operation Flow Diagram
+-----------------------
+
+The documentation is the LeoFS operation flow diagram as follows:
+
+.. image:: _static/images/leofs-flow-diagram.jpg
+   :width: 780px
+
+* `The diagram only <http://www.leofs.org/docs/_images/leofs-flow-diagram.jpg>`_
 
 System launch order
 ----------------------
 
-LeoFS' system launch is very simple.
+The documentation in this section outlines core administrative tasks and practices that operators of LeoFS will want to consider.
+LeoFS' system launch is very simple:
 
 .. image:: _static/images/leofs-order-of-system-launch.png
    :width: 640px
 
 
 
-Operations
-^^^^^^^^^^
+Explanation of the Operations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 \
 
@@ -32,7 +47,7 @@ Operations
 +-------------+------------------------------------+------------------------------------------------------------+
 | 4           | $ telnet $manager-master 10010     | Accessing **Manager Master Console** by telnet             |
 +-------------+------------------------------------+------------------------------------------------------------+
-| 5           | > start                            | Starting LeoFS (manager and storages)                      |
+| 5           | > start                            | Starting LeoFS (manager and storage)                       |
 +-------------+------------------------------------+------------------------------------------------------------+
 | 6           | > status                           | Confirm status of the cluster on Manager Master Console #1 |
 +-------------+------------------------------------+------------------------------------------------------------+
@@ -89,8 +104,8 @@ Open LeoFS Manager Console on **LeoFS-Manager Master** node
               # of successes of R : 1
               # of successes of W : 1
               # of successes of D : 1
-    # of awareness replicas [DC]  : 0
-    # of awareness replicas [Rack]: 0
+       # of DC-awareness replicas : 0
+     # of Rack-awareness replicas : 0
                         ring size : 2^128
                  ring hash (cur)  : -1
                  ring hash (prev) : -1
@@ -125,8 +140,8 @@ Confirm#1 by **LeoFS-Manager** node's console
            # of successes of R : 1
            # of successes of W : 1
            # of successes of D : 1
- # of awareness replicas [DC]  : 0
- # of awareness replicas [Rack]: 0
+    # of DC-awareness replicas : 0
+  # of Rack-awareness replicas : 0
                      ring size : 2^128
               ring hash (cur)  : 1428891014
               ring hash (prev) : 1428891014
@@ -162,8 +177,8 @@ Confirm#2 by **LeoFS-Manager** master node's console
            # of successes of R : 1
            # of successes of W : 1
            # of successes of D : 1
- # of awareness replicas [DC]  : 0
- # of awareness replicas [Rack]: 0
+    # of DC-awareness replicas : 0
+  # of Rack-awareness replicas : 0
                      ring size : 2^128
               ring hash (cur)  : 1428891014
               ring hash (prev) : 1428891014
@@ -186,11 +201,8 @@ Storage Cluster Operation Commands
 .. index::
    pair: Operation; Command
 
-LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
-
-.. image:: _static/images/leofs-life-cycle.png
-   :width: 640px
-
+* LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
+* LeoFS operation flow diagram is :ref:`here <operation-flow-diagram-label>`.
 
 
 .. index::
@@ -205,7 +217,7 @@ Table of Storage Cluster's Commands
 +--------------------------------+---------------------------------------------------------------------------------------------------+
 | Command                        | Explanation                                                                                       |
 +================================+===================================================================================================+
-| **Storage-node related commands:**                                                                                                 |
+| *Storage-node related commands*                                                                                                    |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
 | detach `${storage-node}`       | * Remove a storage node from the LeoFS storage-cluster                                            |
 |                                | * Current status: ``running`` | ``stop``                                                          |
@@ -216,7 +228,7 @@ Table of Storage Cluster's Commands
 | resume `${storage-node}`       | * Resume a storage node                                                                           |
 |                                | * Current status: ``suspended`` | ``restarted``                                                   |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
-| **Storage-cluster related commands:**                                                                                              |
+| *Storage-cluster related commands*                                                                                                 |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
 | start                          | * Launch LeoFS after distributing the "routing-table (RING)" from Manager to Storage and Gateway  |
 +--------------------------------+---------------------------------------------------------------------------------------------------+
@@ -235,6 +247,8 @@ Table of Storage Cluster's Commands
 
 .. index::
    detach-command
+
+.. _detach-command-label:
 
 **'detach'** - Storage node is removed from the LeoFS-Cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -276,6 +290,8 @@ Command: ``resume ${storage-node}``
 
 .. index::
    rebalance-command
+
+.. _rebalance-command-label:
 
 **'rebalance'** - Rebalance files into the cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -430,8 +446,8 @@ Command: ``du detail ${storage-node}``
 
 \
 
-**compact** - Remove logical deleted objects and metadata
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**compact** - Remove logical deleted objects and meta data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 \
 
@@ -452,7 +468,7 @@ Command: ``compact start ${storage-node} all | ${num_of_targets} [${num_of_compa
 ::
 
     ## All compaction-targets will be executed with 3 concurrent processes
-    ## (default concurrents is 3)
+    ## (default concurrency is 3)
     compact start storage_0@127.0.0.1 all
     OK
 
@@ -655,7 +671,7 @@ Command: ``get-users``
 **'set-endpoint'** - Register a new Endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note:: LeoFS's domains are ruled by :ref:`this rule <s3-path-label>`
+.. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`
 
 Command: ``set-endpoint ${endpoint}``
 
@@ -910,7 +926,14 @@ Command: ``history``
 Attach/Detach node into a Storage-cluster in operation
 ------------------------------------------------------
 
-\
+This section describes the process of adding and removing nodes in a LeoFS Storage cluster.
+
+* Adding a storage node:
+    * The node can be added to the cluster once it is running. You can use the :ref:`rebalance <rebalance-command-label>` command to request a join from the Manager.
+* Removing a storage node:
+    * The node can be removed from the cluster when it is either running or stopped. You can use the :ref:`detach <detach-command-label>` command to remove the node.
+    * After that, you need to execute the :ref:`rebalance <rebalance-command-label>` command in the Manager to actually remove the node from the storage cluster.
+
 
 .. image:: _static/images/leofs-order-of-attach.png
    :width: 640px
@@ -920,4 +943,43 @@ Attach/Detach node into a Storage-cluster in operation
 
 .. image:: _static/images/leofs-order-of-detach.png
    :width: 640px
+
+
+
+
+Gateway access-log format
+-------------------------
+
+LeoFS-Gateway is able to output access-log. If you would like to use this option, you can check and set :ref:`the configuration <conf_gateway_label>`.
+
+Sample
+^^^^^^
+
+::
+
+    [HEAD]   photo/cloud_storage.jpeg 0       2013-08-22 18:54:42.874701 +0900 1377165282874827
+    [PUT]    photo/cloud_storage.jpeg 1683333 2013-08-22 18:54:45.644641 +0900 1377165285644703
+    [GET]    photo/cloud_storage.jpeg 1683333 2013-08-22 18:55:04.235031 +0900 1377165304235106
+    [DELETE] photo/cloud_storage.jpeg 0       2013-08-22 18:55:37.385382 +0900 1377165337385451
+
+Format
+^^^^^^
+
+.. note:: The format of the access log is "Tab Separated Values".
+
++---------------+------------------------------------------------------------+
+| Column Number | Explanation                                                |
++===============+============================================================+
+| 1             | Method: [HEAD|PUT|GET|DELETE]                              |
++---------------+------------------------------------------------------------+
+| 2             | Filename (including path)                                  |
++---------------+------------------------------------------------------------+
+| 3             | File Size (byte)                                           |
++---------------+------------------------------------------------------------+
+| 4             | Timestamp with timezone                                    |
++---------------+------------------------------------------------------------+
+| 5             | Unixtime (including micro-second)                          |
++---------------+------------------------------------------------------------+
+
+
 

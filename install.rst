@@ -1,25 +1,39 @@
 .. LeoFS documentation
 
+.. _leofs-installation-label:
+
 LeoFS installation
 ================================
 .. index::
    pair: Erlang; Installation
 
 
-Erlang
---------------------------------
+System Requirements
+-------------------
+LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS|13.04 and CentOS 6.x, but should work on
+most Linux platforms with the following software installed:
+
+* `Erlang/OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
+* `Erlang/OTP R16B01 <http://www.erlang.org/download_release/19>`_
+
+
+Installing Erlang
+-----------------
+
+.. note:: We recommend this installation method. Please follow the relevant instructions for your environment.
+
 
 Preparation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Install required libraries using yum (CentOS 6.2)
+Install required libraries using yum (CentOS 6.x)
 """""""""""""""""""""""""""""""""""""""""""""""""
 .. index::
-   pair: CentOS-6.2; Installation
+   pair: CentOS-6.x; Installation
 
 ::
 
-   # yum install libuuid-devel cmake
+   # yum install libuuid-devel cmake check check-devel
 
 Install required libraries using apt-get (Ubuntu Server 12.04 LTS)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -28,7 +42,7 @@ Install required libraries using apt-get (Ubuntu Server 12.04 LTS)
 
 ::
 
-   # sudo apt-get install libtool libncurses5-dev libssl-dev cmake
+   # sudo apt-get install libtool libncurses5-dev libssl-dev cmake check
 
 Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -42,7 +56,7 @@ Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
    $ make
    $ sudo make install
 
-Download "Erlang R15B03-1"
+Download "Erlang R15B03-1"|"R16B01"
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
@@ -50,6 +64,11 @@ Download "Erlang R15B03-1"
    ## [R15B03-1]
    $ cd $WORK_DIR
    $ wget http://www.erlang.org/download/otp_src_R15B03-1.tar.gz
+
+   ## [R16B01]
+   $ cd $WORK_DIR
+   $ wget http://www.erlang.org/download/otp_src_R16B01.tar.gz
+
 
 Build for Linux (CentOS, Debian and Others)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -73,6 +92,22 @@ Build for Linux (CentOS, Debian and Others)
    $ make
    $ sudo make install
 
+   ## [R16B01]
+   $ tar xzf otp_src_R16B01.tar.gz
+   $ cd otp_src_R16B01
+   $ ./configure --prefix=/usr/local/erlang/R16B01 \
+                 --enable-smp-support \
+                 --enable-m64-build \
+                 --enable-halfword-emulator \
+                 --enable-kernel-poll \
+                 --without-javac \
+                 --disable-native-libs \
+                 --disable-hipe \
+                 --disable-sctp \
+                 --enable-threads \
+                 --with-libatomic_ops=/usr/local
+
+
 Confirm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -85,16 +120,22 @@ Confirm
     Eshell V5.9.3  (abort with ^G)
     1>
 
+    ## [R16B01]
+    Erlang R16B01 (erts-5.10.2) [source] [64-bit halfword] [smp:8:8] [async-threads:10] [kernel-poll:false]
+
+    Eshell V5.10.2  (abort with ^G)
+    1>
+
 
 XFS-related
 ------------
 
-.. note:: We highly recommend using an XFS partition, as it is the filesystem that shows the better results with LeoFS. This section describes the installation instructions related to XFS. If you are deploying LeoFS on a **DEV environment**, you do NOT need to perform this operation.
+.. note:: We highly recommend using an XFS partition, as it is the file system that shows the better results with LeoFS. This section describes the installation instructions related to XFS. If you are deploying LeoFS on a **DEV environment**, you do NOT need to perform this operation.
 
-Install required libraries for XFS with yum (CentOS 6.2)
+Install required libraries for XFS with yum (CentOS 6.x)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. index::
-   pair: CentOS-6.2; Installation
+   pair: CentOS-6.x; Installation
 
 ::
 
@@ -107,7 +148,7 @@ Create an XFS Partition (Volume)
 .. index::
    pair: XFS; Installation
 
-Only the servers running **LeoFS storage nodes** will benefit from using XFS (unix local file system). XFS provides particularly efficient I/O for large files. **LeoFS-Storage** is implemented on top of files stored in a single filesystem created on top of the a few TB volume.
+Only the servers running **LeoFS storage nodes** will benefit from using XFS (unix local file system). XFS provides particularly efficient I/O for large files. **LeoFS-Storage** is implemented on top of files stored in a single file system created on top of the a few TB volume.
 
 Start fdisk
 """""""""""""""""
@@ -234,11 +275,14 @@ LeoFS
 .. index::
    pair: LeoFS; Installation
 
+This installation method is based on a source build, so if you do not have Erlang already installed, you need to first install Erlang. Also, building LeoFS from source requires Erlang R15B03-1 or R16B01.
+
+
 File structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 Before running make
-""""""""""""""""""""""""""""""""
+"""""""""""""""""""
 
 ::
 
@@ -259,7 +303,7 @@ Before running make
              `--- leo_storage/
 
 After running make
-"""""""""""""""""""""""""""""""
+""""""""""""""""""
 
 ::
 
@@ -355,7 +399,7 @@ Building
       |               `--- work/
 
 Log Dir and Working Dir
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 \
 
@@ -398,78 +442,10 @@ Log Dir and Working Dir
      .                     |--- mnesia
      .                     `--- queue
 
-.. _system-configuration-label:
-
-Configuring your new LeoFS system using LeoFS-Manager
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* File: ${LEOFS_SRC}/package/leofs/manager_0/etc/app.config
-
-.. note::  The **Consistency Level** is configured in this file. It should not be modified while the system is running.
-
-+-------------+---------------------------------------------------------+
-| Property    | Explanation                                             |
-+=============+=========================================================+
-| n           | # of replicas                                           |
-+-------------+---------------------------------------------------------+
-| r           | # of replicas needed for a successful READ operation    |
-+-------------+---------------------------------------------------------+
-| w           | # of replicas needed for a successful WRITE operation   |
-+-------------+---------------------------------------------------------+
-| d           | # of replicas needed for a successful DELETE operation  |
-+-------------+---------------------------------------------------------+
-| level_1     | # of dc-aware replicas (Supported from v1.0.0 onward)   |
-+-------------+---------------------------------------------------------+
-| level_2     | # of rack-aware replicas                                |
-+-------------+---------------------------------------------------------+
-| bit_of_ring | # of bits for the hash-ring (fixed 128bit)              |
-+-------------+---------------------------------------------------------+
-
-* A reference consistency level
-
-+-------------+--------------------------------------------------------+
-| Level       | Configuration                                          |
-+=============+========================================================+
-| Low         | n = 3, r = 1, w = 1, d = 1                             |
-+-------------+--------------------------------------------------------+
-| Middle      | n = 3, [r = 1 | r = 2], w = 2, d = 2                   |
-+-------------+--------------------------------------------------------+
-| High        | n = 3, [r = 2 | r = 3], w = 3, d = 3                   |
-+-------------+--------------------------------------------------------+
-
-* **Example - File: ${LEOFS_SRC}/package/leofs/manager_0/etc/app.config**:
-
-.. code-block:: erlang
-
-    %% Example (Part of manager-configurations):
-    [
-
-        {leo_manager,
-                 [
-                  %% System Configuration
-                  {system, [{n, 3 },  %% # of replicas
-                            {w, 2 },  %% # of replicas needed for a successful WRITE  operation
-                            {r, 1 },  %% # of replicas needed for a successful READ   operation
-                            {d, 2 },  %% # of replicas needed for a successful DELETE operation
-                            {level_1, 0}, %% # of DC-awareness replicas (Plan to support with v1.0.0)
-                            {level_2, 0}, %% # of rack-awareness replicas
-                            {bit_of_ring, 128}
-                           ]},
-                  %% Manager Configuration
-                  {manager_mode,     master },
-                  {manager_partners, ["manager_1@127.0.0.1"] },
-                  {port,             10010 },
-                  {num_of_acceptors, 3},
-                  %% Directories
-                  {log_dir,          "./log"},
-                  {queue_dir,        "./work/queue"},
-                  {snmp_agent,       "./snmp/manager_0/LEO-MANAGER"}
-                 ]},
-
-    ].
-
 Firewall Rules
 --------------
+
+In order for LeoFS to work correctly, it is necessary to set and check the firewall rules in your environment as follows:
 
 +----------------+-----------+-----------------+--------------------------+
 | Subsystem      | Direction | Ports           | Notes                    |
