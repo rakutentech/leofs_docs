@@ -202,7 +202,7 @@ Storage Cluster Operation Commands
    pair: Operation; Command
 
 * LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
-* LeoFS operation flow diagram is  :ref:`here <operation-flow-diagram-label>`.
+* LeoFS operation flow diagram is :ref:`here <operation-flow-diagram-label>`.
 
 
 .. index::
@@ -943,4 +943,43 @@ This section describes the process of adding and removing nodes in a LeoFS Stora
 
 .. image:: _static/images/leofs-order-of-detach.png
    :width: 640px
+
+
+
+
+Gateway access-log format
+-------------------------
+
+LeoFS-Gateway is able to output access-log. If you would like to use this option, you can check and set :ref:`the configuration <conf_gateway_label>`.
+
+Sample
+^^^^^^
+
+::
+
+    [HEAD]   photo/cloud_storage.jpeg 0       2013-08-22 18:54:42.874701 +0900 1377165282874827
+    [PUT]    photo/cloud_storage.jpeg 1683333 2013-08-22 18:54:45.644641 +0900 1377165285644703
+    [GET]    photo/cloud_storage.jpeg 1683333 2013-08-22 18:55:04.235031 +0900 1377165304235106
+    [DELETE] photo/cloud_storage.jpeg 0       2013-08-22 18:55:37.385382 +0900 1377165337385451
+
+Format
+^^^^^^
+
+.. note:: The format of the access log is "Tab Separated Values".
+
++---------------+------------------------------------------------------------+
+| Column Number | Explanation                                                |
++===============+============================================================+
+| 1             | Method: [HEAD|PUT|GET|DELETE]                              |
++---------------+------------------------------------------------------------+
+| 2             | Filename (including path)                                  |
++---------------+------------------------------------------------------------+
+| 3             | File Size (byte)                                           |
++---------------+------------------------------------------------------------+
+| 4             | Timestamp with timezone                                    |
++---------------+------------------------------------------------------------+
+| 5             | Unixtime (including micro-second)                          |
++---------------+------------------------------------------------------------+
+
+
 
