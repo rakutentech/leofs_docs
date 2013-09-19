@@ -1,7 +1,7 @@
-LeoFS Console v0.4.1
-====================
+LeoCenter v0.4.2
+================
 
-**LeoFS Console** is LeoFS' GUI console in your browser. You can use it to easily operate LeoFS.
+**LeoCenter** is LeoFS' Web console in your browser. You can use it to easily operate LeoFS.
 
 Installation and configuration
 ------------------------------
@@ -12,24 +12,24 @@ Requirements
 * **LeoFS v0.14.0** or higher is required.
 
 
-Install LeoFS Console
-^^^^^^^^^^^^^^^^^^^^^
+Install LeoCenter
+^^^^^^^^^^^^^^^^^
 
-* **LeoFS-Console's Repository**: https://github.com/leo-project/leofs_console
+* **LeoCenter's Repository**: https://github.com/leo-project/leo_center
 * **Ruby 1.9.3-p362** or higher is required.
     * Download URL: http://www.ruby-lang.org/en/downloads/
 
 ::
 
   gem install bundler
-  git clone https://github.com/leo-project/leofs_console.git
-  cd leofs_console
+  git clone https://github.com/leo-project/leo_center.git
+  cd leo_center
   bundle install
 
 Create Admin User
 ^^^^^^^^^^^^^^^^^
 
-* You must create an ``administrator`` user from LeoFS-Manager's console.
+* You need to create an ``administrator`` user from LeoFS-Manager's console.
 
 ::
 
@@ -45,7 +45,7 @@ Create Admin User
 Configuration
 ^^^^^^^^^^^^^
 
-You must modify ``config.yml`` to allow LeoFS Console to connect to LeoFS-Manager.
+You need to modify ``config.yml`` to allow LeoCenter to connect to LeoFS-Manager.
 
 ::
 
@@ -67,78 +67,19 @@ You must modify ``config.yml`` to allow LeoFS Console to connect to LeoFS-Manage
     - Processes memory usage (1-min Averages)
     - System memory usage (1-min Averages)
 
-You must also modify ``unicorn.conf``.
-
-::
-
-  listen "/tmp/leofs-console.sock" # Unix domain socket
-  listen ${LEOFS-CONSOLE-PORT} # TCP
-
-Nginx Configuration
-"""""""""""""""""""
-
-* When using ``TCP/IP``
-    * You need to modify ``/etc/nginx/sites-available/default``
-
-::
-
-  server {
-    root /usr/share/nginx/www;
-    index index.html index.htm;
-    server_name localhost;
-
-    location / {
-      proxy_pass http://localhost:8082;
-    }
-  }
-
-* When using ``Unix-domain-socket``
-    * You need to modify ``/etc/nginx/nginx.conf`` and ``/etc/nginx/sites-available/default``
-
-::
-
-  ## /etc/nginx/nginx.conf
-
-  http {
-    upstream leofs_console {
-      server unix:/tmp/leofs-console.sock;
-    }
-  }
 
 
-  ## /etc/nginx/sites-available/default
+Starting LeoCenter
+------------------
 
-  server {
-    root /usr/share/nginx/www;
-    index index.html index.htm;
-    server_name localhost;
-
-    location / {
-      proxy_pass http://leofs_console;
-    }
-  }
-
-
-
-Starting LeoFS Console
-----------------------
-
-When using WEBrick
+Using WEBrick
 ^^^^^^^^^^^^^^^^^^
 
-::
-
-  $ rackup config_webrick.ru
-
-When using Unicorn (Unicorn is an HTTP server for Rack applications)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* Web site: http://unicorn.bogomips.org/
-* Ruby Gems: https://rubygems.org/gems/unicorn
+.. note:: You need to set the port number as the follows:
 
 ::
 
-  $ unicorn -c unicorn.conf config_unicorn.ru
+  $ ruby config_webrick.ru 8888
 
 
 Features
@@ -163,7 +104,7 @@ Bucket Status View
 
 * You can get an overview of the buckets that belong to you.
     * You can create new buckets.
-    * ``Deletion of a bucket`` is planned to be supported from ``LeoFS-Console v0.4.2``.
+    * ``Deletion of a bucket`` is planned to be supported from ``LeoCenter v0.4.2``.
 
 .. image:: _static/screenshots/leofs_console/bucket_status_0.png
    :width: 720px
@@ -289,17 +230,17 @@ Milestones
     * Bucket status
         * Belonging bucket-list
 
-* 0.4 (Mar - July 2013)
+* 0.4 (Mar - Oct 2013)
     *  User Group
         * Sharing LeoFS' credential-keys in the group
         * User management in the group
 
-* 0.6 (August 2013)
-    * Link LeoFS-QoS *(Quality of Service - Denebola)*
+* 0.6 (Nov 2013)
+    * Link LeoQoS *(LeoFS's Quality of Service)*
         * Bucket status
             * total of files
             * total used disk capacity
 
-* 0.8 (October 2013)
+* 0.8 (Dec 2013)
     * Log Search/Analysis (Option)
 

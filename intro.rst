@@ -20,6 +20,19 @@ LeoFS provides **High Scalability**. Adding and removing nodes is simple and qui
 .. image:: _static/images/leofs-architecture.011.png
    :width: 760px
 
+
+LeoFS consists of 3 applications - "Leo Storage", "Leo Gateway" and "Leo Manager" which depend on Erlang.
+
+**Leo Gateway** handles http-request and http-response from any clients when using REST-API OR S3-API. Also, Gateway is already built in the object-cache mechanism *(memory cache and disc cache)*.
+
+**Leo Storage** handles GET, PUT and DELETE objects as well as metadata, Also **Leo Storage** has *replicator*, *recoverer* and *queueing mechanism* for keep running and keep consistency.
+
+**Leo Manager** always monitors Leo Gateway(s) and Leo Storage(s). Main monitoring status are *node-status* and *RING(logical routing-table) checksum* for keep running and keep consistency.
+
+
+The detail document is `here <http://www.leofs.org/blog/2013/04/16/leofs_overview.html>`_.
+
+
 Goals
 --------------------------------
 
