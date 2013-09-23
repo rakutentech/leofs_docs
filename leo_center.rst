@@ -1,4 +1,4 @@
-LeoCenter v0.4.2
+LeoCenter v0.4.3
 ================
 
 **LeoCenter** is LeoFS' Web console in your browser. You can use it to easily operate LeoFS.
@@ -29,23 +29,23 @@ Install LeoCenter
 Create Admin User
 ^^^^^^^^^^^^^^^^^
 
-* You need to create an ``administrator`` user from LeoFS-Manager's console.
+.. note:: You need to create an ``administrator`` user from LeoFS-Manager's console.
 
 ::
 
   $ telnet ${LEOFS_MANAGER_HOST} ${LEOFS_MANAGER_PORT}
-  create-user new_admin password
+  > create-user leo_admin password
     access-key-id: ab96d56258e0e9d3621a
     secret-access-key: 5c3d9c188d3e4c4372e414dbd325da86ecaa8068
 
-  update-user-role new_admin 9 ## Set user's role as 'Admin'
+  > update-user-role leo_admin 9
   OK
 
 
 Configuration
 ^^^^^^^^^^^^^
 
-You need to modify ``config.yml`` to allow LeoCenter to connect to LeoFS-Manager.
+.. note:: You need to modify ``config.yml`` to allow LeoCenter to connect to LeoFS-Manager.
 
 ::
 
@@ -56,9 +56,6 @@ You need to modify ``config.yml`` to allow LeoCenter to connect to LeoFS-Manager
     :access_key_id: ${YOUR_ACCESS_KEY_ID}
     :secret_access_key: ${YOUR_SECRET_ACCESS_KEY}
   :session:
-  #  :redis:
-  #    :url: "redis://localhost:6379/0"
-  #    #:expire_after: 600
     :local:
       :secret: ""
       :expire_after: 300
@@ -72,14 +69,15 @@ You need to modify ``config.yml`` to allow LeoCenter to connect to LeoFS-Manager
 Starting LeoCenter
 ------------------
 
-Using WEBrick
-^^^^^^^^^^^^^^^^^^
+Using Thin Web Server
+^^^^^^^^^^^^^^^^^^^^^
 
 .. note:: You need to set the port number as the follows:
 
-::
+.. code-block:: bash
 
-  $ ruby config_webrick.ru 8888
+  ## Port number is 8888
+  $ ruby config_thin.ru 8888 &
 
 
 Features
