@@ -13,7 +13,7 @@ LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS|13.04 and 
 most Linux platforms with the following software:
 
 * `Erlang/OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
-* `Erlang/OTP R16B01 <http://www.erlang.org/download_release/19>`_
+* `Erlang/OTP R16B02 <http://www.erlang.org/download_release/20>`_
 
 
 LeoFS includes the following Erlang libraries:
@@ -68,10 +68,10 @@ Erlang (CentOS, Ubuntu, Other Linux OS)
    ##
    ## 2. Install Erlang (R15B03-1)
    ##
-   $ wget http://www.erlang.org/download/otp_src_R15B03-1.tar.gz
-   $ tar xzf otp_src_R15B03-1.tar.gz
-   $ cd otp_src_R15B03-1
-   $ ./configure --prefix=/usr/local/erlang/R15B03 \
+   $ wget http://www.erlang.org/download/otp_src_R16B02.tar.gz
+   $ tar xzf otp_src_R16B02.tar.gz
+   $ cd otp_src_R16B02
+   $ ./configure --prefix=/usr/local/erlang/R16B02 \
                  --enable-smp-support \
                  --enable-m64-build \
                  --enable-halfword-emulator \
@@ -90,7 +90,7 @@ Erlang (CentOS, Ubuntu, Other Linux OS)
    ##
    $ vi ~/.profile
        ## append the follows:
-       export ERL_HOME=/usr/local/erlang/R15B03
+       export ERL_HOME=/usr/local/erlang/R16B02
        export PATH=$PATH:$ERL_HOME/bin
 
    $ source ~/.profile
