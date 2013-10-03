@@ -1,4 +1,4 @@
-LeoCenter v0.4.3
+LeoCenter v0.4.4
 ================
 
 **LeoCenter** is LeoFS' Web console in your browser. You can use it to easily operate LeoFS.
