@@ -600,6 +600,11 @@ S3-API Commands
 +------------------------------------------------------+-------------------------------------------------------------------+
 | get-buckets                                          | * Retrieve all of registered buckets                              |
 +------------------------------------------------------+-------------------------------------------------------------------+
+| update-acl `${bucket}` `${access_key_id}`            | * Update a ACL for a bucket                                       |
+| `private | public-read | public-read-write`          |                                                                   |
++------------------------------------------------------+-------------------------------------------------------------------+
+| get-acl `${bucket}` `${access_key_id}`               | * Retrieve a ACL for a bucket                                     |
++------------------------------------------------------+-------------------------------------------------------------------+
 
 
 .. ### CREATE USER ###
@@ -773,6 +778,40 @@ Command: ``get-buckets``
     docs   | __leofs__ | 2012-09-12 14:29:30 +0900
     logs   | __leofs__ | 2012-09-12 14:29:34 +0900
     photo  | __leofs__ | 2012-09-12 14:29:26 +0900
+
+.. ### UPDATE ACL ###
+.. _s3-update-acl:
+
+.. index::
+   update-acl-command
+
+**'update-acl'** - Update a ACL for a bucket
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Command: ``update-acl``
+
+::
+
+    update-acl photo 05236 private
+    ok
+
+.. ### RETRIVE ACL ###
+.. _s3-get-acl:
+
+.. index::
+   get-acl-command
+
+**'get-acl'** - Retrieve a ACL for a bucket
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Command: ``get-acl``
+
+::
+
+    get-acl photo 05236
+    owner     | acls
+    ----------+--------------------------
+    __leofs__ | full_contorol
 
 \
 \
