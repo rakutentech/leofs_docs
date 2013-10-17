@@ -135,9 +135,9 @@ Modify “/etc/hosts”
 ::
 
     $ cd $LEOFS_ROOT/package/leofs
-    $ manager_0/bin/leo_manager start
-    $ manager_1/bin/leo_manager start
-    $ storage/bin/leo_storage start
+    $ leo_manager_0/bin/leo_manager start
+    $ leo_manager_1/bin/leo_manager start
+    $ leo_storage/bin/leo_storage start
 
 
 4. Start the system

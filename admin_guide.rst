@@ -85,8 +85,7 @@ Start storage on each **LeoFS-Storage** node
 ::
 
     $ cd $LEOFS_DEPLOYED_DIR
-    $ storage/bin/leo_storage start
-
+    $ leo_storage/bin/leo_storage start
 Open LeoFS Manager Console on **LeoFS-Manager Master** node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
