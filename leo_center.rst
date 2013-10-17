@@ -76,25 +76,27 @@ Using Thin Web Server
 
 .. code-block:: bash
 
-  $ thin start
+  $ thin start -a ${HOST} -p ${PORT}
 
 * Launch LeoCenter with SSL
 
 .. code-block:: bash
 
   ## Caution: You need to prepare key and certification first
-  $ thin start --ssl --ssl-key-file "${path/to/key}/leofs.key" --ssl-cert-file "${path/to/cert}/leofs.crt" --ssl-verify
+  $ thin start --ssl --ssl-key-file "${path/to/key}/leofs.key" \
+               --ssl-cert-file "${path/to/cert}/leofs.crt" \
+               --ssl-verify \
+               -a ${HOST}
 
-* Stop LeoCenter
+.. * Stop LeoCenter
+.. .. code-block:: bash
+..   $ thin stop
 
-.. code-block:: bash
+.. note:: | You are able to add setting in detail by these steps:
+          |   1. Rename thin.yml.sample to thin.yml
+          |   2. Edit thin.yml with check explanation of using "thin - -help"
+          |   3. Launch LeoCenter by "thin start -C thin.yml"
 
-  $ thin stop
-
-.. note:: | You can add setting in detail by these steps:
-          | 1. Rename thin.yml.sample to thin.yml
-          | 2. Edit thin.yml with check explanation of using "thin - -help"
-          | 3. Launch LeoCenter by "thin start -C thin.yml"
 
 Features
 --------
