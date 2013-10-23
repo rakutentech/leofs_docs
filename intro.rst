@@ -54,26 +54,35 @@ Milestones
     * Web GUI-Console (LeoTamer - Optional)
         * Cluster manager/monitor
         * Log Analysis/Search
-* 0.14 (Feb 2013 - June)
+* *DONE* - 0.14 (Feb 2013 - Sep)
     * Multi-layer Cache (Using SSD)
     * Rack aware replica placement
     * Web GUI Console (Option)
        * Support whole LeoFS Manager's commands
-    * QoS System Phase-1 (Savannah - Option)
+* 0.16 (Oct 2013)
+    * Increase compatibility S3-APIs#4
+        * the bucket ACLs
+    * Web GUI Console (Option)
+       * Support whole LeoFS Manager's commands
+
+* 1.0 (Nov 2013 - Dec)
+    * Multi Data Center Replication
+    * Increase compatibility S3-APIs#5
+        * Other bucket operations
+    * QoS System Phase-1 (LeoInsight - Option)
        * Support *statistics/analyzer*
-* 1.0 (July 2013 - )
-    * Job Scheduler on the Manager
-        * Support *auto-compaction*
-        * Support *auro-recovery*
-    * Multi-Datacenter Data Replication
+
+* 1.2 (Jan 2014 - Apr)
     * OpenStack Integration
         * Support for OpenStack Swift-API
-    * Increase compatibility S3-APIs#4
+    * Increase compatibility S3-APIs#6
         * Objects Expiration into the bucket
-        * Other bucket operations
-    * QoS System Phase-2 (Savannah - Option)
+        * Versioning
+    * Job Scheduler on the Manager
+        * Support *auto-compaction*
+    * QoS System Phase-2 (LeoInsight - Option)
        * Support *notifier*
     * Web GUI Console (Option)
-        * QoS Integration
+        * LeoInsight(QoS) Integration
         * Support Log analysis/search
 
