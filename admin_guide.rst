@@ -86,6 +86,7 @@ Start storage on each **LeoFS-Storage** node
 
     $ cd $LEOFS_DEPLOYED_DIR
     $ leo_storage/bin/leo_storage start
+
 Open LeoFS Manager Console on **LeoFS-Manager Master** node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -600,10 +601,10 @@ S3-API Commands
 +------------------------------------------------------+-------------------------------------------------------------------+
 | get-buckets                                          | * Retrieve all of registered buckets                              |
 +------------------------------------------------------+-------------------------------------------------------------------+
-| update-acl `${bucket}` `${access_key_id}`            | * Update a ACL for a bucket                                       |
+| update-acl `${bucket}` `${access_key_id}`            | * Update a ACL for a bucket (v0.16.0-)                            |
 | `private | public-read | public-read-write`          |                                                                   |
 +------------------------------------------------------+-------------------------------------------------------------------+
-| get-acl `${bucket}` `${access_key_id}`               | * Retrieve a ACL for a bucket                                     |
+| get-acl `${bucket}` `${access_key_id}`               | * Retrieve a ACL for a bucket (v0.16.0-)                          |
 +------------------------------------------------------+-------------------------------------------------------------------+
 
 
@@ -785,7 +786,7 @@ Command: ``get-buckets``
 .. index::
    update-acl-command
 
-**'update-acl'** - Update a ACL for a bucket
+**'update-acl'** - Update a ACL for a bucket (v0.16.0-)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``update-acl``
@@ -795,23 +796,65 @@ Command: ``update-acl``
     update-acl photo 05236 private
     ok
 
+    update-acl photo 05236 public-read
+    ok
+
+    update-acl photo 05236 public-read-write
+    ok
+
+
 .. ### RETRIVE ACL ###
 .. _s3-get-acl:
 
 .. index::
    get-acl-command
 
-**'get-acl'** - Retrieve a ACL for a bucket
+**'get-acl'** - Retrieve a ACL for a bucket (v0.16.0-)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``get-acl``
 
 ::
 
+    ## Updated acl as 'private'
     get-acl photo 05236
-    owner     | acls
-    ----------+--------------------------
-    __leofs__ | full_contorol
+    access_key_id| acls
+    -------------+--------------------------
+    05236        | full_contorol
+
+
+    ## Updated acl as 'public-read'
+    get-acl photo 05236
+    access_key_id                                   | permissions
+    ------------------------------------------------+-------------------------
+    http://acs.amazonaws.com/groups/global/AllUsers | read
+
+
+    ## Updated acl as 'public-read-write'
+    get-acl photo 05236
+    access_key_id                                   | permissions
+    ------------------------------------------------+-------------------------
+    http://acs.amazonaws.com/groups/global/AllUsers | read, write
+
+
+Canned ACL:
+
+.. note:: When using S3-API, LeoFS supports a set of predefined grants, known as canned ACLs. Each canned ACL has a predefined a set of grantees and permissions. The following table lists the set of canned ACLs and the associated predefined grants.
+
++------------------+-----------------------+------------------------------------------------------------------------+
+| Canned ACL       | Applies to            | Permissions added to ACL                                               |
++==================+=======================+========================================================================+
+| private          | Bucket and object     | Owner gets FULL_CONTROL. No one else has access rights (default).      |
++------------------+-----------------------+------------------------------------------------------------------------+
+| public-read      | Bucket and object     | Owner gets FULL_CONTROL. The AllUsers group gets READ access.          |
++------------------+-----------------------+------------------------------------------------------------------------+
+| public-read-write| Bucket and object     | Owner gets FULL_CONTROL. The AllUsers group gets READ and WRITE access.|
+|                  |                       | Granting this on a bucket is generally not recommended.                |
++------------------+-----------------------+------------------------------------------------------------------------+
+
+    * Reference:
+        * `Access Control List (ACL) Overview <http://docs.aws.amazon.com/AmazonS3/latest/dev/ACLOverview.html>`_
+
 
 \
 \
