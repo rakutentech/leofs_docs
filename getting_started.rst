@@ -210,6 +210,28 @@ Modify “/etc/hosts”
     * :ref:`FUSE - ‘S3FS-C’ <s3fs-c-label>`
     * :ref:`GUI  - ‘Dragon Disk’ <dragondisk-label>`
 
+9. Using LeoFS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Use the command ``add-bucket`` in the LeoFS manager console
+* It takes the bucket name and access-key-id got in the previous section as its arguments
+
+::
+
+    $ telnet 127.0.0.1 10010
+    > add-bucket ${BUCKET_NAME} ${YOUR_ACCESS_KEY_ID}
+    ok
+
+* Insert some data into LeoFS by using any S3 client as mentioned above 
+* You can now get the data stored in LeoFS
+
+::
+
+    $ curl http://localhost:8080/your_bucket_name/path/to/file
+    > ${CONTENTS}
+    
+.. note:: From version 0.16.0, you need to set ACL settings of your bucket to ``public-read`` by using the command :ref:`update-acl<s3-update-acl>` if you want to get the data stored in LeoFS via web browser.
+
 Wrap up
 ^^^^^^^
 
@@ -406,6 +428,27 @@ Case example
     access-key-id: 05dcba94333c7590a635
     secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
+9. Using LeoFS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Use the command ``add-bucket`` in the LeoFS manager console
+* It takes the bucket name and access-key-id got in the previous section as its arguments
+
+::
+
+    $ telnet 127.0.0.1 10010
+    > add-bucket ${BUCKET_NAME} ${YOUR_ACCESS_KEY_ID}
+    ok
+
+* Insert some data into LeoFS by using any S3 client as mentioned above 
+* You can now get the data stored in LeoFS
+
+::
+
+    $ curl http://localhost:8080/your_bucket_name/path/to/file
+    > ${CONTENTS}
+    
+.. note:: From version 0.16.0, you need to set ACL settings of your bucket to ``public-read`` by using the command :ref:`update-acl<s3-update-acl>` if you want to get the data stored in LeoFS via web browser.
 
 Wrap up
 ^^^^^^^
