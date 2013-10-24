@@ -692,6 +692,11 @@ LeoFS Gateway
 
                 %% Output Access-log?
                 {is_enable_access_log, true },
+                {is_enable_esearch,     false },
+                {esearch_host,          "127.0.0.1" },
+                {esearch_port,          9200 },
+                {esearch_timeout,       5000 },
+                {esearch_bulk_duration, 3000 },
 
                 %% Log appender - [file]
                 {log_appender, [
