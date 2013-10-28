@@ -14,7 +14,7 @@ LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS|13.04 and 
 most Linux platforms with the following software installed:
 
 * `Erlang/OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
-* `Erlang/OTP R16B01 <http://www.erlang.org/download_release/19>`_
+* `Erlang/OTP R16B02 <http://www.erlang.org/download_release/20>`_
 
 
 Installing Erlang
@@ -56,7 +56,7 @@ Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
    $ make
    $ sudo make install
 
-Download "Erlang R15B03-1"|"R16B01"
+Download "Erlang R15B03-1"|"R16B02"
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
@@ -65,9 +65,9 @@ Download "Erlang R15B03-1"|"R16B01"
    $ cd $WORK_DIR
    $ wget http://www.erlang.org/download/otp_src_R15B03-1.tar.gz
 
-   ## [R16B01]
+   ## [R16B02]
    $ cd $WORK_DIR
-   $ wget http://www.erlang.org/download/otp_src_R16B01.tar.gz
+   $ wget http://www.erlang.org/download/otp_src_R16B02.tar.gz
 
 
 Build for Linux (CentOS, Debian and Others)
@@ -92,10 +92,10 @@ Build for Linux (CentOS, Debian and Others)
    $ make
    $ sudo make install
 
-   ## [R16B01]
-   $ tar xzf otp_src_R16B01.tar.gz
-   $ cd otp_src_R16B01
-   $ ./configure --prefix=/usr/local/erlang/R16B01 \
+   ## [R16B02]
+   $ tar xzf otp_src_R16B02.tar.gz
+   $ cd otp_src_R16B02
+   $ ./configure --prefix=/usr/local/erlang/R16B02 \
                  --enable-smp-support \
                  --enable-m64-build \
                  --enable-halfword-emulator \
@@ -120,10 +120,10 @@ Confirm
     Eshell V5.9.3  (abort with ^G)
     1>
 
-    ## [R16B01]
-    Erlang R16B01 (erts-5.10.2) [source] [64-bit halfword] [smp:8:8] [async-threads:10] [kernel-poll:false]
+    ## [R16B02]
+    Erlang R16B02 (erts-5.10.3) [source] [64-bit halfword] [smp:8:8] [async-threads:10] [kernel-poll:false]
 
-    Eshell V5.10.2  (abort with ^G)
+    Eshell V5.10.3  (abort with ^G)
     1>
 
 
@@ -275,7 +275,7 @@ LeoFS
 .. index::
    pair: LeoFS; Installation
 
-This installation method is based on a source build, so if you do not have Erlang already installed, you need to first install Erlang. Also, building LeoFS from source requires Erlang R15B03-1 or R16B01.
+This installation method is based on a source build, so if you do not have Erlang already installed, you need to first install Erlang. Also, building LeoFS from source requires Erlang R15B03-1 or R16B02.
 
 
 File structure

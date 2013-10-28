@@ -85,7 +85,7 @@ Start storage on each **LeoFS-Storage** node
 ::
 
     $ cd $LEOFS_DEPLOYED_DIR
-    $ storage/bin/leo_storage start
+    $ leo_storage/bin/leo_storage start
 
 Open LeoFS Manager Console on **LeoFS-Manager Master** node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -601,6 +601,11 @@ S3-API Commands
 +------------------------------------------------------+-------------------------------------------------------------------+
 | get-buckets                                          | * Retrieve all of registered buckets                              |
 +------------------------------------------------------+-------------------------------------------------------------------+
+| update-acl `${bucket}` `${access_key_id}`            | * Update a ACL for a bucket (v0.16.0-)                            |
+| `private | public-read | public-read-write`          |                                                                   |
++------------------------------------------------------+-------------------------------------------------------------------+
+| get-acl `${bucket}` `${access_key_id}`               | * Retrieve a ACL for a bucket (v0.16.0-)                          |
++------------------------------------------------------+-------------------------------------------------------------------+
 
 
 .. ### CREATE USER ###
@@ -775,6 +780,82 @@ Command: ``get-buckets``
     logs   | __leofs__ | 2012-09-12 14:29:34 +0900
     photo  | __leofs__ | 2012-09-12 14:29:26 +0900
 
+.. ### UPDATE ACL ###
+.. _s3-update-acl:
+
+.. index::
+   update-acl-command
+
+**'update-acl'** - Update a ACL for a bucket (v0.16.0-)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Command: ``update-acl``
+
+::
+
+    update-acl photo 05236 private
+    ok
+
+    update-acl photo 05236 public-read
+    ok
+
+    update-acl photo 05236 public-read-write
+    ok
+
+
+.. ### RETRIVE ACL ###
+.. _s3-get-acl:
+
+.. index::
+   get-acl-command
+
+**'get-acl'** - Retrieve a ACL for a bucket (v0.16.0-)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Command: ``get-acl``
+
+::
+
+    ## Updated acl as 'private'
+    get-acl photo 05236
+    access_key_id| acls
+    -------------+--------------------------
+    05236        | full_contorol
+
+
+    ## Updated acl as 'public-read'
+    get-acl photo 05236
+    access_key_id                                   | permissions
+    ------------------------------------------------+-------------------------
+    http://acs.amazonaws.com/groups/global/AllUsers | read
+
+
+    ## Updated acl as 'public-read-write'
+    get-acl photo 05236
+    access_key_id                                   | permissions
+    ------------------------------------------------+-------------------------
+    http://acs.amazonaws.com/groups/global/AllUsers | read, write
+
+
+Canned ACL:
+
+.. note:: When using S3-API, LeoFS supports a set of predefined grants, known as canned ACLs. Each canned ACL has a predefined a set of grantees and permissions. The following table lists the set of canned ACLs and the associated predefined grants.
+
++------------------+-----------------------+------------------------------------------------------------------------+
+| Canned ACL       | Applies to            | Permissions added to ACL                                               |
++==================+=======================+========================================================================+
+| private          | Bucket and object     | Owner gets FULL_CONTROL. No one else has access rights (default).      |
++------------------+-----------------------+------------------------------------------------------------------------+
+| public-read      | Bucket and object     | Owner gets FULL_CONTROL. The AllUsers group gets READ access.          |
++------------------+-----------------------+------------------------------------------------------------------------+
+| public-read-write| Bucket and object     | Owner gets FULL_CONTROL. The AllUsers group gets READ and WRITE access.|
+|                  |                       | Granting this on a bucket is generally not recommended.                |
++------------------+-----------------------+------------------------------------------------------------------------+
+
+    * Reference:
+        * `Access Control List (ACL) Overview <http://docs.aws.amazon.com/AmazonS3/latest/dev/ACLOverview.html>`_
+
+
 \
 \
 
@@ -947,8 +1028,8 @@ This section describes the process of adding and removing nodes in a LeoFS Stora
 
 
 
-Gateway access-log format
--------------------------
+Gateway Access-log Format (v0.16.0-)
+------------------------------------
 
 LeoFS-Gateway is able to output access-log. If you would like to use this option, you can check and set :ref:`the configuration <conf_gateway_label>`.
 
@@ -957,20 +1038,26 @@ Sample
 
 ::
 
-    [HEAD]   photo/cloud_storage.jpeg 0       2013-08-22 18:54:42.874701 +0900 1377165282874827
-    [PUT]    photo/cloud_storage.jpeg 1683333 2013-08-22 18:54:45.644641 +0900 1377165285644703
-    [GET]    photo/cloud_storage.jpeg 1683333 2013-08-22 18:55:04.235031 +0900 1377165304235106
-    [DELETE] photo/cloud_storage.jpeg 0       2013-08-22 18:55:37.385382 +0900 1377165337385451
+    --------+-------+--------------------+-------+---------------------------------------+-----------------------+----------
+    Method  | Bucket| Path               |Size   | Timestamp                             | Unix Time             | Response
+    --------+-------+--------------------+-------+---------------------------------------+-----------------------+----------
+    [HEAD]   photo   photo/1              0       2013-10-18 13:28:56.148269 +0900        1381206536148320        500
+    [HEAD]   photo   photo/1              0       2013-10-18 13:28:56.465670 +0900        1381206536465735        404
+    [HEAD]   photo   photo/city/tokyo.png 0       2013-10-18 13:28:56.489234 +0900        1381206536489289        200
+    [GET]    photo   photo/1              0       2013-10-18 13:28:56.518631 +0900        1381206536518693        500
+    [GET]    photo   photo/city/paris.png 0       2013-10-18 13:28:56.550376 +0900        1381206536550444        404
 
 Format
 ^^^^^^
 
-.. note:: The format of the access log is "Tab Separated Values".
+.. note:: The format of the access log is **Tab Separated Values**.
 
 +---------------+------------------------------------------------------------+
 | Column Number | Explanation                                                |
 +===============+============================================================+
 | 1             | Method: [HEAD|PUT|GET|DELETE]                              |
++---------------+------------------------------------------------------------+
+| 2             | Bucket                                                     |
 +---------------+------------------------------------------------------------+
 | 2             | Filename (including path)                                  |
 +---------------+------------------------------------------------------------+
@@ -980,6 +1067,6 @@ Format
 +---------------+------------------------------------------------------------+
 | 5             | Unixtime (including micro-second)                          |
 +---------------+------------------------------------------------------------+
-
-
+| 6             | Response (HTTP Status Code)                                |
++---------------+------------------------------------------------------------+
 
