@@ -133,7 +133,7 @@ How to determine the name of Bucket
     * How S3 determines what to use depends on the **Domain name**.
 *   Patterns
 
-1. **http://s3.amazonaws.com/bucket/path_to_file**
+**1. http://s3.amazonaws.com/bucket/path_to_file**
 
   In this case, the name of the bucket is the first segment of the path.
 
@@ -149,7 +149,7 @@ How to determine the name of Bucket
 
   The argument of LeoFS' :ref:`whereis <whereis>` | :ref:`purge <purge>` commands should be `bucket/path_to_file`.
 
-2. **http://www.example.com.s3.amazonaws.com/path_to_file**
+**2. http://www.example.com.s3.amazonaws.com/path_to_file**
 
   In this case, the name of the bucket is the part of the domain name before `.s3.amazonaws.com`.
 
@@ -165,7 +165,7 @@ How to determine the name of Bucket
 
   The argument of LeoFS' :ref:`whereis <whereis>` | :ref:`purge <purge>` commands should be `www.example.com/path_to_file`.
 
-3. **http://www.example.com/path_to_file**
+**3. http://www.example.com/path_to_file**
 
   In this case, the name of bucket is equal to the FQDN.
 
@@ -181,3 +181,12 @@ How to determine the name of Bucket
 
   The argument of LeoFS' :ref:`whereis <whereis>` | :ref:`purge <purge>` commands should be `www.example.com/path_to_file`.
 
+
+**4. Rules for Bucket Naming (v0.16.1-)**
+
+.. note::  We recommend as a best practice that you always use DNS-compliant bucket names regardless of the region in which you create the bucket.
+
+* Bucket names can be as long as between 3 and 255 characters.
+* Bucket names can contain lowercase letters, numbers, periods (.), dashes (-) and underscores (_).
+* Bucket names must not be formatted as an IP address (e.g., 192.168.5.4).
+* Bucket name cannot start and end with periods (.), dashes (-) and underscores (_).
