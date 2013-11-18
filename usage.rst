@@ -37,7 +37,7 @@ Testing without a load balancer
 ::
 
     $ telnet 127.0.0.1 10010
-    > set-endpoint yourhost.com
+    > add-endpoint yourhost.com
     OK
     > create-user yourname
     access-key-id: 05dcba94333c7590a635

@@ -144,7 +144,7 @@ Configure the ``endpoint`` on LeoFS-Manager console
     Connected to localhost.
     Escape character is '^]'.
 
-    set-endpoint ${HOST_NAME_OF_LEOFS_GATEWAY}
+    add-endpoint ${HOST_NAME_OF_LEOFS_GATEWAY}
     OK
 
     get-endpoints

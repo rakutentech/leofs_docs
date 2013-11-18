@@ -588,7 +588,7 @@ S3-API Commands
 +------------------------------------------------------+-------------------------------------------------------------------+
 | get-users                                            | * Retrieve all the registered users                               |
 +------------------------------------------------------+-------------------------------------------------------------------+
-| set-endpoint `${endpoint}`                           | * Register a new S3 Endpoint                                      |
+| add-endpoint `${endpoint}`                           | * Register a new S3 Endpoint                                      |
 |                                                      | * LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`    |
 +------------------------------------------------------+-------------------------------------------------------------------+
 | delete-endpoint `${endpoint}`                        | * Delete an S3 Endpoint                                           |
@@ -668,21 +668,21 @@ Command: ``get-users``
 
 .. ### SET ENDPOINT ###
 
-.. _s3-set-endpoint:
+.. _s3-add-endpoint:
 
 .. index::
-   set-endpoint-command
+   add-endpoint-command
 
-**'set-endpoint'** - Register a new Endpoint
+**'add-endpoint'** - Register a new Endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`
 
-Command: ``set-endpoint ${endpoint}``
+Command: ``add-endpoint ${endpoint}``
 
 ::
 
-   set-endpoint test_account
+   add-endpoint test_account
    OK
 
 
