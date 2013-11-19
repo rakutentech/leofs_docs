@@ -604,7 +604,7 @@ S3-API Commands
 | update-acl `${bucket}` `${access_key_id}`            | * Update a ACL for a bucket (v0.16.0-)                            |
 | `private | public-read | public-read-write`          |                                                                   |
 +------------------------------------------------------+-------------------------------------------------------------------+
-| get-acl `${bucket}` `${access_key_id}`               | * Retrieve a ACL for a bucket (v0.16.0-)                          |
+| get-acl `${bucket}`                                  | * Retrieve a ACL for a bucket (v0.16.0-)                          |
 +------------------------------------------------------+-------------------------------------------------------------------+
 
 
@@ -789,7 +789,7 @@ Command: ``get-buckets``
 **'update-acl'** - Update a ACL for a bucket (v0.16.0-)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command: ``update-acl``
+Command: ``update-acl ${bucket} ${access_key_id}``
 
 ::
 
@@ -812,26 +812,26 @@ Command: ``update-acl``
 **'get-acl'** - Retrieve a ACL for a bucket (v0.16.0-)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command: ``get-acl``
+Command: ``get-acl ${bucket}``
 
 ::
 
     ## Updated acl as 'private'
-    get-acl photo 05236
+    get-acl photo
     access_key_id| acls
     -------------+--------------------------
     05236        | full_contorol
 
 
     ## Updated acl as 'public-read'
-    get-acl photo 05236
+    get-acl photo
     access_key_id                                   | permissions
     ------------------------------------------------+-------------------------
     http://acs.amazonaws.com/groups/global/AllUsers | read
 
 
     ## Updated acl as 'public-read-write'
-    get-acl photo 05236
+    get-acl photo
     access_key_id                                   | permissions
     ------------------------------------------------+-------------------------
     http://acs.amazonaws.com/groups/global/AllUsers | read, write
