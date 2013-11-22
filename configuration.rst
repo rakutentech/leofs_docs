@@ -354,9 +354,56 @@ LeoFS Storage
 +=========================+========================================================+
 |${OBJECT_STORAGE_DIR}    | Object Storage directory  - Default:"./avs"            |
 +-------------------------+--------------------------------------------------------+
+|${NUM_OF_CONTAINERS}     | # of AVS files storing objects(files).                 |
++-------------------------+--------------------------------------------------------+
 |${MANAGER_MASTER_IP}     | Manager-master node's IP-address                       |
 +-------------------------+--------------------------------------------------------+
 |${MANAGER_SLAVE_IP}      | Manager-slave node's IP-address                        |
++-------------------------+--------------------------------------------------------+
+|${NUM_OF_PROC_PER_OBJECT}| # of batch processes related to                        |
+|                         | objects like replicating an object.                    |
++-------------------------+--------------------------------------------------------+
+|${INT_PER_OBJECT_MIN}    | Minimum interval between consuming a job related to    |
+|                         | objects like replicating an object.                    |
++-------------------------+--------------------------------------------------------+
+|${INT_PER_OBJECT_MAX}    | Maximum interval between consuming a job related to    |
+|                         | objects like replicating an object.                    |
++-------------------------+--------------------------------------------------------+
+|${NUM_OF_PROC_SYNC_BY_VN}| # of batch processes related to                        |
+|                         | syncing objects by vnode.                              |
++-------------------------+--------------------------------------------------------+
+|${INT_SYNC_BY_VNODE_MIN} | Minimum interval between consuming a job related to    |
+|                         | syncing objects by vnode.                              |
++-------------------------+--------------------------------------------------------+
+|${INT_SYNC_BY_VNODE_MAX} | Maximum interval between consuming a job related to    |
+|                         | syncing objects by vnode.                              |
++-------------------------+--------------------------------------------------------+
+|${NUM_OF_PROC_REBALANCE} | # of batch processes related to                        |
+|                         | rebalancing an object.                                 |
++-------------------------+--------------------------------------------------------+
+|${INT_REBALANCE_MIN}     | Minimum interval between consuming a job related to    |
+|                         | rebalancing an object.                                 |
++-------------------------+--------------------------------------------------------+
+|${INT_REBALANCE_MAX}     | Maximum interval between consuming a job related to    |
+|                         | rebalancing an object.                                 |
++-------------------------+--------------------------------------------------------+
+|${NUM_OF_PROC_ASYNC_DEL} | # of batch processes related to                        |
+|                         | deleting an object asynchronously.                     |
++-------------------------+--------------------------------------------------------+
+|${INT_ASYNC_DEL_MIN}     | Minimum interval between consuming a job related to    |
+|                         | deleting an object asynchronously.                     |
++-------------------------+--------------------------------------------------------+
+|${INT_ASYNC_DEL_MAX}     | Maximum interval between consuming a job related to    |
+|                         | deleting an object asynchronously.                     |
++-------------------------+--------------------------------------------------------+
+|${NUM_OF_PROC_RECOVERY_N}| # of batch processes related to                        |
+|                         | recovering an node.                                    |
++-------------------------+--------------------------------------------------------+
+|${INT_RECOVERY_NODE_MIN} | Minimum interval between consuming a job related to    |
+|                         | recovering an node.                                    |
++-------------------------+--------------------------------------------------------+
+|${INT_RECOVERY_NODE_MAX} | Maximum interval between consuming a job related to    |
+|                         | recovering an node.                                    |
 +-------------------------+--------------------------------------------------------+
 |${SNMPA-DIR}             | SNMPA configuration files directory                    |
 |                         |                                                        |
@@ -382,7 +429,7 @@ LeoFS Storage
                    %%   If you set up LeoFS on 'production' or 'staging', You should need to change "volume",
                    %%       And We recommend volume's partition is XFS.
                    %%
-                   {obj_containers,     [[{path, ${OBJECT_STORAGE_DIR}}, {num_of_containers, 64}]] },
+                   {obj_containers,     [[{path, ${OBJECT_STORAGE_DIR}}, {num_of_containers, ${NUM_OF_CONTAINERS}}]] },
 
                    %% leo-manager's nodes
                    {managers,           [${MANAGER_MASTER_IP}, ${MANAGER_SLAVE_IP}] },
@@ -395,20 +442,29 @@ LeoFS Storage
 
                    %% mq - queues consumption's intervals
                    %% - per_object
-                   {cns_interval_per_object_min, 0  },
-                   {cns_interval_per_object_max, 16 },
+                   {cns_num_of_batch_process_per_object, ${NUM_OF_PROC_PER_OBJECT } },
+                   {cns_interval_per_object_min, ${INT_PER_OBJECT_MIN} },
+                   {cns_interval_per_object_max, ${INT_PER_OBJECT_MAX} },
+
                    %% - sync_by_vnode_id
-                   {cns_interval_sync_by_vnode_id_min, 0  },
-                   {cns_interval_sync_by_vnode_id_max, 16 },
+                   {cns_num_of_batch_process_sync_by_vnode_id, ${NUM_OF_PROC_SYNC_BY_VN} },
+                   {cns_interval_sync_by_vnode_id_min, ${INT_SYNC_BY_VNODE_MIN} },
+                   {cns_interval_sync_by_vnode_id_max, ${INT_SYNC_BY_VNODE_MAX} },
+
                    %% - for rebalance
-                   {cns_interval_rebalance_min, 0  },
-                   {cns_interval_rebalance_max, 16 },
+                   {cns_num_of_batch_process_rebalance, ${NUM_OF_PROC_REBALANCE} },
+                   {cns_interval_rebalance_min, ${INT_REBALANCE_MIN} },
+                   {cns_interval_rebalance_max, ${INT_REBALANCE_MAX} },
+
                    %% - async deletion objects (after remove a bucket)
-                   {cns_interval_async_deletion_min, 0  },
-                   {cns_interval_async_deletion_max, 16 },
+                   {cns_num_of_batch_process_async_deletion, ${NUM_OF_PROC_ASYNC_DEL} },
+                   {cns_interval_async_deletion_min, ${INT_ASYNC_DEL_MIN} },
+                   {cns_interval_async_deletion_max, ${INT_ASYNC_DEL_MAX} },
+
                    %% - recovery node
-                   {cns_interval_recovery_node_min,  0  },
-                   {cns_interval_recovery_node_max,  16 },
+                   {cns_num_of_batch_process_recovery_node, ${NUM_OF_PROC_RECOVERY_N} },
+                   {cns_interval_recovery_node_min,  ${INT_RECOVERY_NODE_MIN} },
+                   {cns_interval_recovery_node_max,  ${INT_RECOVERY_NODE_MAX} },
 
                    %% == For Ordning-Reda ==
                    %% Size of stacked objects (bytes)
