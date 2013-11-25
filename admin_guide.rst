@@ -61,7 +61,7 @@ System launch step by step
 --------------------------
 
 .. index::
-   pair: Operation; System Launch
+    pair: Operation; System Launch
 
 Start manager-master on **LeoFS-Manager Master** node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -199,7 +199,7 @@ Storage Cluster Operation Commands
 ----------------------------------
 
 .. index::
-   pair: Operation; Command
+    pair: Operation; Command
 
 * LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
 * LeoFS operation flow diagram is :ref:`here <operation-flow-diagram-label>`.
@@ -246,7 +246,7 @@ Table of Storage Cluster's Commands
 +--------------------------------+---------------------------------------------------------------------------------------------------+
 
 .. index::
-   detach-command
+    detach-command
 
 .. _detach-command-label:
 
@@ -588,7 +588,7 @@ S3-API Commands
 +------------------------------------------------------+-------------------------------------------------------------------+
 | get-users                                            | * Retrieve all the registered users                               |
 +------------------------------------------------------+-------------------------------------------------------------------+
-| set-endpoint `${endpoint}`                           | * Register a new S3 Endpoint                                      |
+| add-endpoint `${endpoint}`                           | * Register a new S3 Endpoint                                      |
 |                                                      | * LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`    |
 +------------------------------------------------------+-------------------------------------------------------------------+
 | delete-endpoint `${endpoint}`                        | * Delete an S3 Endpoint                                           |
@@ -601,10 +601,12 @@ S3-API Commands
 +------------------------------------------------------+-------------------------------------------------------------------+
 | get-buckets                                          | * Retrieve all of registered buckets                              |
 +------------------------------------------------------+-------------------------------------------------------------------+
+| chown-bucket `${bucket}` `${access_key_id}`          | * Change owner of a bucket (v0.16.5-)                             |
++------------------------------------------------------+-------------------------------------------------------------------+
 | update-acl `${bucket}` `${access_key_id}`            | * Update a ACL for a bucket (v0.16.0-)                            |
 | `private | public-read | public-read-write`          |                                                                   |
 +------------------------------------------------------+-------------------------------------------------------------------+
-| get-acl `${bucket}` `${access_key_id}`               | * Retrieve a ACL for a bucket (v0.16.0-)                          |
+| get-acl `${bucket}`                                  | * Retrieve a ACL for a bucket (v0.16.0-)                          |
 +------------------------------------------------------+-------------------------------------------------------------------+
 
 
@@ -613,7 +615,7 @@ S3-API Commands
 .. _s3-create-user:
 
 .. index::
-   create-user-command
+    create-user-command
 
 **'create-user'** - Create a user and generate an S3 key pair (AccessKeyID and SecretAccessKey)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -622,9 +624,9 @@ Command: ``create-user ${user-id}``
 
 ::
 
-   create-user test_account
-   access-key-id: be8111173c8218aaf1c3
-   secret-access-key: 929b09f9b794832142c59218f2907cd1c35ac163
+    create-user test_account
+    access-key-id: be8111173c8218aaf1c3
+    secret-access-key: 929b09f9b794832142c59218f2907cd1c35ac163
 
 
 .. ### DELETE USER ###
@@ -632,7 +634,7 @@ Command: ``create-user ${user-id}``
 .. _s3-delete-user:
 
 .. index::
-   delete-user-command
+    delete-user-command
 
 **'delete-user'** - Remove a user from LeoFS manager's DB
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -641,8 +643,8 @@ Command: ``delete-user ${user-id}``
 
 ::
 
-   delete-user test
-   ok
+    delete-user test
+    ok
 
 
 .. ### GET USERS ###
@@ -650,7 +652,7 @@ Command: ``delete-user ${user-id}``
 .. _s3-get-users:
 
 .. index::
-   get-users-command
+    get-users-command
 
 **'get-users'** - Retrieve users from LeoFS manager's DB
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -659,31 +661,31 @@ Command: ``get-users``
 
 ::
 
-   get-users
-   user_id     | access_key_id          | created_at
-   ------------+------------------------+---------------------------
-   _test_leofs | 05236                  | 2012-12-07 10:27:39 +0900
-   leo         | 39bbad4f3b837ed209fb   | 2012-12-07 10:27:39 +0900
+    get-users
+    user_id     | access_key_id          | created_at
+    ------------+------------------------+---------------------------
+    _test_leofs | 05236                  | 2012-12-07 10:27:39 +0900
+    leo         | 39bbad4f3b837ed209fb   | 2012-12-07 10:27:39 +0900
 
 
 .. ### SET ENDPOINT ###
 
-.. _s3-set-endpoint:
+.. _s3-add-endpoint:
 
 .. index::
-   set-endpoint-command
+    add-endpoint-command
 
-**'set-endpoint'** - Register a new Endpoint
+**'add-endpoint'** - Register a new Endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`
 
-Command: ``set-endpoint ${endpoint}``
+Command: ``add-endpoint ${endpoint}``
 
 ::
 
-   set-endpoint test_account
-   OK
+    add-endpoint test_account
+    OK
 
 
 .. ### DELETE ENDPOINTS ###
@@ -691,7 +693,7 @@ Command: ``set-endpoint ${endpoint}``
 .. _s3-delete-endpoint:
 
 .. index::
-   delete-endpoint-command
+    delete-endpoint-command
 
 **'delete-endpoint'** - Remove an Endpoint
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -700,8 +702,8 @@ Command: ``delete-endpoint ${endpoint}``
 
 ::
 
-   delete-endpoint test
-   OK
+    delete-endpoint test
+    OK
 
 
 .. ### GET ENDPOINTS ###
@@ -709,7 +711,7 @@ Command: ``delete-endpoint ${endpoint}``
 .. _s3-get-endpoints:
 
 .. index::
-   get-endpoints-command
+    get-endpoints-command
 
 **'get-endpoints'** - Retrieve all the registered Endpoints
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -763,7 +765,7 @@ Command: ``delete-bucket ${bucket} ${access_key_id}``
 .. _s3-get-buckets:
 
 .. index::
-   get-buckets-command
+    get-buckets-command
 
 **'get-buckets'** - Retrieve list of Buckets registered
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -780,16 +782,34 @@ Command: ``get-buckets``
     logs   | __leofs__ | 2012-09-12 14:29:34 +0900
     photo  | __leofs__ | 2012-09-12 14:29:26 +0900
 
+
+.. ### CHANGE BUCKET OWNER ###
+.. _s3-chown-bucket:
+
+.. index::
+    chown-bucket-command
+
+**'chown-bucket'** - Change owner of a bucket (v0.16.5-)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Command: ``chown-bucket ${bucket} ${new_access_key_id}``
+
+::
+
+    chown-bucket backup 47ad5ca9
+    OK
+
+
 .. ### UPDATE ACL ###
 .. _s3-update-acl:
 
 .. index::
-   update-acl-command
+    update-acl-command
 
 **'update-acl'** - Update a ACL for a bucket (v0.16.0-)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command: ``update-acl``
+Command: ``update-acl ${bucket} ${access_key_id}``
 
 ::
 
@@ -807,31 +827,31 @@ Command: ``update-acl``
 .. _s3-get-acl:
 
 .. index::
-   get-acl-command
+    get-acl-command
 
 **'get-acl'** - Retrieve a ACL for a bucket (v0.16.0-)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command: ``get-acl``
+Command: ``get-acl ${bucket}``
 
 ::
 
     ## Updated acl as 'private'
-    get-acl photo 05236
+    get-acl photo
     access_key_id| acls
     -------------+--------------------------
     05236        | full_contorol
 
 
     ## Updated acl as 'public-read'
-    get-acl photo 05236
+    get-acl photo
     access_key_id                                   | permissions
     ------------------------------------------------+-------------------------
     http://acs.amazonaws.com/groups/global/AllUsers | read
 
 
     ## Updated acl as 'public-read-write'
-    get-acl photo 05236
+    get-acl photo
     access_key_id                                   | permissions
     ------------------------------------------------+-------------------------
     http://acs.amazonaws.com/groups/global/AllUsers | read, write
@@ -875,7 +895,7 @@ Miscellaneous Commands
 
 
 .. index::
-   status-command
+    status-command
 
 **'status'** - Retrieve status of the cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -974,7 +994,7 @@ Command-2: ``status ${storage-node}`` OR ``status ${gateway-node}``
                  thread_pool_size : 32
 
 .. index::
-   history-command
+    history-command
 
 **'history'** - Retrieve history of operations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -996,7 +1016,7 @@ Command: ``history``
 
 
 .. index::
-   attach-new-storage
+    attach-new-storage
 
 \
 \

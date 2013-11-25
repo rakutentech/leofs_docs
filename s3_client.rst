@@ -677,6 +677,9 @@ Create a credential file for S3FS
     ## Set access-key and secret-key ##
     ${ACCESS_KEY}:${SECRET_KEY}
 
+    $ chmod 600 ~/.passwd-s3fs
+
+
 Mount "LeoFS"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
