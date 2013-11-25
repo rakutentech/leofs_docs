@@ -355,6 +355,8 @@ LeoFS Storage
 |${OBJECT_STORAGE_DIR}    | Object Storage directory  - Default:"./avs"            |
 +-------------------------+--------------------------------------------------------+
 |${NUM_OF_CONTAINERS}     | # of AVS files storing objects(files).                 |
+|                         |                                                        |
+|                         | * AVS: ARIA(ex-LeoFS's name) Vector Storage            |
 +-------------------------+--------------------------------------------------------+
 |${MANAGER_MASTER_IP}     | Manager-master node's IP-address                       |
 +-------------------------+--------------------------------------------------------+
