@@ -42,7 +42,7 @@ Install required libraries using apt-get (Ubuntu Server 12.04 LTS)
 
 ::
 
-   # sudo apt-get install libtool libncurses5-dev libssl-dev cmake check
+   # sudo apt-get install build-essential libtool libncurses5-dev libssl-dev cmake check
 
 Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
