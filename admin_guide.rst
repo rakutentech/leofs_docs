@@ -1020,8 +1020,121 @@ Command: ``history``
 
 \
 \
+
+Upgrade LeoFS v0.14.9/v0.16.0 to v0.16.5
+----------------------------------------
+
+This section describes the way of replacement of LeoFS from v0.14.9 or v0.16.0 to v0.16.5.
+
+Upgrade flow diagram
+^^^^^^^^^^^^^^^^^^^^
+
 \
-\
+
+.. image:: _static/images/leofs-upgrade-flow-diagram.png
+   :width: 780px
+
+* `The diagram only <http://www.leofs.org/docs/_images/leofs-upgrade-flow-diagram.png>`_
+
+
+Adjust Every Path
+^^^^^^^^^^^^^^^^^
+
+* Manager: [mnesia, log-dir and queue-dir]
+
+.. code-block:: erlang
+
+    {mnesia, [
+              {dir, "./work/mnesia/${IP}"},
+              {dump_log_write_threshold, 50000},
+              {dc_dump_limit,            40}
+             ]},
+    .
+    .
+    .
+    {leo_manager, [
+          .
+          .
+          .
+          %% == Log-specific properties ==
+          {log_level,    1 },
+          {log_appender, [
+                          {file, [{path, "./log/app"}]}
+                         ]},
+
+          %% == Directories ==
+          %% Directory of log output
+          {log_dir,     "./log"},
+          %% Directory of mq's db-files
+          {queue_dir,   "./work/queue"},
+          %% Directory of SNMP-Agent
+          {snmp_agent,  ${SNMPA-DIR}}
+         ]}
+
+
+* Storage: [obj_containers, log-dir and queue-dir]
+
+.. code-block:: erlang
+
+    {leo_storage, [
+          %% == System Ver ==
+          {system_version, "0.16.5" },
+
+          %% == Storage Configuration ==
+          {obj_containers,     [[{path, ${OBJECT_STORAGE_DIR}},
+                                 {num_of_containers, ${NUM_OF_CONTAINERS}}]] },
+          .
+          .
+          .
+          %% == Log-specific properties ==
+          {log_level,    1 },
+          {log_appender, [
+                          {file, [{path, "./log/app"}]}
+                         ]},
+
+          %% == Directories ==
+          %% Directory of log output
+          {log_dir,     "./log"},
+          %% Directory of mq's db-files
+          {queue_dir,   "./work/queue"},
+          %% Directory of SNMP-Agent
+          {snmp_agent,  ${SNMPA-DIR}}
+         ]}
+
+* Gateway: [log-dir and queue-dir]
+
+.. code-block:: erlang
+
+    {leo_gateway, [
+            %% Cache-related properties:
+            {cache, [
+                     .
+                     .
+                     .
+                     %% Disc-cache's directory
+                     {cache_disc_dir_data,    ${CACHE_DISC_DIR_DATA} },
+                     {cache_disc_dir_journal, ${CACHE_DISC_DIR_JOURNAL} },
+                     .
+                     .
+                     .
+                    ]},
+          .
+          .
+          .
+          %% == Log-specific properties ==
+          {log_level,    1 },
+          {log_appender, [
+                          {file, [{path, "./log/app"}]}
+                         ]},
+
+          %% == Directories ==
+          %% Directory of log output
+          {log_dir,     "./log"},
+          %% Directory of mq's db-files
+          {queue_dir,   "./work/queue"},
+          %% Directory of SNMP-Agent
+          {snmp_agent,  ${SNMPA-DIR}}
+         ]}
 
 
 Attach/Detach node into a Storage-cluster in operation
