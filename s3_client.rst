@@ -629,6 +629,70 @@ Example usage
     console.log(res.statusCode);
   });
 
+.. _erlcloud-label:
+
+Getting Started with Erlang: 'erlcloud'
+------------------------------------------------------
+
+Getting erlcloud
+^^^^^^^^^^^^^^^^
+
+* erlcloud is a Erlang interface to Amazon Web Services. You can use it for LeoFS too.
+    * `Repository <https://github.com/gleber/erlcloud>`_
+
+Edit /etc/hosts
+^^^^^^^^^^^^^^^
+
+.. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`.
+
+::
+
+  127.0.0.1 s3.amazonaws.com
+  127.0.0.1 ${bucket_name}.s3.amazonaws.com # if you use create_bucket
+
+Example usage
+^^^^^^^^^^^^^
+
+.. code-block:: erlang
+
+  erlcloud:start(),
+  Conf = erlcloud_s3:new("YOUR ACCESS KEY ID", 
+                         "YOUR_SECRET_ACCESS_KEY",
+                         "localhost",
+                         8080),
+  Conf2 = Conf#aws_config{s3_scheme = "http://"},
+  try
+      
+      erlcloud_s3:create_bucket("erlang", Conf2),
+
+      List = erlcloud_s3:list_buckets(Conf2),
+      io:format("[debug]buckets:~p~n", [List]),
+
+      erlcloud_s3:put_object("erlang", "test-key", "value", [], Conf2),
+
+      Objs = erlcloud_s3:list_objects("erlang", Conf2),
+      io:format("[debug]objects:~p~n", [Objs]),
+
+      Obj = erlcloud_s3:get_object("erlang", "test-key", Conf2),
+      io:format("[debug]inserted object:~p~n", [Obj]),
+
+      Meta = erlcloud_s3:get_object_metadata("erlang", "test-key", Conf2),
+      io:format("[debug]metadata:~p~n", [Meta]),
+
+      DeletedObj = erlcloud_s3:delete_object("erlang", "test-key", Conf2),
+      io:format("[debug]deleted object:~p~n", [DeletedObj]),
+
+      try
+          NotFoundObj = erlcloud_s3:get_object("erlang", "test-key", Conf2),
+          io:format("[debug]not found object:~p~n", [NotFoundObj])
+      catch
+          error:{aws_error,{http_error,404,_,_}} ->
+              io:format("[debug]404 not found object~n")
+      end
+  after
+      ok = erlcloud_s3:delete_bucket("erlang", Conf2)
+  end  
+
 .. _s3fs-c-label:
 
 Getting Started with S3FS-C (Ubuntu-12.04 LTS)
