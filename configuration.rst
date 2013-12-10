@@ -8,41 +8,40 @@ LeoFS Configuration
 .. index::
    pair: Configuration; Relationship of configuration files
 
-Relationship of configuration files
------------------------------------
+.. Relationship of configuration files
+.. -----------------------------------
 
-Each configuration of node refers a set value of other name of nodes as follows:
+.. Each configuration of node refers a set value of other name of nodes as follows:
 
-.. image:: _static/images/leofs-conf-relationship.png
-   :width: 700px
+.. .. image:: _static/images/leofs-conf-relationship.png
+..    :width: 700px
 
 
-SNMP-related configuration refers a directory name of SNMPA as follows:
+.. SNMP-related configuration refers a directory name of SNMPA as follows:
 
-.. image:: _static/images/leofs-conf-relationship-snmpa.png
-   :width: 700px
+.. .. image:: _static/images/leofs-conf-relationship-snmpa.png
+..    :width: 700px
 
 
 LeoFS Configuration
---------------------
+-------------------
 
-Each LeoFS node has two configuration files, ``app.config`` and ``vm.args``, which are located in the following directories:
+Each LeoFS node has one configuration files, ``leo_manager.conf``, ``leo_storage.conf`` and ``leo_gateway.conf``, which are located in the following directories:
 
 
 +---------------+---------------------------------------------------------+
 | Application   | Location                                                |
 +===============+=========================================================+
-| Manager-Master| $LEOFS_HOME/package/leo_manager_0/etc/                  |
+| Manager-Master| $LEOFS_HOME/package/leo_manager_0/etc/leo_manager.conf  |
 +---------------+---------------------------------------------------------+
-| Manager-Slave | $LEOFS_HOME/package/leo_manager_1/etc/                  |
+| Manager-Slave | $LEOFS_HOME/package/leo_manager_1/etc/leo_manager.conf  |
 +---------------+---------------------------------------------------------+
-| Storage       | $LEOFS_HOME/package/leo_storage/etc/                    |
+| Storage       | $LEOFS_HOME/package/leo_storage/etc/leo_storage.conf    |
 +---------------+---------------------------------------------------------+
-| Gateway       | $LEOFS_HOME/package/leo_gateway/etc/                    |
+| Gateway       | $LEOFS_HOME/package/leo_gateway/etc/leo_gateway.conf    |
 +---------------+---------------------------------------------------------+
 
-* The ``app.config`` file is used to set various attributes of the application.
-* The ``vm.args`` file is used to pass parameters to the Erlang node such as the name and cookie of the node.
+* The ``*.config`` file is used to set various attributes of the application. Also, it used to pass parameters to the Erlang node such as the name and cookie of the node.
 
 
 .. index::
@@ -92,20 +91,28 @@ The Consistency Level
 
 * **Example - File: ${LEOFS_SRC}/package/manager_0/etc/app.config**:
 
-.. code-block:: erlang
+.. code-block:: bash
 
-        {leo_manager,
-                 [
-                  %% System Configuration
-                  {system, [{n, 3 },  %% # of replicas
-                            {w, 2 },  %% # of replicas needed for a successful WRITE  operation
-                            {r, 1 },  %% # of replicas needed for a successful READ   operation
-                            {d, 2 },  %% # of replicas needed for a successful DELETE operation
-                            {level_1, 0}, %% # of DC-awareness replicas (Plan to support with v1.0.0)
-                            {level_2, 0}, %% # of Rack-awareness replicas
-                            {bit_of_ring, 128}
-                           ]},
 
+    ## --------------------------------------------------------------------
+    ## MANAGER - Consistency Level
+    ##     * Only set its configurations to **Manager-master**
+    ##     * See: http://www.leofs.org/docs/configuration.html#the-consistency-level
+    ## --------------------------------------------------------------------
+    ## A number of replicas
+    consistency.num_of_replicas = 3
+
+    ## A number of replicas needed for a successful WRITE operation
+    consistency.write = 2
+
+    ## A number of replicas needed for a successful READ operation
+    consistency.read = 1
+
+    ## A number of replicas needed for a successful DELETE operation
+    consistency.delete = 2
+
+    ## A number of rack-aware replicas
+    consistency.rack_aware_replicas = 0
 
 \
 \
@@ -131,89 +138,92 @@ Configuration of the Manager-Master node
 |                | - [snmpa_manager_0|snmpa_manager_1|snmpa_manager_0]    |
 +----------------+--------------------------------------------------------+
 
-.. code-block:: erlang
+.. code-block:: bash
 
-    [
-        {sasl, [
-                {sasl_error_logger, {file, "./log/sasl-error.log"}},
-                {errlog_type, error},
-                {error_logger_mf_dir, "./log/sasl"},
-                {error_logger_mf_maxbytes, 10485760}, % 10 MB max file size
-                {error_logger_mf_maxfiles, 5}         % 5 files max
-               ]},
-        {mnesia, [
-                  {dir, "./work/mnesia/${IP}"},
-                  {dump_log_write_threshold, 50000},
-                  {dc_dump_limit,            40}
-                 ]},
-        {leo_manager, [
-                   %% == System Ver ==
-                   {system_version, "0.14.7" },
+    ## --------------------------------------------------------------------
+    ## MANAGER
+    ## --------------------------------------------------------------------
+    ## LeoFS version
+    ## system_version = 0.16.8
 
-                   %% == System Configuration ==
-                   %%
-                   %% n: # of replicated files
-                   %% w: # of successes of write-operation
-                   %% r: # of successes of read-operation
-                   %% d: # of successes of delete-operation
-                   %% bit_of_ring: Ring size - 128 = 2^128
-                   {system, [{n, 1 },
-                             {w, 1 },
-                             {r, 1 },
-                             {d, 1 },
-                             {bit_of_ring, 128},
-                             {level_1, 0 },
-                             {level_2, 0 }
-                            ]},
+    ## Mode of Manager: [master, slave]
+    manager.mode = master
 
-                   %% == Available Commands ==
-                   {available_commands, all },
+    ## Partner of manager's alias
+    manager.partner = manager_1@127.0.0.1
 
-                   %% == Manager Properties ==
-                   %% Mode of server - [master|slave]
-                   {manager_mode,     master },
-                   %% Partner of manager's alias
-                   {manager_partners, ["manager_1@${SLAVE-IP}"] },
-                   %% Manager acceptable port number
-                   {port_cui,         10010 },
-                   {port_json,        10020 },
+    ## Manager-console accepatable port number
+    console.port.cui  = 10010
+    console.port.json = 10020
 
-                   %% # of acceptors
-                   {num_of_acceptors_cui,   3},
-                   {num_of_acceptors_json, 16},
+    ## Manager-console's number of acceptors
+    console.acceptors.cui = 3
+    console.acceptors.json = 16
 
-                   %% Compaction: # of execution of concurrent
-                   {num_of_compact_proc, 3 },
+    ## --------------------------------------------------------------------
+    ## MANAGER - Consistency Level
+    ##     * Only set its configurations to **Manager-master**
+    ##     * See: http://www.leofs.org/docs/configuration.html#the-consistency-level
+    ## --------------------------------------------------------------------
+    ## A number of replicas
+    consistency.num_of_replicas = 1
 
-                   %% == Log-specific properties ==
-                   %%
-                   %% Log output level
-                   %%   0: debug
-                   %%   1: info
-                   %%   2: warning
-                   %%   3: error
-                   {log_level,    1 },
-                   %% Log appender - [file]
-                   {log_appender, [
-                                   {file, [{path, "./log/app"}]}
-                                  ]},
+    ## A number of replicas needed for a successful WRITE operation
+    consistency.write = 1
 
-                   %% == Directories ==
-                   %%
-                   %% Directory of log output
-                   {log_dir,          "./log"},
-                   %% Directory of mq's db-file
-                   {queue_dir,        "./work/queue"},
-                   %% Directory of snmp-agent
-                   {snmp_agent,       "./snmp/${SNMPA-DIR}/LEO-MANAGER"}
-                  ]},
-    ].
+    ## A number of replicas needed for a successful READ operation
+    consistency.read = 1
+
+    ## A number of replicas needed for a successful DELETE operation
+    consistency.delete = 1
+
+    ## A number of rack-aware replicas
+    consistency.rack_aware_replicas = 0
+
+    ## --------------------------------------------------------------------
+    ## MANAGER - Mnesia
+    ##     * Store the info storage-cluster and the info of gateway(s)
+    ##     * Store the RING and the command histories
+    ## --------------------------------------------------------------------
+    ## Mnesia dir
+    mnesia.dir = ./work/mnesia/127.0.0.1
+
+    ## The write threshold for transaction log dumps
+    ## as the number of writes to the transaction log
+    mnesia.dump_log_write_threshold = 50000
+
+    ## Controls how often disc_copies tables are dumped from memory
+    mnesia.dc_dump_limit = 40
+
+    ## --------------------------------------------------------------------
+    ## MANAGER - Log
+    ## --------------------------------------------------------------------
+    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
+    log.log_level = 1
+
+    ## Output log file(s) - Erlang's log
+    log.erlang = ./log/erlang
+
+    ## Output log file(s) - app
+    log.app = ./log/app
+
+    ## Output log file(s) - members of storage-cluster
+    log.member_dir = ./log/ring
+
+    ## Output log file(s) - ring
+    log.ring_dir = ./log/ring
+
+    ## --------------------------------------------------------------------
+    ## MANAGER - Other Directories
+    ## --------------------------------------------------------------------
+    ## Directory of queue for monitoring "RING"
+    queue_dir = ./work/queue
+
+    ## Directory of SNMP agent configuration
+    snmp_agent = ./snmp/snmpa_manager_0/LEO-MANAGER
 
 
-**[vm.args]**
-
-* The ``vm.args`` location: **${LEOFS_HOME}/package/manager_0/etc/vm.args**
-* Modification of the required items:
+**[Erlang VM related properties]**
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
@@ -225,31 +235,33 @@ Configuration of the Manager-Master node
 
 .. code-block:: bash
 
-    ## Name of the node
-    -name manager_0@${MASTER-IP}
+    ## Name of the leofs-gateway node
+    nodename = manager_0@127.0.0.1
 
-    ## Cookie for distributed erlang
-    -setcookie 401321b4
+    ## Cookie for distributed node communication.  All nodes in the same cluster
+    ## should use the same cookie or they will not be able to communicate.
+    distributed_cookie = 401321b4
 
-    ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
-    ## (Disabled by default..use with caution!)
-    ##-heart
+    ## Enable kernel poll
+    erlang.kernel_poll = true
 
-    ## Enable kernel poll and a few async threads
-    +K true
-    +A 32
+    ## Number of async threads
+    erlang.asyc_threads = 32
 
     ## Increase number of concurrent ports/sockets
-    ##-env ERL_MAX_PORTS 4096
+    erlang.max_ports = 64000
 
-    ## Tweak GC to run more often
-    ##-env ERL_FULLSWEEP_AFTER 10
+    ## Set the location of crash dumps
+    erlang.crash_dump = ./log/erl_crash.dump
 
-    ## SNMP Config file
-    -config ./snmp/${SNMPA-DIR}/leo_manager_snmp
+    ## Raise the ETS table limit
+    erlang.max_ets_tables = 256000
 
-    ## set up the node with the -hidden flag
-    -hidden
+    ## Raise the default erlang process limit
+    process_limit = 1048576
+
+    ## Path of SNMP-agent configuration
+    ##snmp_conf = ./snmp/snmpa_manager_0/leo_maanager_snmp
 
 .. index::
    pair: Configuration; LeoFS Manager-Slave
@@ -272,25 +284,71 @@ LeoFS Manager-Slave
 |${SNMPA-DIR}    | SNMPA configuration files directory                    |
 +----------------+--------------------------------------------------------+
 
-.. code-block:: erlang
+.. code-block:: bash
 
-    [
 
-        {leo_manager,
-                 [
+    ## --------------------------------------------------------------------
+    ## MANAGER
+    ## --------------------------------------------------------------------
+    ## LeoFS version
+    ## system_version = 0.16.8
 
-                  %% Manager Configuration
-                  {manager_mode,     slave },
-                  {manager_partners, ["manager_0@${MASTER-IP}"] },
-                  {port,             10011 },
-                  {num_of_acceptors, 3},
+    ## Mode of Manager: [master, slave]
+    manager.mode = slave
 
-                  %% Directories
-                  {log_dir,          "./log"},
-                  {queue_dir,        "./work/queue"},
-                  {snmp_agent,       "./snmp/${SNMPA-DIR}/LEO-MANAGER"}
-                 ]}
-    ].
+    ## Partner of manager's alias
+    manager.partner = manager_0@127.0.0.1
+
+    ## Manager-console accepatable port number
+    console.port.cui  = 10011
+    console.port.json = 10021
+
+    ## Manager-console's number of acceptors
+    console.acceptors.cui = 3
+    console.acceptors.json = 16
+
+        ## --------------------------------------------------------------------
+    ## MANAGER - Mnesia
+    ##     * Store the info storage-cluster and the info of gateway(s)
+    ##     * Store the RING and the command histories
+    ## --------------------------------------------------------------------
+    ## Mnesia dir
+    mnesia.dir = ./work/mnesia/127.0.0.1
+
+    ## The write threshold for transaction log dumps
+    ## as the number of writes to the transaction log
+    mnesia.dump_log_write_threshold = 50000
+
+    ## Controls how often disc_copies tables are dumped from memory
+    mnesia.dc_dump_limit = 40
+
+    ## --------------------------------------------------------------------
+    ## MANAGER - Log
+    ## --------------------------------------------------------------------
+    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
+    log.log_level = 1
+
+    ## Output log file(s) - Erlang's log
+    log.erlang = ./log/erlang
+
+    ## Output log file(s) - app
+    log.app = ./log/app
+
+    ## Output log file(s) - members of storage-cluster
+    log.member_dir = ./log/ring
+
+    ## Output log file(s) - ring
+    log.ring_dir = ./log/ring
+
+    ## --------------------------------------------------------------------
+    ## MANAGER - Other Directories
+    ## --------------------------------------------------------------------
+    ## Directory of queue for monitoring "RING"
+    queue_dir = ./work/queue
+
+    ## Directory of SNMP agent configuration
+    snmp_agent = ./snmp/snmpa_manager_1/LEO-MANAGER
+
 
 **[vm.args]**
 
@@ -307,32 +365,33 @@ LeoFS Manager-Slave
 
 .. code-block:: bash
 
-    ## Name of the node
-    -name manager_0@${SLAVE-IP}
+    ## Name of the leofs-gateway node
+    nodename = manager_1@127.0.0.1
 
-    ## Cookie for distributed erlang
-    -setcookie 401321b4
+    ## Cookie for distributed node communication.  All nodes in the same cluster
+    ## should use the same cookie or they will not be able to communicate.
+    distributed_cookie = 401321b4
 
-    ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
-    ## (Disabled by default..use with caution!)
-    ##-heart
+    ## Enable kernel poll
+    erlang.kernel_poll = true
 
-    ## Enable kernel poll and a few async threads
-    +K true
-    +A 32
+    ## Number of async threads
+    erlang.asyc_threads = 32
 
     ## Increase number of concurrent ports/sockets
-    ##-env ERL_MAX_PORTS 4096
+    erlang.max_ports = 64000
 
-    ## Tweak GC to run more often
-    ##-env ERL_FULLSWEEP_AFTER 10
+    ## Set the location of crash dumps
+    erlang.crash_dump = ./log/erl_crash.dump
 
-    ## SNMP Config file
-    -config ./snmp/${SNMPA-DIR}/leo_manager_snmp
+    ## Raise the ETS table limit
+    erlang.max_ets_tables = 256000
 
-    ## set up the node with the -hidden flag
-    -hidden
+    ## Raise the default erlang process limit
+    process_limit = 1048576
 
+    ## Path of SNMP-agent configuration
+    snmp_conf = ./snmp/snmpa_manager_1/leo_maanager_snmp
 
 .. index::
    pair: Configuration; LeoFS Storage
