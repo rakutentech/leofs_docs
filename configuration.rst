@@ -8,41 +8,40 @@ LeoFS Configuration
 .. index::
    pair: Configuration; Relationship of configuration files
 
-Relationship of configuration files
------------------------------------
+.. Relationship of configuration files
+.. -----------------------------------
 
-Each configuration of node refers a set value of other name of nodes as follows:
+.. Each configuration of node refers a set value of other name of nodes as follows:
 
-.. image:: _static/images/leofs-conf-relationship.png
-   :width: 700px
+.. .. image:: _static/images/leofs-conf-relationship.png
+..    :width: 700px
 
 
-SNMP-related configuration refers a directory name of SNMPA as follows:
+.. SNMP-related configuration refers a directory name of SNMPA as follows:
 
-.. image:: _static/images/leofs-conf-relationship-snmpa.png
-   :width: 700px
+.. .. image:: _static/images/leofs-conf-relationship-snmpa.png
+..    :width: 700px
 
 
 LeoFS Configuration
---------------------
+-------------------
 
-Each LeoFS node has two configuration files, ``app.config`` and ``vm.args``, which are located in the following directories:
-
+Each LeoFS node has one configuration files, ``leo_manager.conf``, ``leo_storage.conf`` and ``leo_gateway.conf``, which are located in the following directories:
+\
 
 +---------------+---------------------------------------------------------+
 | Application   | Location                                                |
 +===============+=========================================================+
-| Manager-Master| $LEOFS_HOME/package/leo_manager_0/etc/                  |
+| Manager-Master| $LEOFS_HOME/package/leo_manager_0/etc/leo_manager.conf  |
 +---------------+---------------------------------------------------------+
-| Manager-Slave | $LEOFS_HOME/package/leo_manager_1/etc/                  |
+| Manager-Slave | $LEOFS_HOME/package/leo_manager_1/etc/leo_manager.conf  |
 +---------------+---------------------------------------------------------+
-| Storage       | $LEOFS_HOME/package/leo_storage/etc/                    |
+| Storage       | $LEOFS_HOME/package/leo_storage/etc/leo_storage.conf    |
 +---------------+---------------------------------------------------------+
-| Gateway       | $LEOFS_HOME/package/leo_gateway/etc/                    |
+| Gateway       | $LEOFS_HOME/package/leo_gateway/etc/leo_gateway.conf    |
 +---------------+---------------------------------------------------------+
 
-* The ``app.config`` file is used to set various attributes of the application.
-* The ``vm.args`` file is used to pass parameters to the Erlang node such as the name and cookie of the node.
+* The ``*.config`` file is used to set various attributes of the application. Also, it used to pass parameters to the Erlang node such as the name and cookie of the node.
 
 
 .. index::
@@ -90,22 +89,30 @@ The Consistency Level
 | High        | n = 3, [r = 2 | r = 3], w = 3, d = 3                   |
 +-------------+--------------------------------------------------------+
 
-* **Example - File: ${LEOFS_SRC}/package/manager_0/etc/app.config**:
+* **Example - File: ${LEOFS_SRC}/package/manager_0/etc/leo_manager.conf**:
 
-.. code-block:: erlang
+.. code-block:: bash
 
-        {leo_manager,
-                 [
-                  %% System Configuration
-                  {system, [{n, 3 },  %% # of replicas
-                            {w, 2 },  %% # of replicas needed for a successful WRITE  operation
-                            {r, 1 },  %% # of replicas needed for a successful READ   operation
-                            {d, 2 },  %% # of replicas needed for a successful DELETE operation
-                            {level_1, 0}, %% # of DC-awareness replicas (Plan to support with v1.0.0)
-                            {level_2, 0}, %% # of Rack-awareness replicas
-                            {bit_of_ring, 128}
-                           ]},
 
+    ## --------------------------------------------------------------------
+    ## MANAGER - Consistency Level
+    ##     * Only set its configurations to **Manager-master**
+    ##     * See: http://www.leofs.org/docs/configuration.html#the-consistency-level
+    ## --------------------------------------------------------------------
+    ## A number of replicas
+    consistency.num_of_replicas = 3
+
+    ## A number of replicas needed for a successful WRITE operation
+    consistency.write = 2
+
+    ## A number of replicas needed for a successful READ operation
+    consistency.read = 1
+
+    ## A number of replicas needed for a successful DELETE operation
+    consistency.delete = 2
+
+    ## A number of rack-aware replicas
+    consistency.rack_aware_replicas = 0
 
 \
 \
@@ -114,9 +121,9 @@ The Consistency Level
 Configuration of the Manager-Master node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**[app.config]**
+**[leo_manager.conf]**
 
-* The ``app.config`` location: **${LEOFS_HOME}/package/manager_0/etc/app.config**
+* The ``leo_manager.conf`` location: **${LEOFS_HOME}/package/manager_0/etc/leo_manager.conf**
 * Modification of the required items:
 
 +----------------+--------------------------------------------------------+
@@ -131,125 +138,130 @@ Configuration of the Manager-Master node
 |                | - [snmpa_manager_0|snmpa_manager_1|snmpa_manager_0]    |
 +----------------+--------------------------------------------------------+
 
-.. code-block:: erlang
+.. code-block:: bash
 
-    [
-        {sasl, [
-                {sasl_error_logger, {file, "./log/sasl-error.log"}},
-                {errlog_type, error},
-                {error_logger_mf_dir, "./log/sasl"},
-                {error_logger_mf_maxbytes, 10485760}, % 10 MB max file size
-                {error_logger_mf_maxfiles, 5}         % 5 files max
-               ]},
-        {mnesia, [
-                  {dir, "./work/mnesia/${IP}"},
-                  {dump_log_write_threshold, 50000},
-                  {dc_dump_limit,            40}
-                 ]},
-        {leo_manager, [
-                   %% == System Ver ==
-                   {system_version, "0.14.7" },
+    ## --------------------------------------------------------------------
+    ## MANAGER
+    ## --------------------------------------------------------------------
+    ## LeoFS version
+    ## system_version = 0.16.8
 
-                   %% == System Configuration ==
-                   %%
-                   %% n: # of replicated files
-                   %% w: # of successes of write-operation
-                   %% r: # of successes of read-operation
-                   %% d: # of successes of delete-operation
-                   %% bit_of_ring: Ring size - 128 = 2^128
-                   {system, [{n, 1 },
-                             {w, 1 },
-                             {r, 1 },
-                             {d, 1 },
-                             {bit_of_ring, 128},
-                             {level_1, 0 },
-                             {level_2, 0 }
-                            ]},
+    ## Mode of Manager: [master, slave]
+    manager.mode = master
 
-                   %% == Available Commands ==
-                   {available_commands, all },
+    ## Partner of manager's alias
+    manager.partner = manager_1@${SLAVE-IP}
 
-                   %% == Manager Properties ==
-                   %% Mode of server - [master|slave]
-                   {manager_mode,     master },
-                   %% Partner of manager's alias
-                   {manager_partners, ["manager_1@${SLAVE-IP}"] },
-                   %% Manager acceptable port number
-                   {port_cui,         10010 },
-                   {port_json,        10020 },
+    ## Manager-console accepatable port number
+    console.port.cui  = 10010
+    console.port.json = 10020
 
-                   %% # of acceptors
-                   {num_of_acceptors_cui,   3},
-                   {num_of_acceptors_json, 16},
+    ## Manager-console's number of acceptors
+    console.acceptors.cui = 3
+    console.acceptors.json = 16
 
-                   %% Compaction: # of execution of concurrent
-                   {num_of_compact_proc, 3 },
+    ## --------------------------------------------------------------------
+    ## MANAGER - Consistency Level
+    ##     * Only set its configurations to **Manager-master**
+    ##     * See: http://www.leofs.org/docs/configuration.html#the-consistency-level
+    ## --------------------------------------------------------------------
+    ## A number of replicas
+    consistency.num_of_replicas = 1
 
-                   %% == Log-specific properties ==
-                   %%
-                   %% Log output level
-                   %%   0: debug
-                   %%   1: info
-                   %%   2: warning
-                   %%   3: error
-                   {log_level,    1 },
-                   %% Log appender - [file]
-                   {log_appender, [
-                                   {file, [{path, "./log/app"}]}
-                                  ]},
+    ## A number of replicas needed for a successful WRITE operation
+    consistency.write = 1
 
-                   %% == Directories ==
-                   %%
-                   %% Directory of log output
-                   {log_dir,          "./log"},
-                   %% Directory of mq's db-file
-                   {queue_dir,        "./work/queue"},
-                   %% Directory of snmp-agent
-                   {snmp_agent,       "./snmp/${SNMPA-DIR}/LEO-MANAGER"}
-                  ]},
-    ].
+    ## A number of replicas needed for a successful READ operation
+    consistency.read = 1
+
+    ## A number of replicas needed for a successful DELETE operation
+    consistency.delete = 1
+
+    ## A number of rack-aware replicas
+    consistency.rack_aware_replicas = 0
+
+    ## --------------------------------------------------------------------
+    ## MANAGER - Mnesia
+    ##     * Store the info storage-cluster and the info of gateway(s)
+    ##     * Store the RING and the command histories
+    ## --------------------------------------------------------------------
+    ## Mnesia dir
+    mnesia.dir = ./work/mnesia/127.0.0.1
+
+    ## The write threshold for transaction log dumps
+    ## as the number of writes to the transaction log
+    mnesia.dump_log_write_threshold = 50000
+
+    ## Controls how often disc_copies tables are dumped from memory
+    mnesia.dc_dump_limit = 40
+
+    ## --------------------------------------------------------------------
+    ## MANAGER - Log
+    ## --------------------------------------------------------------------
+    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
+    log.log_level = 1
+
+    ## Output log file(s) - Erlang's log
+    log.erlang = ./log/erlang
+
+    ## Output log file(s) - app
+    log.app = ./log/app
+
+    ## Output log file(s) - members of storage-cluster
+    log.member_dir = ./log/ring
+
+    ## Output log file(s) - ring
+    log.ring_dir = ./log/ring
+
+    ## --------------------------------------------------------------------
+    ## MANAGER - Other Directories
+    ## --------------------------------------------------------------------
+    ## Directory of queue for monitoring "RING"
+    queue_dir = ./work/queue
+
+    ## Directory of SNMP agent configuration
+    snmp_agent = ${SNMPA-DIR}/snmp/snmpa_manager_0/LEO-MANAGER
 
 
-**[vm.args]**
-
-* The ``vm.args`` location: **${LEOFS_HOME}/package/manager_0/etc/vm.args**
-* Modification of the required items:
+**[Erlang VM related properties]**
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
 +================+========================================================+
-|${MASTER-IP  }  | Manager-Master IP                                      |
+|${MASTER-IP}    | Manager-Master IP                                      |
 +----------------+--------------------------------------------------------+
 |${SNMPA-DIR}    | SNMPA configuration files directory                    |
 +----------------+--------------------------------------------------------+
 
 .. code-block:: bash
 
-    ## Name of the node
-    -name manager_0@${MASTER-IP}
+    ## Name of the leofs-gateway node
+    nodename = manager_0@${MASTER-IP}
 
-    ## Cookie for distributed erlang
-    -setcookie 401321b4
+    ## Cookie for distributed node communication.  All nodes in the same cluster
+    ## should use the same cookie or they will not be able to communicate.
+    distributed_cookie = 401321b4
 
-    ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
-    ## (Disabled by default..use with caution!)
-    ##-heart
+    ## Enable kernel poll
+    erlang.kernel_poll = true
 
-    ## Enable kernel poll and a few async threads
-    +K true
-    +A 32
+    ## Number of async threads
+    erlang.asyc_threads = 32
 
     ## Increase number of concurrent ports/sockets
-    ##-env ERL_MAX_PORTS 4096
+    erlang.max_ports = 64000
 
-    ## Tweak GC to run more often
-    ##-env ERL_FULLSWEEP_AFTER 10
+    ## Set the location of crash dumps
+    erlang.crash_dump = ./log/erl_crash.dump
 
-    ## SNMP Config file
-    -config ./snmp/${SNMPA-DIR}/leo_manager_snmp
+    ## Raise the ETS table limit
+    erlang.max_ets_tables = 256000
 
-    ## set up the node with the -hidden flag
-    -hidden
+    ## Raise the default erlang process limit
+    process_limit = 1048576
+
+    ## Path of SNMP-agent configuration
+    snmp_conf = ${SNMPA-DIR}/snmp/snmpa_manager_0/leo_maanager_snmp
 
 .. index::
    pair: Configuration; LeoFS Manager-Slave
@@ -259,9 +271,9 @@ LeoFS Manager-Slave
 
 **Configuration of the Manager-Slave node**
 
-**[app.config]**
+**[leo_manager.conf]**
 
-* The ``app.config`` location: **${LEOFS_HOME}/package/manager_1/etc/app.config**
+* The ``leo_manager.conf`` location: **${LEOFS_HOME}/package/manager_1/etc/leo_manager.conf**
 * Modification of the required items:
 
 +----------------+--------------------------------------------------------+
@@ -272,30 +284,72 @@ LeoFS Manager-Slave
 |${SNMPA-DIR}    | SNMPA configuration files directory                    |
 +----------------+--------------------------------------------------------+
 
-.. code-block:: erlang
+.. code-block:: bash
 
-    [
 
-        {leo_manager,
-                 [
+    ## --------------------------------------------------------------------
+    ## MANAGER
+    ## --------------------------------------------------------------------
+    ## LeoFS version
+    ## system_version = 0.16.8
 
-                  %% Manager Configuration
-                  {manager_mode,     slave },
-                  {manager_partners, ["manager_0@${MASTER-IP}"] },
-                  {port,             10011 },
-                  {num_of_acceptors, 3},
+    ## Mode of Manager: [master, slave]
+    manager.mode = slave
 
-                  %% Directories
-                  {log_dir,          "./log"},
-                  {queue_dir,        "./work/queue"},
-                  {snmp_agent,       "./snmp/${SNMPA-DIR}/LEO-MANAGER"}
-                 ]}
-    ].
+    ## Partner of manager's alias
+    manager.partner = manager_0@${MASTER-IP}
 
-**[vm.args]**
+    ## Manager-console accepatable port number
+    console.port.cui  = 10011
+    console.port.json = 10021
 
-* The ``vm.args`` location: **${LEOFS_HOME}/package/manager_1/etc/vm.args**
-* Modification of the required items:
+    ## Manager-console's number of acceptors
+    console.acceptors.cui = 3
+    console.acceptors.json = 16
+
+    ## --------------------------------------------------------------------
+    ## MANAGER - Mnesia
+    ##     * Store the info storage-cluster and the info of gateway(s)
+    ##     * Store the RING and the command histories
+    ## --------------------------------------------------------------------
+    ## Mnesia dir
+    mnesia.dir = ./work/mnesia/127.0.0.1
+
+    ## The write threshold for transaction log dumps
+    ## as the number of writes to the transaction log
+    mnesia.dump_log_write_threshold = 50000
+
+    ## Controls how often disc_copies tables are dumped from memory
+    mnesia.dc_dump_limit = 40
+
+    ## --------------------------------------------------------------------
+    ## MANAGER - Log
+    ## --------------------------------------------------------------------
+    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
+    log.log_level = 1
+
+    ## Output log file(s) - Erlang's log
+    log.erlang = ./log/erlang
+
+    ## Output log file(s) - app
+    log.app = ./log/app
+
+    ## Output log file(s) - members of storage-cluster
+    log.member_dir = ./log/ring
+
+    ## Output log file(s) - ring
+    log.ring_dir = ./log/ring
+
+    ## --------------------------------------------------------------------
+    ## MANAGER - Other Directories
+    ## --------------------------------------------------------------------
+    ## Directory of queue for monitoring "RING"
+    queue_dir = ./work/queue
+
+    ## Directory of SNMP agent configuration
+    snmp_agent = ${SNMPA-DIR}/snmp/snmpa_manager_1/LEO-MANAGER
+
+**[Erlang VM related properties]**
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
@@ -307,32 +361,33 @@ LeoFS Manager-Slave
 
 .. code-block:: bash
 
-    ## Name of the node
-    -name manager_0@${SLAVE-IP}
+    ## Name of the leofs-gateway node
+    nodename = manager_1@${SLAVE-IP}
 
-    ## Cookie for distributed erlang
-    -setcookie 401321b4
+    ## Cookie for distributed node communication.  All nodes in the same cluster
+    ## should use the same cookie or they will not be able to communicate.
+    distributed_cookie = 401321b4
 
-    ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
-    ## (Disabled by default..use with caution!)
-    ##-heart
+    ## Enable kernel poll
+    erlang.kernel_poll = true
 
-    ## Enable kernel poll and a few async threads
-    +K true
-    +A 32
+    ## Number of async threads
+    erlang.asyc_threads = 32
 
     ## Increase number of concurrent ports/sockets
-    ##-env ERL_MAX_PORTS 4096
+    erlang.max_ports = 64000
 
-    ## Tweak GC to run more often
-    ##-env ERL_FULLSWEEP_AFTER 10
+    ## Set the location of crash dumps
+    erlang.crash_dump = ./log/erl_crash.dump
 
-    ## SNMP Config file
-    -config ./snmp/${SNMPA-DIR}/leo_manager_snmp
+    ## Raise the ETS table limit
+    erlang.max_ets_tables = 256000
 
-    ## set up the node with the -hidden flag
-    -hidden
+    ## Raise the default erlang process limit
+    process_limit = 1048576
 
+    ## Path of SNMP-agent configuration
+    snmp_conf = ${SNMPA-DIR}/snmp/snmpa_manager_1/leo_maanager_snmp
 
 .. index::
    pair: Configuration; LeoFS Storage
@@ -344,23 +399,23 @@ LeoFS Storage
 
 **Configuration of Storage nodes**
 
-**[app.config]**
+**[leo_storage.conf]**
 
-* The ``app.config`` location: **${LEOFS_HOME}/package/storage/etc/app.config**
+* The ``leo_storage.conf`` location: **${LEOFS_HOME}/package/storage/etc/leo_storage.conf**
 * Modification of the required items:
 
 +-------------------------+--------------------------------------------------------+
 |Property                 | Description                                            |
 +=========================+========================================================+
+|${MANAGER_MASTER_IP}     | Manager-master node's IP-address                       |
++-------------------------+--------------------------------------------------------+
+|${MANAGER_SLAVE_IP}      | Manager-slave node's IP-address                        |
++-------------------------+--------------------------------------------------------+
 |${OBJECT_STORAGE_DIR}    | Object Storage directory  - Default:"./avs"            |
 +-------------------------+--------------------------------------------------------+
 |${NUM_OF_CONTAINERS}     | # of AVS files storing objects(files).                 |
 |                         |                                                        |
 |                         | * AVS: ARIA(ex-LeoFS's name) Vector Storage            |
-+-------------------------+--------------------------------------------------------+
-|${MANAGER_MASTER_IP}     | Manager-master node's IP-address                       |
-+-------------------------+--------------------------------------------------------+
-|${MANAGER_SLAVE_IP}      | Manager-slave node's IP-address                        |
 +-------------------------+--------------------------------------------------------+
 |${NUM_OF_PROC_PER_OBJECT}| # of batch processes related to                        |
 |                         | objects like replicating an object.                    |
@@ -414,95 +469,108 @@ LeoFS Storage
 |                         | - [snmpa_storage_0|snmpa_storage_1|snmpa_storage_0]    |
 +-------------------------+--------------------------------------------------------+
 
-.. code-block:: erlang
+.. code-block:: bash
 
-    {leo_storage, [
-                   %% == System Ver ==
-                   {system_version, "0.14.7" },
+    ## --------------------------------------------------------------------
+    ## Manager's Node(s)
+    ## --------------------------------------------------------------------
+    ## Name of Manager node(s)
+    ## managers = [manager_0@127.0.0.1, manager_1@127.0.0.1]
+    managers = [${MANAGER_MASTER_IP}, ${MANAGER_SLAVE_IP}]
 
-                   %% == Storage Configuration ==
-                   %%
-                   %% Object containers properties:
-                   %% @param path              - Directory of object-containers
-                   %% @param num_of_containers - # of object-containers
-                   %%
-                   %% Notes:
-                   %%   If you set up LeoFS on 'development', default value - "./avs" - is OK.
-                   %%   If you set up LeoFS on 'production' or 'staging', You should need to change "volume",
-                   %%       And We recommend volume's partition is XFS.
-                   %%
-                   {obj_containers,     [[{path, ${OBJECT_STORAGE_DIR}}, {num_of_containers, ${NUM_OF_CONTAINERS}}]] },
+    ## --------------------------------------------------------------------
+    ## STORAGE
+    ## --------------------------------------------------------------------
+    ## LeoFS version
+    ## system_version = 0.16.8
 
-                   %% leo-manager's nodes
-                   {managers,           [${MANAGER_MASTER_IP}, ${MANAGER_SLAVE_IP}] },
+    ## Object container
+    obj_containers.path = [${OBJECT_STORAGE_DIR}]
+    obj_containers.num_of_containers = [${NUM_OF_CONTAINERS}]
 
-                   %% # of virtual-nodes
-                   {num_of_vnodes,      168 },
+    ## e.g. Case of plural pathes
+    ## obj_containers.path = [/var/leofs/avs/1, /var/leofs/avs/2]
+    ## obj_containers.num_of_containers = [32, 64]
 
-                   %% # of mq-server's processes
-                   {num_of_mq_procs,    8 },
+    ## A number of virtual-nodes for the redundant-manager
+    ## num_of_vnodes = 168
 
-                   %% mq - queues consumption's intervals
-                   %% - per_object
-                   {cns_num_of_batch_process_per_object, ${NUM_OF_PROC_PER_OBJECT } },
-                   {cns_interval_per_object_min, ${INT_PER_OBJECT_MIN} },
-                   {cns_interval_per_object_max, ${INT_PER_OBJECT_MAX} },
+    ## --------------------------------------------------------------------
+    ## STORAGE - MQ
+    ## --------------------------------------------------------------------
+    ## A number of mq-server's processes
+    mq.num_of_mq_procs = 8
 
-                   %% - sync_by_vnode_id
-                   {cns_num_of_batch_process_sync_by_vnode_id, ${NUM_OF_PROC_SYNC_BY_VN} },
-                   {cns_interval_sync_by_vnode_id_min, ${INT_SYNC_BY_VNODE_MIN} },
-                   {cns_interval_sync_by_vnode_id_max, ${INT_SYNC_BY_VNODE_MAX} },
+    ## MQ recover per_object
+    mq.recover_per_object.num_of_batch_process = ${NUM_OF_PROC_PER_OBJECT}
+    mq.recover_per_object.interval_min = ${INT_PER_OBJECT_MIN}
+    mq.recover_per_object.interval_max = ${INT_PER_OBJECT_MAX}
 
-                   %% - for rebalance
-                   {cns_num_of_batch_process_rebalance, ${NUM_OF_PROC_REBALANCE} },
-                   {cns_interval_rebalance_min, ${INT_REBALANCE_MIN} },
-                   {cns_interval_rebalance_max, ${INT_REBALANCE_MAX} },
+    ## MQ synchronize objects by vnode-id
+    mq.sync_by_vnode_id.num_of_batch_process = ${NUM_OF_PROC_SYNC_BY_VN}
+    mq.sync_by_vnode_id.interval_min = ${INT_SYNC_BY_VNODE_MIN}
+    mq.sync_by_vnode_id.interval_max = ${INT_SYNC_BY_VNODE_MAX}
 
-                   %% - async deletion objects (after remove a bucket)
-                   {cns_num_of_batch_process_async_deletion, ${NUM_OF_PROC_ASYNC_DEL} },
-                   {cns_interval_async_deletion_min, ${INT_ASYNC_DEL_MIN} },
-                   {cns_interval_async_deletion_max, ${INT_ASYNC_DEL_MAX} },
+    ## MQ rebalance objects
+    mq.rebalance.num_of_batch_process = ${NUM_OF_PROC_REBALANCE}
+    mq.rebalance.interval_min = ${INT_REBALANCE_MIN}
+    mq.rebalance.interval_max = ${INT_REBALANCE_MAX}
 
-                   %% - recovery node
-                   {cns_num_of_batch_process_recovery_node, ${NUM_OF_PROC_RECOVERY_N} },
-                   {cns_interval_recovery_node_min,  ${INT_RECOVERY_NODE_MIN} },
-                   {cns_interval_recovery_node_max,  ${INT_RECOVERY_NODE_MAX} },
+    ## MQ delete objects
+    mq.delete_object.num_of_batch_process = ${NUM_OF_PROC_ASYNC_DEL}
+    mq.delete_object.interval_min = ${INT_ASYNC_DEL_MIN}
+    mq.delete_object.interval_max = ${INT_ASYNC_DEL_MAX}
 
-                   %% == For Ordning-Reda ==
-                   %% Size of stacked objects (bytes)
-                   {size_of_stacked_objs,    67108864 },
-                   %% Stacking timeout (msec)
-                   {stacking_timeout,        5000 },
-
-                   %% == Log-specific properties ==
-                   %%
-                   {log_level,    1 },
-                   {log_appender, [
-                                   {file, [{path, "./log/app"}]}
-                                  ]},
-
-                   %% == Directories ==
-                   %%
-                   %% Directory of log output
-                   {log_dir,     "./log"},
-                   %% Directory of mq's db-files
-                   {queue_dir,   "./work/queue"},
-                   %% Directory of SNMP-Agent
-                   {snmp_agent,  ${SNMPA-DIR}}
-                  ]},
-
-    {leo_object_storage, [{profile, false},
-                          {metadata_storage, 'bitcask'},
-
-                          %% Strict comparison of object's checksum with its metadata
-                          %% (default:false)
-                          {is_strict_check, false }
-                         ]},
+    ## MQ recover a node's object
+    mq.recovery_node.num_of_batch_process = ${NUM_OF_PROC_RECOVERY_N}
+    mq.recovery_node.interval_min = ${INT_RECOVERY_NODE_MIN}
+    mq.recovery_node.interval_max = ${INT_RECOVERY_NODE_MAX}
 
 
-**[vm.args]**
+    ## --------------------------------------------------------------------
+    ## STORAGE - Replication/Recovery object(s)
+    ## --------------------------------------------------------------------
+    ## Rack-id for the rack-awareness replica placement
+    replication.rack_awareness.rack_id = []
 
-* The ``vm.args`` location: **${LEOFS_HOME}/package/storage/etc/vm.args**
+    ## Size of stacked objects (bytes)
+    replication.recovery.size_of_stacked_objs = 67108864
+
+    ## Stacking timeout (msec)
+    replication.recovery.stacking_timeout = 5000
+
+
+    ## --------------------------------------------------------------------
+    ## STORAGE - Log
+    ## --------------------------------------------------------------------
+    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
+    log.log_level = 1
+
+    ## Output log file(s) - Erlang's log
+    log.erlang = ./log/erlang
+
+    ## Output log file(s) - app
+    log.app = ./log/app
+
+    ## Output log file(s) - members of storage-cluster
+    log.member_dir = ./log/ring
+
+    ## Output log file(s) - ring
+    log.ring_dir = ./log/ring
+
+
+    ## --------------------------------------------------------------------
+    ## STORAGE - Other Directories
+    ## --------------------------------------------------------------------
+    ## Directory of queue for monitoring "RING"
+    queue_dir  = ./work/queue
+
+    ## Directory of SNMP agent configuration
+    snmp_agent = ${SNMPA-DIR}/snmp/snmpa_storage_0/LEO-STORAGE
+
+
+**[Erlang VM related properties]**
+
 * Modification of the required items:
 
 +-------------------------+--------------------------------------------------------+
@@ -517,34 +585,34 @@ LeoFS Storage
 
 .. code-block:: bash
 
-    ## Name of the node
-    -name ${STORAGE_ALIAS}@${STORAGE_IP}
+    ## Name of the leofs-storage node
+    ## nodename = storage_0@127.0.0.1
+    nodename = ${STORAGE_ALIAS}@${STORAGE_IP}
 
-    ## Cookie for distributed erlang
-    -setcookie 401321b4
+    ## Cookie for distributed node communication.  All nodes in the same cluster
+    ## should use the same cookie or they will not be able to communicate.
+    distributed_cookie = 401321b4
 
-    ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
-    ## (Disabled by default..use with caution!)
-    ##-heart
+    ## Enable kernel poll
+    erlang.kernel_poll = true
 
-    ## Enable kernel poll and a few async threads
-    +K true
-    +A 32
+    ## Number of async threads
+    erlang.asyc_threads = 32
 
     ## Increase number of concurrent ports/sockets
-    ##-env ERL_MAX_PORTS 4096
+    erlang.max_ports = 64000
 
-    ## Tweak GC to run more often
-    ##-env ERL_FULLSWEEP_AFTER 10
+    ## Set the location of crash dumps
+    erlang.crash_dump = ./log/erl_crash.dump
 
-    ## SNMP Config file
-    -config ./snmp/${SNMPA-DIR}/leo_storage_snmp
+    ## Raise the ETS table limit
+    erlang.max_ets_tables = 256000
 
-    ## Sets the maximum number of concurrent processes for this system
-    +P 1048576
+    ## Raise the default erlang process limit
+    process_limit = 1048576
 
-    ## set up the node with the -hidden flag
-    -hidden
+    ## Path of SNMP-agent configuration
+    snmp_conf = ${SNMPA-DIR}/snmp/snmpa_storage_0/leo_storage_snmp
 
 
 .. index::
@@ -557,9 +625,9 @@ LeoFS Gateway
 
 **Configuration of Gateway nodes**
 
-**[app.config]**
+**[leo_gateway.conf]**
 
-* The ``app.config`` location: **${LEOFS_HOME}/package/gateway/etc/app.config**
+* The ``leo_gateway.conf`` location: **${LEOFS_HOME}/package/gateway/etc/leo_gateway.conf**
 * Modification of the required items:
 
 +---------------------------+----------------------------------------------------------------------------------+
@@ -567,23 +635,23 @@ LeoFS Gateway
 +===========================+==================================================================================+
 | **Basic items**                                                                                              |
 +---------------------------+----------------------------------------------------------------------------------+
+|${MANAGER_MASTER_IP}       | Manager-master node's IP-address                                                 |
++---------------------------+----------------------------------------------------------------------------------+
+|${MANAGER_SLAVE_IP}        | Manager-slave node's IP-address                                                  |
++---------------------------+----------------------------------------------------------------------------------+
+|${HTTP_HANDLER}            | Gateway's HTTP API to use, either ``s3`` (default) or ``rest``                   |
++---------------------------+----------------------------------------------------------------------------------+
 |${LISTENING_PORT}          | Port number the Gateway uses for HTTP connections                                |
 +---------------------------+----------------------------------------------------------------------------------+
 |${NUM_OF_LISTENER}         | Numbers of processes listening for connections                                   |
 +---------------------------+----------------------------------------------------------------------------------+
-|${MANAGER_MASTER_IP}       | Manager-master node's IP-address                                                 |
-+---------------------------+----------------------------------------------------------------------------------+
-|${MANAGER_SLAVE_IP}        | Manager-slave node's IP-address                                                  |
+|${MAX_KEEPALIVE}           | Max number of requests allowed in a single keep-alive session. Defaults to 1024. |
 +---------------------------+----------------------------------------------------------------------------------+
 |${SNMPA-DIR}               | SNMPA configuration files directory                                              |
 |                           |                                                                                  |
 |                           | - ref:${LEOFS_SRC}/apps/leo_gateway/snmp/                                        |
 |                           |                                                                                  |
 |                           | - [snmpa_gateway_0|snmpa_gateway_1|snmpa_gateway_0]                              |
-+---------------------------+----------------------------------------------------------------------------------+
-|${HTTP_HANDLER}            | Gateway's HTTP API to use, either ``s3`` (default) or ``rest``                   |
-+---------------------------+----------------------------------------------------------------------------------+
-|${MAX_KEEPALIVE}           | Max number of requests allowed in a single keep-alive session. Defaults to 1024. |
 +---------------------------+----------------------------------------------------------------------------------+
 | **Cache related items**                                                                                      |
 +---------------------------+----------------------------------------------------------------------------------+
@@ -616,13 +684,13 @@ LeoFS Gateway
 +---------------------------+----------------------------------------------------------------------------------+
 |${CACHE_EXPIRE}            | Cache Expire in seconds                                                          |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_MAX_C_LEN}         | Cache Max Content Length in bytes                                                |
+|${CACHE_MAX_CONTENT_LEN}   | Cache Max Content Length in bytes                                                |
 |                           |                                                                                  |
 |                           | Note: *LeoFS-Gateway can cache up to 1MB*                                        |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_C_TYPE}            | Cache Content Type                                                               |
+|${CACHE_CONTENT_TYPE}      | Cache Content Type                                                               |
 |                           |                                                                                  |
-|                           | ex-1) ["image/png", "image/jpeg"]                                                |
+|                           | ex-1) [image/png, image/jpeg]                                                    |
 |                           |                                                                                  |
 |                           |       Caching only if its Content-Type was *"image/png"* OR *"image/jpeg"*       |
 |                           |                                                                                  |
@@ -632,7 +700,7 @@ LeoFS Gateway
 +---------------------------+----------------------------------------------------------------------------------+
 |${CACHE_PATH_PATTERNS}     | Cache Path Pattern (regular expression)                                          |
 |                           |                                                                                  |
-|                           | ex-1) ["/img/.+", "/css/.+"]                                                     |
+|                           | ex-1) [/img/.+, /css/.+]                                                         |
 |                           |                                                                                  |
 |                           |       Caching only if its path was *"/img/\*"* or *"/css/\*"*                    |
 |                           |                                                                                  |
@@ -677,121 +745,179 @@ LeoFS Gateway
 +---------------------------+----------------------------------------------------------------------------------+
 
 
-.. code-block:: erlang
+.. code-block:: bash
 
-    [
-        {sasl, [
-                {sasl_error_logger, {file, "./log/sasl-error.log"}},
-                {errlog_type, error},
-                {error_logger_mf_dir, "./log/sasl"},
-                {error_logger_mf_maxbytes, 10485760}, % 10 MB max file size
-                {error_logger_mf_maxfiles, 5}         % 5 files max
-               ]},
+    ## --------------------------------------------------------------------
+    ## Manager's Node(s)
+    ## --------------------------------------------------------------------
+    ## Name of Manager node(s)
+    ## managers = [manager_0@127.0.0.1, manager_1@127.0.0.1]
+    managers = [${MANAGER_MASTER_IP}, ${MANAGER_SLAVE_IP}]
 
-        {leo_gateway, [
-                %% System Ver
-                {system_version, "0.14.7" },
+    ## --------------------------------------------------------------------
+    ## GATEWAY
+    ## --------------------------------------------------------------------
+    ## LeoFS version
+    ## system_version = 0.16.8
 
-                %% Gateway Properties:
-                {http, [
-                        %% http-handler (API) - [s3 or rest]:
-                        {handler, ${HTTP_HANDLER}},
-                        %% Gateway port number:
-                        {port, ${LISTENING_PORT} },
-                        %% # of acceptors:
-                        {num_of_acceptors, ${NUM_OF_LISTENER} },
-                        %% max keep-alive:
-                        {max_keepalive, ${MAX_KEEPALIVE} },
-                        %% max # of layer of directories:
-                        {layer_of_dirs, {1, 12} },
-                        %% ssl related:
-                        {ssl_port,     8443 },
-                        {ssl_certfile, "./etc/server_cert.pem" },
-                        {ssl_keyfile,  "./etc/server_key.pem" }
-                       ]},
+    ## Gateway’s HTTP API to use: [s3 | rest | embed]
+    http.handler = ${HTTP_HANDLER}
 
-                %% Large-object-related properties:
-                {large_object, [
-                                {max_chunked_objs,  1000  },
-                                {max_len_for_obj,   524288000 }, %% 500.0MB
-                                {chunked_obj_len,   5242880 },   %% 5.0MB
-                                {threshold_obj_len, 5767168 }    %% 5.5MB
-                               ]},
+    ## Port number the Gateway uses for HTTP connections
+    http.port = ${LISTENING_PORT}
 
-                %% Cache-related properties:
-                {cache, [
-                         %% Use HTTP-cache ?
-                         {http_cache, ${IS_HTTP_CACHE}},
-                         %% # of Cache workers
-                         {cache_workers, 128 },
+    ## Numbers of processes listening for connections
+    http.num_of_acceptors = ${NUM_OF_LISTENER}
 
-                         %% Total of Cache capacity into the RAM (MB)
-                         {cache_ram_capacity,  ${CACHE_RAM_CAPACITY} },
-                         %% Total of Cache capacity into the Disc (MB)
-                         {cache_disc_capacity, ${CACHE_DISC_CAPACITY} },
+    ## Maximum number of requests allowed in a single keep-alive session
+    http.max_keepalive = ${MAX_KEEPALIVE}
 
-                         %% Disc-cache's threshold length which value is exceeded
-                         %% when an object is stored into the disc
-                         {cache_disc_threshold_len, ${CACHE_DISC_THRESHOLD_LEN} },
-                         %% Disc-cache's directory
-                         {cache_disc_dir_data,    ${CACHE_DISC_DIR_DATA} },
-                         {cache_disc_dir_journal, ${CACHE_DISC_DIR_JOURNAL} },
+    ## Total number of virtual directories
+    ## http.layer_of_dirs = 12
 
-                         %% Cache expire time. (sec)
-                         {cache_expire, ${CACHE_EXPIRE} },
-                         %% Acceptable maximum content length (MB)
-                         {cache_max_content_len, ${CACHE_MAX_C_LEN} },
-                         %% Acceptable content-type(s)
-                         {cachable_content_type, ${CACHE_C_TYPE} },
-                         %% Acceptable URL-Pattern(s)
-                         {cachable_path_pattern, ${CACHE_PATH_PATTERNS} }
-                        ]},
+    ## Port number the Gateway uses for HTTPS connections
+    ## http.ssl_port     = 8443
 
-                %% Timeout when request from gateway to storage ==
-                {timeout, [
-                           {level_1,  5000}, %%       0 ..   65535 bytes
-                           {level_2,  7000}, %%   65536 ..  131071 bytes
-                           {level_3, 10000}, %%  131072 ..  524287 bytes
-                           {level_4, 20000}, %%  524288 .. 1048576 bytes
-                           {level_5, 30000}  %%  over 1048577 bytes
-                          ]},
+    ## SSL Certificate file
+    ## http.ssl_certfile = ./etc/server_cert.pem
 
-                %% Manager - leo-manager's nodes
-                {managers, [${MANAGER_MASTER_IP}, ${MANAGER_SLAVE_IP}] },
+    ## SSL key
+    ## http.ssl_keyfile  = ./etc/server_key.pem
 
-                %% Log-specific properties
-                %%   - Log output level
-                %%         0: debug
-                %%         1: info
-                %%         2: warning
-                %%         3: error
-                {log_level,    1 },
+    ## Synchronized time of a bucket property (second)
+    bucket_prop_sync_interval = 300
 
-                %% Output Access-log?
-                {is_enable_access_log,  true },
-                {is_enable_esearch,     false },
-                {esearch_host,          "127.0.0.1" },
-                {esearch_port,          9200 },
-                {esearch_timeout,       5000 },
-                {esearch_bulk_duration, 3000 },
+    ## --------------------------------------------------------------------
+    ## GATEWAY - Large Object
+    ## --------------------------------------------------------------------
+    ## Total number of chunked objects
+    large_object.max_chunked_objs = 1000
 
-                %% Log appender - [file]
-                {log_appender, [
-                                {file, [{path, "./log/app"}]}
-                               ]},
+    ## Maximum length of an object
+    large_object.max_len_of_obj = 524288000
 
-                %% Directory of log output
-                {log_dir,     "./log"},
-                %% Directory of mq's db-files
-                {queue_dir,   "./work/queue"},
-                %% Directory of snmp-agent
-                {snmp_agent,  "./snmp/snmpa_gateway_0/LEO-GATEWAY"}
-               ]},
+    ## Length of a chunked object
+    large_object.chunked_obj_len = 5242880
+
+    ## Threshold of length of a chunked object
+    large_object.threshold_of_chunk_len = 5767168
+
+    ## Reading length of a chuncked object [v0.16.8-]
+    ##   * If happening timeout when copying a large object,
+    ##     you will solve to set this value as less than 5MB.
+    ##   * default: "large_object.chunked_obj_len" (5242880 - 5MB)
+    large_object.reading_chunked_obj_len = 5242880
+
+    ## --------------------------------------------------------------------
+    ## GATEWAY - Cache
+    ## --------------------------------------------------------------------
+    ## If this parameter is 'true', Gateway turns on HTTP-based cache server, like Varnish OR Squid.
+    ## If this parameter is 'false', Stores objects into the Gateway’s memory.
+    ## When operating READ, the Etag of the cache is compared with a backend storage’s Etag.
+    cache.http_cache = ${IS_HTTP_CACHE}
+
+    ## A number of cache workers
+    ## cache.cache_workers = 16
+
+    ## Memory cache capacity in bytes
+    cache.cache_ram_capacity  = ${CACHE_RAM_CAPACITY}
+
+    ## Disk cache capacity in bytes
+    cache.cache_disc_capacity = ${CACHE_DISC_CAPACITY}
+
+    ## When the length of the object exceeds this value, store the object on disk
+    cache.cache_disc_threshold_len = ${CACHE_DISC_THRESHOLD_LEN}
+
+    ## Directory for the disk cache data
+    cache.cache_disc_dir_data    = ${CACHE_DISC_DIR_DATA}
+
+    ## Directory for the disk cache journal
+    cache.cache_disc_dir_journal = ${CACHE_DISC_DIR_JOURNAL}
+
+    ## Cache Expire in seconds
+    cache.cache_expire = ${CACHE_EXPIRE}
+
+    ## Cache Max Content Length in bytes
+    cache.cache_max_content_len = ${CACHE_MAX_CONTENT_LEN}
+
+    ## Cache Content Type(s)
+    ## In case of "empty", all objects are cached.
+    cache.cachable_content_type = ${CACHE_CONTENT_TYPE}
+
+    ## Cache Path Pattern(s) (regular expression)
+    ## In case of "empty", all objects are cached.
+    cache.cachable_path_pattern = ${CACHE_PATH_PATTERNS}
+
+    ## --------------------------------------------------------------------
+    ## GATEWAY - Timeout
+    ## --------------------------------------------------------------------
+    ## Timeout value when requesting to a storage
+    ## 0 to 65,535 bytes
+    timeout.level_1 =  5000
+
+    ## 65,535 to 131,071 bytes
+    timeout.level_2 =  7000
+
+    ## 131,072 to 524,287 bytes
+    timeout.level_3 = 10000
+
+    ## 524,288 to 1,048,576 bytes
+    timeout.level_4 = 20000
+
+    ## 1,048,576 bytes and over
+    timeout.level_5 = 30000
+
+    ## --------------------------------------------------------------------
+    ## GATEWAY - Log
+    ## --------------------------------------------------------------------
+    ##
+    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
+    log.log_level = 1
+
+    ## Is enable access-log [true, false]
+    log.is_enable_access_log = false
+
+    ## Output log file(s) - Erlang's log
+    log.erlang = ./log/erlang
+
+    ## Output log file(s) - app
+    log.app = ./log/app
+
+    ## Output log file(s) - members of storage-cluster
+    log.member_dir = ./log/ring
+
+    ## Output log file(s) - ring
+    log.ring_dir = ./log/ring
+
+    ## Is enable Elasticsearch for access-log
+    ## log.is_enable_esearch = false
+
+    ## Node of Elasticsearch
+    ## log.esearch.host = 127.0.0.1
+
+    ## Elasticsearch listening port
+    ## log.esearch.port = 9200
+
+    ## Elasticsearch receive timeout
+    ## log.esearch.timeout = 5000
+
+    ## Duration of stack objects
+    ## log.esearch.esearch_bulk_duration = 3000
 
 
-**[vm.args]**
+    ## --------------------------------------------------------------------
+    ## GATEWAY - Other Directories
+    ## --------------------------------------------------------------------
+    ## Directory of queue for monitoring "RING"
+    queue_dir  = ./work/queue
 
-* The ``vm.args`` location: **${LEOFS_HOME}/package/gateway/etc/vm.args**
+    ## Directory of SNMP agent configuration
+    snmp_agent = ${SNMPA-DIR}/snmp/snmpa_gateway_0/LEO-GATEWAY
+
+
+
+**[Erlang VM related properties]**
+
 * Modification of the required items:
 
 +--------------------+--------------------------------------------------------+
@@ -806,37 +932,36 @@ LeoFS Gateway
 
 .. code-block:: bash
 
-    ## Name of the node
-    -name ${GATEWAY_ALIAS}@${GATEWAY_IP}
+    ## Name of the leofs-gateway node
+    ## nodename = gateway_0@127.0.0.1
+    nodename = ${GATEWAY_ALIAS}@${GATEWAY_IP}
 
-    ## Cookie for distributed erlang
-    -setcookie 401321b4
+    ## Cookie for distributed node communication.  All nodes in the same cluster
+    ## should use the same cookie or they will not be able to communicate.
+    distributed_cookie = 401321b4
 
-    ## Heartbeat management; auto-restarts VM if it dies or becomes unresponsive
-    ## (Disabled by default..use with caution!)
-    ##-heart
+    ## Enable kernel poll
+    erlang.kernel_poll = true
 
-    ## Enable kernel poll and a few async threads
-    +K true
-    +A 32
+    ## Number of async threads
+    erlang.asyc_threads = 32
 
     ## Increase number of concurrent ports/sockets
-    ##-env ERL_MAX_PORTS 4096
+    erlang.max_ports = 64000
 
-    ## Tweak GC to run more often
-    ##-env ERL_FULLSWEEP_AFTER 10
+    ## Set the location of crash dumps
+    erlang.crash_dump = ./log/erl_crash.dump
 
-    ## SNMP Config file
-    -config ./snmp/${SNMPA-DIR}/leo_gateway_snmp
+    ## Raise the ETS table limit
+    erlang.max_ets_tables = 256000
 
-    ## Sets the maximum number of concurrent processes for this system
-    +P 1048576
+    ## Raise the default erlang process limit
+    process_limit = 1048576
 
-    ## set up the node with the -hidden flag
-    -hidden
+    ## Path of SNMP-agent configuration
+    snmp_conf = ${SNMPA-DIR}/snmp/snmpa_gateway_0/leo_gateway_snmp
 
 \
-
 
 .. index::
     SNMP
