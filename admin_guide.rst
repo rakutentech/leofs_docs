@@ -1036,6 +1036,7 @@ Using the Converter
 
 .. note:: "LeoFS Configuration File Converter" is able to convert configuration files of the previous version to the format of LeoFS v0.16.8. It will be helpful to your operation.
 
+* LeoFS's configuration: http://www.leofs.org/docs/configuration.html
 * Download: https://github.com/leo-project/leofs_utils/releases/tag/0.2.0
 * Repository: https://github.com/leo-project/leofs_utils/tree/develop/converter
 * Usage:
