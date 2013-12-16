@@ -1021,10 +1021,82 @@ Command: ``history``
 \
 \
 
-Upgrade LeoFS v0.14.9/v0.16.0 to v0.16.5
-----------------------------------------
+Upgrade LeoFS v0.14.9/v0.16.0/0.16.5 to v0.16.8
+-----------------------------------------------
 
-This section describes the way of replacement of LeoFS from v0.14.9 or v0.16.0 to v0.16.5.
+This section describes the way of replacement of LeoFS from v0.14.9 or v0.16.0 or v0.16.5 to v0.16.8.
+
+Covert the configuration files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. _conf-file-converter-usage:
+
+Using the Converter
+""""""""""""""""""""
+
+.. note:: "LeoFS Configuration File Converter" is able to convert configuration files of the previous version to the format of LeoFS v0.16.8. It will be helpful to your operation.
+
+* Download: https://github.com/leo-project/leofs_utils/releases/tag/0.2.0
+* Repository: https://github.com/leo-project/leofs_utils/tree/develop/converter
+* Usage:
+
+.. code-block:: bash
+
+    $ ./leofs_conf_converter -h
+    Usage: leofs_conf_converter [-h] [-a <app_config>] [-e <vm_args>]
+                                [-d <dest>] [-v]
+
+      -h, --help        Show the program options
+      -a, --app_config  Individual 'app config'
+      -e, --vm_args     Individual 'vm.args'
+      -d, --dest_file   The file name to write
+      -v, --version     Show version information
+
+    $ ./leofs_conf_converter -a test/leo_gateway.config -e test/vm.args -d leo_gateway.conf
+
+* Result:
+
+.. code-block:: bash
+
+    ## LeoFS Configuration
+    ##
+    ## Converted the configuration
+    ##     from "test/leo_gateway.config" and "test/vm.args"
+    ##     to "leo_gateway.conf"
+    ##
+    ## ------------------------
+    ## For Applications
+    ## ------------------------
+    sasl.sasl_error_log = ./log/sasl/sasl-error.log
+    sasl.errlog_type = error
+    sasl.error_logger_mf_dir = ./log/sasl
+    sasl.error_logger_mf_maxbytes = 10485760
+    sasl.error_logger_mf_maxfiles = 5
+    http.handler = s3
+    http.port = 8080
+    http.num_of_acceptors = 128
+    http.max_keepalive = 4096
+    http.layer_of_dirs = 12
+    http.ssl_port = 8443
+    bucket_prop_sync_interval = 300
+    large_object.max_chunked_objs  = 1000
+    large_object.max_len_of_obj = 524288000
+    large_object.chunked_obj_len = 5242880
+    large_object.threshold_of_chunk_len = 5767168
+    large_object.reading_chunked_obj_len = 5242880
+    managers = ['manager_0@127.0.0.1','manager_1@127.0.0.1']
+
+    ## The rest is omitted
+
+    ## ------------------------
+    ## For Erlang-VM
+    ## ------------------------
+    nodename = manager_0@127.0.0.1
+    distributed_cookie = 401321b4
+    erlang.kernel_poll = true
+    erlang.asyc_threads = 32
+    snmp_conf = ./snmp/snmpa_manager_0/leo_manager_snmp
+
 
 Upgrade flow diagram
 ^^^^^^^^^^^^^^^^^^^^
@@ -1042,99 +1114,95 @@ Adjust Every Path
 
 * Manager: [mnesia, log-dir and queue-dir]
 
-.. code-block:: erlang
+.. code-block:: bash
 
-    {mnesia, [
-              {dir, "./work/mnesia/${IP}"},
-              {dump_log_write_threshold, 50000},
-              {dc_dump_limit,            40}
-             ]},
     .
     .
     .
-    {leo_manager, [
-          .
-          .
-          .
-          %% == Log-specific properties ==
-          {log_level,    1 },
-          {log_appender, [
-                          {file, [{path, "./log/app"}]}
-                         ]},
+    ## Mnesia dir
+    mnesia.dir = ./work/mnesia/${IP}
+    .
+    .
+    .
+    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
+    log.log_level = 1
+    ## Output log file(s) - Erlang's log
+    log.erlang = ./log/erlang
+    ## Output log file(s) - app
+    log.app = ./log/app
+    ## Output log file(s) - members of storage-cluster
+    log.member_dir = ./log/ring
+    ## Output log file(s) - ring
+    log.ring_dir = ./log/ring
 
-          %% == Directories ==
-          %% Directory of log output
-          {log_dir,     "./log"},
-          %% Directory of mq's db-files
-          {queue_dir,   "./work/queue"},
-          %% Directory of SNMP-Agent
-          {snmp_agent,  ${SNMPA-DIR}}
-         ]}
+    ## Directory of queue for monitoring "RING"
+    queue_dir = ./work/queue
+    ## Directory of SNMP agent configuration
+    snmp_agent = ./snmp/snmpa_manager_0/LEO-MANAGER
 
 
 * Storage: [obj_containers, log-dir and queue-dir]
 
-.. code-block:: erlang
+.. code-block:: bash
 
-    {leo_storage, [
-          %% == System Ver ==
-          {system_version, "0.16.5" },
+    ## Object container
+    obj_containers.path = [./avs]
+    obj_containers.num_of_containers = [8]
 
-          %% == Storage Configuration ==
-          {obj_containers,     [[{path, ${OBJECT_STORAGE_DIR}},
-                                 {num_of_containers, ${NUM_OF_CONTAINERS}}]] },
-          .
-          .
-          .
-          %% == Log-specific properties ==
-          {log_level,    1 },
-          {log_appender, [
-                          {file, [{path, "./log/app"}]}
-                         ]},
+    ## e.g. Case of plural pathes
+    ## obj_containers.path = [/var/leofs/avs/1, /var/leofs/avs/2]
+    ## obj_containers.num_of_containers = [32, 64]
+    .
+    .
+    .
+    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
+    log.log_level = 1
+    ## Output log file(s) - Erlang's log
+    log.erlang = ./log/erlang
+    ## Output log file(s) - app
+    log.app = ./log/app
+    ## Output log file(s) - members of storage-cluster
+    log.member_dir = ./log/ring
+    ## Output log file(s) - ring
+    log.ring_dir = ./log/ring
 
-          %% == Directories ==
-          %% Directory of log output
-          {log_dir,     "./log"},
-          %% Directory of mq's db-files
-          {queue_dir,   "./work/queue"},
-          %% Directory of SNMP-Agent
-          {snmp_agent,  ${SNMPA-DIR}}
-         ]}
+    ## Directory of queue for monitoring "RING"
+    queue_dir = ./work/queue
+    ## Directory of SNMP agent configuration
+    snmp_agent = ./snmp/snmpa_storage_0/LEO-STORAGE
 
-* Gateway: [log-dir and queue-dir]
 
-.. code-block:: erlang
+* Gateway: [SSL-related files, cache-related pathes, log-dir and queue-dir]
 
-    {leo_gateway, [
-            %% Cache-related properties:
-            {cache, [
-                     .
-                     .
-                     .
-                     %% Disc-cache's directory
-                     {cache_disc_dir_data,    ${CACHE_DISC_DIR_DATA} },
-                     {cache_disc_dir_journal, ${CACHE_DISC_DIR_JOURNAL} },
-                     .
-                     .
-                     .
-                    ]},
-          .
-          .
-          .
-          %% == Log-specific properties ==
-          {log_level,    1 },
-          {log_appender, [
-                          {file, [{path, "./log/app"}]}
-                         ]},
+.. code-block:: bash
 
-          %% == Directories ==
-          %% Directory of log output
-          {log_dir,     "./log"},
-          %% Directory of mq's db-files
-          {queue_dir,   "./work/queue"},
-          %% Directory of SNMP-Agent
-          {snmp_agent,  ${SNMPA-DIR}}
-         ]}
+    ## SSL Certificate file
+    http.ssl_certfile = ./etc/server_cert.pem
+    ## SSL key
+    http.ssl_keyfile  = ./etc/server_key.pem
+
+    ## Directory for the disk cache data
+    cache.cache_disc_dir_data    = ./cache/data
+    ## Directory for the disk cache journal
+    cache.cache_disc_dir_journal = ./cache/journal
+    .
+    .
+    .
+    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
+    log.log_level = 1
+    ## Output log file(s) - Erlang's log
+    log.erlang = ./log/erlang
+    ## Output log file(s) - app
+    log.app = ./log/app
+    ## Output log file(s) - members of storage-cluster
+    log.member_dir = ./log/ring
+    ## Output log file(s) - ring
+    log.ring_dir = ./log/ring
+
+    ## Directory of queue for monitoring "RING"
+    queue_dir = ./work/queue
+    ## Directory of SNMP agent configuration
+    snmp_agent = ./snmp/snmpa_gateway_0/LEO-GATEWAY
 
 
 Attach/Detach node into a Storage-cluster in operation
