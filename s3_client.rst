@@ -656,13 +656,13 @@ Example usage
 .. code-block:: erlang
 
   erlcloud:start(),
-  Conf = erlcloud_s3:new("YOUR ACCESS KEY ID", 
+  Conf = erlcloud_s3:new("YOUR ACCESS KEY ID",
                          "YOUR_SECRET_ACCESS_KEY",
                          "localhost",
                          8080),
   Conf2 = Conf#aws_config{s3_scheme = "http://"},
   try
-      
+
       erlcloud_s3:create_bucket("erlang", Conf2),
 
       List = erlcloud_s3:list_buckets(Conf2),
@@ -691,7 +691,7 @@ Example usage
       end
   after
       ok = erlcloud_s3:delete_bucket("erlang", Conf2)
-  end  
+  end
 
 .. _s3fs-c-label:
 
@@ -837,6 +837,8 @@ Configuration
     HTTP Proxy server port: ${PORT}
 
   Test access with supplied credentials? [Y/n]
+
+.. note:: LeoFS's Gateway respond an object with "chunked transfer encording - NOT put Content-Length on the HTTP header". Unfortunately, "s3cmd" does not support that, yet.
 
 
 Commands
