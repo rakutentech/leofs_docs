@@ -838,7 +838,7 @@ Configuration
 
   Test access with supplied credentials? [Y/n]
 
-.. note:: LeoFS's Gateway respond an object with "chunked transfer encording - NOT put Content-Length on the HTTP header". Unfortunately, "s3cmd" does not support that, yet.
+.. note:: LeoFS's Gateway respond a large size object with "chunked transfer encording - NOT put Content-Length on the HTTP header". Unfortunately, "s3cmd" does not support that, yet.
 
 
 Commands
