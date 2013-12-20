@@ -134,7 +134,7 @@ Modify “/etc/hosts”
 
 ::
 
-    $ cd $LEOFS_ROOT/package/leofs
+    $ cd $LEOFS_ROOT/package
     $ leo_manager_0/bin/leo_manager start
     $ leo_manager_1/bin/leo_manager start
     $ leo_storage/bin/leo_storage start
@@ -155,7 +155,7 @@ Modify “/etc/hosts”
 
 ::
 
-    $ gateway/bin/leo_gateway start
+    $ leo_gateway/bin/leo_gateway start
 
 6. Confirm that the system is running
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
