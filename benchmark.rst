@@ -46,6 +46,9 @@ Create a test bucket
     Connected to localhost.
     Escape character is '^]'.
 
+    add-endpoint ${GATEWAY_IP}
+    OK
+
     add-bucket test 05236
     OK
 
@@ -54,15 +57,18 @@ Create a test bucket
     ---------+-------------+---------------------------
     test     | _test_leofs | 2013-02-27 14:06:54 +0900
 
+    update-acl test 05236 public-read
+    OK
+
 
 .. index::
     pair: Configuration file for basho_bench; Configuration file for basho_bench
 
 Configuration file for basho_bench
--------------------------------------
+----------------------------------
 
 Examples
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
 
 * Some examples are included in the LeoFS repository at ${LEOFS_ROOT}/test/conf/leofs_*.config
     * `Learn more about basho_bench's configuration <http://docs.basho.com/riak/latest/cookbooks/Benchmarking/#Configuration>`_
