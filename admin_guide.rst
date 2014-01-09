@@ -840,7 +840,7 @@ Command: ``get-acl ${bucket}``
     get-acl photo
     access_key_id| acls
     -------------+--------------------------
-    05236        | full_contorol
+    05236        | full_control
 
 
     ## Updated acl as 'public-read'
