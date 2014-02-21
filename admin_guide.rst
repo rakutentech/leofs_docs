@@ -774,13 +774,35 @@ Command: ``get-buckets``
 
 ::
 
+
     get-buckets
-    bucket | owner     | created at
-    -------+-----------+---------------------------
-    backup | __leofs__ | 2012-09-12 14:30:07 +0900
-    docs   | __leofs__ | 2012-09-12 14:29:30 +0900
-    logs   | __leofs__ | 2012-09-12 14:29:34 +0900
-    photo  | __leofs__ | 2012-09-12 14:29:26 +0900
+      bucket |     owner   | permissions | created at
+    ---------+-------------+-------------+---------------------------
+      backup | leofs_admin | read        | 2014-02-20 12:34:56 +0900
+      docs   | leofs_admin | read        | 2014-02-20 13:45:01 +0900
+      logs   | leofs_admin | read,write  | 2014-02-20 14:56:23 +0900
+
+
+.. ### GET BUCKET ###
+.. _s3-get-bucket:
+
+.. index::
+    get-bucket-command
+
+**'get-buckets'** - Retrieve list of Buckets registered
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Command: ``get-bucket  ${access_key_id}``
+
+::
+
+
+    get-bucket 05236
+      bucket |  permissions | created at
+    ---------+--------------+---------------------------
+     backup  |     read     | 2014-02-20 12:34:56 +0900
+       docs  |     read     | 2014-02-20 13:45:01 +0900
+       logs  |  read,write  | 2014-02-20 14:56:23 +0900
 
 
 .. ### CHANGE BUCKET OWNER ###
@@ -823,41 +845,9 @@ Command: ``update-acl ${bucket} ${access_key_id}``
     ok
 
 
-.. ### RETRIVE ACL ###
-.. _s3-get-acl:
 
-.. index::
-    get-acl-command
-
-**'get-acl'** - Retrieve a ACL for a bucket (v0.16.0-)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``get-acl ${bucket}``
-
-::
-
-    ## Updated acl as 'private'
-    get-acl photo
-    access_key_id| acls
-    -------------+--------------------------
-    05236        | full_control
-
-
-    ## Updated acl as 'public-read'
-    get-acl photo
-    access_key_id                                   | permissions
-    ------------------------------------------------+-------------------------
-    http://acs.amazonaws.com/groups/global/AllUsers | read
-
-
-    ## Updated acl as 'public-read-write'
-    get-acl photo
-    access_key_id                                   | permissions
-    ------------------------------------------------+-------------------------
-    http://acs.amazonaws.com/groups/global/AllUsers | read, write
-
-
-Canned ACL:
+**Canned ACL**
+^^^^^^^^^^^^^^
 
 .. note:: When using S3-API, LeoFS supports a set of predefined grants, known as canned ACLs. Each canned ACL has a predefined a set of grantees and permissions. The following table lists the set of canned ACLs and the associated predefined grants.
 
@@ -872,8 +862,7 @@ Canned ACL:
 |                  |                       | Granting this on a bucket is generally not recommended.                |
 +------------------+-----------------------+------------------------------------------------------------------------+
 
-    * Reference:
-        * `Access Control List (ACL) Overview <http://docs.aws.amazon.com/AmazonS3/latest/dev/ACLOverview.html>`_
+* Reference:`Access Control List (ACL) Overview <http://docs.aws.amazon.com/AmazonS3/latest/dev/ACLOverview.html>`_
 
 
 \
@@ -1232,8 +1221,8 @@ This section describes the process of adding and removing nodes in a LeoFS Stora
 
 
 
-Gateway Access-log Format (v0.16.0-)
-------------------------------------
+Gateway Access-log Format (v1.0.0-pre3)
+---------------------------------------
 
 LeoFS-Gateway is able to output access-log. If you would like to use this option, you can check and set :ref:`the configuration <conf_gateway_label>`.
 
@@ -1242,14 +1231,17 @@ Sample
 
 ::
 
-    --------+-------+--------------------+-------+---------------------------------------+-----------------------+----------
-    Method  | Bucket| Path               |Size   | Timestamp                             | Unix Time             | Response
-    --------+-------+--------------------+-------+---------------------------------------+-----------------------+----------
-    [HEAD]   photo   photo/1              0       2013-10-18 13:28:56.148269 +0900        1381206536148320        500
-    [HEAD]   photo   photo/1              0       2013-10-18 13:28:56.465670 +0900        1381206536465735        404
-    [HEAD]   photo   photo/city/tokyo.png 0       2013-10-18 13:28:56.489234 +0900        1381206536489289        200
-    [GET]    photo   photo/1              0       2013-10-18 13:28:56.518631 +0900        1381206536518693        500
-    [GET]    photo   photo/city/paris.png 0       2013-10-18 13:28:56.550376 +0900        1381206536550444        404
+    --------+-------+--------------------+----------+-------+---------------------------------------+-----------------------+----------
+    Method  | Bucket| Path               |Child Num |  Size | Timestamp                             | Unix Time             | Response
+    --------+-------+--------------------+----------|-------+---------------------------------------+-----------------------+----------
+    [HEAD]   photo   photo/1              0          0       2013-10-18 13:28:56.148269 +0900        1381206536148320        500
+    [HEAD]   photo   photo/1              0          0       2013-10-18 13:28:56.465670 +0900        1381206536465735        404
+    [HEAD]   photo   photo/city/tokyo.png 0          0       2013-10-18 13:28:56.489234 +0900        1381206536489289        200
+    [GET]    photo   photo/1              0          1024    2013-10-18 13:28:56.518631 +0900        1381206536518693        500
+    [GET]    photo   photo/city/paris.png 0          2048    2013-10-18 13:28:56.550376 +0900        1381206536550444        404
+    [PUT]    logs    logs/leofs           1          5242880 2013-10-18 13:28:56.518631 +0900        1381206536518693        500
+    [PUT]    logs    logs/leofs           2          5242880 2013-10-18 13:28:56.518631 +0900        1381206536518693        500
+    [PUT]    logs    logs/leofs           3          5120    2013-10-18 13:28:56.518631 +0900        1381206536518693        500
 
 Format
 ^^^^^^
@@ -1263,14 +1255,16 @@ Format
 +---------------+------------------------------------------------------------+
 | 2             | Bucket                                                     |
 +---------------+------------------------------------------------------------+
-| 2             | Filename (including path)                                  |
+| 3             | Filename (including path)                                  |
 +---------------+------------------------------------------------------------+
-| 3             | File Size (byte)                                           |
+| 4             | Child number of a file                                     |
 +---------------+------------------------------------------------------------+
-| 4             | Timestamp with timezone                                    |
+| 5             | File Size (byte)                                           |
 +---------------+------------------------------------------------------------+
-| 5             | Unixtime (including micro-second)                          |
+| 6             | Timestamp with timezone                                    |
 +---------------+------------------------------------------------------------+
-| 6             | Response (HTTP Status Code)                                |
+| 7             | Unixtime (including micro-second)                          |
++---------------+------------------------------------------------------------+
+| 8             | Response (HTTP Status Code)                                |
 +---------------+------------------------------------------------------------+
 
