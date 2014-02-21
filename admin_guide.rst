@@ -601,6 +601,8 @@ S3-API Commands
 +------------------------------------------------------+-------------------------------------------------------------------+
 | get-buckets                                          | * Retrieve all of registered buckets                              |
 +------------------------------------------------------+-------------------------------------------------------------------+
+| get-bucket `${access_key_id}`                        | * Retrieve buckets of a user                                      |
++------------------------------------------------------+-------------------------------------------------------------------+
 | chown-bucket `${bucket}` `${access_key_id}`          | * Change owner of a bucket (v0.16.5-)                             |
 +------------------------------------------------------+-------------------------------------------------------------------+
 | update-acl `${bucket}` `${access_key_id}`            | * Update a ACL for a bucket (v0.16.0-)                            |
@@ -767,7 +769,7 @@ Command: ``delete-bucket ${bucket} ${access_key_id}``
 .. index::
     get-buckets-command
 
-**'get-buckets'** - Retrieve list of Buckets registered
+**'get-buckets'** - Retrieve list of buckets registered
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``get-buckets``
@@ -789,8 +791,8 @@ Command: ``get-buckets``
 .. index::
     get-bucket-command
 
-**'get-buckets'** - Retrieve list of Buckets registered
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**'get-bucket'** - Retrieve buckets of a user
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Command: ``get-bucket  ${access_key_id}``
 
