@@ -98,27 +98,29 @@ Open LeoFS Manager Console on **LeoFS-Manager Master** node
     Escape character is '^]'.
 
     status
-    [system config]
-                   system version : 0.14.2
-                   total replicas : 1
-              # of successes of R : 1
-              # of successes of W : 1
-              # of successes of D : 1
-       # of DC-awareness replicas : 0
-     # of Rack-awareness replicas : 0
-                        ring size : 2^128
-                 ring hash (cur)  : -1
-                 ring hash (prev) : -1
+    [System config]
+                    System version : 1.0.0-pre3
+                        Cluster Id : 
+                             DC Id : 
+                    Total replicas : 3
+               # of successes of R : 1
+               # of successes of W : 2
+               # of successes of D : 1
+     # of DC-awareness replicas    : 0
+     # of Rack-awareness replicas  : 0
+                         ring size : 2^128
+                 Current ring hash : 
+                    Prev ring hash : 
 
-    [node(s) state]
-    -------------------------------------------------------------------------------------------------
-     type node                    state       ring (cur)    ring (prev)   when
-    -------------------------------------------------------------------------------------------------
-     S    storage_0@127.0.0.1     attached                                2012-09-12 14:16:10 +0900
-     S    storage_1@127.0.0.1     attached                                2012-09-12 14:17:08 +0900
-     S    storage_2@127.0.0.1     attached                                2012-09-12 14:17:23 +0900
-     S    storage_3@127.0.0.1     attached                                2012-09-12 14:18:00 +0900
-
+    [Node(s) state]
+    -------+-------------------------------+--------------+----------------+----------------+----------------------------
+     type  |             node              |    state     |  current ring  |   prev ring    |          updated at         
+    -------+-------------------------------+--------------+----------------+----------------+----------------------------
+      S    | storage_0@127.0.0.1           | attached     |                |                | 2014-02-20 18:04:59 +0900
+      S    | storage_1@127.0.0.1           | attached     |                |                | 2014-02-20 18:04:59 +0900
+      S    | storage_2@127.0.0.1           | attached     |                |                | 2014-02-20 18:04:59 +0900
+      S    | storage_3@127.0.0.1           | attached     |                |                | 2014-02-20 18:04:59 +0900
+    
 
 **'start' command** - Launch LeoFS-cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -133,27 +135,28 @@ Confirm#1 by **LeoFS-Manager** node's console
 
 ::
 
-    status
-    [system config]
-                system version : 0.14.2
-                total replicas : 1
-           # of successes of R : 1
-           # of successes of W : 1
-           # of successes of D : 1
-    # of DC-awareness replicas : 0
-  # of Rack-awareness replicas : 0
-                     ring size : 2^128
-              ring hash (cur)  : 1428891014
-              ring hash (prev) : 1428891014
-
-    [node(s) state]
-    -------------------------------------------------------------------------------------------------
-     type node                    state       ring (cur)    ring (prev)   when
-    -------------------------------------------------------------------------------------------------
-     S    storage_0@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:16:10 +0900
-     S    storage_1@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:17:08 +0900
-     S    storage_2@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:17:23 +0900
-     S    storage_3@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:18:00 +0900
+    [System config]
+                    System version : 1.0.0-pre3
+                        Cluster Id : 
+                             DC Id : 
+                    Total replicas : 3
+               # of successes of R : 1
+               # of successes of W : 2
+               # of successes of D : 1
+     # of DC-awareness replicas    : 0
+     # of Rack-awareness replicas  : 0
+                         ring size : 2^128
+                 Current ring hash : 41e0c107
+                    Prev ring hash : 41e0c107
+    
+    [Node(s) state]
+    -------+-------------------------------+--------------+----------------+----------------+----------------------------
+     type  |             node              |    state     |  current ring  |   prev ring    |          updated at         
+    -------+-------------------------------+--------------+----------------+----------------+----------------------------
+      S    | storage_1@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+      S    | storage_2@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+      S    | storage_3@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+      S    | storage_4@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
 
 
 Launch Gateway on each **LeoFS-Gateway** node
@@ -171,27 +174,29 @@ Confirm#2 by **LeoFS-Manager** master node's console
 ::
 
     status
-    [system config]
-                system version : 0.14.2
-                total replicas : 1
-           # of successes of R : 1
-           # of successes of W : 1
-           # of successes of D : 1
-    # of DC-awareness replicas : 0
-  # of Rack-awareness replicas : 0
-                     ring size : 2^128
-              ring hash (cur)  : 1428891014
-              ring hash (prev) : 1428891014
-
-    [node(s) state]
-    -------------------------------------------------------------------------------------------------
-     type node                    state       ring (cur)    ring (prev)   when
-    -------------------------------------------------------------------------------------------------
-     S    storage_0@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:16:10 +0900
-     S    storage_1@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:17:08 +0900
-     S    storage_2@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:17:23 +0900
-     S    storage_3@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:18:00 +0900
-     G    gateway_0@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:23:26 +0900
+    [System config]
+                    System version : 1.0.0-pre3
+                        Cluster Id : 
+                             DC Id : 
+                    Total replicas : 3
+               # of successes of R : 1
+               # of successes of W : 2
+               # of successes of D : 1
+     # of DC-awareness replicas    : 0
+     # of Rack-awareness replicas  : 0
+                         ring size : 2^128
+                 Current ring hash : 41e0c107
+                    Prev ring hash : 41e0c107
+    
+    [Node(s) state]
+    -------+-------------------------------+--------------+----------------+----------------+----------------------------
+     type  |             node              |    state     |  current ring  |   prev ring    |          updated at         
+    -------+-------------------------------+--------------+----------------+----------------+----------------------------
+      S    | storage_1@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+      S    | storage_2@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+      S    | storage_3@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+      S    | storage_4@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+      G    | gateway_0@192.168.200.12      | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
 
 \
 
@@ -898,25 +903,29 @@ Command-1: ``status``
 ::
 
     status
-    [system config]
-                 version : 0.12.7
-     # of replicas       : 1
-     # of successes of R : 1
-     # of successes of W : 1
-     # of successes of D : 1
-               ring size : 2^128
-        ring hash (cur)  : 1428891014
-        ring hash (prev) : 1428891014
-
-    [node(s) state]
-    -------------------------------------------------------------------------------------------------
-     type node                    state       ring (cur)    ring (prev)   when
-    -------------------------------------------------------------------------------------------------
-     S    storage_0@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:16:10 +0900
-     S    storage_1@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:17:08 +0900
-     S    storage_2@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:17:23 +0900
-     S    storage_3@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:18:00 +0900
-     G    gateway_0@127.0.0.1     running     1428891014    1428891014    2012-09-12 14:23:26 +0900
+    [System config]
+                    System version : 1.0.0-pre3
+                        Cluster Id : 
+                             DC Id : 
+                    Total replicas : 3
+               # of successes of R : 1
+               # of successes of W : 2
+               # of successes of D : 1
+     # of DC-awareness replicas    : 0
+     # of Rack-awareness replicas  : 0
+                         ring size : 2^128
+                 Current ring hash : 41e0c107
+                    Prev ring hash : 41e0c107
+    
+    [Node(s) state]
+    -------+-------------------------------+--------------+----------------+----------------+----------------------------
+     type  |             node              |    state     |  current ring  |   prev ring    |          updated at         
+    -------+-------------------------------+--------------+----------------+----------------+----------------------------
+      S    | storage_1@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+      S    | storage_2@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+      S    | storage_3@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+      S    | storage_4@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+      G    | gateway_0@192.168.200.12      | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
 
 Command-2: ``status ${storage-node}`` OR ``status ${gateway-node}``
 

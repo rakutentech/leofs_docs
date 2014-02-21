@@ -726,7 +726,7 @@ LeoFS Gateway
 +---------------------------+----------------------------------------------------------------------------------+
 | **Access Log**                                                                                               |
 +---------------------------+----------------------------------------------------------------------------------+
-| Output to a file          | Default value - *"is_enable_access_log"* is 'true' and Output destination is     |
+| Output to a file          | Default value - *"is_enable_access_log"* is 'false' and Output destination is     |
 | (v0.16.0-)                | set path, the proepery of which is set at *log_appender*.                        |
 +---------------------------+----------------------------------------------------------------------------------+
 | Output to Elasticsearch   | +----------------------+----------------------------------------------------+    |
@@ -875,7 +875,7 @@ LeoFS Gateway
     log.log_level = 1
 
     ## Is enable access-log [true, false]
-    log.is_enable_access_log = false
+    log.is_enable_access_log = true
 
     ## Output log file(s) - Erlang's log
     log.erlang = ./log/erlang
