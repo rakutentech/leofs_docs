@@ -318,28 +318,30 @@ After running make
       |---- deps/
       |      |--- bear/
       |      |--- bitcask/
-      |      |--- cherly/
       |      |--- cowboy/
-      |      |--- ecache/
       |      |--- eleveldb/
       |      |--- folsom/
       |      |--- jiffy/
       |      |--- leo_backend_db/
+      |      |--- leo_cache/
       |      |--- leo_commons/
       |      |--- leo_gateway/
       |      |--- leo_logger/
       |      |--- leo_manager/
+      |      |--- leo_mcerl/
       |      |--- leo_mq/
       |      |--- leo_object_storage/
       |      |--- leo_ordning_reda/
       |      |--- leo_redundant_manager/
+      |      |--- leo_rpc/
       |      |--- leo_s3_libs/
       |      |--- leo_statistics/
       |      |--- leo_storage/
       |      |--- lz4/
       |      |--- meck/
-      |      `--- proper/
-      |---- doc/
+      |      |--- proper/
+      |      |--- ranch/
+      |      `--- savanna_commons/
       |---- rebar
       |---- rebar.config
       `---- rel/
@@ -363,7 +365,7 @@ Building
       |--- leofs
       |      |--- gateway/
       |      |        |--- bin/
-      |      |        |--- erts-5.8.5/
+      |      |        |--- erts-5.10.4/
       |      |        |--- etc/
       |      |        |--- lib/
       |      |        |--- log/
@@ -372,7 +374,7 @@ Building
       |      |        `--- work/
       |      |--- manager_0/
       |      |        |--- bin/
-      |      |        |--- erts-5.8.5/
+      |      |        |--- erts-5.10.4/
       |      |        |--- etc/
       |      |        |--- lib/
       |      |        |--- log/
@@ -381,7 +383,7 @@ Building
       |      |        `--- work/
       |      |--- manager_1/
       |      |        |--- bin/
-      |      |        |--- erts-5.8.5/
+      |      |        |--- erts-5.10.4/
       |      |        |--- etc/
       |      |        |--- lib/
       |      |        |--- log/
@@ -390,7 +392,7 @@ Building
       |      |        `--- work/
       |      `--- storage/
       |               |--- bin/
-      |               |--- erts-5.8.5/
+      |               |--- erts-5.10.4/
       |               |--- etc/
       |               |--- lib/
       |               |--- log/
@@ -429,7 +431,7 @@ Log Dir and Working Dir
    ${LEOFS_DEPLOYED_DIR}
      |      `--- storage/
      |               |--- bin/
-     |               |--- erts-5.8.5/
+     |               |--- erts-5.10.4/
      |               |--- etc/
      |               |--- lib/
      |               |--- log/
