@@ -1023,10 +1023,10 @@ Command: ``history``
 \
 \
 
-Upgrade LeoFS v0.14.9/v0.16.0/v0.16.5 to v0.16.8 OR v1.0.0-pre1
+Upgrade LeoFS v0.14.9/v0.16.0/v0.16.5 to v0.16.8 OR v1.0.0-pre3
 ---------------------------------------------------------------
 
-This section describes the way of replacement of LeoFS from v0.14.9 or v0.16.0 or v0.16.5 to v0.16.8 OR v1.0.0-pre1.
+This section describes the way of replacement of LeoFS from v0.14.9 or v0.16.0 or v0.16.5 to v0.16.8 OR v1.0.0-pre3.
 
 Covert the configuration files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
