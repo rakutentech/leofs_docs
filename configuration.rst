@@ -726,7 +726,7 @@ LeoFS Gateway
 +---------------------------+----------------------------------------------------------------------------------+
 | **Access Log**                                                                                               |
 +---------------------------+----------------------------------------------------------------------------------+
-| Output to a file          | Default value - *"is_enable_access_log"* is 'false' and Output destination is     |
+| Output to a file          | Default value - *"is_enable_access_log"* is 'false' and Output destination is    |
 | (v0.16.0-)                | set path, the proepery of which is set at *log_appender*.                        |
 +---------------------------+----------------------------------------------------------------------------------+
 | Output to Elasticsearch   | +----------------------+----------------------------------------------------+    |
