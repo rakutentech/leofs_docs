@@ -99,28 +99,30 @@ Open LeoFS Manager Console on **LeoFS-Manager Master** node
 
     status
     [System config]
-                    System version : 1.0.0-pre3
-                        Cluster Id : 
-                             DC Id : 
+                    System version : 1.0.0
+                        Cluster Id : leofs_1
+                             DC Id : dc_1
                     Total replicas : 3
                # of successes of R : 1
                # of successes of W : 2
-               # of successes of D : 1
+               # of successes of D : 2
      # of DC-awareness replicas    : 0
-     # of Rack-awareness replicas  : 0
                          ring size : 2^128
-                 Current ring hash : 
-                    Prev ring hash : 
+                 Current ring hash :
+                    Prev ring hash :
+    [Multi DC replication settings]
+             max # of joinable DCs : 2
+                # of replicas a DC : 1
 
     [Node(s) state]
-    -------+-------------------------------+--------------+----------------+----------------+----------------------------
-     type  |             node              |    state     |  current ring  |   prev ring    |          updated at         
-    -------+-------------------------------+--------------+----------------+----------------+----------------------------
-      S    | storage_0@127.0.0.1           | attached     |                |                | 2014-02-20 18:04:59 +0900
-      S    | storage_1@127.0.0.1           | attached     |                |                | 2014-02-20 18:04:59 +0900
-      S    | storage_2@127.0.0.1           | attached     |                |                | 2014-02-20 18:04:59 +0900
-      S    | storage_3@127.0.0.1           | attached     |                |                | 2014-02-20 18:04:59 +0900
-    
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+     type  |           node           |    state     |  current ring  |   prev ring    |          updated at
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+      S    | storage_0@127.0.0.1      | attached     |                |                | 2014-04-03 11:28:20 +0900
+      S    | storage_1@127.0.0.1      | attached     |                |                | 2014-04-03 11:28:20 +0900
+      S    | storage_2@127.0.0.1      | attached     |                |                | 2014-04-03 11:28:20 +0900
+      S    | storage_3@127.0.0.1      | attached     |                |                | 2014-04-03 11:28:20 +0900
+
 
 **'start' command** - Launch LeoFS-cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -135,28 +137,31 @@ Confirm#1 by **LeoFS-Manager** node's console
 
 ::
 
+    status
     [System config]
-                    System version : 1.0.0-pre3
-                        Cluster Id : 
-                             DC Id : 
+                    System version : 1.0.0
+                        Cluster Id : leofs_1
+                             DC Id : dc_1
                     Total replicas : 3
                # of successes of R : 1
                # of successes of W : 2
-               # of successes of D : 1
+               # of successes of D : 2
      # of DC-awareness replicas    : 0
-     # of Rack-awareness replicas  : 0
                          ring size : 2^128
-                 Current ring hash : 41e0c107
-                    Prev ring hash : 41e0c107
-    
+                 Current ring hash : 8cd79c31
+                    Prev ring hash : 8cd79c31
+    [Multi DC replication settings]
+             max # of joinable DCs : 2
+                # of replicas a DC : 1
+
     [Node(s) state]
-    -------+-------------------------------+--------------+----------------+----------------+----------------------------
-     type  |             node              |    state     |  current ring  |   prev ring    |          updated at         
-    -------+-------------------------------+--------------+----------------+----------------+----------------------------
-      S    | storage_1@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
-      S    | storage_2@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
-      S    | storage_3@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
-      S    | storage_4@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+     type  |           node           |    state     |  current ring  |   prev ring    |          updated at
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+      S    | storage_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_1@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_2@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_3@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
 
 
 Launch Gateway on each **LeoFS-Gateway** node
@@ -175,28 +180,31 @@ Confirm#2 by **LeoFS-Manager** master node's console
 
     status
     [System config]
-                    System version : 1.0.0-pre3
-                        Cluster Id : 
-                             DC Id : 
+                    System version : 1.0.0
+                        Cluster Id : leofs_1
+                             DC Id : dc_1
                     Total replicas : 3
                # of successes of R : 1
                # of successes of W : 2
-               # of successes of D : 1
+               # of successes of D : 2
      # of DC-awareness replicas    : 0
-     # of Rack-awareness replicas  : 0
                          ring size : 2^128
-                 Current ring hash : 41e0c107
-                    Prev ring hash : 41e0c107
-    
+                 Current ring hash : 8cd79c31
+                    Prev ring hash : 8cd79c31
+    [Multi DC replication settings]
+             max # of joinable DCs : 2
+                # of replicas a DC : 1
+
     [Node(s) state]
-    -------+-------------------------------+--------------+----------------+----------------+----------------------------
-     type  |             node              |    state     |  current ring  |   prev ring    |          updated at         
-    -------+-------------------------------+--------------+----------------+----------------+----------------------------
-      S    | storage_1@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
-      S    | storage_2@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
-      S    | storage_3@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
-      S    | storage_4@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
-      G    | gateway_0@192.168.200.12      | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+     type  |           node           |    state     |  current ring  |   prev ring    |          updated at
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+      S    | storage_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_1@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_2@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_3@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      G    | gateway_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:21 +0900
+      G    | gateway_1@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:21 +0900
 
 \
 
@@ -219,36 +227,38 @@ Table of Storage Cluster's Commands
 
 \
 
-+--------------------------------+---------------------------------------------------------------------------------------------------+
-| Command                        | Explanation                                                                                       |
-+================================+===================================================================================================+
-| *Storage-node related commands*                                                                                                    |
-+--------------------------------+---------------------------------------------------------------------------------------------------+
-| detach `${storage-node}`       | * Remove a storage node from the LeoFS storage-cluster                                            |
-|                                | * Current status: ``running`` | ``stop``                                                          |
-+--------------------------------+---------------------------------------------------------------------------------------------------+
-| suspend `${storage-node}`      | * Suspend a storage node for maintenance. This command does NOT change the "routing-table (RING)" |
-|                                | * Current status: ``running``                                                                     |
-+--------------------------------+---------------------------------------------------------------------------------------------------+
-| resume `${storage-node}`       | * Resume a storage node                                                                           |
-|                                | * Current status: ``suspended`` | ``restarted``                                                   |
-+--------------------------------+---------------------------------------------------------------------------------------------------+
-| *Storage-cluster related commands*                                                                                                 |
-+--------------------------------+---------------------------------------------------------------------------------------------------+
-| start                          | * Launch LeoFS after distributing the "routing-table (RING)" from Manager to Storage and Gateway  |
-+--------------------------------+---------------------------------------------------------------------------------------------------+
-| rebalance                      | * Move or Copy files into the LeoFS storage-cluster due to changed RING                           |
-+--------------------------------+---------------------------------------------------------------------------------------------------+
-| whereis `${file-path}`         | * Retrieve status of an assigned file                                                             |
-+--------------------------------+---------------------------------------------------------------------------------------------------+
-| **Recover**                                                                                                                        |
-+--------------------------------+---------------------------------------------------------------------------------------------------+
-| recover file `${file-path}`    | * Synchronize an object between nodes in charge                                                   |
-+--------------------------------+---------------------------------------------------------------------------------------------------+
-| recover node `${storage-node}` | * Recover belonging target node's objects                                                         |
-+--------------------------------+---------------------------------------------------------------------------------------------------+
-| recover ring `${storage-node}` | * Synchronize target node's RING with Manager's RING                                              |
-+--------------------------------+---------------------------------------------------------------------------------------------------+
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| Command                         | Explanation                                                                                       |
++=================================+===================================================================================================+
+| *Storage-node related commands*                                                                                                     |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| detach `${storage-node}`        | * Remove a storage node from the LeoFS storage-cluster                                            |
+|                                 | * Current status: ``running`` | ``stop``                                                          |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| suspend `${storage-node}`       | * Suspend a storage node for maintenance. This command does NOT change the "routing-table (RING)" |
+|                                 | * Current status: ``running``                                                                     |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| resume `${storage-node}`        | * Resume a storage node                                                                           |
+|                                 | * Current status: ``suspended`` | ``restarted``                                                   |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| *Storage-cluster related commands*                                                                                                  |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| start                           | * Launch LeoFS after distributing the "routing-table (RING)" from Manager to Storage and Gateway  |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| rebalance                       | * Move or Copy files into the LeoFS storage-cluster due to changed RING                           |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| whereis `${file-path}`          | * Retrieve status of an assigned file                                                             |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| **Recover**                                                                                                                         |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| recover file `${file-path}`     | * Synchronize an object between nodes in charge                                                   |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| recover node `${storage-node}`  | * Recover belonging target node's objects                                                         |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| recover ring `${storage-node}`  | * Synchronize target node's RING with Manager's RING                                              |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| recover cluster `${cluster-id}` | * [v1.0.0-] Synchronize objects between local-cluster with a remote-cluster                       |
++---------------------------------+---------------------------------------------------------------------------------------------------+
 
 .. index::
     detach-command
@@ -530,6 +540,83 @@ Command: ``compact status ${storage-node}``
     # of out of targets : 56
 
 
+MultiDC-related Commands
+------------------------
+
+\
+
++-----------------------------------------------------------------+-------------------------------------------------------------------------------+
+| Command                                                         | Explanation                                                                   |
++=================================================================+===============================================================================+
+| join-cluster ${remote-manager-master} ${remote-manager-slave}   | * [1.0.0-] Communicate between the local-cluster and a remote cluster         |
++-----------------------------------------------------------------+-------------------------------------------------------------------------------+
+| remove-cluster ${remote-manager-master} ${remote-manager-slave} | * [1.0.0-] Remove communication between clusters                              |
++-----------------------------------------------------------------+-------------------------------------------------------------------------------+
+| cluster-status                                                  | * [1.0.0-] Retrieve current status of clusters                                |
++-----------------------------------------------------------------+-------------------------------------------------------------------------------+
+
+\
+
+.. ### JOIN-CLUSTER ###
+
+.. _join_cluster:
+
+.. index::
+    join-cluster-command
+
+**'join-cluster'** - Communicate between the local-cluster and a remote cluster
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Command: ``join-cluster ${remote-manager-master} ${remote-manager-slave}``
+
+::
+
+    join-cluster manager_c2_0@10.1.2.1 manager_c2_1@10.1.2.2
+    OK
+
+\
+
+.. ### REMOVE-CLUSTER ###
+
+.. _remove_cluster:
+
+.. index::
+    remove-cluster-command
+
+**'remove-cluster'** - Remove communication between clusters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Command: ``remove-cluster ${remote-manager-master} ${remote-manager-slave}``
+
+::
+
+    remove-cluster manager_c2_0@10.1.2.1 manager_c2_1@10.1.2.2
+    OK
+
+\
+
+.. ### CLUSTER-STATUS ###
+
+.. _cluster_status:
+
+.. index::
+    cluster-status-command
+
+**'cluster-status'** - Retrieve current status of clusters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Command: ``cluster-status``
+
+::
+
+    cluster-status
+    cluster id |   dc id    |    status    | # of storages  |          updated at         
+    -----------+------------+--------------+----------------+-----------------------------
+    leofs_2    | dc_2       |   running    |              8 | 2014-03-21 19:17:45 +0900
+
+
+
+
 
 Gateway Maintenance Commands
 ----------------------------
@@ -781,14 +868,13 @@ Command: ``get-buckets``
 
 ::
 
-
     get-buckets
-      bucket |     owner   | permissions | created at
-    ---------+-------------+-------------+---------------------------
-      backup | leofs_admin | read        | 2014-02-20 12:34:56 +0900
-      docs   | leofs_admin | read        | 2014-02-20 13:45:01 +0900
-      logs   | leofs_admin | read,write  | 2014-02-20 14:56:23 +0900
-
+    cluster id   | bucket   | owner       | permissions                            | created at
+    -------------+----------+-------------+----------------------------------------+---------------------------
+    leofs_1      | backup   | _test_leofs | Me(full_control), Everyone(read)       | 2014-04-03 11:39:01 +0900
+    leofs_1      | docs     | _test_leofs | Me(full_control), Everyone(read)       | 2014-04-03 11:39:25 +0900
+    leofs_1      | logs     | _test_leofs | Me(full_control), Everyone(read,write) | 2014-04-03 11:39:38 +0900
+    leofs_1      | movie    | _test_leofs | Me(full_control)                       | 2014-04-03 11:39:45 +0900
 
 .. ### GET BUCKET ###
 .. _s3-get-bucket:
@@ -803,13 +889,13 @@ Command: ``get-bucket  ${access_key_id}``
 
 ::
 
-
     get-bucket 05236
-      bucket |  permissions | created at
-    ---------+--------------+---------------------------
-     backup  |     read     | 2014-02-20 12:34:56 +0900
-       docs  |     read     | 2014-02-20 13:45:01 +0900
-       logs  |  read,write  | 2014-02-20 14:56:23 +0900
+    bucket   | permissions                            | created at
+    ---------+----------------------------------------+---------------------------
+    backup   | Me(full_control), Everyone(read)       | 2014-04-03 11:39:01 +0900
+    docs     | Me(full_control), Everyone(read)       | 2014-04-03 11:39:25 +0900
+    logs     | Me(full_control), Everyone(read,write) | 2014-04-03 11:39:38 +0900
+    movie    | Me(full_control)                       | 2014-04-03 11:39:45 +0900
 
 
 .. ### CHANGE BUCKET OWNER ###
@@ -904,28 +990,31 @@ Command-1: ``status``
 
     status
     [System config]
-                    System version : 1.0.0-pre3
-                        Cluster Id : 
-                             DC Id : 
+                    System version : 1.0.0
+                        Cluster Id : leofs_1
+                             DC Id : dc_1
                     Total replicas : 3
                # of successes of R : 1
                # of successes of W : 2
-               # of successes of D : 1
+               # of successes of D : 2
      # of DC-awareness replicas    : 0
-     # of Rack-awareness replicas  : 0
                          ring size : 2^128
-                 Current ring hash : 41e0c107
-                    Prev ring hash : 41e0c107
-    
+                 Current ring hash : 8cd79c31
+                    Prev ring hash : 8cd79c31
+    [Multi DC replication settings]
+             max # of joinable DCs : 2
+                # of replicas a DC : 1
+
     [Node(s) state]
-    -------+-------------------------------+--------------+----------------+----------------+----------------------------
-     type  |             node              |    state     |  current ring  |   prev ring    |          updated at         
-    -------+-------------------------------+--------------+----------------+----------------+----------------------------
-      S    | storage_1@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
-      S    | storage_2@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
-      S    | storage_3@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
-      S    | storage_4@127.0.0.1           | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
-      G    | gateway_0@192.168.200.12      | running      | 41e0c107       | 41e0c107       | 2014-02-20 18:04:59 +0900
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+     type  |           node           |    state     |  current ring  |   prev ring    |          updated at
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+      S    | storage_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_1@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_2@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_3@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      G    | gateway_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:21 +0900
+      G    | gateway_1@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:21 +0900
 
 Command-2: ``status ${storage-node}`` OR ``status ${gateway-node}``
 
@@ -1023,10 +1112,10 @@ Command: ``history``
 \
 \
 
-Upgrade LeoFS v0.14.9/v0.16.0/v0.16.5 to v0.16.8 OR v1.0.0-pre3
----------------------------------------------------------------
+Upgrade your old version LeoFS to v1.0.0
+----------------------------------------
 
-This section describes the way of replacement of LeoFS from v0.14.9 or v0.16.0 or v0.16.5 to v0.16.8 OR v1.0.0-pre3.
+This section describes the way of replacement of old LeoFS to v1.0.0
 
 Covert the configuration files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
