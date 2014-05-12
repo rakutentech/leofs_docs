@@ -59,23 +59,19 @@ The Consistency Level
 
 .. note::  The consistency level is configured in this file. It should not be modified while the system is running.
 
-+-------------+---------------------------------------------------------+
-| Property    | Explanation                                             |
-+=============+=========================================================+
-| n           | # of replicas                                           |
-+-------------+---------------------------------------------------------+
-| r           | # of replicas needed for a successful READ operation    |
-+-------------+---------------------------------------------------------+
-| w           | # of replicas needed for a successful WRITE operation   |
-+-------------+---------------------------------------------------------+
-| d           | # of replicas needed for a successful DELETE operation  |
-+-------------+---------------------------------------------------------+
-| level_1     | # of dc-aware replicas (Supported from v1.0.0 onward)   |
-+-------------+---------------------------------------------------------+
-| level_2     | # of rack-aware replicas                                |
-+-------------+---------------------------------------------------------+
-| bit_of_ring | # of bits for the hash-ring (fixed 128bit)              |
-+-------------+---------------------------------------------------------+
++---------------------------------+---------------------------------------------------------+
+| Property                        | Explanation                                             |
++=================================+=========================================================+
+| n - consistency.num_of_replicas | # of replicas                                           |
++---------------------------------+---------------------------------------------------------+
+| r - consistency.read            | # of replicas needed for a successful READ operation    |
++---------------------------------+---------------------------------------------------------+
+| w - consistency.write           | # of replicas needed for a successful WRITE operation   |
++---------------------------------+---------------------------------------------------------+
+| d - consistency.delete          | # of replicas needed for a successful DELETE operation  |
++---------------------------------+---------------------------------------------------------+
+| consistency.rack_aware_replicas | # of rack-aware replicas                                |
++---------------------------------+---------------------------------------------------------+
 
 * A reference consistency level
 
@@ -127,7 +123,7 @@ Configuration of the Manager-Master node
 * Modification of the required items:
 
 +----------------+--------------------------------------------------------+
-|Property        | Description                                            |
+| Property       | Description                                            |
 +================+========================================================+
 |${SLAVE-IP}     | Manager-Slave node's IP-address                        |
 +----------------+--------------------------------------------------------+
@@ -138,14 +134,13 @@ Configuration of the Manager-Master node
 |                | - [snmpa_manager_0|snmpa_manager_1|snmpa_manager_0]    |
 +----------------+--------------------------------------------------------+
 
+\
+
 .. code-block:: bash
 
     ## --------------------------------------------------------------------
     ## MANAGER
     ## --------------------------------------------------------------------
-    ## LeoFS version
-    ## system_version = 0.16.8
-
     ## Mode of Manager: [master, slave]
     manager.mode = master
 
@@ -166,19 +161,28 @@ Configuration of the Manager-Master node
     ##     * See: http://www.leofs.org/docs/configuration.html#the-consistency-level
     ## --------------------------------------------------------------------
     ## A number of replicas
-    consistency.num_of_replicas = 1
+    consistency.num_of_replicas = 3
 
     ## A number of replicas needed for a successful WRITE operation
-    consistency.write = 1
+    consistency.write = 2
 
     ## A number of replicas needed for a successful READ operation
     consistency.read = 1
 
     ## A number of replicas needed for a successful DELETE operation
-    consistency.delete = 1
+    consistency.delete = 2
 
     ## A number of rack-aware replicas
     consistency.rack_aware_replicas = 0
+
+    ## --------------------------------------------------------------------
+    ## MANAGER - Multi DataCenter Settings
+    ## --------------------------------------------------------------------
+    ## A number of replication targets
+    mdc_replication.max_targets = 2
+
+    ## A number of replicas a DC
+    mdc_replication.num_of_replicas_a_dc = 1
 
     ## --------------------------------------------------------------------
     ## MANAGER - Mnesia
@@ -290,9 +294,6 @@ LeoFS Manager-Slave
     ## --------------------------------------------------------------------
     ## MANAGER
     ## --------------------------------------------------------------------
-    ## LeoFS version
-    ## system_version = 0.16.8
-
     ## Mode of Manager: [master, slave]
     manager.mode = slave
 
@@ -481,9 +482,6 @@ LeoFS Storage
     ## --------------------------------------------------------------------
     ## STORAGE
     ## --------------------------------------------------------------------
-    ## LeoFS version
-    ## system_version = 0.16.8
-
     ## Object container
     obj_containers.path = [${OBJECT_STORAGE_DIR}]
     obj_containers.num_of_containers = [${NUM_OF_CONTAINERS}]
@@ -726,7 +724,7 @@ LeoFS Gateway
 +---------------------------+----------------------------------------------------------------------------------+
 | **Access Log**                                                                                               |
 +---------------------------+----------------------------------------------------------------------------------+
-| Output to a file          | Default value - *"is_enable_access_log"* is 'true' and Output destination is     |
+| Output to a file          | Default value - *"is_enable_access_log"* is 'false' and Output destination is    |
 | (v0.16.0-)                | set path, the proepery of which is set at *log_appender*.                        |
 +---------------------------+----------------------------------------------------------------------------------+
 | Output to Elasticsearch   | +----------------------+----------------------------------------------------+    |
@@ -757,9 +755,6 @@ LeoFS Gateway
     ## --------------------------------------------------------------------
     ## GATEWAY
     ## --------------------------------------------------------------------
-    ## LeoFS version
-    ## system_version = 0.16.8
-
     ## Gateway’s HTTP API to use: [s3 | rest | embed]
     http.handler = ${HTTP_HANDLER}
 
@@ -875,7 +870,7 @@ LeoFS Gateway
     log.log_level = 1
 
     ## Is enable access-log [true, false]
-    log.is_enable_access_log = false
+    log.is_enable_access_log = true
 
     ## Output log file(s) - Erlang's log
     log.erlang = ./log/erlang
@@ -1001,7 +996,7 @@ b. SNMPA Items
 +==================+====================================+
 | 1                | Node name                          |
 +------------------+------------------------------------+
-| **1-min Averages**                                    |
+| **1-min averages**                                    |
 +------------------+------------------------------------+
 | 2                | # of processes                     |
 +------------------+------------------------------------+
@@ -1013,7 +1008,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 6                | ETS memory usage                   |
 +------------------+------------------------------------+
-| **5-min Averages**                                    |
+| **5-min averages**                                    |
 +------------------+------------------------------------+
 | 7                | # of processes                     |
 +------------------+------------------------------------+
@@ -1076,7 +1071,7 @@ b. SNMPA Items
 +==================+====================================+
 | 1                | Node name                          |
 +------------------+------------------------------------+
-| **VM-related values (1-min Averages)**                |
+| **VM-related values (1min averages)**                 |
 +------------------+------------------------------------+
 | 2                | # of processes                     |
 +------------------+------------------------------------+
@@ -1088,7 +1083,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 6                | ETS memory usage                   |
 +------------------+------------------------------------+
-| **VM-related values (5-min Averages)**                |
+| **VM-related values (5min averages)**                 |
 +------------------+------------------------------------+
 | 7                | # of processes                     |
 +------------------+------------------------------------+
@@ -1100,7 +1095,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 11               | ETS memory usage                   |
 +------------------+------------------------------------+
-| **Request Counter (1-min Averages)**                  |
+| **Request counter (for 1min)**                        |
 +------------------+------------------------------------+
 | 12               | # of WRITEs                        |
 +------------------+------------------------------------+
@@ -1108,7 +1103,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 14               | # of DELETEs                       |
 +------------------+------------------------------------+
-| **Request Counter (5-min Averages)**                  |
+| **Request counter (for 5min)**                        |
 +------------------+------------------------------------+
 | 15               | # of WRITEs                        |
 +------------------+------------------------------------+
@@ -1126,7 +1121,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 21               | Total size                         |
 +------------------+------------------------------------+
-| **MQ-related**                                        |
+| **MQ-related properties**                             |
 +------------------+------------------------------------+
 | 22               | # of replication messages          |
 +------------------+------------------------------------+
@@ -1194,7 +1189,7 @@ b. SNMPA Items
 +==================+====================================+
 | 1                | Node name                          |
 +------------------+------------------------------------+
-| **VM-related values (1-min Averages)**                |
+| **VM-related values (1-min averages)**                |
 +------------------+------------------------------------+
 | 2                | # of processes                     |
 +------------------+------------------------------------+
@@ -1206,7 +1201,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 6                | ETS memory usage                   |
 +------------------+------------------------------------+
-| **VM-related values (5-min Averages)**                |
+| **VM-related values (5-min averages)**                |
 +------------------+------------------------------------+
 | 7                | # of processes                     |
 +------------------+------------------------------------+
@@ -1218,7 +1213,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 11               | ETS memory usage                   |
 +------------------+------------------------------------+
-| **Request Counter (1-min Averages)**                  |
+| **Request counter (for 1min)**                        |
 +------------------+------------------------------------+
 | 12               | # of WRITEs                        |
 +------------------+------------------------------------+
@@ -1226,7 +1221,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 14               | # of DELETEs                       |
 +------------------+------------------------------------+
-| **Request Counter (5-min Averages)**                  |
+| **Request counter (for 5min)**                        |
 +------------------+------------------------------------+
 | 15               | # of WRITEs                        |
 +------------------+------------------------------------+
@@ -1234,7 +1229,7 @@ b. SNMPA Items
 +------------------+------------------------------------+
 | 17               | # of DELETEs                       |
 +------------------+------------------------------------+
-| **Cache-related**                                     |
+| **Cache-related properties**                          |
 +------------------+------------------------------------+
 | 18               | Count of cache-hit                 |
 +------------------+------------------------------------+

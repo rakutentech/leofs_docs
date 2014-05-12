@@ -1,4 +1,4 @@
-LeoCenter v0.4.4
+LeoCenter v0.4.5
 ================
 
 **LeoCenter** is LeoFS' Web console in your browser. You can use it to easily operate LeoFS.
@@ -9,14 +9,14 @@ Installation and configuration
 Requirements
 ^^^^^^^^^^^^
 
-* **LeoFS v0.14.0** or higher is required.
+* **LeoFS v0.16.8** or higher
 
 
 Install LeoCenter
 ^^^^^^^^^^^^^^^^^
 
 * **LeoCenter's Repository**: https://github.com/leo-project/leo_center
-* **Ruby 1.9.3-p362** or higher is required.
+* **Ruby 1.9.3-p484** or higher
     * Download URL: http://www.ruby-lang.org/en/downloads/
 
 ::
@@ -42,8 +42,8 @@ Create Admin User
   OK
 
 
-Configuration
-^^^^^^^^^^^^^
+Configure
+^^^^^^^^^
 
 .. note:: You need to modify ``config.yml`` to allow LeoCenter to connect to LeoFS-Manager.
 
@@ -87,10 +87,6 @@ Using Thin Web Server
                --ssl-cert-file "${path/to/cert}/leofs.crt" \
                --ssl-verify \
                -a ${HOST}
-
-.. * Stop LeoCenter
-.. .. code-block:: bash
-..   $ thin stop
 
 .. note:: | You are able to add setting in detail by these steps:
           |   1. Rename thin.yml.sample to thin.yml
@@ -246,17 +242,17 @@ Milestones
     * Bucket status
         * Belonging bucket-list
 
-* 0.4 (Mar - Oct 2013)
+* 0.4 (Mar - Jan 2014)
     *  User Group
         * Sharing LeoFS' credential-keys in the group
         * User management in the group
 
-* 0.6 (Nov 2013)
+* 0.6 (Feb 2014)
     * Link LeoQoS *(LeoFS's Quality of Service)*
         * Bucket status
             * total of files
             * total used disk capacity
 
-* 0.8 (Dec 2013)
+* 0.8 (May 2014)
     * Log Search/Analysis (Option)
 

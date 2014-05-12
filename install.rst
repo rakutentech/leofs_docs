@@ -14,7 +14,7 @@ LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS|13.04 and 
 most Linux platforms with the following software installed:
 
 * `Erlang/OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
-* `Erlang/OTP R16B02 <http://www.erlang.org/download_release/20>`_
+* `Erlang/OTP R16B03-1 <http://www.erlang.org/download_release/23>`_
 
 
 Installing Erlang
@@ -56,7 +56,7 @@ Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
    $ make
    $ sudo make install
 
-Download "Erlang R15B03-1"|"R16B02"
+Download "Erlang R15B03-1"|"R16B03-1"
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
@@ -65,9 +65,9 @@ Download "Erlang R15B03-1"|"R16B02"
    $ cd $WORK_DIR
    $ wget http://www.erlang.org/download/otp_src_R15B03-1.tar.gz
 
-   ## [R16B02]
+   ## [R16B03-1]
    $ cd $WORK_DIR
-   $ wget http://www.erlang.org/download/otp_src_R16B02.tar.gz
+   $ wget http://www.erlang.org/download/otp_src_R16B03-1.tar.gz
 
 
 Build for Linux (CentOS, Debian and Others)
@@ -92,10 +92,10 @@ Build for Linux (CentOS, Debian and Others)
    $ make
    $ sudo make install
 
-   ## [R16B02]
-   $ tar xzf otp_src_R16B02.tar.gz
-   $ cd otp_src_R16B02
-   $ ./configure --prefix=/usr/local/erlang/R16B02 \
+   ## [R16B03-1]
+   $ tar xzf otp_src_R16B03-1.tar.gz
+   $ cd otp_src_R16B03-1
+   $ ./configure --prefix=/usr/local/erlang/R16B03-1 \
                  --enable-smp-support \
                  --enable-m64-build \
                  --enable-halfword-emulator \
@@ -120,8 +120,8 @@ Confirm
     Eshell V5.9.3  (abort with ^G)
     1>
 
-    ## [R16B02]
-    Erlang R16B02 (erts-5.10.3) [source] [64-bit halfword] [smp:8:8] [async-threads:10] [kernel-poll:false]
+    ## [R16B03-1]
+    Erlang R16B03-1 (erts-5.10.4) [source] [64-bit halfword] [smp:8:8] [async-threads:10] [kernel-poll:false]
 
     Eshell V5.10.3  (abort with ^G)
     1>
@@ -275,7 +275,7 @@ LeoFS
 .. index::
    pair: LeoFS; Installation
 
-This installation method is based on a source build, so if you do not have Erlang already installed, you need to first install Erlang. Also, building LeoFS from source requires Erlang R15B03-1 or R16B02.
+This installation method is based on a source build, so if you do not have Erlang already installed, you need to first install Erlang. Also, building LeoFS from source requires Erlang R15B03-1 or R16B03-1.
 
 
 File structure
@@ -318,28 +318,30 @@ After running make
       |---- deps/
       |      |--- bear/
       |      |--- bitcask/
-      |      |--- cherly/
       |      |--- cowboy/
-      |      |--- ecache/
       |      |--- eleveldb/
       |      |--- folsom/
       |      |--- jiffy/
       |      |--- leo_backend_db/
+      |      |--- leo_cache/
       |      |--- leo_commons/
       |      |--- leo_gateway/
       |      |--- leo_logger/
       |      |--- leo_manager/
+      |      |--- leo_mcerl/
       |      |--- leo_mq/
       |      |--- leo_object_storage/
       |      |--- leo_ordning_reda/
       |      |--- leo_redundant_manager/
+      |      |--- leo_rpc/
       |      |--- leo_s3_libs/
       |      |--- leo_statistics/
       |      |--- leo_storage/
       |      |--- lz4/
       |      |--- meck/
-      |      `--- proper/
-      |---- doc/
+      |      |--- proper/
+      |      |--- ranch/
+      |      `--- savanna_commons/
       |---- rebar
       |---- rebar.config
       `---- rel/
@@ -363,7 +365,7 @@ Building
       |--- leofs
       |      |--- gateway/
       |      |        |--- bin/
-      |      |        |--- erts-5.8.5/
+      |      |        |--- erts-5.10.4/
       |      |        |--- etc/
       |      |        |--- lib/
       |      |        |--- log/
@@ -372,7 +374,7 @@ Building
       |      |        `--- work/
       |      |--- manager_0/
       |      |        |--- bin/
-      |      |        |--- erts-5.8.5/
+      |      |        |--- erts-5.10.4/
       |      |        |--- etc/
       |      |        |--- lib/
       |      |        |--- log/
@@ -381,7 +383,7 @@ Building
       |      |        `--- work/
       |      |--- manager_1/
       |      |        |--- bin/
-      |      |        |--- erts-5.8.5/
+      |      |        |--- erts-5.10.4/
       |      |        |--- etc/
       |      |        |--- lib/
       |      |        |--- log/
@@ -390,7 +392,7 @@ Building
       |      |        `--- work/
       |      `--- storage/
       |               |--- bin/
-      |               |--- erts-5.8.5/
+      |               |--- erts-5.10.4/
       |               |--- etc/
       |               |--- lib/
       |               |--- log/
@@ -429,7 +431,7 @@ Log Dir and Working Dir
    ${LEOFS_DEPLOYED_DIR}
      |      `--- storage/
      |               |--- bin/
-     |               |--- erts-5.8.5/
+     |               |--- erts-5.10.4/
      |               |--- etc/
      |               |--- lib/
      |               |--- log/

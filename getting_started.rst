@@ -13,12 +13,13 @@ LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS|13.04 and 
 most Linux platforms with the following software:
 
 * `Erlang/OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
-* `Erlang/OTP R16B02 <http://www.erlang.org/download_release/20>`_
+* `Erlang/OTP R16B03-1 <http://www.erlang.org/download_release/23>`_
 
 
 LeoFS includes the following Erlang libraries:
 
 * `Basho Bitcask <https://github.com/basho/bitcask>`_
+* `Basho eleveldb <https://github.com/basho/eleveldb>`_
 * `Nine Nines Cowboy <https://github.com/extend/cowboy>`_
 * `Boundary Folsom <https://github.com/boundary/folsom>`_
 * `Szktty Erlang LZ4 <https://github.com/szktty/erlang-lz4>`_
@@ -66,12 +67,12 @@ Erlang (CentOS, Ubuntu, Other Linux OS)
    $ sudo make install
 
    ##
-   ## 2. Install Erlang (R15B03-1)
+   ## 2. Install Erlang (R16B03-1)
    ##
-   $ wget http://www.erlang.org/download/otp_src_R16B02.tar.gz
-   $ tar xzf otp_src_R16B02.tar.gz
-   $ cd otp_src_R16B02
-   $ ./configure --prefix=/usr/local/erlang/R16B02 \
+   $ wget http://www.erlang.org/download/otp_src_R16B03-1.tar.gz
+   $ tar xzf otp_src_R16B03-1.tar.gz
+   $ cd otp_src_R16B03-1
+   $ ./configure --prefix=/usr/local/erlang/R16B03-1 \
                  --enable-smp-support \
                  --enable-m64-build \
                  --enable-halfword-emulator \
@@ -90,7 +91,7 @@ Erlang (CentOS, Ubuntu, Other Linux OS)
    ##
    $ vi ~/.profile
        ## append the follows:
-       export ERL_HOME=/usr/local/erlang/R16B02
+       export ERL_HOME=/usr/local/erlang/R16B03-1
        export PATH=$PATH:$ERL_HOME/bin
 
    $ source ~/.profile
