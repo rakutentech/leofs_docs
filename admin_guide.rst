@@ -610,7 +610,7 @@ Command: ``cluster-status``
 ::
 
     cluster-status
-    cluster id |   dc id    |    status    | # of storages  |          updated at         
+    cluster id |   dc id    |    status    | # of storages  |          updated at
     -----------+------------+--------------+----------------+-----------------------------
     leofs_2    | dc_2       |   running    |              8 | 2014-03-21 19:17:45 +0900
 
@@ -1110,85 +1110,11 @@ Command: ``history``
     attach-new-storage
 
 \
-\
 
-Upgrade your old version LeoFS to v1.0.0
+Upgrade your old version LeoFS to v1.0.2
 ----------------------------------------
 
-This section describes the way of replacement of old LeoFS to v1.0.0
-
-Covert the configuration files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. _conf-file-converter-usage:
-
-Using the Converter
-""""""""""""""""""""
-
-.. note:: "LeoFS Configuration File Converter" is able to convert configuration files of the previous version to the format of LeoFS v0.16.8. It will be helpful to your operation.
-
-* LeoFS's configuration: http://www.leofs.org/docs/configuration.html
-* Download: https://github.com/leo-project/leofs_utils/releases/tag/0.2.0
-* Repository: https://github.com/leo-project/leofs_utils/tree/develop/converter
-* Usage:
-
-.. code-block:: bash
-
-    $ ./leofs_conf_converter -h
-    Usage: leofs_conf_converter [-h] [-a <app_config>] [-e <vm_args>]
-                                [-d <dest>] [-v]
-
-      -h, --help        Show the program options
-      -a, --app_config  Individual 'app config'
-      -e, --vm_args     Individual 'vm.args'
-      -d, --dest_file   The file name to write
-      -v, --version     Show version information
-
-    $ ./leofs_conf_converter -a test/leo_gateway.config -e test/vm.args -d leo_gateway.conf
-
-* Result:
-
-.. code-block:: bash
-
-    ## LeoFS Configuration
-    ##
-    ## Converted the configuration
-    ##     from "test/leo_gateway.config" and "test/vm.args"
-    ##     to "leo_gateway.conf"
-    ##
-    ## ------------------------
-    ## For Applications
-    ## ------------------------
-    sasl.sasl_error_log = ./log/sasl/sasl-error.log
-    sasl.errlog_type = error
-    sasl.error_logger_mf_dir = ./log/sasl
-    sasl.error_logger_mf_maxbytes = 10485760
-    sasl.error_logger_mf_maxfiles = 5
-    http.handler = s3
-    http.port = 8080
-    http.num_of_acceptors = 128
-    http.max_keepalive = 4096
-    http.layer_of_dirs = 12
-    http.ssl_port = 8443
-    bucket_prop_sync_interval = 300
-    large_object.max_chunked_objs  = 1000
-    large_object.max_len_of_obj = 524288000
-    large_object.chunked_obj_len = 5242880
-    large_object.threshold_of_chunk_len = 5767168
-    large_object.reading_chunked_obj_len = 5242880
-    managers = ['manager_0@127.0.0.1','manager_1@127.0.0.1']
-
-    ## The rest is omitted
-
-    ## ------------------------
-    ## For Erlang-VM
-    ## ------------------------
-    nodename = manager_0@127.0.0.1
-    distributed_cookie = 401321b4
-    erlang.kernel_poll = true
-    erlang.asyc_threads = 32
-    snmp_conf = ./snmp/snmpa_manager_0/leo_manager_snmp
-
+This section describes the way of replacement of old LeoFS to v1.0.2
 
 Upgrade flow diagram
 ^^^^^^^^^^^^^^^^^^^^
@@ -1200,6 +1126,22 @@ Upgrade flow diagram
 
 * `The diagram only <http://www.leofs.org/docs/_images/leofs-upgrade-flow-diagram.png>`_
 
+\
+
+.. note:: If you're using LeoFS v1.0.0-pre1, v0.16 and v0.14, you need to take over the part of configuration as follows because from v1.0.0-pre2, default leo_storage configuration of it put ``leveldb``. So we're planning to provide ``db-converter`` with v1.1.0.
+
+Takeover a part of confugurations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+\
+
++-------------------------------------+---------------+
+| Item                                | Default value |
++=====================================+===============+
+| leo_object_storage.metadata_storage | bitcask       |
++-------------------------------------+---------------+
+
+\
 
 Adjust Every Path
 ^^^^^^^^^^^^^^^^^
