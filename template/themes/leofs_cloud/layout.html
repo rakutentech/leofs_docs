@@ -1,0 +1,76 @@
+{#
+    cloud/layout.html
+    ~~~~~~~~~~~~~~~~~
+
+    Sphinx layout template for the cloud theme.
+
+    :copyright: Copyright 2009-2011 Assurance Technologies LLC
+    :license: BSD
+
+    roottarget - optional target for root link (default to toc)
+    logotarget - optional target for logo link (defaults to root target)
+    googleanalytics_id - if set, enabled google analytics snippet & footer
+    googleanalytics_path - optional subpatch for GA cookie
+    collapsiblesidebar - enable collapsible sidebar support
+
+#}
+
+{% extends "basic/layout.html" %}
+
+{% set reldelim2 = reldim2 is not defined and ' &nbsp; &nbsp;' or reldelim2 %}
+
+{# add script file to instrument collapsable sections  and other features #}
+{% set script_files = script_files + ['_static/jquery.cookie.js',
+                                      '_static/leofs_cloud.js'] %}
+
+{# add font stylesheets #}
+{% set css_files = css_files + [theme_fontcssurl] %}
+
+{# make root link redirectable #}
+{%- set theme_roottarget = (theme_roottarget == "<toc>" and master_doc or theme_roottarget) %}
+{% block rootrellink %}
+    <li><a href="{{ pathto(theme_roottarget) }}">{{shorttitle|e}}</a>{{reldelim1}}</li>
+{% endblock %}
+
+{# make logo link redirectable #}
+{%- set theme_logotarget = (theme_logotarget == "<root>" and theme_roottarget or (theme_logotarget == "<toc>" and master_doc or theme_logotarget)) %}
+{%- block sidebarlogo %}
+    {%- if logo %}
+        <p class="logo"><a href="{{ pathto(theme_logotarget) }}" title="{{ theme_logotarget }}">
+          <img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/>
+        </a></p>
+    {%- endif %}
+{%- endblock %}
+
+{# wrap relbars in distinct classes to make themeing easier #}
+{%- block relbar1 %}
+    <div class="relbar-top">
+        {{ super() }}
+    </div>
+{% endblock %}
+
+{%- block relbar2 %}
+    <div class="relbar-bottom">
+        {{ super() }}
+    </div>
+{% endblock %}
+
+{% block extrahead -%}
+        {{ super() }}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-5301881-3', 'leo-project.net');
+      ga('send', 'pageview');
+    </script>
+{%- endblock %}
+
+{% block footer -%}
+    {{ super() }}
+
+{%- endblock %}
