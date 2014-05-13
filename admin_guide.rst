@@ -1128,7 +1128,7 @@ Upgrade flow diagram
 
 \
 
-.. note:: If you're using LeoFS v1.0.0-pre1, v0.16 and v0.14, you need to take over the part of configuration as follows because from v1.0.0-pre2, default leo_storage configuration of it put ``leveldb``. So we're planning to provide ``db-converter`` with v1.1.0.
+.. note:: If you're using LeoFS v1.0.0-pre1, v0.16 or v0.14, you need to take over the configuration of ``metadata-storage`` as follows because from v1.0.0-pre2, the default configuration is ``leveldb``. So we're planning to provide the ``db-converter`` tool - from ``bitcask`` to ``leveldb`` with v1.1.0.
 
 Takeover a part of confugurations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
