@@ -102,7 +102,7 @@ Erlang (CentOS, Ubuntu, Other Linux OS)
 LeoFS
 """""""""
 
-::
+.. code-block:: bash
 
     $ git clone https://github.com/leo-project/leofs.git
     $ cd leofs
@@ -118,7 +118,7 @@ Modify “/etc/hosts”
 * Add a domain for the LeoFS bucket in ``/etc/hosts``
 * Bucket names must follow :ref:`these rules <s3-path-label>`
 
-::
+.. code-block:: bash
 
     $ sudo vi /etc/hosts
 
@@ -133,7 +133,7 @@ Modify “/etc/hosts”
 * Start master-manager, slave-manager
 * Start a storage node
 
-::
+.. code-block:: bash
 
     $ cd $LEOFS_ROOT/package
     $ leo_manager_0/bin/leo_manager start
@@ -146,7 +146,7 @@ Modify “/etc/hosts”
 
 * Use the command ``start`` in the LeoFS manager console
 
-::
+.. code-block:: bash
 
     $ telnet 127.0.0.1 10010
     > start
@@ -154,7 +154,7 @@ Modify “/etc/hosts”
 5. Start a LeoFS gateway node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-::
+.. code-block:: bash
 
     $ leo_gateway/bin/leo_gateway start
 
@@ -166,26 +166,33 @@ Modify “/etc/hosts”
 ::
 
     $ telnet 127.0.0.1 10010
-    > status
-    status
-    [system config]
-                 version : 0.14.4
-     # of replicas       : 1
-     # of successes of R : 1
-     # of successes of W : 1
-     # of successes of D : 1
-     # of DC-awareness replicas   : 0
-     # of Rack-awareness replicas : 0
-               ring size : 2^128
-        ring hash (cur)  : 1428891014
-        ring hash (prev) : 1428891014
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
 
-    [node(s) state]
-    ------------------------------------------------------------------------------------------------
-     node                        state       ring (cur)    ring (prev)   when
-    ------------------------------------------------------------------------------------------------
-     storage_0@127.0.0.1         running     1428891014    1428891014    2013-07-04 11:23:08 +0900
-     gateway@127.0.0.1           running     1428891014    1428891014    2013-07-04 11:24:37 +0900
+    status
+    [System config]
+                    System version : 1.0.0
+                        Cluster Id : leofs_1
+                             DC Id : dc_1
+                    Total replicas : 1
+               # of successes of R : 1
+               # of successes of W : 1
+               # of successes of D : 1
+     # of DC-awareness replicas    : 0
+                         ring size : 2^128
+                 Current ring hash : 8cd79c31
+                    Prev ring hash : 8cd79c31
+    [Multi DC replication settings]
+             max # of joinable DCs : 2
+                # of replicas a DC : 1
+
+    [Node(s) state]
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+     type  |           node           |    state     |  current ring  |   prev ring    |          updated at
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+      S    | storage_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      G    | gateway_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:21 +0900
 
 
 7. Get your S3 API Key from the LeoFS manager console
@@ -194,7 +201,7 @@ Modify “/etc/hosts”
 * Use the command ``create-user`` in the LeoFS manager console
 * It takes the user name as its only argument
 
-::
+.. code-block:: bash
 
     $ telnet 127.0.0.1 10010
     > create-user ${YOUR_NAME}
@@ -217,20 +224,20 @@ Modify “/etc/hosts”
 * Use the command ``add-bucket`` in the LeoFS manager console
 * It takes the bucket name and access-key-id got in the previous section as its arguments
 
-::
+.. code-block:: bash
 
     $ telnet 127.0.0.1 10010
     > add-bucket ${BUCKET_NAME} ${YOUR_ACCESS_KEY_ID}
     ok
 
-* Insert some data into LeoFS by using any S3 client as mentioned above 
+* Insert some data into LeoFS by using any S3 client as mentioned above
 * You can now get the data stored in LeoFS
 
-::
+.. code-block:: bash
 
     $ curl http://localhost:8080/your_bucket_name/path/to/file
     > ${CONTENTS}
-    
+
 .. note:: From version 0.16.0, you need to set ACL settings of your bucket to ``public-read`` by using the command :ref:`update-acl<s3-update-acl>` if you want to get the data stored in LeoFS via web browser.
 
 Wrap up
@@ -314,25 +321,28 @@ Case example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Reference: :ref:`The consistency level <system-configuration-label>`
-* Edit *Manager's app.config*
+* Edit *Manager's leo_manager.conf*
     * You only need to modify *Manager-master* for the consistency level.
     * "$LEOFS_ROOT/package/leo_manager_0/etc/app.config"
 
-.. code-block:: erlang
+.. code-block:: bash
 
-    [
-        {leo_manager, [
-                   %% == System Ver ==
-                   {system_version, "0.14.4" },
+    ## --------------------------------------------------------------------
+    ## MANAGER - Consistency Level
+    ##     * Only set its configurations to **Manager-master**
+    ##     * See: http://www.leofs.org/docs/configuration.html#the-consistency-level
+    ## --------------------------------------------------------------------
+    ## A number of replicas
+    consistency.num_of_replicas = 2
 
-                   %% == System Configuration ==
-                   %% - Consistency Level
-                   {system, [{n, 2 },  %% number of replicated files is 2
-                             {w, 1 },  %% number of of successes of write-operation is 1
-                             {r, 1 },  %% number of of successes of read-operation is 1
-                             {d, 1 },  %% number of of successes of delete-operation is 1
-                             {bit_of_ring, 128} %% size of routing-table (RING)
-                            ]},
+    ## A number of replicas needed for a successful WRITE operation
+    consistency.write = 1
+
+    ## A number of replicas needed for a successful READ operation
+    consistency.read = 1
+
+    ## A number of replicas needed for a successful DELETE operation
+    consistency.delete = 1
 
 
 4. Order of server launch
@@ -392,28 +402,35 @@ Case example
 ::
 
     $ telnet 127.0.0.1 10010
-    > status
-    status
-    [system config]
-                 version : 0.14.4
-     # of replicas       : 2
-     # of successes of R : 1
-     # of successes of W : 1
-     # of successes of D : 1
-     # of DC-awareness replicas   : 0
-     # of Rack-awareness replicas : 0
-               ring size : 2^128
-        ring hash (cur)  : 1428891014
-        ring hash (prev) : 1428891014
+    Trying 127.0.0.1...
+    Connected to localhost.
+    Escape character is '^]'.
 
-    [node(s) state]
-    ------------------------------------------------------------------------------------------------
-     node                        state       ring (cur)    ring (prev)   when
-    ------------------------------------------------------------------------------------------------
-     storage_0@10.0.1.104        running     1428891014    1428891014    2013-07-04 11:23:08 +0900
-     storage_1@10.0.1.105        running     1428891014    1428891014    2013-07-04 11:23:08 +0900
-     storage_2@10.0.1.106        running     1428891014    1428891014    2013-07-04 11:23:08 +0900
-     gateway_0@10.0.1.103        running     1428891014    1428891014    2013-07-04 11:24:37 +0900
+    status
+    [System config]
+                    System version : 1.0.0
+                        Cluster Id : leofs_1
+                             DC Id : dc_1
+                    Total replicas : 2
+               # of successes of R : 1
+               # of successes of W : 1
+               # of successes of D : 1
+     # of DC-awareness replicas    : 0
+                         ring size : 2^128
+                 Current ring hash : 8cd79c31
+                    Prev ring hash : 8cd79c31
+    [Multi DC replication settings]
+             max # of joinable DCs : 2
+                # of replicas a DC : 1
+
+    [Node(s) state]
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+     type  |           node           |    state     |  current ring  |   prev ring    |          updated at
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+      S    | storage_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_1@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_2@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      G    | gateway_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:21 +0900
 
 
 8. Get your S3 API Key from the LeoFS manager console
@@ -422,7 +439,7 @@ Case example
 * Use the command ``create-user`` in the LeoFS manager console
 * It takes the user name as its only argument
 
-::
+.. code-block:: bash
 
     $ telnet 127.0.0.1 10010
     > create-user ${YOUR_NAME}
@@ -435,20 +452,20 @@ Case example
 * Use the command ``add-bucket`` in the LeoFS manager console
 * It takes the bucket name and access-key-id got in the previous section as its arguments
 
-::
+.. code-block:: bash
 
     $ telnet 127.0.0.1 10010
     > add-bucket ${BUCKET_NAME} ${YOUR_ACCESS_KEY_ID}
     ok
 
-* Insert some data into LeoFS by using any S3 client as mentioned above 
+* Insert some data into LeoFS by using any S3 client as mentioned above
 * You can now get the data stored in LeoFS
 
-::
+.. code-block:: bash
 
     $ curl http://localhost:8080/your_bucket_name/path/to/file
     > ${CONTENTS}
-    
+
 .. note:: From version 0.16.0, you need to set ACL settings of your bucket to ``public-read`` by using the command :ref:`update-acl<s3-update-acl>` if you want to get the data stored in LeoFS via web browser.
 
 Wrap up
