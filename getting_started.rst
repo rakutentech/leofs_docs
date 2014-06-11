@@ -9,7 +9,7 @@ Getting Started
 -------------------
 System Requirements
 -------------------
-LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS|13.04 and CentOS 6.x, but should work on
+LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS or Higher|13.04 and CentOS 6.x, but should work on
 most Linux platforms with the following software:
 
 * `Erlang/OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
@@ -58,7 +58,7 @@ Install required libraries using yum (CentOS 6.x)
 
    # yum install libuuid-devel cmake check check-devel
 
-Install required libraries using apt-get (Ubuntu Server 12.04 LTS)
+Install required libraries using apt-get (Ubuntu Server 12.04 LTS or Higher)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .. index::
    pair: Ubuntu-12.04; Installation
