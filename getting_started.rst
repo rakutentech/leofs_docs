@@ -49,6 +49,24 @@ This section is a step by step guide to setting up LeoFS for the first time. By 
 1. Install
 ^^^^^^^^^^
 
+Install required libraries using yum (CentOS 6.x)
+"""""""""""""""""""""""""""""""""""""""""""""""""
+.. index::
+   pair: CentOS-6.x; Installation
+
+::
+
+   # yum install libuuid-devel cmake check check-devel
+
+Install required libraries using apt-get (Ubuntu Server 12.04 LTS)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.. index::
+   pair: Ubuntu-12.04; Installation
+
+::
+
+   # sudo apt-get install build-essential libtool libncurses5-dev libssl-dev cmake check
+
 .. _erlang-install-label:
 
 Erlang (CentOS, Ubuntu, Other Linux OS)
