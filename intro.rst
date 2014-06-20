@@ -9,7 +9,7 @@ Introduction
 LeoFS Overview
 --------------------------------
 
-**LeoFS** is a highly scalable, fault-tolerant distributed file system (DFS) for the Web. LeoFS is the leading DFS and offers a number of unique benefits to users.
+**LeoFS** is a highly scalable, fault-tolerant unstructured object storage system for the Web.
 
 LeoFS provides **High Cost Performance Ratio**. It allows you to build LeoFS clusters using commodity hardware on top of the Linux operating system. LeoFS will provide very good performance even on commodity hardware. LeoFS will require a smaller cluster than other storage to achieve the same performance. LeoFS is also very easy to setup and to operate.
 
@@ -49,16 +49,6 @@ Goals
 Milestones
 --------------------------------
 
-* *DONE* - 0.12 (Oct 2012 - Jan 2013)
-    * Large Object Support (incl.Streaming/Multi-part/Range requests)
-    * Web GUI-Console (LeoTamer - Optional)
-        * Cluster manager/monitor
-        * Log Analysis/Search
-* *DONE* - 0.14 (Feb 2013 - Sep)
-    * Multi-layer Cache (Using SSD)
-    * Rack aware replica placement
-    * Web GUI Console (Option)
-       * Support whole LeoFS Manager's commands
 * *DONE* - 0.16 (Oct 2013)
     * Increase compatibility S3-APIs#4
         * the bucket ACLs
