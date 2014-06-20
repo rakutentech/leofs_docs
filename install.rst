@@ -36,7 +36,7 @@ Install required libraries using yum (CentOS 6.x)
    # yum install libuuid-devel cmake check check-devel
 
 Install required libraries using apt-get (Ubuntu Server 12.04 LTS or Higher)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .. index::
    pair: Ubuntu-12.04; Installation
 
@@ -240,7 +240,7 @@ Format the partition
 
 ::
 
-   # mkfs.xfs -d agcount=4 -l size=32m ${TARGET_PARTITION}
+   # mkfs.xfs -d agcount=4 -l size=32m {TARGET_PARTITION}
 
 Modify the "/etc/fstab" file
 """"""""""""""""""""""""""""
@@ -288,7 +288,7 @@ Before running make
 
     $ git clone https://github.com/leo-project/leofs.git
 
-    ${LEOFS_SRC_DIR}
+    {LEOFS_SRC_DIR}
       |
       |--- LICENSE
       |--- Makefile
@@ -307,11 +307,11 @@ After running make
 
 ::
 
-    $ cd ${LEOFS_SRC}/
+    $ cd {LEOFS_SRC}/
     $ make
     $ make release
 
-    ${LEOFS_SRC_DIR}
+    {LEOFS_SRC_DIR}
       |
       |--- LICENSE
       |--- Makefile
@@ -325,6 +325,7 @@ After running make
       |      |--- leo_backend_db/
       |      |--- leo_cache/
       |      |--- leo_commons/
+      |      |--- leo_dcerl
       |      |--- leo_gateway/
       |      |--- leo_logger/
       |      |--- leo_manager/
@@ -332,6 +333,7 @@ After running make
       |      |--- leo_mq/
       |      |--- leo_object_storage/
       |      |--- leo_ordning_reda/
+      |      |--- leo_pod/
       |      |--- leo_redundant_manager/
       |      |--- leo_rpc/
       |      |--- leo_s3_libs/
@@ -341,6 +343,7 @@ After running make
       |      |--- meck/
       |      |--- proper/
       |      |--- ranch/
+      |      |--- savanna_agent/
       |      `--- savanna_commons/
       |---- rebar
       |---- rebar.config
@@ -357,48 +360,47 @@ Building
     $ cd leofs/
     $ make
     $ make release
-    $ cp -r package/leofs ${LEOFS_DEPLOYED_DIR}
-    $ cd ${LEOFS_DEPLOYED_DIR}/
+    $ cp -r package {LEOFS_DEPLOYED_DIR}
+    $ cd {LEOFS_DEPLOYED_DIR}/
 
     [LeoFS deployed files layout]
-    ${LEOFS_DEPLOYED_DIR}
-      |--- leofs
-      |      |--- gateway/
-      |      |        |--- bin/
-      |      |        |--- erts-5.10.4/
-      |      |        |--- etc/
-      |      |        |--- lib/
-      |      |        |--- log/
-      |      |        |--- releases/
-      |      |        |--- snmp/
-      |      |        `--- work/
-      |      |--- manager_0/
-      |      |        |--- bin/
-      |      |        |--- erts-5.10.4/
-      |      |        |--- etc/
-      |      |        |--- lib/
-      |      |        |--- log/
-      |      |        |--- releases/
-      |      |        |--- snmp/
-      |      |        `--- work/
-      |      |--- manager_1/
-      |      |        |--- bin/
-      |      |        |--- erts-5.10.4/
-      |      |        |--- etc/
-      |      |        |--- lib/
-      |      |        |--- log/
-      |      |        |--- releases/
-      |      |        |--- snmp/
-      |      |        `--- work/
-      |      `--- storage/
-      |               |--- bin/
-      |               |--- erts-5.10.4/
-      |               |--- etc/
-      |               |--- lib/
-      |               |--- log/
-      |               |--- releases/
-      |               |--- snmp/
-      |               `--- work/
+    {LEOFS_DEPLOYED_DIR}
+            |--- leo_gateway/
+            |        |--- bin/
+            |        |--- erts-{VERSION}/
+            |        |--- etc/
+            |        |--- lib/
+            |        |--- log/
+            |        |--- releases/
+            |        |--- snmp/
+            |        `--- work/
+            |--- leo_manager_0/
+            |        |--- bin/
+            |        |--- erts-{VERSION}/
+            |        |--- etc/
+            |        |--- lib/
+            |        |--- log/
+            |        |--- releases/
+            |        |--- snmp/
+            |        `--- work/
+            |--- leo_manager_1/
+            |        |--- bin/
+            |        |--- erts-{VERSION}/
+            |        |--- etc/
+            |        |--- lib/
+            |        |--- log/
+            |        |--- releases/
+            |        |--- snmp/
+            |        `--- work/
+            `--- leo_storage/
+                     |--- bin/
+                     |--- erts-{VERSION}/
+                     |--- etc/
+                     |--- lib/
+                     |--- log/
+                     |--- releases/
+                     |--- snmp/
+                     `--- work/
 
 Log Dir and Working Dir
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -428,10 +430,10 @@ Log Dir and Working Dir
 
 ::
 
-   ${LEOFS_DEPLOYED_DIR}
-     |      `--- storage/
+   {LEOFS_DEPLOYED_DIR}
+     |      `--- leo_storage/
      |               |--- bin/
-     |               |--- erts-5.10.4/
+     |               |--- erts-{VERSION}/
      |               |--- etc/
      |               |--- lib/
      |               |--- log/
