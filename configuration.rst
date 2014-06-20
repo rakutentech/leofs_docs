@@ -32,13 +32,13 @@ Each LeoFS node has one configuration files, ``leo_manager.conf``, ``leo_storage
 +---------------+---------------------------------------------------------+
 | Application   | Location                                                |
 +===============+=========================================================+
-| Manager-Master| $LEOFS_HOME/package/leo_manager_0/etc/leo_manager.conf  |
+| Manager-Master| {LEOFS_HOME}/package/leo_manager_0/etc/leo_manager.conf |
 +---------------+---------------------------------------------------------+
-| Manager-Slave | $LEOFS_HOME/package/leo_manager_1/etc/leo_manager.conf  |
+| Manager-Slave | {LEOFS_HOME}/package/leo_manager_1/etc/leo_manager.conf |
 +---------------+---------------------------------------------------------+
-| Storage       | $LEOFS_HOME/package/leo_storage/etc/leo_storage.conf    |
+| Storage       | {LEOFS_HOME}/package/leo_storage/etc/leo_storage.conf   |
 +---------------+---------------------------------------------------------+
-| Gateway       | $LEOFS_HOME/package/leo_gateway/etc/leo_gateway.conf    |
+| Gateway       | {LEOFS_HOME}/package/leo_gateway/etc/leo_gateway.conf   |
 +---------------+---------------------------------------------------------+
 
 * The ``*.config`` file is used to set various attributes of the application. Also, it used to pass parameters to the Erlang node such as the name and cookie of the node.
@@ -85,7 +85,7 @@ The Consistency Level
 | High        | n = 3, [r = 2 | r = 3], w = 3, d = 3                   |
 +-------------+--------------------------------------------------------+
 
-* **Example - File: ${LEOFS_SRC}/package/manager_0/etc/leo_manager.conf**:
+* **Example - File: {LEOFS_SRC}/package/manager_0/etc/leo_manager.conf**:
 
 .. code-block:: bash
 
@@ -119,17 +119,17 @@ Configuration of the Manager-Master node
 
 **[leo_manager.conf]**
 
-* The ``leo_manager.conf`` location: **${LEOFS_HOME}/package/manager_0/etc/leo_manager.conf**
+* The ``leo_manager.conf`` location: **{LEOFS_HOME}/package/manager_0/etc/leo_manager.conf**
 * Modification of the required items:
 
 +----------------+--------------------------------------------------------+
 | Property       | Description                                            |
 +================+========================================================+
-|${SLAVE-IP}     | Manager-Slave node's IP-address                        |
+|{SLAVE-IP}      | Manager-Slave node's IP-address                        |
 +----------------+--------------------------------------------------------+
-|${SNMPA-DIR}    | SNMPA configuration files directory                    |
+|{SNMPA-DIR}     | SNMPA configuration files directory                    |
 |                |                                                        |
-|                | - ref:${LEOFS_SRC}/apps/leo_manager/snmp/              |
+|                | - ref:{LEOFS_SRC}/apps/leo_manager/snmp/               |
 |                |                                                        |
 |                | - [snmpa_manager_0|snmpa_manager_1|snmpa_manager_0]    |
 +----------------+--------------------------------------------------------+
@@ -145,7 +145,7 @@ Configuration of the Manager-Master node
     manager.mode = master
 
     ## Partner of manager's alias
-    manager.partner = manager_1@${SLAVE-IP}
+    manager.partner = manager_1@{SLAVE-IP}
 
     ## Manager-console accepatable port number
     console.port.cui  = 10010
@@ -224,7 +224,7 @@ Configuration of the Manager-Master node
     queue_dir = ./work/queue
 
     ## Directory of SNMP agent configuration
-    snmp_agent = ${SNMPA-DIR}/snmp/snmpa_manager_0/LEO-MANAGER
+    snmp_agent = {SNMPA-DIR}/snmp/snmpa_manager_0/LEO-MANAGER
 
 
 **[Erlang VM related properties]**
@@ -232,15 +232,15 @@ Configuration of the Manager-Master node
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
 +================+========================================================+
-|${MASTER-IP}    | Manager-Master IP                                      |
+|{MASTER-IP}     | Manager-Master IP                                      |
 +----------------+--------------------------------------------------------+
-|${SNMPA-DIR}    | SNMPA configuration files directory                    |
+|{SNMPA-DIR}     | SNMPA configuration files directory                    |
 +----------------+--------------------------------------------------------+
 
 .. code-block:: bash
 
     ## Name of the leofs-gateway node
-    nodename = manager_0@${MASTER-IP}
+    nodename = manager_0@{MASTER-IP}
 
     ## Cookie for distributed node communication.  All nodes in the same cluster
     ## should use the same cookie or they will not be able to communicate.
@@ -265,7 +265,7 @@ Configuration of the Manager-Master node
     process_limit = 1048576
 
     ## Path of SNMP-agent configuration
-    snmp_conf = ${SNMPA-DIR}/snmp/snmpa_manager_0/leo_maanager_snmp
+    snmp_conf = {SNMPA-DIR}/snmp/snmpa_manager_0/leo_maanager_snmp
 
 .. index::
    pair: Configuration; LeoFS Manager-Slave
@@ -277,15 +277,15 @@ LeoFS Manager-Slave
 
 **[leo_manager.conf]**
 
-* The ``leo_manager.conf`` location: **${LEOFS_HOME}/package/manager_1/etc/leo_manager.conf**
+* The ``leo_manager.conf`` location: **{LEOFS_HOME}/package/manager_1/etc/leo_manager.conf**
 * Modification of the required items:
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
 +================+========================================================+
-|${MASTER-IP}    | Manager-Master node's IP-address                       |
+|{MASTER-IP}     | Manager-Master node's IP-address                       |
 +----------------+--------------------------------------------------------+
-|${SNMPA-DIR}    | SNMPA configuration files directory                    |
+|{SNMPA-DIR}     | SNMPA configuration files directory                    |
 +----------------+--------------------------------------------------------+
 
 .. code-block:: bash
@@ -298,7 +298,7 @@ LeoFS Manager-Slave
     manager.mode = slave
 
     ## Partner of manager's alias
-    manager.partner = manager_0@${MASTER-IP}
+    manager.partner = manager_0@{MASTER-IP}
 
     ## Manager-console accepatable port number
     console.port.cui  = 10011
@@ -348,22 +348,22 @@ LeoFS Manager-Slave
     queue_dir = ./work/queue
 
     ## Directory of SNMP agent configuration
-    snmp_agent = ${SNMPA-DIR}/snmp/snmpa_manager_1/LEO-MANAGER
+    snmp_agent = {SNMPA-DIR}/snmp/snmpa_manager_1/LEO-MANAGER
 
 **[Erlang VM related properties]**
 
 +----------------+--------------------------------------------------------+
 |Property        | Description                                            |
 +================+========================================================+
-|${SLAVE-IP}     | Manager-Slave IP                                       |
+|{SLAVE-IP}      | Manager-Slave IP                                       |
 +----------------+--------------------------------------------------------+
-|${SNMPA-DIR}    | SNMPA configuration files directory                    |
+|{SNMPA-DIR}     | SNMPA configuration files directory                    |
 +----------------+--------------------------------------------------------+
 
 .. code-block:: bash
 
     ## Name of the leofs-gateway node
-    nodename = manager_1@${SLAVE-IP}
+    nodename = manager_1@{SLAVE-IP}
 
     ## Cookie for distributed node communication.  All nodes in the same cluster
     ## should use the same cookie or they will not be able to communicate.
@@ -388,7 +388,7 @@ LeoFS Manager-Slave
     process_limit = 1048576
 
     ## Path of SNMP-agent configuration
-    snmp_conf = ${SNMPA-DIR}/snmp/snmpa_manager_1/leo_maanager_snmp
+    snmp_conf = {SNMPA-DIR}/snmp/snmpa_manager_1/leo_maanager_snmp
 
 .. index::
    pair: Configuration; LeoFS Storage
@@ -402,70 +402,70 @@ LeoFS Storage
 
 **[leo_storage.conf]**
 
-* The ``leo_storage.conf`` location: **${LEOFS_HOME}/package/storage/etc/leo_storage.conf**
+* The ``leo_storage.conf`` location: **{LEOFS_HOME}/package/storage/etc/leo_storage.conf**
 * Modification of the required items:
 
 +-------------------------+--------------------------------------------------------+
 |Property                 | Description                                            |
 +=========================+========================================================+
-|${MANAGER_MASTER_IP}     | Manager-master node's IP-address                       |
+|{MANAGER_MASTER_IP}      | Manager-master node's IP-address                       |
 +-------------------------+--------------------------------------------------------+
-|${MANAGER_SLAVE_IP}      | Manager-slave node's IP-address                        |
+|{MANAGER_SLAVE_IP}       | Manager-slave node's IP-address                        |
 +-------------------------+--------------------------------------------------------+
-|${OBJECT_STORAGE_DIR}    | Object Storage directory  - Default:"./avs"            |
+|{OBJECT_STORAGE_DIR}     | Object Storage directory  - Default:"./avs"            |
 +-------------------------+--------------------------------------------------------+
-|${NUM_OF_CONTAINERS}     | # of AVS files storing objects(files).                 |
+|{NUM_OF_CONTAINERS}      | # of AVS files storing objects(files).                 |
 |                         |                                                        |
 |                         | * AVS: ARIA(ex-LeoFS's name) Vector Storage            |
 +-------------------------+--------------------------------------------------------+
-|${NUM_OF_PROC_PER_OBJECT}| # of batch processes related to                        |
+|{NUM_OF_PROC_PER_OBJECT} | # of batch processes related to                        |
 |                         | objects like replicating an object.                    |
 +-------------------------+--------------------------------------------------------+
-|${INT_PER_OBJECT_MIN}    | Minimum interval between consuming a job related to    |
+|{INT_PER_OBJECT_MIN}     | Minimum interval between consuming a job related to    |
 |                         | objects like replicating an object.                    |
 +-------------------------+--------------------------------------------------------+
-|${INT_PER_OBJECT_MAX}    | Maximum interval between consuming a job related to    |
+|{INT_PER_OBJECT_MAX}     | Maximum interval between consuming a job related to    |
 |                         | objects like replicating an object.                    |
 +-------------------------+--------------------------------------------------------+
-|${NUM_OF_PROC_SYNC_BY_VN}| # of batch processes related to                        |
+|{NUM_OF_PROC_SYNC_BY_VN} | # of batch processes related to                        |
 |                         | syncing objects by vnode.                              |
 +-------------------------+--------------------------------------------------------+
-|${INT_SYNC_BY_VNODE_MIN} | Minimum interval between consuming a job related to    |
+|{INT_SYNC_BY_VNODE_MIN}  | Minimum interval between consuming a job related to    |
 |                         | syncing objects by vnode.                              |
 +-------------------------+--------------------------------------------------------+
-|${INT_SYNC_BY_VNODE_MAX} | Maximum interval between consuming a job related to    |
+|{INT_SYNC_BY_VNODE_MAX}  | Maximum interval between consuming a job related to    |
 |                         | syncing objects by vnode.                              |
 +-------------------------+--------------------------------------------------------+
-|${NUM_OF_PROC_REBALANCE} | # of batch processes related to                        |
+|{NUM_OF_PROC_REBALANCE}  | # of batch processes related to                        |
 |                         | rebalancing an object.                                 |
 +-------------------------+--------------------------------------------------------+
-|${INT_REBALANCE_MIN}     | Minimum interval between consuming a job related to    |
+|{INT_REBALANCE_MIN}      | Minimum interval between consuming a job related to    |
 |                         | rebalancing an object.                                 |
 +-------------------------+--------------------------------------------------------+
-|${INT_REBALANCE_MAX}     | Maximum interval between consuming a job related to    |
+|{INT_REBALANCE_MAX}      | Maximum interval between consuming a job related to    |
 |                         | rebalancing an object.                                 |
 +-------------------------+--------------------------------------------------------+
-|${NUM_OF_PROC_ASYNC_DEL} | # of batch processes related to                        |
+|{NUM_OF_PROC_ASYNC_DEL}  | # of batch processes related to                        |
 |                         | deleting an object asynchronously.                     |
 +-------------------------+--------------------------------------------------------+
-|${INT_ASYNC_DEL_MIN}     | Minimum interval between consuming a job related to    |
+|{INT_ASYNC_DEL_MIN}      | Minimum interval between consuming a job related to    |
 |                         | deleting an object asynchronously.                     |
 +-------------------------+--------------------------------------------------------+
-|${INT_ASYNC_DEL_MAX}     | Maximum interval between consuming a job related to    |
+|{INT_ASYNC_DEL_MAX}      | Maximum interval between consuming a job related to    |
 |                         | deleting an object asynchronously.                     |
 +-------------------------+--------------------------------------------------------+
-|${NUM_OF_PROC_RECOVERY_N}| # of batch processes related to                        |
+|{NUM_OF_PROC_RECOVERY_N} | # of batch processes related to                        |
 |                         | recovering an node.                                    |
 +-------------------------+--------------------------------------------------------+
-|${INT_RECOVERY_NODE_MIN} | Minimum interval between consuming a job related to    |
+|{INT_RECOVERY_NODE_MIN}  | Minimum interval between consuming a job related to    |
 |                         | recovering an node.                                    |
 +-------------------------+--------------------------------------------------------+
-|${INT_RECOVERY_NODE_MAX} | Maximum interval between consuming a job related to    |
+|{INT_RECOVERY_NODE_MAX}  | Maximum interval between consuming a job related to    |
 |                         | recovering an node.                                    |
 +-------------------------+--------------------------------------------------------+
-|${SNMPA-DIR}             | SNMPA configuration files directory                    |
+|{SNMPA-DIR}              | SNMPA configuration files directory                    |
 |                         |                                                        |
-|                         | - ref:${LEOFS_SRC}/apps/leo_storage/snmp/              |
+|                         | - ref:{LEOFS_SRC}/apps/leo_storage/snmp/               |
 |                         |                                                        |
 |                         | - [snmpa_storage_0|snmpa_storage_1|snmpa_storage_0]    |
 +-------------------------+--------------------------------------------------------+
@@ -477,14 +477,14 @@ LeoFS Storage
     ## --------------------------------------------------------------------
     ## Name of Manager node(s)
     ## managers = [manager_0@127.0.0.1, manager_1@127.0.0.1]
-    managers = [${MANAGER_MASTER_IP}, ${MANAGER_SLAVE_IP}]
+    managers = [{MANAGER_MASTER_IP}, {MANAGER_SLAVE_IP}]
 
     ## --------------------------------------------------------------------
     ## STORAGE
     ## --------------------------------------------------------------------
     ## Object container
-    obj_containers.path = [${OBJECT_STORAGE_DIR}]
-    obj_containers.num_of_containers = [${NUM_OF_CONTAINERS}]
+    obj_containers.path = [{OBJECT_STORAGE_DIR}]
+    obj_containers.num_of_containers = [{NUM_OF_CONTAINERS}]
 
     ## e.g. Case of plural pathes
     ## obj_containers.path = [/var/leofs/avs/1, /var/leofs/avs/2]
@@ -500,29 +500,29 @@ LeoFS Storage
     mq.num_of_mq_procs = 8
 
     ## MQ recover per_object
-    mq.recover_per_object.num_of_batch_process = ${NUM_OF_PROC_PER_OBJECT}
-    mq.recover_per_object.interval_min = ${INT_PER_OBJECT_MIN}
-    mq.recover_per_object.interval_max = ${INT_PER_OBJECT_MAX}
+    mq.recover_per_object.num_of_batch_process = {NUM_OF_PROC_PER_OBJECT}
+    mq.recover_per_object.interval_min = {INT_PER_OBJECT_MIN}
+    mq.recover_per_object.interval_max = {INT_PER_OBJECT_MAX}
 
     ## MQ synchronize objects by vnode-id
-    mq.sync_by_vnode_id.num_of_batch_process = ${NUM_OF_PROC_SYNC_BY_VN}
-    mq.sync_by_vnode_id.interval_min = ${INT_SYNC_BY_VNODE_MIN}
-    mq.sync_by_vnode_id.interval_max = ${INT_SYNC_BY_VNODE_MAX}
+    mq.sync_by_vnode_id.num_of_batch_process = {NUM_OF_PROC_SYNC_BY_VN}
+    mq.sync_by_vnode_id.interval_min = {INT_SYNC_BY_VNODE_MIN}
+    mq.sync_by_vnode_id.interval_max = {INT_SYNC_BY_VNODE_MAX}
 
     ## MQ rebalance objects
-    mq.rebalance.num_of_batch_process = ${NUM_OF_PROC_REBALANCE}
-    mq.rebalance.interval_min = ${INT_REBALANCE_MIN}
-    mq.rebalance.interval_max = ${INT_REBALANCE_MAX}
+    mq.rebalance.num_of_batch_process = {NUM_OF_PROC_REBALANCE}
+    mq.rebalance.interval_min = {INT_REBALANCE_MIN}
+    mq.rebalance.interval_max = {INT_REBALANCE_MAX}
 
     ## MQ delete objects
-    mq.delete_object.num_of_batch_process = ${NUM_OF_PROC_ASYNC_DEL}
-    mq.delete_object.interval_min = ${INT_ASYNC_DEL_MIN}
-    mq.delete_object.interval_max = ${INT_ASYNC_DEL_MAX}
+    mq.delete_object.num_of_batch_process = {NUM_OF_PROC_ASYNC_DEL}
+    mq.delete_object.interval_min = {INT_ASYNC_DEL_MIN}
+    mq.delete_object.interval_max = {INT_ASYNC_DEL_MAX}
 
     ## MQ recover a node's object
-    mq.recovery_node.num_of_batch_process = ${NUM_OF_PROC_RECOVERY_N}
-    mq.recovery_node.interval_min = ${INT_RECOVERY_NODE_MIN}
-    mq.recovery_node.interval_max = ${INT_RECOVERY_NODE_MAX}
+    mq.recovery_node.num_of_batch_process = {NUM_OF_PROC_RECOVERY_N}
+    mq.recovery_node.interval_min = {INT_RECOVERY_NODE_MIN}
+    mq.recovery_node.interval_max = {INT_RECOVERY_NODE_MAX}
 
 
     ## --------------------------------------------------------------------
@@ -564,7 +564,7 @@ LeoFS Storage
     queue_dir  = ./work/queue
 
     ## Directory of SNMP agent configuration
-    snmp_agent = ${SNMPA-DIR}/snmp/snmpa_storage_0/LEO-STORAGE
+    snmp_agent = {SNMPA-DIR}/snmp/snmpa_storage_0/LEO-STORAGE
 
 
 **[Erlang VM related properties]**
@@ -574,18 +574,18 @@ LeoFS Storage
 +-------------------------+--------------------------------------------------------+
 |Property                 | Description                                            |
 +=========================+========================================================+
-|${STORAGE_ALIAS}         | Storage node's Alias name                              |
+|{STORAGE_ALIAS}          | Storage node's Alias name                              |
 +-------------------------+--------------------------------------------------------+
-|${STORAGE_IP}            | Storage node's IP-Address                              |
+|{STORAGE_IP}             | Storage node's IP-Address                              |
 +-------------------------+--------------------------------------------------------+
-|${SNMPA-DIR}             | SNMPA configuration files directory                    |
+|{SNMPA-DIR}              | SNMPA configuration files directory                    |
 +-------------------------+--------------------------------------------------------+
 
 .. code-block:: bash
 
     ## Name of the leofs-storage node
     ## nodename = storage_0@127.0.0.1
-    nodename = ${STORAGE_ALIAS}@${STORAGE_IP}
+    nodename = {STORAGE_ALIAS}@{STORAGE_IP}
 
     ## Cookie for distributed node communication.  All nodes in the same cluster
     ## should use the same cookie or they will not be able to communicate.
@@ -610,7 +610,7 @@ LeoFS Storage
     process_limit = 1048576
 
     ## Path of SNMP-agent configuration
-    snmp_conf = ${SNMPA-DIR}/snmp/snmpa_storage_0/leo_storage_snmp
+    snmp_conf = {SNMPA-DIR}/snmp/snmpa_storage_0/leo_storage_snmp
 
 
 .. index::
@@ -625,7 +625,7 @@ LeoFS Gateway
 
 **[leo_gateway.conf]**
 
-* The ``leo_gateway.conf`` location: **${LEOFS_HOME}/package/gateway/etc/leo_gateway.conf**
+* The ``leo_gateway.conf`` location: **{LEOFS_HOME}/package/gateway/etc/leo_gateway.conf**
 * Modification of the required items:
 
 +---------------------------+----------------------------------------------------------------------------------+
@@ -633,27 +633,27 @@ LeoFS Gateway
 +===========================+==================================================================================+
 | **Basic items**                                                                                              |
 +---------------------------+----------------------------------------------------------------------------------+
-|${MANAGER_MASTER_IP}       | Manager-master node's IP-address                                                 |
+|{MANAGER_MASTER_IP}        | Manager-master node's IP-address                                                 |
 +---------------------------+----------------------------------------------------------------------------------+
-|${MANAGER_SLAVE_IP}        | Manager-slave node's IP-address                                                  |
+|{MANAGER_SLAVE_IP}         | Manager-slave node's IP-address                                                  |
 +---------------------------+----------------------------------------------------------------------------------+
-|${HTTP_HANDLER}            | Gateway's HTTP API to use, either ``s3`` (default) or ``rest``                   |
+|{HTTP_HANDLER}             | Gateway's HTTP API to use, either ``s3`` (default) or ``rest``                   |
 +---------------------------+----------------------------------------------------------------------------------+
-|${LISTENING_PORT}          | Port number the Gateway uses for HTTP connections                                |
+|{LISTENING_PORT}           | Port number the Gateway uses for HTTP connections                                |
 +---------------------------+----------------------------------------------------------------------------------+
-|${NUM_OF_LISTENER}         | Numbers of processes listening for connections                                   |
+|{NUM_OF_LISTENER}          | Numbers of processes listening for connections                                   |
 +---------------------------+----------------------------------------------------------------------------------+
-|${MAX_KEEPALIVE}           | Max number of requests allowed in a single keep-alive session. Defaults to 1024. |
+|{MAX_KEEPALIVE}            | Max number of requests allowed in a single keep-alive session. Defaults to 1024. |
 +---------------------------+----------------------------------------------------------------------------------+
-|${SNMPA-DIR}               | SNMPA configuration files directory                                              |
+|{SNMPA-DIR}                | SNMPA configuration files directory                                              |
 |                           |                                                                                  |
-|                           | - ref:${LEOFS_SRC}/apps/leo_gateway/snmp/                                        |
+|                           | - ref:{LEOFS_SRC}/apps/leo_gateway/snmp/                                         |
 |                           |                                                                                  |
 |                           | - [snmpa_gateway_0|snmpa_gateway_1|snmpa_gateway_0]                              |
 +---------------------------+----------------------------------------------------------------------------------+
 | **Cache related items**                                                                                      |
 +---------------------------+----------------------------------------------------------------------------------+
-|${IS_HTTP_CACHE}           | Cache method: **http** OR **inner** *(default)*                                  |
+|{IS_HTTP_CACHE}            | Cache method: **http** OR **inner** *(default)*                                  |
 |                           |                                                                                  |
 |                           | +-----+---------------------------------------------------------------------+    |
 |                           | |true |HTTP-based cache server, like *Varnish* OR *Squid*                   |    |
@@ -668,25 +668,25 @@ LeoFS Gateway
 |                           | |     | +----------+--------------------------------------------+           |    |
 |                           | +-----+---------------------------------------------------------------------+    |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_RAM_CAPACITY}      | Memory cache capacity in bytes                                                   |
+|{CACHE_RAM_CAPACITY}       | Memory cache capacity in bytes                                                   |
 |                           |                                                                                  |
 |                           | (ex. 4000000000 means using 4GB memory cache)                                    |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_DISC_CAPACITY}     | Disk cache capacity in bytes - default: 0 Bytes (disabled)                       |
+|{CACHE_DISC_CAPACITY}      | Disk cache capacity in bytes - default: 0 Bytes (disabled)                       |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_DISC_THRESHOLD_LEN}| When the length of the object exceeds this value, store the object on disk       |
+|{CACHE_DISC_THRESHOLD_LEN} | When the length of the object exceeds this value, store the object on disk       |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_DISC_DIR_DATA}     | Directory for the disk cache data                                                |
+|{CACHE_DISC_DIR_DATA}      | Directory for the disk cache data                                                |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_DISC_DIR_JOURNAL}  | Directory for the disk cache journal                                             |
+|{CACHE_DISC_DIR_JOURNAL}   | Directory for the disk cache journal                                             |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_EXPIRE}            | Cache Expire in seconds                                                          |
+|{CACHE_EXPIRE}             | Cache Expire in seconds                                                          |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_MAX_CONTENT_LEN}   | Cache Max Content Length in bytes                                                |
+|{CACHE_MAX_CONTENT_LEN}    | Cache Max Content Length in bytes                                                |
 |                           |                                                                                  |
 |                           | Note: *LeoFS-Gateway can cache up to 1MB*                                        |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_CONTENT_TYPE}      | Cache Content Type                                                               |
+|{CACHE_CONTENT_TYPE}       | Cache Content Type                                                               |
 |                           |                                                                                  |
 |                           | ex-1) [image/png, image/jpeg]                                                    |
 |                           |                                                                                  |
@@ -696,7 +696,7 @@ LeoFS Gateway
 |                           |                                                                                  |
 |                           |       When value is empty, all objects are cached.                               |
 +---------------------------+----------------------------------------------------------------------------------+
-|${CACHE_PATH_PATTERNS}     | Cache Path Pattern (regular expression)                                          |
+|{CACHE_PATH_PATTERNS}      | Cache Path Pattern (regular expression)                                          |
 |                           |                                                                                  |
 |                           | ex-1) [/img/.+, /css/.+]                                                         |
 |                           |                                                                                  |
@@ -750,22 +750,22 @@ LeoFS Gateway
     ## --------------------------------------------------------------------
     ## Name of Manager node(s)
     ## managers = [manager_0@127.0.0.1, manager_1@127.0.0.1]
-    managers = [${MANAGER_MASTER_IP}, ${MANAGER_SLAVE_IP}]
+    managers = [{MANAGER_MASTER_IP}, {MANAGER_SLAVE_IP}]
 
     ## --------------------------------------------------------------------
     ## GATEWAY
     ## --------------------------------------------------------------------
     ## Gateway’s HTTP API to use: [s3 | rest | embed]
-    http.handler = ${HTTP_HANDLER}
+    http.handler = {HTTP_HANDLER}
 
     ## Port number the Gateway uses for HTTP connections
-    http.port = ${LISTENING_PORT}
+    http.port = {LISTENING_PORT}
 
     ## Numbers of processes listening for connections
-    http.num_of_acceptors = ${NUM_OF_LISTENER}
+    http.num_of_acceptors = {NUM_OF_LISTENER}
 
     ## Maximum number of requests allowed in a single keep-alive session
-    http.max_keepalive = ${MAX_KEEPALIVE}
+    http.max_keepalive = {MAX_KEEPALIVE}
 
     ## Total number of virtual directories
     ## http.layer_of_dirs = 12
@@ -809,39 +809,39 @@ LeoFS Gateway
     ## If this parameter is 'true', Gateway turns on HTTP-based cache server, like Varnish OR Squid.
     ## If this parameter is 'false', Stores objects into the Gateway’s memory.
     ## When operating READ, the Etag of the cache is compared with a backend storage’s Etag.
-    cache.http_cache = ${IS_HTTP_CACHE}
+    cache.http_cache = {IS_HTTP_CACHE}
 
     ## A number of cache workers
     ## cache.cache_workers = 16
 
     ## Memory cache capacity in bytes
-    cache.cache_ram_capacity  = ${CACHE_RAM_CAPACITY}
+    cache.cache_ram_capacity  = {CACHE_RAM_CAPACITY}
 
     ## Disk cache capacity in bytes
-    cache.cache_disc_capacity = ${CACHE_DISC_CAPACITY}
+    cache.cache_disc_capacity = {CACHE_DISC_CAPACITY}
 
     ## When the length of the object exceeds this value, store the object on disk
-    cache.cache_disc_threshold_len = ${CACHE_DISC_THRESHOLD_LEN}
+    cache.cache_disc_threshold_len = {CACHE_DISC_THRESHOLD_LEN}
 
     ## Directory for the disk cache data
-    cache.cache_disc_dir_data    = ${CACHE_DISC_DIR_DATA}
+    cache.cache_disc_dir_data    = {CACHE_DISC_DIR_DATA}
 
     ## Directory for the disk cache journal
-    cache.cache_disc_dir_journal = ${CACHE_DISC_DIR_JOURNAL}
+    cache.cache_disc_dir_journal = {CACHE_DISC_DIR_JOURNAL}
 
     ## Cache Expire in seconds
-    cache.cache_expire = ${CACHE_EXPIRE}
+    cache.cache_expire = {CACHE_EXPIRE}
 
     ## Cache Max Content Length in bytes
-    cache.cache_max_content_len = ${CACHE_MAX_CONTENT_LEN}
+    cache.cache_max_content_len = {CACHE_MAX_CONTENT_LEN}
 
     ## Cache Content Type(s)
     ## In case of "empty", all objects are cached.
-    cache.cachable_content_type = ${CACHE_CONTENT_TYPE}
+    cache.cachable_content_type = {CACHE_CONTENT_TYPE}
 
     ## Cache Path Pattern(s) (regular expression)
     ## In case of "empty", all objects are cached.
-    cache.cachable_path_pattern = ${CACHE_PATH_PATTERNS}
+    cache.cachable_path_pattern = {CACHE_PATH_PATTERNS}
 
     ## --------------------------------------------------------------------
     ## GATEWAY - Timeout
@@ -907,7 +907,7 @@ LeoFS Gateway
     queue_dir  = ./work/queue
 
     ## Directory of SNMP agent configuration
-    snmp_agent = ${SNMPA-DIR}/snmp/snmpa_gateway_0/LEO-GATEWAY
+    snmp_agent = {SNMPA-DIR}/snmp/snmpa_gateway_0/LEO-GATEWAY
 
 
 
@@ -918,18 +918,18 @@ LeoFS Gateway
 +--------------------+--------------------------------------------------------+
 |Property            | Description                                            |
 +====================+========================================================+
-|${GATEWAY_ALIAS}    | Gateway node's Alias name                              |
+|{GATEWAY_ALIAS}     | Gateway node's Alias name                              |
 +--------------------+--------------------------------------------------------+
-|${GATEWAY_IP}       | Gateway node's IP-Address                              |
+|{GATEWAY_IP}        | Gateway node's IP-Address                              |
 +--------------------+--------------------------------------------------------+
-|${SNMPA-DIR}        | SNMPA configuration files directory                    |
+|{SNMPA-DIR}         | SNMPA configuration files directory                    |
 +--------------------+--------------------------------------------------------+
 
 .. code-block:: bash
 
     ## Name of the leofs-gateway node
     ## nodename = gateway_0@127.0.0.1
-    nodename = ${GATEWAY_ALIAS}@${GATEWAY_IP}
+    nodename = {GATEWAY_ALIAS}@{GATEWAY_IP}
 
     ## Cookie for distributed node communication.  All nodes in the same cluster
     ## should use the same cookie or they will not be able to communicate.
@@ -954,7 +954,7 @@ LeoFS Gateway
     process_limit = 1048576
 
     ## Path of SNMP-agent configuration
-    snmp_conf = ${SNMPA-DIR}/snmp/snmpa_gateway_0/leo_gateway_snmp
+    snmp_conf = {SNMPA-DIR}/snmp/snmpa_gateway_0/leo_gateway_snmp
 
 \
 
