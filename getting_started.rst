@@ -59,7 +59,7 @@ Install required libraries using yum (CentOS 6.x)
    # yum install libuuid-devel cmake check check-devel
 
 Install required libraries using apt-get (Ubuntu Server 12.04 LTS or Higher)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .. index::
    pair: Ubuntu-12.04; Installation
 
