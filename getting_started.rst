@@ -6,26 +6,6 @@
 Getting Started
 ================================
 
--------------------
-System Requirements
--------------------
-LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS or Higher|13.04 and CentOS 6.x, but should work on
-most Linux platforms with the following software:
-
-* `Erlang/OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
-* `Erlang/OTP R16B03-1 <http://www.erlang.org/download_release/23>`_
-
-
-LeoFS includes the following Erlang libraries:
-
-* `Basho Bitcask <https://github.com/basho/bitcask>`_
-* `Basho eleveldb <https://github.com/basho/eleveldb>`_
-* `Nine Nines Cowboy <https://github.com/extend/cowboy>`_
-* `Boundary Folsom <https://github.com/boundary/folsom>`_
-* `Szktty Erlang LZ4 <https://github.com/szktty/erlang-lz4>`_
-
-We recommend that you use a 64bit system to be able to handle large files.
-
 .. index::
    pair: LeoFS; Download
 
@@ -33,7 +13,6 @@ We recommend that you use a 64bit system to be able to handle large files.
 Getting LeoFS
 -------------
 * Leo Project/leofs: <https://github.com/leo-project/leofs>
-
 
 ------------------------------------------------------
 Quick Start -1 All in one for Application Development
@@ -49,82 +28,37 @@ This section is a step by step guide to setting up LeoFS for the first time. By 
 1. Install
 ^^^^^^^^^^
 
-Install required libraries using yum (CentOS 6.x)
+* Download a LeoFS package from `LeoFS website <http://leo-project.net/leofs/download.html>`_
+
+.. _install_leofs_label:
+
+Install LeoFS on CentOS-6.x
 """""""""""""""""""""""""""""""""""""""""""""""""
 .. index::
-   pair: CentOS-6.x; Installation
+   pair: CentOS-6; Installation
 
 ::
 
-   # yum install libuuid-devel cmake check check-devel
+    $ wget http://leo-project.net/leofs/packages/rpm/x86_64/leofs-{VERSION}.x86_64.rpm
+    $ sudo rpm -ivh leofs-{VERSION}.x86_64.rpm
+    $ ls -l /usr/local/leofs/
+    total 4
+    drwxr-xr-x 6 root   root   4096 Jun 20 15:37 {VERSION}
+    $ chown -R {USER}:{GROUP} /usr/local/leofs/{VERSION}
 
-Install required libraries using apt-get (Ubuntu Server 12.04 LTS or Higher)
+Install LeoFS on Ubuntu Server 12.04 LTS or Higher
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .. index::
-   pair: Ubuntu-12.04; Installation
-
-::
-
-   # sudo apt-get install build-essential libtool libncurses5-dev libssl-dev cmake check
-
-.. _erlang-install-label:
-
-Erlang (CentOS, Ubuntu, Other Linux OS)
-"""""""""""""""""""""""""""""""""""""""""""
+   pair: Ubuntu; Installation
 
 .. code-block:: bash
 
-   ##
-   ## 1. Install libatomic
-   ##
-   $ wget http://www.hpl.hp.com/research/linux/atomic_ops/download/libatomic_ops-7.2d.tar.gz
-   $ tar xzvf libatomic_ops-7.2d.tar.gz
-   $ cd libatomic_ops-7.2d
-   $ ./configure --prefix=/usr/local
-   $ make
-   $ sudo make install
-
-   ##
-   ## 2. Install Erlang (R16B03-1)
-   ##
-   $ wget http://www.erlang.org/download/otp_src_R16B03-1.tar.gz
-   $ tar xzf otp_src_R16B03-1.tar.gz
-   $ cd otp_src_R16B03-1
-   $ ./configure --prefix=/usr/local/erlang/R16B03-1 \
-                 --enable-smp-support \
-                 --enable-m64-build \
-                 --enable-halfword-emulator \
-                 --enable-kernel-poll \
-                 --without-javac \
-                 --disable-native-libs \
-                 --disable-hipe \
-                 --disable-sctp \
-                 --enable-threads \
-                 --with-libatomic_ops=/usr/local
-   $ make
-   $ sudo make install
-
-   ##
-   ## 3. Set PATH
-   ##
-   $ vi ~/.profile
-       ## append the follows:
-       export ERL_HOME=/usr/local/erlang/R16B03-1
-       export PATH=$PATH:$ERL_HOME/bin
-
-   $ source ~/.profile
-
-
-.. _leofs-install-label:
-
-LeoFS
-"""""""""
-
-.. code-block:: bash
-
-    $ git clone https://github.com/leo-project/leofs.git
-    $ cd leofs
-    $ make && make release
+    $ wget http://leo-project.net/leofs/packages/ubuntu/x86_64/leofs_{VERSION}_amd64.deb
+    $ sudo dpkg -i
+    $ ls -l /usr/local/leofs/
+    total 4
+    drwxr-xr-x 6 root   root   4096 Jun 20 15:37 {VERSION}
+    $ chown -R {USER}:{GROUP} /usr/local/leofs/{VERSION}
 
 
 2. Configuration
@@ -140,8 +74,8 @@ Modify “/etc/hosts”
 
     $ sudo vi /etc/hosts
 
-    ## Replace ${BUCKET_NAME} with the name of the bucket ##
-    127.0.0.1 localhost ${BUCKET_NAME}.localhost
+    ## Replace {BUCKET_NAME} with the name of the bucket ##
+    127.0.0.1 localhost {BUCKET_NAME}.localhost
 
 
 3. Launch LeoFS' managers and storage
@@ -153,7 +87,7 @@ Modify “/etc/hosts”
 
 .. code-block:: bash
 
-    $ cd $LEOFS_ROOT/package
+    $ cd /usr/local/leofs/{VERSION}
     $ leo_manager_0/bin/leo_manager start
     $ leo_manager_1/bin/leo_manager start
     $ leo_storage/bin/leo_storage start
@@ -222,7 +156,7 @@ Modify “/etc/hosts”
 .. code-block:: bash
 
     $ telnet 127.0.0.1 10010
-    > create-user ${YOUR_NAME}
+    > create-user {YOUR_NAME}
     access-key-id: 05dcba94333c7590a635
     secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
@@ -245,7 +179,7 @@ Modify “/etc/hosts”
 .. code-block:: bash
 
     $ telnet 127.0.0.1 10010
-    > add-bucket ${BUCKET_NAME} ${YOUR_ACCESS_KEY_ID}
+    > add-bucket {BUCKET_NAME} {YOUR_ACCESS_KEY_ID}
     ok
 
 * Insert some data into LeoFS by using any S3 client as mentioned above
@@ -254,7 +188,7 @@ Modify “/etc/hosts”
 .. code-block:: bash
 
     $ curl http://localhost:8080/your_bucket_name/path/to/file
-    > ${CONTENTS}
+    > {CONTENTS}
 
 .. note:: From version 0.16.0, you need to set ACL settings of your bucket to ``public-read`` by using the command :ref:`update-acl<s3-update-acl>` if you want to get the data stored in LeoFS via web browser.
 
@@ -292,8 +226,7 @@ Case example
 1. Install Erlang and LeoFS on each server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* :ref:`Install Erlang <erlang-install-label>`
-* :ref:`Install LeoFS <leofs-install-label>`
+* :ref:`Install LeoFS <install_leofs_label>`
 
 
 2. Configuration - Edit *"vm.args"* on each server
@@ -460,7 +393,7 @@ Case example
 .. code-block:: bash
 
     $ telnet 127.0.0.1 10010
-    > create-user ${YOUR_NAME}
+    > create-user {YOUR_NAME}
     access-key-id: 05dcba94333c7590a635
     secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
@@ -473,7 +406,7 @@ Case example
 .. code-block:: bash
 
     $ telnet 127.0.0.1 10010
-    > add-bucket ${BUCKET_NAME} ${YOUR_ACCESS_KEY_ID}
+    > add-bucket {BUCKET_NAME} {YOUR_ACCESS_KEY_ID}
     ok
 
 * Insert some data into LeoFS by using any S3 client as mentioned above
@@ -482,7 +415,7 @@ Case example
 .. code-block:: bash
 
     $ curl http://localhost:8080/your_bucket_name/path/to/file
-    > ${CONTENTS}
+    > {CONTENTS}
 
 .. note:: From version 0.16.0, you need to set ACL settings of your bucket to ``public-read`` by using the command :ref:`update-acl<s3-update-acl>` if you want to get the data stored in LeoFS via web browser.
 
