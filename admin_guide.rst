@@ -232,13 +232,13 @@ Table of Storage Cluster's Commands
 +=================================+===================================================================================================+
 | *Storage-node related commands*                                                                                                     |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
-| detach `${storage-node}`        | * Remove a storage node from the LeoFS storage-cluster                                            |
+| detach `{STORAGE_NODE}`         | * Remove a storage node from the LeoFS storage-cluster                                            |
 |                                 | * Current status: ``running`` | ``stop``                                                          |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
-| suspend `${storage-node}`       | * Suspend a storage node for maintenance. This command does NOT change the "routing-table (RING)" |
+| suspend `{STORAGE_NODE}`        | * Suspend a storage node for maintenance. This command does NOT change the "routing-table (RING)" |
 |                                 | * Current status: ``running``                                                                     |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
-| resume `${storage-node}`        | * Resume a storage node                                                                           |
+| resume `{STORAGE_NODE}`         | * Resume a storage node                                                                           |
 |                                 | * Current status: ``suspended`` | ``restarted``                                                   |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
 | *Storage-cluster related commands*                                                                                                  |
@@ -247,17 +247,17 @@ Table of Storage Cluster's Commands
 +---------------------------------+---------------------------------------------------------------------------------------------------+
 | rebalance                       | * Move or Copy files into the LeoFS storage-cluster due to changed RING                           |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
-| whereis `${file-path}`          | * Retrieve status of an assigned file                                                             |
+| whereis `{FILE_PATH}`           | * Retrieve status of an assigned file                                                             |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
 | **Recover**                                                                                                                         |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
-| recover file `${file-path}`     | * Synchronize an object between nodes in charge                                                   |
+| recover file `{FILE_PATH}`      | * Synchronize an object between nodes in charge                                                   |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
-| recover node `${storage-node}`  | * Recover belonging target node's objects                                                         |
+| recover node `{STORAGE_NODE}`   | * Recover belonging target node's objects                                                         |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
-| recover ring `${storage-node}`  | * Synchronize target node's RING with Manager's RING                                              |
+| recover ring `{STORAGE_NODE}`   | * Synchronize target node's RING with Manager's RING                                              |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
-| recover cluster `${cluster-id}` | * [v1.0.0-] Synchronize objects between local-cluster with a remote-cluster                       |
+| recover cluster `{CLUSTER_ID}`  | * [v1.0.0-] Synchronize objects between local-cluster with a remote-cluster                       |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
 
 .. index::
@@ -268,7 +268,7 @@ Table of Storage Cluster's Commands
 **'detach'** - Storage node is removed from the LeoFS-Cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command: ``detach ${storage-node}``
+Command: ``detach {STORAGE_NODE}``
 
 ::
 
@@ -283,7 +283,7 @@ Command: ``detach ${storage-node}``
 **'suspend'** - Suspend a storage node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command: ``suspend ${storage-node}``
+Command: ``suspend {STORAGE_NODE}``
 
 ::
 
@@ -296,7 +296,7 @@ Command: ``suspend ${storage-node}``
 **'resume'** - Resume a storage node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command: ``resume ${storage-node}``
+Command: ``resume {STORAGE_NODE}``
 
 ::
 
@@ -328,7 +328,7 @@ Command: ``rebalance``
 
 Paths used by `whereis` are ruled by :ref:`this rule <s3-path-label>`
 
-Command: ``whereis ${file-path}``
+Command: ``whereis {FILE_PATH}``
 
 ::
 
@@ -390,20 +390,20 @@ Storage Maintenance Commands
 +===========================================================+================================================================+
 | **Disk Usage**                                                                                                             |
 +-----------------------------------------------------------+----------------------------------------------------------------+
-| du `${storage-node}`                                      | * Display disk usages (like Unix du command)                   |
+| du `{STORAGE_NODE}`                                       | * Display disk usages (like Unix du command)                   |
 +-----------------------------------------------------------+----------------------------------------------------------------+
-| du detail `${storage-node}`                               | * Display disk usages in details (like Unix du command)        |
+| du detail `{STORAGE_NODE}`                                | * Display disk usages in details (like Unix du command)        |
 +-----------------------------------------------------------+----------------------------------------------------------------+
 | **Compaction**                                                                                                             |
 +-----------------------------------------------------------+----------------------------------------------------------------+
-| compact start `${storage-node}` `all | ${num_of_targets}` | * Compact raw files used by the LeoFS Storage subsystem        |
-| `[${num_of_compact_proc}]`                                | * Default ${num_of_compact_proc} is '3'                        |
+| compact start `{STORAGE_NODE}` `all` | `{NUM_OF_TARGETS}` | * Compact raw files used by the LeoFS Storage subsystem        |
+| `[{NUM_OF_COMPACT_PROC}]`                                 | * Default {NUM_OF_COMPACT_PROC} is '3'                         |
 +-----------------------------------------------------------+----------------------------------------------------------------+
-| compact suspend `${storage-node}`                         | * Suspend a compaction job in progress                         |
+| compact suspend `{STORAGE_NODE}`                          | * Suspend a compaction job in progress                         |
 +-----------------------------------------------------------+----------------------------------------------------------------+
-| compact resume  `${storage-node}`                         | * Resume a suspended compaction job                            |
+| compact resume  `{STORAGE_NODE}`                          | * Resume a suspended compaction job                            |
 +-----------------------------------------------------------+----------------------------------------------------------------+
-| compact status  `${storage-node}`                         | * Display compaction statuses                                  |
+| compact status  `{STORAGE_NODE}`                          | * Display compaction statuses                                  |
 |                                                           | * Compaction's status: ``idle``, ``running``, ``suspend``      |
 +-----------------------------------------------------------+----------------------------------------------------------------+
 
@@ -416,7 +416,7 @@ Storage Maintenance Commands
 
 **'du'** - Display disk usage (summary)
 
-Command: ``du ${storage-node}``
+Command: ``du {STORAGE_NODE}``
 
 ::
 
@@ -433,7 +433,7 @@ Command: ``du ${storage-node}``
 
 **'du detail'** - Display disk usage in details (per raw file)
 
-Command: ``du detail ${storage-node}``
+Command: ``du detail {STORAGE_NODE}``
 
 ::
 
@@ -476,9 +476,9 @@ Command: ``du detail ${storage-node}``
 
 **'compact start'** - Start doing compaction raw-files with targets and a number of compaction-processes
 
-Command: ``compact start ${storage-node} all | ${num_of_targets} [${num_of_compact_proc}]``
+Command: ``compact start {STORAGE_NODE} all | {NUM_OF_TARGETS} [{NUM_OF_COMPACT_PROC}]``
 
-.. note:: Default ``${num_of_compact_proc}`` is '3' - You can control the number of processes to execute compaction in parallel. It enables you to get maximum performance by setting an appropriate number corresponding to the number of cores.
+.. note:: Default ``{NUM_OF_COMPACT_PROC}`` is '3' - You can control the number of processes to execute compaction in parallel. It enables you to get maximum performance by setting an appropriate number corresponding to the number of cores.
 
 ::
 
@@ -499,7 +499,7 @@ Command: ``compact start ${storage-node} all | ${num_of_targets} [${num_of_compa
 
 **'compact suspend'** - Suspend a compaction job in progress
 
-Command: ``compact suspend ${storage-node}``
+Command: ``compact suspend {STORAGE_NODE}``
 
 ::
 
@@ -512,7 +512,7 @@ Command: ``compact suspend ${storage-node}``
 
 **'compact resume'** - Resume a suspended compaction job
 
-Command: ``compact resume ${storage-node}``
+Command: ``compact resume {STORAGE_NODE}``
 
 ::
 
@@ -525,7 +525,7 @@ Command: ``compact resume ${storage-node}``
 
 **'compact status'** - Retrieve compaction statuses
 
-Command: ``compact status ${storage-node}``
+Command: ``compact status {STORAGE_NODE}``
 
 * Compaction's status: ``idle``, ``running``, ``suspend``
 
@@ -545,15 +545,15 @@ MultiDC-related Commands
 
 \
 
-+-----------------------------------------------------------------+-------------------------------------------------------------------------------+
-| Command                                                         | Explanation                                                                   |
-+=================================================================+===============================================================================+
-| join-cluster ${remote-manager-master} ${remote-manager-slave}   | * [1.0.0-] Communicate between the local-cluster and a remote cluster         |
-+-----------------------------------------------------------------+-------------------------------------------------------------------------------+
-| remove-cluster ${remote-manager-master} ${remote-manager-slave} | * [1.0.0-] Remove communication between clusters                              |
-+-----------------------------------------------------------------+-------------------------------------------------------------------------------+
-| cluster-status                                                  | * [1.0.0-] Retrieve current status of clusters                                |
-+-----------------------------------------------------------------+-------------------------------------------------------------------------------+
++-------------------------------------------------------------------+-------------------------------------------------------------------------------+
+| Command                                                           | Explanation                                                                   |
++===================================================================+===============================================================================+
+| join-cluster `{REMOTE_MANAGER_MASTER}` `{REMOTE_MANAGER_SLAVE}`   | * [1.0.0-] Communicate between the local-cluster and a remote cluster         |
++-------------------------------------------------------------------+-------------------------------------------------------------------------------+
+| remove-cluster `{REMOTE_MANAGER_MASTER}` `{REMOTE_MANAGER_SLAVE}` | * [1.0.0-] Remove communication between clusters                              |
++-------------------------------------------------------------------+-------------------------------------------------------------------------------+
+| cluster-status                                                    | * [1.0.0-] Retrieve current status of clusters                                |
++-------------------------------------------------------------------+-------------------------------------------------------------------------------+
 
 \
 
@@ -567,7 +567,7 @@ MultiDC-related Commands
 **'join-cluster'** - Communicate between the local-cluster and a remote cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command: ``join-cluster ${remote-manager-master} ${remote-manager-slave}``
+Command: ``join-cluster {REMOTE_MANAGER_MASTER} {REMOTE_MANAGER_SLAVE}``
 
 ::
 
@@ -586,7 +586,7 @@ Command: ``join-cluster ${remote-manager-master} ${remote-manager-slave}``
 **'remove-cluster'** - Remove communication between clusters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command: ``remove-cluster ${remote-manager-master} ${remote-manager-slave}``
+Command: ``remove-cluster {REMOTE_MANAGER_MASTER} {REMOTE_MANAGER_SLAVE}``
 
 ::
 
@@ -626,356 +626,15 @@ Gateway Maintenance Commands
 +------------------------------------------------------+-----------------------------------------------------------------------------------+
 | Command                                              | Explanation                                                                       |
 +======================================================+===================================================================================+
-| purge ${file-path}                                   | * Purge a cached file if the specified file exists in the cache                   |
+| purge `{FILE_PATH}`                                  | * Purge a cached file if the specified file exists in the cache                   |
 +------------------------------------------------------+-----------------------------------------------------------------------------------+
-| remove ${gateway-node}                               | * Remove the gateway node from manager when the state of the node is 'stop'       |
+| remove `{GATEWAY_NODE}`                              | * Retrieve status of the cluster                                                  |
+|                                                      | * Retrieve status of the node                                                     |
 +------------------------------------------------------+-----------------------------------------------------------------------------------+
-
-.. _purge:
-
-.. index::
-   purge-command
-
-**'purge'**
-^^^^^^^^^^^
-
-Paths used by `purge` are ruled by :ref:`this rule <s3-path-label>`
-
-Command: ``purge ${file-path}``
-
-::
-
-    purge leofs.org/is/s3/comaptible/storage.key
-    OK
-
-\
-\
-
-Manager Maintenance Commands
-----------------------------
-
-+------------------------------------------------------+----------------------------------------------------------------+
-| Command                                              | Explanation                                                    |
-+======================================================+================================================================+
-| update-managers ${manager-master} ${manager-slave}   | * Update manager's nodes to specified master/slave nodes       |
-+------------------------------------------------------+----------------------------------------------------------------+
-| backup-mnesia ${backup-filepath}                     | * Backup mnesia-data to specified filepath                     |
-+------------------------------------------------------+----------------------------------------------------------------+
-| restore-mnesia ${backup-filepath}                    | * Restore mnesia-data from specified filepath                  |
-+------------------------------------------------------+----------------------------------------------------------------+
-
-
-
-S3-API Commands
----------------
-
-\
-
-+------------------------------------------------------+-------------------------------------------------------------------+
-| Command                                              | Explanation                                                       |
-+======================================================+===================================================================+
-| create-user `${user-id}`                             | * Generate an S3 key pair (AccessKeyID and SecretAccessKey)       |
-+------------------------------------------------------+-------------------------------------------------------------------+
-| delete-user `${user-id}`                             | * Remove a user                                                   |
-+------------------------------------------------------+-------------------------------------------------------------------+
-| get-users                                            | * Retrieve all the registered users                               |
-+------------------------------------------------------+-------------------------------------------------------------------+
-| add-endpoint `${endpoint}`                           | * Register a new S3 Endpoint                                      |
-|                                                      | * LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`    |
-+------------------------------------------------------+-------------------------------------------------------------------+
-| delete-endpoint `${endpoint}`                        | * Delete an S3 Endpoint                                           |
-+------------------------------------------------------+-------------------------------------------------------------------+
-| get-endpoints                                        | * Retrieve all the registered S3 Endpoints                        |
-+------------------------------------------------------+-------------------------------------------------------------------+
-| add-bucket `${bucket}` `${access_key_id}`            | * Create a bucket from Manager(s) and Gateway(s)                  |
-+------------------------------------------------------+-------------------------------------------------------------------+
-| delete-bucket `${bucket}` `${access_key_id}`         | * Remove a bucket from Manager(s), Gateway(s) and Storage-cluster |
-+------------------------------------------------------+-------------------------------------------------------------------+
-| get-buckets                                          | * Retrieve all of registered buckets                              |
-+------------------------------------------------------+-------------------------------------------------------------------+
-| get-bucket `${access_key_id}`                        | * Retrieve buckets of a user                                      |
-+------------------------------------------------------+-------------------------------------------------------------------+
-| chown-bucket `${bucket}` `${access_key_id}`          | * Change owner of a bucket (v0.16.5-)                             |
-+------------------------------------------------------+-------------------------------------------------------------------+
-| update-acl `${bucket}` `${access_key_id}`            | * Update a ACL for a bucket (v0.16.0-)                            |
-| `private | public-read | public-read-write`          |                                                                   |
-+------------------------------------------------------+-------------------------------------------------------------------+
-| get-acl `${bucket}`                                  | * Retrieve a ACL for a bucket (v0.16.0-)                          |
-+------------------------------------------------------+-------------------------------------------------------------------+
-
-
-.. ### CREATE USER ###
-
-.. _s3-create-user:
-
-.. index::
-    create-user-command
-
-**'create-user'** - Create a user and generate an S3 key pair (AccessKeyID and SecretAccessKey)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``create-user ${user-id}``
-
-::
-
-    create-user test_account
-    access-key-id: be8111173c8218aaf1c3
-    secret-access-key: 929b09f9b794832142c59218f2907cd1c35ac163
-
-
-.. ### DELETE USER ###
-
-.. _s3-delete-user:
-
-.. index::
-    delete-user-command
-
-**'delete-user'** - Remove a user from LeoFS manager's DB
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``delete-user ${user-id}``
-
-::
-
-    delete-user test
-    ok
-
-
-.. ### GET USERS ###
-
-.. _s3-get-users:
-
-.. index::
-    get-users-command
-
-**'get-users'** - Retrieve users from LeoFS manager's DB
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``get-users``
-
-::
-
-    get-users
-    user_id     | access_key_id          | created_at
-    ------------+------------------------+---------------------------
-    _test_leofs | 05236                  | 2012-12-07 10:27:39 +0900
-    leo         | 39bbad4f3b837ed209fb   | 2012-12-07 10:27:39 +0900
-
-
-.. ### SET ENDPOINT ###
-
-.. _s3-add-endpoint:
-
-.. index::
-    add-endpoint-command
-
-**'add-endpoint'** - Register a new Endpoint
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`
-
-Command: ``add-endpoint ${endpoint}``
-
-::
-
-    add-endpoint test_account
-    OK
-
-
-.. ### DELETE ENDPOINTS ###
-
-.. _s3-delete-endpoint:
-
-.. index::
-    delete-endpoint-command
-
-**'delete-endpoint'** - Remove an Endpoint
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``delete-endpoint ${endpoint}``
-
-::
-
-    delete-endpoint test
-    OK
-
-
-.. ### GET ENDPOINTS ###
-
-.. _s3-get-endpoints:
-
-.. index::
-    get-endpoints-command
-
-**'get-endpoints'** - Retrieve all the registered Endpoints
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``get-endpoints``
-
-::
-
-    get-endpoints
-    endpoint         | created at
-    -----------------+---------------------------
-    s3.amazonaws.com | 2012-09-12 14:09:52 +0900
-    localhost        | 2012-09-12 14:09:52 +0900
-    leofs.org        | 2012-09-12 14:09:52 +0900
-
-.. ### ADD BUCKET ###
-.. _s3-add-bucket:
-
-.. index::
-    add-bucket-command
-
-**'add-bucket'** - Create a bucket from Manager(s) and Gateway(s)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``add-bucket ${bucket} ${access_key_id}``
-
-::
-
-    add-bucket backup 05236
-    OK
-
-
-.. ### DELETE BUCKET ###
-.. _s3-delete-bucket:
-
-.. index::
-    delete-bucket-command
-
-**'delete-bucket'** - Remove a bucket from Manager(s), Gateway(s) and Storage-cluster
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``delete-bucket ${bucket} ${access_key_id}``
-
-::
-
-    delete-bucket backup 05236
-    OK
-
-
-.. ### GET BUCKETS ###
-.. _s3-get-buckets:
-
-.. index::
-    get-buckets-command
-
-**'get-buckets'** - Retrieve list of buckets registered
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``get-buckets``
-
-::
-
-    get-buckets
-    cluster id   | bucket   | owner       | permissions                            | created at
-    -------------+----------+-------------+----------------------------------------+---------------------------
-    leofs_1      | backup   | _test_leofs | Me(full_control), Everyone(read)       | 2014-04-03 11:39:01 +0900
-    leofs_1      | docs     | _test_leofs | Me(full_control), Everyone(read)       | 2014-04-03 11:39:25 +0900
-    leofs_1      | logs     | _test_leofs | Me(full_control), Everyone(read,write) | 2014-04-03 11:39:38 +0900
-    leofs_1      | movie    | _test_leofs | Me(full_control)                       | 2014-04-03 11:39:45 +0900
-
-.. ### GET BUCKET ###
-.. _s3-get-bucket:
-
-.. index::
-    get-bucket-command
-
-**'get-bucket'** - Retrieve buckets of a user
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``get-bucket  ${access_key_id}``
-
-::
-
-    get-bucket 05236
-    bucket   | permissions                            | created at
-    ---------+----------------------------------------+---------------------------
-    backup   | Me(full_control), Everyone(read)       | 2014-04-03 11:39:01 +0900
-    docs     | Me(full_control), Everyone(read)       | 2014-04-03 11:39:25 +0900
-    logs     | Me(full_control), Everyone(read,write) | 2014-04-03 11:39:38 +0900
-    movie    | Me(full_control)                       | 2014-04-03 11:39:45 +0900
-
-
-.. ### CHANGE BUCKET OWNER ###
-.. _s3-chown-bucket:
-
-.. index::
-    chown-bucket-command
-
-**'chown-bucket'** - Change owner of a bucket (v0.16.5-)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``chown-bucket ${bucket} ${new_access_key_id}``
-
-::
-
-    chown-bucket backup 47ad5ca9
-    OK
-
-
-.. ### UPDATE ACL ###
-.. _s3-update-acl:
-
-.. index::
-    update-acl-command
-
-**'update-acl'** - Update a ACL for a bucket (v0.16.0-)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``update-acl ${bucket} ${access_key_id}``
-
-::
-
-    update-acl photo 05236 private
-    ok
-
-    update-acl photo 05236 public-read
-    ok
-
-    update-acl photo 05236 public-read-write
-    ok
-
-
-
-**Canned ACL**
-^^^^^^^^^^^^^^
-
-.. note:: When using S3-API, LeoFS supports a set of predefined grants, known as canned ACLs. Each canned ACL has a predefined a set of grantees and permissions. The following table lists the set of canned ACLs and the associated predefined grants.
-
-+------------------+-----------------------+------------------------------------------------------------------------+
-| Canned ACL       | Applies to            | Permissions added to ACL                                               |
-+==================+=======================+========================================================================+
-| private          | Bucket and object     | Owner gets FULL_CONTROL. No one else has access rights (default).      |
-+------------------+-----------------------+------------------------------------------------------------------------+
-| public-read      | Bucket and object     | Owner gets FULL_CONTROL. The AllUsers group gets READ access.          |
-+------------------+-----------------------+------------------------------------------------------------------------+
-| public-read-write| Bucket and object     | Owner gets FULL_CONTROL. The AllUsers group gets READ and WRITE access.|
-|                  |                       | Granting this on a bucket is generally not recommended.                |
-+------------------+-----------------------+------------------------------------------------------------------------+
-
-* Reference:`Access Control List (ACL) Overview <http://docs.aws.amazon.com/AmazonS3/latest/dev/ACLOverview.html>`_
-
-
-\
-\
-
-Miscellaneous Commands
-----------------------
-
-\
-
-+------------------------------------------------------+----------------------------------------------------------------+
-| Command                                              | Explanation                                                    |
-+======================================================+================================================================+
-| status [${NODE}]                                     | * Retrieve status of the cluster                               |
-|                                                      | * Retrieve status of the node                                  |
-+------------------------------------------------------+----------------------------------------------------------------+
-| dump-ring ${MANAGER}|${STORAGE}|${GATEWAY}           | * Dump ring and memeber-info [1.0.0-pre1 or higher ]           |
-+------------------------------------------------------+----------------------------------------------------------------+
-| history                                              | Retrieve history of operations                                 |
-+------------------------------------------------------+----------------------------------------------------------------+
+| dump-ring `{MANAGER}`|`{STORAGE}`|`{GATEWAY}`        | * Dump ring and memeber-info [1.0.0-pre1 or higher ]                              |
++------------------------------------------------------+-----------------------------------------------------------------------------------+
+| history                                              | Retrieve history of operations                                                    |
++------------------------------------------------------+-----------------------------------------------------------------------------------+
 
 
 .. index::
@@ -1016,7 +675,7 @@ Command-1: ``status``
       G    | gateway_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:21 +0900
       G    | gateway_1@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:21 +0900
 
-Command-2: ``status ${storage-node}`` OR ``status ${gateway-node}``
+Command-2: ``status {STORAGE_NODE}`` OR ``status {GATEWAY_NODE}``
 
 ::
 
@@ -1154,7 +813,7 @@ Adjust Every Path
     .
     .
     ## Mnesia dir
-    mnesia.dir = ./work/mnesia/${IP}
+    mnesia.dir = ./work/mnesia/{IP}
     .
     .
     .
@@ -1309,4 +968,3 @@ Format
 +---------------+------------------------------------------------------------+
 | 8             | Response (HTTP Status Code)                                |
 +---------------+------------------------------------------------------------+
-
