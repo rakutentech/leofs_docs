@@ -54,7 +54,7 @@ Install LeoFS on Ubuntu Server 12.04 LTS or Higher
 .. code-block:: bash
 
     $ wget http://leo-project.net/leofs/packages/ubuntu/x86_64/leofs_{VERSION}_amd64.deb
-    $ sudo dpkg -i
+    $ sudo dpkg -i leofs_{VERSION}_amd64.deb
     $ ls -l /usr/local/leofs/
     total 4
     drwxr-xr-x 6 root   root   4096 Jun 20 15:37 {VERSION}
