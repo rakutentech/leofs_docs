@@ -33,7 +33,7 @@ Install required libraries using yum (CentOS 6.x)
 
 ::
 
-   # yum install libuuid-devel cmake check check-devel
+   # yum install gcc glibc-devel make ncurses-devel openssl-devel autoconf libuuid-devel cmake check check-devel
 
 Install required libraries using apt-get (Ubuntu Server 12.04 LTS or Higher)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
