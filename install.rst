@@ -32,7 +32,8 @@ Install required libraries using yum (CentOS 6.5)
 
 ::
 
-   # yum install gcc glibc-devel make ncurses-devel openssl-devel autoconf libuuid-devel cmake check check-devel
+   $ sudo yum install gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf \
+                      libuuid-devel cmake check check-devel
 
 Install required libraries using apt-get (Ubuntu Server 12.04 LTS or Higher)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -41,7 +42,7 @@ Install required libraries using apt-get (Ubuntu Server 12.04 LTS or Higher)
 
 ::
 
-   # sudo apt-get install build-essential libtool libncurses5-dev libssl-dev cmake check
+   $ sudo apt-get install build-essential libtool libncurses5-dev libssl-dev cmake check
 
 Install "libatomic_ops" for R16B03-1  *(both CentOS and Ubuntu)*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
