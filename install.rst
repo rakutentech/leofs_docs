@@ -10,10 +10,9 @@ LeoFS installation
 
 System Requirements
 -------------------
-LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS or Higher|13.04 and CentOS 6.x, but should work on
+LeoFS development currently targets Debian 6, Ubuntu-Server 12.04 LTS or Higher and CentOS 6.5, but should work on
 most Linux platforms with the following software installed:
 
-* `Erlang/OTP R15B03-1 <http://www.erlang.org/download_release/16>`_
 * `Erlang/OTP R16B03-1 <http://www.erlang.org/download_release/23>`_
 
 
@@ -26,10 +25,10 @@ Installing Erlang
 Preparation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Install required libraries using yum (CentOS 6.x)
+Install required libraries using yum (CentOS 6.5)
 """""""""""""""""""""""""""""""""""""""""""""""""
 .. index::
-   pair: CentOS-6.x; Installation
+   pair: CentOS-6.5; Installation
 
 ::
 
@@ -44,7 +43,7 @@ Install required libraries using apt-get (Ubuntu Server 12.04 LTS or Higher)
 
    # sudo apt-get install build-essential libtool libncurses5-dev libssl-dev cmake check
 
-Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
+Install "libatomic_ops" for R16B03-1  *(both CentOS and Ubuntu)*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 .. code-block:: bash
@@ -56,29 +55,25 @@ Install "libatomic_ops" for R15B03-1  *(both CentOS and Ubuntu)*
    $ make
    $ sudo make install
 
-Download "Erlang R15B03-1"|"R16B03-1"
+Download "Erlang R16B03-1"
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
-
-   ## [R15B03-1]
-   $ cd $WORK_DIR
-   $ wget http://www.erlang.org/download/otp_src_R15B03-1.tar.gz
 
    ## [R16B03-1]
    $ cd $WORK_DIR
    $ wget http://www.erlang.org/download/otp_src_R16B03-1.tar.gz
 
 
-Build for Linux (CentOS, Debian and Others)
+Build Erlang on CentOS 6.5
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
-   ## [R15B03-1]
-   $ tar xzf otp_src_R15B03-1.tar.gz
-   $ cd otp_src_R15B03-1
-   $ ./configure --prefix=/usr/local/erlang/R15B03 \
+   $ tar xzf otp_src_R16B03-1.tar.gz
+   $ cd otp_src_R16B03-1
+   $ CFLAGS="-DOPENSSL_NO_EC=1" \
+     ./configure --prefix=/usr/local/erlang/R16B03-1 \
                  --enable-smp-support \
                  --enable-m64-build \
                  --enable-halfword-emulator \
@@ -89,10 +84,12 @@ Build for Linux (CentOS, Debian and Others)
                  --disable-sctp \
                  --enable-threads \
                  --with-libatomic_ops=/usr/local
-   $ make
-   $ sudo make install
 
-   ## [R16B03-1]
+Build Erlang on Debian and others
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
    $ tar xzf otp_src_R16B03-1.tar.gz
    $ cd otp_src_R16B03-1
    $ ./configure --prefix=/usr/local/erlang/R16B03-1 \
@@ -113,17 +110,9 @@ Confirm
 
 .. code-block:: bash
 
-    ## [R15B03-1]
-    $ erl
-    Erlang R15B03 (erts-5.9.3) [source] [64-bit halfword] [smp:2:2] [async-threads:0] [kernel-poll:false]
-
-    Eshell V5.9.3  (abort with ^G)
-    1>
-
-    ## [R16B03-1]
     Erlang R16B03-1 (erts-5.10.4) [source] [64-bit halfword] [smp:8:8] [async-threads:10] [kernel-poll:false]
 
-    Eshell V5.10.3  (abort with ^G)
+    Eshell V5.10.4  (abort with ^G)
     1>
 
 
@@ -132,10 +121,10 @@ XFS-related
 
 .. note:: We highly recommend using an XFS partition, as it is the file system that shows the better results with LeoFS. This section describes the installation instructions related to XFS. If you are deploying LeoFS on a **DEV environment**, you do NOT need to perform this operation.
 
-Install required libraries for XFS with yum (CentOS 6.x)
+Install required libraries for XFS with yum (CentOS 6.5)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. index::
-   pair: CentOS-6.x; Installation
+   pair: CentOS-6.5; Installation
 
 ::
 
