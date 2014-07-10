@@ -8,12 +8,14 @@
 Administration Guide
 ================================
 
+We explain core administrative tasks and practices that operators of LeoFS will want to consider.
+
 .. _operation-flow-diagram-label:
 
 Operation Flow Diagram
 -----------------------
 
-The documentation is the LeoFS operation flow diagram as follows:
+The LeoFS operation flow is as follows:
 
 .. image:: _static/images/leofs-flow-diagram.jpg
    :width: 780px
@@ -23,8 +25,7 @@ The documentation is the LeoFS operation flow diagram as follows:
 System launch order
 ----------------------
 
-The documentation in this section outlines core administrative tasks and practices that operators of LeoFS will want to consider.
-LeoFS' system launch is very simple:
+LeoFS's system launch process is very simple:
 
 .. image:: _static/images/leofs-order-of-system-launch.png
    :width: 640px
@@ -215,7 +216,7 @@ Storage Cluster Operation Commands
     pair: Operation; Command
 
 * LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
-* LeoFS operation flow diagram is :ref:`here <operation-flow-diagram-label>`.
+* Please refer :ref:`LeoFS operation flow diagram <operation-flow-diagram-label>`, too.
 
 
 .. index::
@@ -474,9 +475,9 @@ Command: ``du detail {STORAGE_NODE}``
 
 .. index:: compact-start-command
 
-**'compact start'** - Start doing compaction raw-files with targets and a number of compaction-processes
+**'compact start'** - Start compaction
 
-Command: ``compact start {STORAGE_NODE} all | {NUM_OF_TARGETS} [{NUM_OF_COMPACT_PROC}]``
+Command: ``compact start {STORAGE_NODE} (all | {NUM_OF_TARGETS}) [{NUM_OF_COMPACT_PROC}]``
 
 .. note:: Default ``{NUM_OF_COMPACT_PROC}`` is '3' - You can control the number of processes to execute compaction in parallel. It enables you to get maximum performance by setting an appropriate number corresponding to the number of cores.
 
