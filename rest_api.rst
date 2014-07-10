@@ -9,7 +9,14 @@ REST API
 Configuration
 -------------
 
-* You need to update ``${USE_S3_AUTH}`` and set its value to ``false`` in :ref:`Gateway configuration <conf_gateway_label>`
+* Update ``Gateway HTTP API`` in :ref:`your Gateway configuration <conf_gateway_label>`
+
+::
+
+    http.handler = rest
+
+\
+
 
 Interface
 ---------
