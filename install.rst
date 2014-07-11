@@ -2,7 +2,7 @@
 
 .. _leofs-installation-label:
 
-LeoFS installation
+LeoFS Installation
 ================================
 .. index::
    pair: Erlang; Installation
