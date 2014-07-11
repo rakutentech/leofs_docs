@@ -36,15 +36,14 @@ The detail document is `here <http://www.leofs.org/blog/2013/04/16/leofs_overvie
 Goals
 --------------------------------
 
-* LeoFS aims to provide the following advantages:
-    * HIGH Cost Performance Ratio
-        * Fast - Over 200MB/sec in a 10GE network
-        * A lower cost than other storage
-        * Easy management and easy operation
-    * HIGH Reliability
-        * Nine nines - 99.9999999% availability
-    * High Scalability
-        * Build a huge cluster at low cost
+* HIGH Reliability
+    * Nine nines - Operating ratios is 99.9999999%
+* High Scalability
+    * Build huge-cluster at low cost
+* HIGH Cost Performance
+    * Fast - Over 10Gbps
+    * A lower cost than other storage
+    * Provide easy management and easy operation
 
 Milestones
 --------------------------------
