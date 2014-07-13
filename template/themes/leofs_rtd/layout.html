@@ -72,13 +72,10 @@
 
   {# Keep modernizr in head - http://modernizr.com/docs/#installing #}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav" role="document">
-
   <div class="wy-grid-for-nav">
-
     {# SIDE NAV, TOGGLES ON MOBILE #}
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
@@ -100,32 +97,24 @@
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
       {# MOBILE NAV, TRIGGLES SIDE NAV ON TOGGLE #}
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
         <a href="{{ pathto(master_doc) }}">{{ project }}</a>
       </nav>
 
-
       {# PAGE CONTENT #}
       <div class="wy-nav-content">
         <div class="rst-content">
-          {% include "breadcrumbs.html" %}
           <div role="main">
             {% block body %}{% endblock %}
           </div>
-          {% include "footer.html" %}
         </div>
       </div>
-
     </section>
-
   </div>
-  {% include "versions.html" %}
 
   {% if not embedded %}
-
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'{{ url_root }}',
@@ -138,7 +127,6 @@
     {%- for scriptfile in script_files %}
       <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
     {%- endfor %}
-
   {% endif %}
 
   {# RTD hosts this file, so just load on non RTD builds #}

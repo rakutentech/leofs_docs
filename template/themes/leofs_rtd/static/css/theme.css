@@ -1886,7 +1886,7 @@ a .fa,a .rst-content .admonition-title,.rst-content a .admonition-title,a .rst-c
     opacity: 0;
     height: 0;
     line-height: 56px;
-    overflow: hidden;
+    overflow: block;
     -webkit-transition: all 0.3s ease-in;
     -moz-transition: all 0.3s ease-in;
     transition: all 0.3s ease-in
@@ -3374,7 +3374,7 @@ div[class^='highlight'] pre {
     top: 0;
     left: 0;
     width: 300px;
-    overflow: hidden;
+    overflow: block;
     min-height: 100%;
     background: #343131;
     z-index: 200
@@ -3497,7 +3497,7 @@ footer p {
         left: 85%;
         top: 0;
         height: 100%;
-        overflow: hidden
+        overflow: block
     }
 
 }
@@ -3507,7 +3507,7 @@ footer p {
     }
     .wy-nav-content {
         margin: 0;
-        background: #fcfcfc
+        background: #fff
     }
 
 }

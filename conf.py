@@ -12,7 +12,6 @@
 # serve to show the default.
 
 import sys, os
-# import sphinx_rtd_theme
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -255,7 +254,7 @@ texinfo_documents = [
 epub_title = u'LeoFS'
 epub_author = u'Leo Project'
 epub_publisher = u'Leo Project'
-epub_copyright = u'2012, Leo Project'
+epub_copyright = u'2012-2014, Leo Project'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
@@ -286,7 +285,7 @@ epub_copyright = u'2012, Leo Project'
 #epub_exclude_files = []
 
 # The depth of the table of contents in toc.ncx.
-#epub_tocdepth = 3
+epub_tocdepth = 3
 
 # Allow duplicate toc entries.
 #epub_tocdup = True
