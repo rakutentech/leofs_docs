@@ -2920,7 +2920,8 @@ div[class^='highlight'] pre {
     line-height: 1.5;
     display: block;
     overflow: auto;
-    color: #404040
+    color: #404040;
+    background: #f0f0f0;
 }
 @media print {
     .codeblock,pre.literal-block,.rst-content .literal-block,.rst-content pre.literal-block,div[class^='highlight'],div[class^='highlight'] pre {
