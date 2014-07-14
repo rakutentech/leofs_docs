@@ -3,8 +3,8 @@
 .. index::
    pair: LeoFS; Installation
 
-LeoFS
------
+Install LeoFS
+-------------
 
 This installation method is based on a source build, so if you do not have Erlang already installed, you need to first install Erlang. Also, building LeoFS from source requires Erlang R15B03-1 or R16B03-1.
 
