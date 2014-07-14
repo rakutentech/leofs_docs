@@ -77,6 +77,7 @@
 <body class="wy-body-for-nav" role="document">
 
   <!-- Header -->
+  <div>
   <header id="header-section" class="row" role="navigation">
     <div class="header-content">
       <a class="fa fa-bars expand-toc-icon pull-left" href="#"></a>
@@ -95,13 +96,14 @@
       </div>
     </div>
   </header>
+  </div>
 
   <div class="wy-grid-for-nav">
     {# SIDE NAV, TOGGLES ON MOBILE #}
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <!-- {% include "searchbox.html" %} -->
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        {% set toctree = toctree(maxdepth=2, collapse=false, includehidden=True) %}
+        {% set toctree = toctree(maxdepth=2, collapse=True, includehidden=True) %}
         {% if toctree %}
             {{ toctree }}
         {% else %}

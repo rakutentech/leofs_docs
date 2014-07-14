@@ -3,7 +3,7 @@
 .. _leofs-configuration-label:
 
 LeoFS Configuration
-======================
+===================
 
 .. index::
    pair: Configuration; Relationship of configuration files
