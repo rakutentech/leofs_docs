@@ -85,7 +85,7 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        {% set toctree = toctree(maxdepth=2, collapse=False, includehidden=True) %}
+        {% set toctree = toctree(maxdepth=2, collapse=false, includehidden=True) %}
         {% if toctree %}
             {{ toctree }}
         {% else %}
@@ -109,6 +109,7 @@
           <div role="main">
             {% block body %}{% endblock %}
           </div>
+          {% include "footer.html" %}
         </div>
       </div>
     </section>

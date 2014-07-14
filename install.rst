@@ -111,6 +111,7 @@ Confirm
 
 .. code-block:: bash
 
+    $ erl
     Erlang R16B03-1 (erts-5.10.4) [source] [64-bit halfword] [smp:8:8] [async-threads:10] [kernel-poll:false]
 
     Eshell V5.10.4  (abort with ^G)
@@ -129,7 +130,7 @@ Install required libraries for XFS with yum (CentOS 6.5)
 
 ::
 
-   # yum --enablerepo=centosplus install kmod-xfs xfsprogs xfsprogs-devel
+   $ sudo yum --enablerepo=centosplus install kmod-xfs xfsprogs xfsprogs-devel
 
 
 Create an XFS Partition (Volume)
@@ -145,7 +146,7 @@ Start fdisk
 
 ::
 
-   # fdisk /dev/sda
+   $ sudo fdisk /dev/sda
 
    The number of cylinders for this disk is set to 8908.
    There is nothing wrong with that, but this is larger than 1024,
@@ -195,7 +196,7 @@ Confirm
 
 ::
 
-   # fdisk /dev/sda
+   $ sudo fdisk /dev/sda
 
    The number of cylinders for this disk is set to 8908.
    There is nothing wrong with that, but this is larger than 1024,
@@ -220,7 +221,7 @@ Reboot
 
 ::
 
-   # reboot
+   $ sudo reboot
 
 Format the partition
 """""""""""""""""""""""""""
@@ -230,14 +231,14 @@ Format the partition
 
 ::
 
-   # mkfs.xfs -d agcount=4 -l size=32m {TARGET_PARTITION}
+   $ sudo mkfs.xfs -d agcount=4 -l size=32m {TARGET_PARTITION}
 
 Modify the "/etc/fstab" file
 """"""""""""""""""""""""""""
 
 ::
 
-   # vi /etc/fstab
+   $ sudo vi /etc/fstab
    /dev/sda3   /mnt/xfs   xfs   noatime,nodiratime,osyncisdsync 0 0
 
 Mount the partition
@@ -245,15 +246,15 @@ Mount the partition
 
 ::
 
-   # mkdir /mnt/xfs
-   # mount -a
+   $ sudo mkdir /mnt/xfs
+   $ sudo mount -a
 
 Confirm
 """""""""
 
 ::
 
-   # df
+   $ df
    Filesystem           1K-blocks      Used Available Use% Mounted on
    /dev/sda1             15180256   2153492  12243196  15% /
    tmpfs                  2025732         0   2025732   0% /dev/shm

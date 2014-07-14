@@ -57,6 +57,8 @@ mark {
     font-weight: bold
 }
 pre,code,.rst-content tt,kbd,samp {
+    /* border-left: 5px solid #327DAD; */
+    border-left: 5px solid #014A78;
     font-family: monospace,serif;
     _font-family: "courier new",monospace;
     font-size: 1em
@@ -2619,10 +2621,10 @@ select[disabled],textarea[disabled],input[readonly],select[readonly],textarea[re
     border-left-width: 0
 }
 .wy-table thead,.rst-content table.docutils thead,.rst-content table.field-list thead {
-    color: #000;
+    color: #252525;
     text-align: left;
     vertical-align: bottom;
-    white-space: nowrap
+    white-space: nowrap;
 }
 .wy-table thead th,.rst-content table.docutils thead th,.rst-content table.field-list thead th {
     font-weight: bold;
@@ -3232,19 +3234,25 @@ div[class^='highlight'] pre {
     background: #e3e3e3
 }
 .wy-menu-vertical li.current a {
-    color: gray;
-    border-right: solid 1px #c9c9c9;
+    color: #333;
+    border-right: 0;
+    /* border-right: solid 1px #c9c9c9; */
     padding: 0.4045em 2.427em
+}
+.wy-menu-vertical li.toctree-l3 a {
+    padding-left: 4.2em
 }
 .wy-menu-vertical li.current a: hover {
     background: #d6d6d6
 }
 .wy-menu-vertical li.on a,.wy-menu-vertical li.current>a {
-    color: #404040;
+    color: #fff;
     padding: 0.4045em 1.618em;
     font-weight: bold;
     position: relative;
-    background: #fcfcfc;
+    /* background: #327DAD; */
+    background: #014A78;
+
     border: none;
     border-bottom: solid 1px #c9c9c9;
     border-top: solid 1px #c9c9c9;
@@ -3279,7 +3287,9 @@ div[class^='highlight'] pre {
     display: block;
     position: relative;
     font-size: 90%;
-    color: #b3b3b3
+    /* color: #b3b3b3 */
+    color: #737373;
+    font-weight: bold
 }
 .wy-menu-vertical a: hover {
     background-color: #4e4a4a;
@@ -3292,12 +3302,13 @@ div[class^='highlight'] pre {
 }
 .wy-side-nav-search {
     z-index: 200;
-    background-color: #252525;
+    /* background-color: #327DAD; */
+    background-color: #014A78;
     text-align: center;
     padding: 0.809em;
     display: block;
     color: #fcfcfc;
-    margin-bottom: 0.809em
+    margin-bottom: 0
 }
 .wy-side-nav-search input[type=text] {
     width: 100%;
@@ -3310,7 +3321,8 @@ div[class^='highlight'] pre {
     margin: auto auto 0.809em auto;
     height: 45px;
     width: 45px;
-    background-color: #252525;
+    /* background-color: #327DAD; */
+    background-color: #014A78;
     padding: 5px;
     /* border-radius: 100% */
 }
@@ -3377,7 +3389,8 @@ div[class^='highlight'] pre {
     width: 300px;
     overflow: block;
     min-height: 100%;
-    background: #343131;
+    background: #fffx;
+    /* background: #343131; */
     z-index: 200
 }
 .wy-nav-top {
@@ -3417,7 +3430,7 @@ div[class^='highlight'] pre {
 }
 .wy-nav-content-wrap {
     margin-left: 300px;
-    background: #fcfcfc;
+    background: #fff;
     min-height: 100%
 }
 .wy-nav-content {
