@@ -3,7 +3,7 @@
 .. @since July, 2012
 
 LeoFS v1.0 Manual
-================================
+=================
 
 **LeoFS** is a highly available, distributed, eventually consistent object/blob store. If you are searching a storage system that is able to store huge amount and various kind of files such as photo, movie, log data and so on, LeoFS is suitable for that.
 
@@ -55,3 +55,4 @@ LeoFS aims to provide all of 3-HIGHs as follow:
    s3_client
    benchmark
    leo_center
+   faq_index

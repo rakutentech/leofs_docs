@@ -1,7 +1,7 @@
 :tocdepth: 3
 
 Getting Started
-================================
+===============
 
 .. index::
    pair: LeoFS; Download
@@ -420,4 +420,3 @@ Wrap up
 ^^^^^^^
 
 You now have a working *LeoFS cluster*. Make sure to have a look at :ref:`LeoFS Installation <leofs-installation-label>`, :ref:`LeoFS Configuration <leofs-configuration-label>` and :ref:`Administration Guide <administration-guide-label>` to learn more about setting up and managing your LeoFS cluster.
-

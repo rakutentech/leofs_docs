@@ -1947,12 +1947,10 @@ button[disabled] {
     font-size: 100%;
     padding: 6px 12px 8px 12px;
     color: #fff;
-    border: 1px solid rgba(0,0,0,0.1);
     background-color: #27ae60;
     text-decoration: none;
     font-weight: normal;
     font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
-    box-shadow: 0px 1px 2px -1px rgba(255,255,255,0.5) inset,0px -2px 0px 0px rgba(0,0,0,0.1) inset;
     outline-none: false;
     vertical-align: middle;
     *display: inline;
@@ -2023,8 +2021,8 @@ button[disabled] {
     background-color: #2e8ece !important
 }
 .btn-neutral {
-    background-color: #f3f6f6 !important;
-    color: #404040 !important
+    background-color: #fff !important;
+    color: #428bca !important
 }
 .btn-neutral: hover {
     background-color: #e5ebeb !important;
@@ -2582,13 +2580,55 @@ select[disabled],textarea[disabled],input[readonly],select[readonly],textarea[re
     .tablet-hide {
         display: none
     }
-
+    #header-section {
+        display: none
+    }
+    /*START*/
+    .wy-grid-for-nav {
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        height: 100%
+    }
+    .wy-nav-top {
+        display: none;
+        background: #252525;
+        color: #fff;
+        padding: 0.4045em 0.809em;
+        position: relative;
+        line-height: 0px;
+        text-align: center;
+        font-size: 100%;
+        *zoom: 1
+    }
+    /*END*/
 }
 @media screen and (max-width:  480px) {
     .mobile-hide {
         display: none
     }
-
+    #header-section {
+        display: none
+    }
+    /*START*/
+    .wy-grid-for-nav {
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        height: 100%
+    }
+    .wy-nav-top {
+        display: none;
+        background: #252525;
+        color: #fff;
+        padding: 0.4045em 0.809em;
+        position: relative;
+        line-height: 0px;
+        text-align: center;
+        font-size: 100%;
+        *zoom: 1
+    }
+    /*END*/
 }
 .float-left {
     float: left
@@ -3379,6 +3419,7 @@ div[class^='highlight'] pre {
 }
 .wy-grid-for-nav {
     position: absolute;
+    top: 50px;
     width: 100%;
     height: 100%
 }
@@ -3434,7 +3475,7 @@ div[class^='highlight'] pre {
     min-height: 100%
 }
 .wy-nav-content {
-    padding: 1.618em 3.236em;
+    /* padding: 1.618em 3.236em; */
     height: 100%;
     max-width: 800px;
     margin: auto
@@ -3457,7 +3498,8 @@ footer p {
     margin-bottom: 12px
 }
 .rst-footer-buttons {
-    display:none;
+    display:block;
+    padding-bottom:48px;
     *zoom: 1
 }
 .rst-footer-buttons: before,.rst-footer-buttons: after {
@@ -3492,6 +3534,25 @@ footer p {
     .wy-nav-top {
         display: block
     }
+    /*START*/
+    .wy-grid-for-nav {
+        position: absolute;
+        top: 50px;
+        width: 100%;
+        height: 100%
+    }
+    .wy-nav-top {
+        display: none;
+        background: #252525;
+        color: #fff;
+        padding: 0.4045em 0.809em;
+        position: relative;
+        line-height: 50px;
+        text-align: center;
+        font-size: 100%;
+        *zoom: 1
+    }
+    /*END*/
     .wy-nav-side {
         left: -300px
     }
@@ -3536,7 +3597,7 @@ footer p {
 }
 nav.stickynav {
     position: fixed;
-    top: 0
+    top: 50px;
 }
 .rst-versions {
     position: fixed;
@@ -3916,3 +3977,52 @@ span[id*='MathJax-Span'] {
     text-align: center
 }
 
+
+
+/* Header styles */
+
+#header-section {
+    position: fixed;
+    -webkit-transform: translateZ(0); /* hack around Chrome bug: http://stackoverflow.com/questions/11258877/fixed-element-disappears-in-chrome */
+    height: 50px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-size: 31px;
+    background-color: #014A78;
+    color: white;
+    margin: 0;
+    padding: 0;
+    z-index: 100;
+}
+
+#header-section .header-content {
+    width: 1385px;
+    padding-left: 12px;
+
+    transition: width 0.4s cubic-bezier(.02,.01,.47,1);
+    -moz-transition: width 0.4s cubic-bezier(.02,.01,.47,1);
+    -webkit-transition: width 0.4s cubic-bezier(.02,.01,.47,1);
+}
+
+#header-section .nav-items {
+    display: inline-block;
+}
+
+#header-section .nav-items > a {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#header-section a {
+    color: white;
+}
+
+#header-section .logo img {
+    height: 36px;
+    padding-top:4px;
+    vertical-align: middle;
+}
+#header-section .nav-items > a:not(:last-child) {
+    margin-right: 15px;
+}

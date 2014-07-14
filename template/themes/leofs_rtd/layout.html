@@ -75,15 +75,31 @@
 </head>
 
 <body class="wy-body-for-nav" role="document">
+
+  <!-- Header -->
+  <header id="header-section" class="row" role="navigation">
+    <div class="header-content">
+      <a class="fa fa-bars expand-toc-icon pull-left" href="#"></a>
+      <div class="logo pull-left" style="width:180px;">
+        <a href="../index.html">
+          <img src="_static/images/leofs-logo-wht-1.png" alt="LeoFS">
+        </a>
+      </div>
+      <div>
+        <div class="nav-items">
+          <a href="getting_started.html">Getting Started</a>
+          <a href="../download.html">Downloads</a>
+          <a href="../blog.html">Blog</a>
+          <a href="../faq.html">FAQ</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
   <div class="wy-grid-for-nav">
     {# SIDE NAV, TOGGLES ON MOBILE #}
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="{{ pathto(master_doc) }}" style="width:200px"><img src="_static/images/leofs-logo-wht-1.png"
-                                                                    style="height:100%; width:100%;"/></a>
-        {% include "searchbox.html" %}
-      </div>
-
+      <!-- {% include "searchbox.html" %} -->
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         {% set toctree = toctree(maxdepth=2, collapse=false, includehidden=True) %}
         {% if toctree %}
@@ -94,6 +110,9 @@
         {% endif %}
       </div>
       &nbsp;
+      <dev style="position:fixed; bottom:10px; padding-left:8px;">
+        <a href="contents.html">Contents</a> | <a href="genindex.html">Index</a> | <a href="../assets/epub/LeoFS-v1.0.2.epub">Download EPub</a>
+      </dev>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
