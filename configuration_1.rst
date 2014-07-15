@@ -2,8 +2,8 @@
 
 .. _leofs-configuration-label:
 
-LeoFS Configuration
-===================
+Configuration Fundamentals and LeoFS Manager
+============================================
 
 .. index::
    pair: Configuration; Relationship of configuration files
