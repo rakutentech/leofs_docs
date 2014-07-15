@@ -91,7 +91,7 @@
           <a href="getting_started.html">Getting Started</a>
           <a href="../download.html">Downloads</a>
           <a href="../blog.html">Blog</a>
-          <a href="faq_index.html">FAQ</a>
+          <a href="faq.html">FAQ</a>
         </div>
       </div>
     </div>
@@ -127,6 +127,7 @@
       {# PAGE CONTENT #}
       <div class="wy-nav-content">
         <div class="rst-content">
+          {% include "breadcrumbs.html" %}
           <div role="main">
             {% block body %}{% endblock %}
           </div>
