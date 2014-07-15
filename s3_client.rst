@@ -1,3 +1,6 @@
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
+
 :tocdepth: 3
 
 Amazon S3 Client Tutorials

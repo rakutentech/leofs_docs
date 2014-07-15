@@ -1,6 +1,5 @@
 .. LeoFS documentation
-.. @author leo-project
-.. @since July, 2012
+.. Copyright (c) 2013-2014 Rakuten, Inc.
 
 LeoFS v1.0 Manual
 =================
@@ -55,4 +54,4 @@ LeoFS aims to provide all of 3-HIGHs as follow:
    s3_client
    benchmark
    leo_center
-   faq_index
+   faq

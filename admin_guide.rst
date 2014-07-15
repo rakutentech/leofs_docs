@@ -1,4 +1,5 @@
-.. _administration-guide-label:
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
 
 Administration Guide
 ====================

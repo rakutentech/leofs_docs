@@ -1,7 +1,5 @@
-.. LeoFS documentation master file, created by
-   sphinx-quickstart on Tue Feb 21 10:38:17 2012.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
 
 Amazon S3 API and Interface
 ---------------------------

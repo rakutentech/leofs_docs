@@ -1,3 +1,6 @@
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
+
 .. _s3fs-c-label:
 
 Getting Started with S3FS-C

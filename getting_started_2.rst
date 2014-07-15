@@ -1,4 +1,5 @@
-:tocdepth: 3
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
 
 .. _quick-start2-label:
 
@@ -25,14 +26,14 @@ Case example
     * Name: storage_0@10.0.1.104 .. storage_2@10.0.1.106
 
 
-1. Install Erlang and LeoFS on each server
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install Erlang and LeoFS on each server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * :ref:`Install LeoFS <install_leofs_label>`
 
 
-2. Configuration - Edit *"vm.args"* on each server
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configuration - Edit *"vm.args"* on each server
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * File path: "$LEOFS_ROOT/package/leo_*/etc/vm.args"
 * Precondition
@@ -70,8 +71,8 @@ Case example
     -name storage_0@10.0.1.104
     ... omitted below
 
-3. Configuration - Consistency level
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configuration - Consistency level
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Reference: :ref:`The consistency level <system-configuration-label>`
 * Edit *Manager's leo_manager.conf*
@@ -98,8 +99,8 @@ Case example
     consistency.delete = 1
 
 
-4. Order of server launch
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Order of server launch
+^^^^^^^^^^^^^^^^^^^^^^
 
 * Manager-master
 * Manager-slave
@@ -107,8 +108,8 @@ Case example
 * Gateway(s)
 
 
-5. Method of server launch
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Method of server launch
+^^^^^^^^^^^^^^^^^^^^^^^
 
 * Shell script: "$LEOFS_ROOT/package/leo_*/bin/leo_*"
 * Launch Manager-master
@@ -137,8 +138,8 @@ Case example
     $ $LEOFS_ROOT/package/leo_gateway/bin/leo_gateway start
 
 
-6. Start the system
-^^^^^^^^^^^^^^^^^^^
+Start the system
+^^^^^^^^^^^^^^^^
 
 * Use the command ``start`` in the LeoFS manager console
 
@@ -147,8 +148,8 @@ Case example
     $ telnet 127.0.0.1 10010
     > start
 
-7. Confirm that the system is running
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Confirm that the system is running
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Use the command ``status`` in the LeoFS manager console
 
@@ -186,8 +187,8 @@ Case example
       G    | gateway_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:21 +0900
 
 
-8. Get your S3 API Key from the LeoFS manager console
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Get your S3 API Key from the LeoFS manager console
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Use the command ``create-user`` in the LeoFS manager console
 * It takes the user name as its only argument
@@ -199,8 +200,8 @@ Case example
     access-key-id: 05dcba94333c7590a635
     secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
-9. Using LeoFS
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Using LeoFS
+^^^^^^^^^^^
 
 * Use the command ``add-bucket`` in the LeoFS manager console
 * It takes the bucket name and access-key-id got in the previous section as its arguments

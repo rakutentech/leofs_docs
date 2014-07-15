@@ -1,4 +1,5 @@
-.. LeoFS documentation master file
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
 
 REST API
 ========

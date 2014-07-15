@@ -1,15 +1,12 @@
 .. LeoFS documentation
 .. Copyright (c) 2013-2014 Rakuten, Inc.
 
-.. _leofs-installation-label:
-
-LeoFS Installation
+LeoFS Frequently Asked Questions
 ================================
 
 .. toctree::
    :maxdepth: 3
 
-   install_1
-   install_2
-   install_3
-   install_4
+   faq_1
+   faq_2
+

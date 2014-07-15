@@ -1,3 +1,6 @@
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
+
 LeoFS Contents
 ==============
 
@@ -15,3 +18,4 @@ LeoFS Contents
    s3_client
    benchmark
    leo_center
+   faq

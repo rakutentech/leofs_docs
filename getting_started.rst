@@ -1,4 +1,5 @@
-:tocdepth: 3
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
 
 Getting Started
 ===============
@@ -8,7 +9,3 @@ Getting Started
 
    getting_started_1.rst
    getting_started_2.rst
-
-.. raw:: html
-
-    <div style="margin-bottom:150px;">&nbsp;</div>

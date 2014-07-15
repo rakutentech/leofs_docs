@@ -1,3 +1,6 @@
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
+
 .. _s3cmd-label:
 
 Connect to LeoFS using s3cmd
