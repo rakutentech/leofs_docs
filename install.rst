@@ -8,10 +8,10 @@ LeoFS Installation
 .. toctree::
    :maxdepth: 3
 
-   install_1.rst
-   install_2.rst
-   install_3.rst
-   install_4.rst
+   install_1
+   install_2
+   install_3
+   install_4
 
 .. raw:: html
 

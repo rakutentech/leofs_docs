@@ -2761,7 +2761,7 @@ body {
     color: #404040;
     min-height: 100%;
     overflow-x: hidden;
-    background: #edf0f2
+    background: #fff
 }
 .wy-text-left {
     text-align: left
@@ -3581,7 +3581,7 @@ footer p {
 }
 @media screen and (min-width:  1400px) {
     .wy-nav-content-wrap {
-        background: rgba(0,0,0,0.05)
+        /* background: rgba(0,0,0,0.05) */
     }
     .wy-nav-content {
         margin: 0;
