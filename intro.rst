@@ -25,11 +25,8 @@ LeoFS consists of 3 applications - "Leo Storage", "Leo Gateway" and "Leo Manager
 **Leo Manager** always monitors Leo Gateway(s) and Leo Storage(s). Main monitoring status are *node-status* and *RING(logical routing-table) checksum* for keep running and keep consistency.
 
 
-The detail document is `here <http://www.leofs.org/blog/2013/04/16/leofs_overview.html>`_.
-
-
 .. toctree::
    :hidden:
 
-   intro_1
-   intro_2
+   goal
+   milestone
