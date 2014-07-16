@@ -7,7 +7,7 @@
 SNMPA Setup
 -----------
 
-Each LeoFS node provides a built in SNMP server which allows to connect external systems, such as `Nagios <http://www.nagios.org/>`_ and `Zabbix <http://www.zabbix.com/>`_. You can retrieve various statistics as follows:
+Each LeoFS node provides a built in SNMP server which allows to connect external systems, such as |Nagios| and |Zabbix|. You can retrieve various statistics as follows:
 
 Manager
 ^^^^^^^
@@ -309,3 +309,13 @@ c. Method of confirmation
     SNMPv2-SMI::enterprises.35450.21.19.0 = Gauge32: 39
     SNMPv2-SMI::enterprises.35450.21.20.0 = Gauge32: 3
     SNMPv2-SMI::enterprises.35450.21.21.0 = Gauge32: 565700
+
+
+.. |Nagios| raw:: html
+
+   <a href="http://www.nagios.org/" target="_blank">Nagios</a>
+
+.. |Zabbix| raw:: html
+
+   <a href="http://www.zabbix.com/" target="_blank">Zabbix</a>
+
