@@ -1,8 +1,8 @@
 .. LeoFS documentation
 .. Copyright (c) 2013-2014 Rakuten, Inc.
 
-LeoFS Storage Detail
-====================
+LeoFS Storage
+=============
 
 *Storage* consists of object and the metadata storage. In addition, it includes replicator and repairer in order to realise `eventualy consistency <http://en.wikipedia.org/wiki/Eventual_consistency>`_.
 

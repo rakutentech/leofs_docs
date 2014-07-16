@@ -3,8 +3,8 @@
 
 .. _leofs-installation-label:
 
-LeoFS Installation
-================================
+Installation
+============
 
 .. toctree::
    :maxdepth: 3

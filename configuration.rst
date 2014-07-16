@@ -1,8 +1,8 @@
 .. LeoFS documentation
 .. Copyright (c) 2013-2014 Rakuten, Inc.
 
-LeoFS Configuration
-================================
+Configuration
+=============
 
 .. toctree::
    :maxdepth: 3

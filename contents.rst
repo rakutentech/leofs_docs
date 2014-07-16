@@ -12,6 +12,7 @@ LeoFS Contents
    install
    configuration
    admin_guide
+   architecture
    usage
    rest_api
    s3_api

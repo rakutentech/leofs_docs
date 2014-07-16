@@ -1,8 +1,8 @@
 .. LeoFS documentation
 .. Copyright (c) 2013-2014 Rakuten, Inc.
 
-LeoFS Gateway Detail
-====================
+LeoFS Gateway
+=============
 
 *Gateway* consists of the fast HTTP-Server - `Cowboy <https://github.com/extend/cowboy>`_, the API handler and the cache mecanism. It provides `the REST-API <http://leo-project.net/leofs/docs/rest_api.html>`_ and `Amazon S3-API <http://docs.aws.amazon.com/AmazonS3/latest/API/APIRest.html>`_. You're able to easily access LeoFS with S3-Clients such as `s3cmd <http://s3tools.org/s3cmd>`_, `DragonDisk <http://www.dragondisk.com/>`_, program languages - `Erlang <https://github.com/gleber/erlcloud>`_, `Java <https://github.com/aws/aws-sdk-java>`_, `Ruby <https://github.com/aws/aws-sdk-ruby>`_, `Python <https://github.com/boto/boto>`_, `Go-lang <https://github.com/rlmcpherson/s3gof3r>`_ and so on.
 

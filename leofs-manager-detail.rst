@@ -1,8 +1,8 @@
 .. LeoFS documentation
 .. Copyright (c) 2013-2014 Rakuten, Inc.
 
-LeoFS Manager Detail
-====================
+LeoFS Manager
+=============
 
 *Manager* generates and manages a routing table, which is called **RING** and based on `consistent hashing <http://en.wikipedia.org/wiki/Consistent_hashing>`_.
 

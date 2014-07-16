@@ -48,6 +48,7 @@ LeoFS aims to provide all of 3-HIGHs as follow:
    install
    configuration
    admin_guide
+   architecture
    usage
    rest_api
    s3_api
