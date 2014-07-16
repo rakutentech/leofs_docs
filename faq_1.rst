@@ -36,7 +36,7 @@ We've been mainly focusing on **High Availability**, **High Scalability** and **
 LeoFS consists of 3 core components - `Gateway <leofs-gateway-detail.html>`_, `Storage <leofs-storage-detail.html>`_ and `Manager <leofs-manager-detail.html>`_. The role of each component is clearly defined.
 
 
-.. image:: _static/images/leofs-architecture.png
+.. image:: _static/images/leofs-architecture.001.jpg
    :width: 780px
 
 `Gateway <leofs-gateway-detail.html>`_ handles http-requests and http-responses from clients when using REST-API OR S3-API. Also, it has the built-in object-cache system.

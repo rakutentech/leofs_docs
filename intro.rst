@@ -12,17 +12,17 @@ LeoFS provides **High Reliability** thanks to its great design on top of the Erl
 
 LeoFS provides **High Scalability**. Adding and removing nodes is simple and quick, allowing you to react swiftly when your needs change. A LeoFS cluster can be thought as elastic storage that you can stretch as much and as often as you need.
 
-.. image:: _static/images/leofs-architecture.011.png
+.. image:: _static/images/leofs-architecture.001.jpg
    :width: 760px
 
 
-LeoFS consists of 3 applications - "Leo Storage", "Leo Gateway" and "Leo Manager" which depend on Erlang.
+LeoFS consists of 3 applications - `Storage <leofs-storage-detail.html>`_, `Gateway <leofs-gateway-detail.html>`_ and `Manager <leofs-manager-detail.html>`_ which depend on Erlang.
 
-**Leo Gateway** handles http-request and http-response from any clients when using REST-API OR S3-API. Also, Gateway is already built in the object-cache mechanism *(memory cache and disc cache)*.
+`Gateway <leofs-gateway-detail.html>`_ handles http-request and http-response from any clients when using REST-API OR S3-API. Also, it is already built in the object-cache mechanism *(memory and disk cache)*.
 
-**Leo Storage** handles GET, PUT and DELETE objects as well as metadata, Also **Leo Storage** has *replicator*, *recoverer* and *queueing mechanism* for keep running and keep consistency.
+`Storage <leofs-storage-detail.html>`_ handles GET, PUT and DELETE objects as well as metadata. Also, it has *replicator*, *recoverer* and *queueing mechanism* in order to keep running a storage node and realise eventualy consistency.
 
-**Leo Manager** always monitors Leo Gateway(s) and Leo Storage(s). Main monitoring status are *node-status* and *RING(logical routing-table) checksum* for keep running and keep consistency.
+`Manager <leofs-manager-detail.html>`_ always monitors *Gateway* and *Storage* nodes. The main monitoring status are *Node status* and *RING's checksum* in order to realise to keep high availability and keep data consistency.
 
 
 .. toctree::
