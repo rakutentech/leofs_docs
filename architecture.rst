@@ -4,7 +4,7 @@
 Architecture
 ============
 
-We're really focused on is **High Availability**, **High Scalability** and **High Cost Performance Ratio** because unstructured data such as *image/photo*, *short movie*, *event-data*, *log* and so on, they have been exponentially increasing in our services day by day, so we needed to build a cloud storage with all them.
+We're really focused on is **High Availability**, **High Scalability** and **High Cost Performance Ratio** because unstructured data such as *image/photo*, *short movie*, *event-data*, *log* and so on, they have been exponentially increasing day by day, so we needed to build a cloud storage with all them.
 
 We really succeeded in designing and implementing LeoFS as simple as possible. LeoFS consists of 3 core components - `Gateway <leofs-gateway-detail.html>`_, `Storage <leofs-storage-detail.html>`_ and `Manager <leofs-manager-detail.html>`_. The role of each component is clearly defined.
 
