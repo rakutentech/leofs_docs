@@ -1,0 +1,32 @@
+<footer>
+  <p style="height:8px"></p>
+  {% if next or prev %}
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      {% if next %}
+        <a href="{{ next.link|e }}" class="btn btn-neutral float-right" title="{{ next.title|striptags|e }}">{{ next.title|striptags|e }} &gt;&gt; <span class="fa fa-arrow-circle-right"></span></a>
+      {% endif %}
+      {% if prev %}
+        <a href="{{ prev.link|e }}" class="btn btn-neutral" title="{{ prev.title|striptags|e }}"><span class="fa fa-arrow-circle-left"></span> &lt;&lt; {{ prev.title|striptags|e }}</a>
+      {% endif %}
+    </div>
+  {% endif %}
+
+
+  <div role="contentinfo">
+    <p>Copyright &copy; 2012-2014 <a href="http://leo-project.net/leofs/" target="_blank">Leo Project</a>. Sponsored by <a href="http://global.rakuten.com/corp/" target="_blank">Rakuten, Inc.</a> and <a href="http://rit.rakuten.co.jp/" target="_blank">Rakuten Institute of Technology</a>.
+    <!-- {%- if show_copyright %} -->
+    <!--   {%- if hasdoc('copyright') %} -->
+    <!--     {% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %} -->
+    <!--   {%- else %} -->
+    <!--     {% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{% endtrans %} -->
+    <!--   {%- endif %} -->
+    <!-- {%- endif %} -->
+
+    {%- if last_updated %}
+      {% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}
+    {%- endif %}
+    </p>
+  </div>
+
+  {% trans %}{% endtrans %}
+</footer>

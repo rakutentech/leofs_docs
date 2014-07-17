@@ -1,4 +1,7 @@
-LeoCenter v0.4.5
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
+
+LeoCenter v0.4.6
 ================
 
 **LeoCenter** is LeoFS' Web console in your browser. You can use it to easily operate LeoFS.
@@ -16,7 +19,7 @@ Install LeoCenter
 ^^^^^^^^^^^^^^^^^
 
 * **LeoCenter's Repository**: https://github.com/leo-project/leo_center
-* **Ruby 1.9.3-p484** or higher
+* **Ruby 1.9.3-p484** OR higher
     * Download URL: http://www.ruby-lang.org/en/downloads/
 
 ::

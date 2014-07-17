@@ -1,15 +1,10 @@
-.. LeoFS documentation master file, created by
-   sphinx-quickstart on Tue Feb 21 10:38:17 2012.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
 
 Introduction
-================================
+============
 
-LeoFS Overview
---------------------------------
-
-**LeoFS** is a highly scalable, fault-tolerant distributed file system (DFS) for the Web. LeoFS is the leading DFS and offers a number of unique benefits to users.
+**LeoFS** is a highly scalable, fault-tolerant unstructured object storage system for the Web.
 
 LeoFS provides **High Cost Performance Ratio**. It allows you to build LeoFS clusters using commodity hardware on top of the Linux operating system. LeoFS will provide very good performance even on commodity hardware. LeoFS will require a smaller cluster than other storage to achieve the same performance. LeoFS is also very easy to setup and to operate.
 
@@ -17,72 +12,21 @@ LeoFS provides **High Reliability** thanks to its great design on top of the Erl
 
 LeoFS provides **High Scalability**. Adding and removing nodes is simple and quick, allowing you to react swiftly when your needs change. A LeoFS cluster can be thought as elastic storage that you can stretch as much and as often as you need.
 
-.. image:: _static/images/leofs-architecture.011.png
+.. image:: _static/images/leofs-architecture.001.jpg
    :width: 760px
 
 
-LeoFS consists of 3 applications - "Leo Storage", "Leo Gateway" and "Leo Manager" which depend on Erlang.
+LeoFS consists of 3 applications - `Storage <leofs-storage-detail.html>`_, `Gateway <leofs-gateway-detail.html>`_ and `Manager <leofs-manager-detail.html>`_ which depend on Erlang.
 
-**Leo Gateway** handles http-request and http-response from any clients when using REST-API OR S3-API. Also, Gateway is already built in the object-cache mechanism *(memory cache and disc cache)*.
+`Gateway <leofs-gateway-detail.html>`_ handles http-request and http-response from any clients when using REST-API OR S3-API. Also, it is already built in the object-cache mechanism *(memory and disk cache)*.
 
-**Leo Storage** handles GET, PUT and DELETE objects as well as metadata, Also **Leo Storage** has *replicator*, *recoverer* and *queueing mechanism* for keep running and keep consistency.
+`Storage <leofs-storage-detail.html>`_ handles GET, PUT and DELETE objects as well as metadata. Also, it has *replicator*, *recoverer* and *queueing mechanism* in order to keep running a storage node and realise eventualy consistency.
 
-**Leo Manager** always monitors Leo Gateway(s) and Leo Storage(s). Main monitoring status are *node-status* and *RING(logical routing-table) checksum* for keep running and keep consistency.
-
-
-The detail document is `here <http://www.leofs.org/blog/2013/04/16/leofs_overview.html>`_.
+`Manager <leofs-manager-detail.html>`_ always monitors *Gateway* and *Storage* nodes. The main monitoring status are *Node status* and *RING's checksum* in order to realise to keep high availability and keep data consistency.
 
 
-Goals
---------------------------------
+.. toctree::
+   :hidden:
 
-* LeoFS aims to provide the following advantages:
-    * HIGH Cost Performance Ratio
-        * Fast - Over 200MB/sec in a 10GE network
-        * A lower cost than other storage
-        * Easy management and easy operation
-    * HIGH Reliability
-        * Nine nines - 99.9999999% availability
-    * High Scalability
-        * Build a huge cluster at low cost
-
-Milestones
---------------------------------
-
-* *DONE* - 0.12 (Oct 2012 - Jan 2013)
-    * Large Object Support (incl.Streaming/Multi-part/Range requests)
-    * Web GUI-Console (LeoTamer - Optional)
-        * Cluster manager/monitor
-        * Log Analysis/Search
-* *DONE* - 0.14 (Feb 2013 - Sep)
-    * Multi-layer Cache (Using SSD)
-    * Rack aware replica placement
-    * Web GUI Console (Option)
-       * Support whole LeoFS Manager's commands
-* 0.16 (Oct 2013)
-    * Increase compatibility S3-APIs#4
-        * the bucket ACLs
-    * Web GUI Console (Option)
-       * Support whole LeoFS Manager's commands
-
-* 1.0 (Nov 2013 - Dec)
-    * Multi Data Center Replication
-    * Increase compatibility S3-APIs#5
-        * Other bucket operations
-    * QoS System Phase-1 (LeoInsight - Option)
-       * Support *statistics/analyzer*
-
-* 1.2 (Jan 2014 - Apr)
-    * OpenStack Integration
-        * Support for OpenStack Swift-API
-    * Increase compatibility S3-APIs#6
-        * Objects Expiration into the bucket
-        * Versioning
-    * Job Scheduler on the Manager
-        * Support *auto-compaction*
-    * QoS System Phase-2 (LeoInsight - Option)
-       * Support *notifier*
-    * Web GUI Console (Option)
-        * LeoInsight(QoS) Integration
-        * Support Log analysis/search
-
+   goal
+   milestone

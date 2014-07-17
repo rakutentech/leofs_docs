@@ -1,11 +1,12 @@
 .. LeoFS documentation
 .. Copyright (c) 2013-2014 Rakuten, Inc.
 
-Getting Started
-===============
+LeoFS Frequently Asked Questions
+================================
 
 .. toctree::
    :maxdepth: 3
 
-   getting_started_1.rst
-   getting_started_2.rst
+   faq_1
+   faq_2
+

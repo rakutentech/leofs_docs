@@ -94,13 +94,14 @@ pygments_style = 'sphinx'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #html_theme = 'sphinxdoc'
-html_theme = "leofs_cloud"
+#html_theme = "leofs_cloud"
+html_theme = 'leofs_rtd'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
-html_theme_options = { "roottarget": "index" }
+html_theme_options = {}
+# html_theme_options = { "roottarget": "index" }
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
@@ -253,7 +254,7 @@ texinfo_documents = [
 epub_title = u'LeoFS'
 epub_author = u'Leo Project'
 epub_publisher = u'Leo Project'
-epub_copyright = u'2012, Leo Project'
+epub_copyright = u'2012-2014, Leo Project'
 
 # The language of the text. It defaults to the language option
 # or en if the language is not set.
@@ -284,7 +285,7 @@ epub_copyright = u'2012, Leo Project'
 #epub_exclude_files = []
 
 # The depth of the table of contents in toc.ncx.
-#epub_tocdepth = 3
+epub_tocdepth = 3
 
 # Allow duplicate toc entries.
 #epub_tocdup = True

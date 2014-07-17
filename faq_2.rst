@@ -1,0 +1,67 @@
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
+
+=======================
+FAQ: LeoFS Limits
+=======================
+
+Features
+--------
+
+* LeoFS have covered almost major |AmazonS3API| but not all.
+* If you use |MultiPartUploadAPI|, the size of a part of an object must be less than the size of a chunked object in LeoFS.
+
+See Also:
+    * `Amazon S3 API and Interface <s3_api.html>`_
+    * `Configuration of Gateway nodes <configuration_3.html>`_
+
+----
+
+Operations
+----------
+
+* When you upgrade your LeoFS, you can NOT change the metadata storage as |KVS| - ``bitcask`` or ``leveldb`` can be used in LeoFS - used by LeoFS Storage. In the future, we will provide the data converting tool which enables to take over the metadata.
+* Compaction is needed to execute manually for now. We're planning to provide the feature Auto Compaction with LeoFS v1.2.
+
+See Also:
+    * `Configuration of Storage nodes <configuration_2.html>`_
+    * `Upgrade your old version LeoFS to v1.0.2 <admin_guide_5.html>`_
+    * `The roadmap of LeoFS <faq_1.html#is-there-the-roadmap-of-leofs>`_
+
+----
+
+NFS Support
+-----------
+
+* NFS implemantation with LeoFS v1.1 is a subset of |NFSv3|. Lock manager protocol, ``Authentication``, and ``Owner/Permission`` management are NOT covered.
+* If you use LeoFS with NFS, you should set the size of a chunked object in LeoFS to 1MB (1048576Bytes), otherwise the efficiency of disk utilization can be decreased.
+
+See Also:
+    * `Configuration of Gateway nodes <configuration_3.html>`_
+    * |ISSUE_198|
+
+
+----
+
+
+.. |AmazonS3API| raw:: html
+
+   <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/APIRest.html" target="_blank">Amazon S3 REST API</a>
+
+.. |MultiPartUploadAPI| raw:: html
+
+   <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html" target="_blank">Amazon S3 multipart upload API</a>
+
+.. |KVS| raw:: html
+
+   <a href="http://en.wikipedia.org/wiki/Key/value_store#Key.E2.80.93Value_or_KV_stores" target="_blank">KVS</a>
+
+.. |NFSv3| raw:: html
+
+   <a href="http://www.ietf.org/rfc/rfc1813.txt" target="_blank">NFS v3</a>
+
+.. |ISSUE_198| raw:: html
+
+   <a href="https://github.com/leo-project/leofs/issues/198" target="_blank">NFS R/W transfer block size is limited up to 1MB</a>
+
+
