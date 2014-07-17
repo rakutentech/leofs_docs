@@ -50,7 +50,7 @@ See Also:
 
 .. |MultiPartUploadAPI| raw:: html
 
-   <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html" target="_blank">the Multipart upload API</a>
+   <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html" target="_blank">Amazon S3 multipart upload API</a>
 
 .. |KVS| raw:: html
 
