@@ -41,9 +41,9 @@ Install "libatomic_ops" for R16B03-1  *(both CentOS and Ubuntu)*
 
 .. code-block:: bash
 
-   $ wget http://www.hpl.hp.com/research/linux/atomic_ops/download/libatomic_ops-7.2d.tar.gz
-   $ tar xzvf libatomic_ops-7.2d.tar.gz
-   $ cd libatomic_ops-7.2d
+   $ wget http://www.ivmaisoft.com/_bin/atomic_ops/libatomic_ops-7.4.2.tar.gz
+   $ tar xzvf libatomic_ops-7.4.2.tar.gz
+   $ cd libatomic_ops-7.4.2
    $ ./configure --prefix=/usr/local
    $ make
    $ sudo make install
@@ -77,6 +77,8 @@ Build Erlang on CentOS 6.5
                  --disable-sctp \
                  --enable-threads \
                  --with-libatomic_ops=/usr/local
+   $ make
+   $ sudo make install
 
 Build Erlang on Debian and others
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -96,7 +98,8 @@ Build Erlang on Debian and others
                  --disable-sctp \
                  --enable-threads \
                  --with-libatomic_ops=/usr/local
-
+   $ make
+   $ sudo make install
 
 Confirm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
