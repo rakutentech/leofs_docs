@@ -1,0 +1,213 @@
+.. LeoFS documentation
+.. Copyright (c) 2013-2014 Rakuten, Inc.
+
+.. _leofs-with-nfs-label:
+
+.. index::
+   pair: Configuration; LeoFS with NFS
+
+LeoFS with NFS
+==============
+
+.. index::
+   pair: NFS; Purpose
+
+Purpose
+-------
+This section is a step by step guide to setting up LeoFS with NFS. By
+following this tutorial you can easily build a LeoFS system with NFS.
+
+.. index::
+   pair: NFS; Getting Started
+
+Getting Started
+---------------
+
+Pre-requirement
+~~~~~~~~~~~~~~~
+
+- Install NFS client on CentOS 6.5
+
+.. code-block:: bash
+
+    $ sudo yum install nfs-utils
+
+- Install NFS client on Ubuntu Server 12.04 LTS or Higher
+
+.. code-block:: bash
+
+    $ sudo apt-get install nfs-common
+
+Configuration
+~~~~~~~~~~~~~
+
+- Modify ``leo_gateway.conf``
+
+ -  Set ``http.handler`` to ``nfs``
+ -  Set ``large_object.chunked_obj_len`` to ``1048576``
+
+.. note:: If you also want to access LeoFS via S3 intereface, you need to start another LeoFS Gateway with setting http.handler to s3.
+
+::
+
+    ## Gateway’s HTTP API to use: [s3 | rest | embed | nfs]
+    http.handler = nfs
+    ## Length of a chunked object
+    large_object.chunked_obj_len = 1048576
+
+Start LeoFS as NFS Server with other dependent programs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- `Start LeoFS as usual <http://leo-project.net/leofs/docs/admin_guide_1.html>`_
+
+- Start rpcbind 
+
+.. code-block:: bash
+
+    $ sudo service rpcbind start
+
+- Create a bucket for NFS
+
+.. code-block:: bash
+
+    $ telnet 127.0.0.1 10010    
+    > add-bucket test 05236
+
+- Create a mount point and Mount
+
+.. code-block:: bash
+
+    $ sudo mkdir /mnt/leofs   
+    $ sudo mount -t nfs -o nolock localhost:/test /mnt/leofs
+
+Now you can operate the bucket test in LeoFS as a filesystem via ``/mnt/leofs``.
+
+Confirm that NFS works
+~~~~~~~~~~~~~~~~~~~~~~
+
+- Create a file
+
+.. code-block:: bash
+
+    $ touch /mnt/leofs/newfile 
+    $ ls -al /mnt/leofs
+
+    drwxrwxrwx. 0 root root 4096 7月 31 10:09 2014 .
+    drwxr-xr-x. 6 root root 4096 7月 11 12:38 2014 ..
+    -rw-rw-rw-  0 root root    0 7月 31 10:25 2014 newfile
+
+- Modify a file 
+
+.. code-block:: bash
+   
+    $ echo "hello world" > /mnt/leofs/newfile
+    $ cat /mnt/leofs/newfile
+
+    hello world
+
+- Copy a file
+
+.. code-block:: bash
+
+    $ cp /mnt/leofs/newfile /mnt/leofs/newfile.copy 
+    $ ls -al /mnt/leofs
+
+    drwxrwxrwx  0 root root 4096 7月 31 10:09 2014 .
+    drwxr-xr-x. 6 root root 4096 7月 11 12:38 2014 .. 
+    -rw-rw-rw-  0 root root   12 7月 31 10:29 2014 newfile 
+    -rw-rw-rw-  0 root root   12 7月 31 10:31 2014 newfile.copy
+
+- Diff files
+
+.. code-block:: bash
+
+    $ diff /mnt/leofs/newfile /mnt/leofs/newfile.copy
+
+- Remove a file 
+
+.. code-block:: bash
+
+    $ rm /mnt/leofs/newfile 
+    $ ls -al /mnt/leofs
+
+    drwxrwxrwx  0 root root 4096 7月 31 10:09 2014 . 
+    drwxr-xr-x. 6 root root 4096 7月 11 12:38 2014 .. 
+    -rw-rw-rw-  0 root root   12 7月 31 10:31 2014 newfile.copy
+
+- Create a directory 
+
+.. code-block:: bash
+
+    $ mkdir -p /mnt/leofs/1/2/3 
+    $ ls -alR /mnt/leofs/1
+
+    /mnt/leofs/1: 
+    drwxrwxrwx 0 root root 4096 7月 31 19:37 2014 .
+    drwxrwxrwx 0 root root 4096 7月 31 10:09 2014 ..
+    drwxrwxrwx 0 root root 4096 7月 31 10:37 2014 2
+
+    /mnt/leofs/1/2: 
+    drwxrwxrwx 0 root root 4096 7月 31 19:37 2014 .
+    drwxrwxrwx 0 root root 4096 7月 31 19:37 2014 .. 
+    drwxrwxrwx 0 root root 4096 7月 31 10:37 2014 3
+
+    /mnt/leofs/1/2/3:
+    drwxrwxrwx 0 root root 4096 7月 31 19:37 2014 .
+    drwxrwxrwx 0 root root 4096 7月 31 19:37 2014 ..
+
+- Create a very large file 
+
+.. code-block:: bash
+
+    # Create a 50M file 
+    $ dd if=/dev/urandom of=/mnt/leofs/1/2/3/largefile bs=1048576 count=50 
+    $ ls -alR /mnt/leofs/1
+
+    drwxrwxrwx 0 root root     4096 7月 31 19:42 2014 .
+    drwxrwxrwx 0 root root     4096 7月 31 19:42 2014 ..
+    -rw-rw-rw- 0 root root 52428800 7月 31 10:42 2014 largefile
+
+- Remove files recursively 
+
+.. code-block:: bash
+
+    $ rm -rf /mnt/leofs/1/
+    $ ls -al /mnt/leofs
+
+    drwxrwxrwx  0 root root 4096 7月 31 10:09 2014 .
+    drwxr-xr-x. 6 root root 4096 7月 11 12:38 2014 ..
+    -rw-rw-rw-  0 root root   12 7月 31 10:31 2014 leofs.copy
+
+And other basic file/directory operations also should work except
+controlling owners/permissions/symbolic links/special files.
+
+.. index::
+   pair: NFS; Configuration
+
+Configuration
+-------------
+
+You can change the port number the NFS/Mount server use and the number
+of acceptor processes at ``leo_gateway.conf``.
+
++------------------------+------------------------------------------------------------------------+
+| Property               | Description                                                            |
++========================+========================================================================+
+| nfs.port               | Port number the NFS server use                                         |
++------------------------+------------------------------------------------------------------------+
+| nfs.num_of_acceptors   | The number of acceptor processes listening for NFS server connection   |
++------------------------+------------------------------------------------------------------------+
+| mount.port             | Port number the Mount server use                                       |
++------------------------+------------------------------------------------------------------------+
+| mount.num_of_acceptors | The number of acceptor processes listening for Mount server connection |
++------------------------+------------------------------------------------------------------------+
+
+.. index::
+   pair: NFS; Limits
+
+Limits
+------
+
+Since LeoFS NFS implementation is still Alpha status, there are some
+limitations. Details are described at `LeoFS
+Limits <http://leo-project.net/leofs/docs/faq_2.html#nfs-support>`_
