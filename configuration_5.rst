@@ -66,12 +66,17 @@ Start LeoFS as NFS Server with other dependent programs
 
     $ sudo service rpcbind start
 
-- Create a bucket for NFS
+- Create a bucket for NFS with ``leofs-adm``
 
 .. code-block:: bash
 
-    $ telnet 127.0.0.1 10010    
-    > add-bucket test 05236
+    $ ./leofs-adm add-bucket test 05236           
+    OK
+    $ ./leofs-adm get-buckets          
+    cluster id   | bucket   | owner       | permissions      | created at                
+    -------------+----------+-------------+------------------+---------------------------
+    leofs_1      | test     | _test_leofs | Me(full_control) | 2014-07-31 10:20:42 +0900
+
 
 - Create a mount point and Mount
 
