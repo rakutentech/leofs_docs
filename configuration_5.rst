@@ -242,6 +242,5 @@ of acceptor processes at ``leo_gateway.conf``.
 Limits
 ------
 
-Since LeoFS NFS implementation is still Alpha status, there are some
-limitations. Details are described at `LeoFS
+Since LeoFS NFS implementation is still the alpha version, there are some limitations. The details are described at `LeoFS
 Limits <http://leo-project.net/leofs/docs/faq_2.html#nfs-support>`_
