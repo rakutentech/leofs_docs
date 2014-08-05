@@ -191,6 +191,15 @@ Confirm that NFS works
     drwxrwxrwx 0 root root     4096 7月 31 19:42 2014 ..
     -rw-rw-rw- 0 root root 52428800 7月 31 10:42 2014 largefile
 
+.. code-block:: bash
+
+    $ ./leofs-adm whereis photo/1/2/3/largefile
+    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
+     del?  |           node           |             ring address             |    size    |   checksum   |  # of chunks   |     clock      |             when
+    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
+           | storage_0@127.0.0.1      | b7992d2fac981fbd98230a124ac78506     |     51200K |   d41d8cd98f |             10 | 4ffe2f44badd2  | 2014-07-31 10:42:53 +0900
+
+
 - Remove files recursively 
 
 .. code-block:: bash
@@ -204,6 +213,7 @@ Confirm that NFS works
 
 And other basic file/directory operations also should work except
 controlling owners/permissions/symbolic links/special files.
+
 
 .. index::
    pair: NFS; Configuration
