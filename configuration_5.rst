@@ -78,7 +78,7 @@ Start LeoFS as NFS Server with other dependent programs
 .. code-block:: bash
 
     $ sudo mkdir /mnt/leofs   
-    $ sudo mount -t nfs -o nolock localhost:/test /mnt/leofs
+    $ sudo mount -t nfs -o nolock 127.0.0.1:/test /mnt/leofs
 
 Now you can operate the bucket test in LeoFS as a filesystem via ``/mnt/leofs``.
 
@@ -116,6 +116,21 @@ Confirm that NFS works
     drwxr-xr-x. 6 root root 4096 7月 11 12:38 2014 .. 
     -rw-rw-rw-  0 root root   12 7月 31 10:29 2014 newfile 
     -rw-rw-rw-  0 root root   12 7月 31 10:31 2014 newfile.copy
+    
+.. code-block:: bash
+
+    $ ./leofs-adm whereis photo/newfile
+    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
+     del?  |           node           |             ring address             |    size    |   checksum   |  # of chunks   |     clock      |             when
+    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
+           | storage_0@127.0.0.1      | 22f3d93762d31abc5f5704f78edf1691     |        12B |   6f5902ac23 |              0 | 4ffe2d105f1f4  | 2014-07-31 10:29:01 +0900
+
+    $ ./leofs-adm whereis photo/newfile.copy
+    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
+     del?  |           node           |             ring address             |    size    |   checksum   |  # of chunks   |     clock      |             when
+    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
+           | storage_0@127.0.0.1      | d02e1e52d93242d2dcdb98224421a1fb     |        12B |   6f5902ac23 |              0 | 4ffe2d20343a3  | 2014-07-31 10:31:17 +0900
+
 
 - Diff files
 
@@ -133,6 +148,15 @@ Confirm that NFS works
     drwxrwxrwx  0 root root 4096 7月 31 10:09 2014 . 
     drwxr-xr-x. 6 root root 4096 7月 11 12:38 2014 .. 
     -rw-rw-rw-  0 root root   12 7月 31 10:31 2014 newfile.copy
+
+.. code-block:: bash
+
+    $ ./leofs-adm whereis photo/newfile
+    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
+     del?  |           node           |             ring address             |    size    |   checksum   |  # of chunks   |     clock      |             when
+    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
+      *    | storage_0@127.0.0.1      | 22f3d93762d31abc5f5704f78edf1691     |         0B |   d41d8cd98f |              0 | 4ffe2e5d9cffe  | 2014-07-41 10:34:50 +0900
+
 
 - Create a directory 
 
