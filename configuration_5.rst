@@ -26,13 +26,16 @@ Getting Started
 Pre-requirement
 ~~~~~~~~~~~~~~~
 
+.. note:: We have checked this mechanism with CentOS 6.5 and Ubuntu Server 14.04 LTS but we're goinng to investigate other OS such as FreeBSD and SmartOS.
+
+
 - Install NFS client on CentOS 6.5
 
 .. code-block:: bash
 
     $ sudo yum install nfs-utils
 
-- Install NFS client on Ubuntu Server 12.04 LTS or Higher
+- Install NFS client on Ubuntu Server 14.04 LTS
 
 .. code-block:: bash
 
