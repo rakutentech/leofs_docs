@@ -44,17 +44,18 @@ Pre-requirement
 Configuration
 ~~~~~~~~~~~~~
 
-- Modify ``leo_gateway.conf``
+- Modify |leo_gateway_conf|
 
- -  Set ``http.handler`` to ``nfs``
+ -  Set ``protocol`` to ``nfs``
  -  Set ``large_object.chunked_obj_len`` to ``1048576``
 
-.. note:: If you also want to access LeoFS via S3 intereface, you need to start another LeoFS Gateway with setting http.handler to s3.
+.. note:: If you also want to access LeoFS via S3 intereface, you need to start another LeoFS Gateway with setting ``protocol`` to s3.
 
 ::
 
-    ## Gateway’s HTTP API to use: [s3 | rest | embed | nfs]
-    http.handler = nfs
+    ## Gateway protocol to use: [s3 | rest | embed | nfs]
+    protocol = nfs
+
     ## Length of a chunked object
     large_object.chunked_obj_len = 1048576
 
@@ -252,3 +253,9 @@ Limits
 
 Since LeoFS NFS implementation is still the alpha version, there are some limitations. The details are described at `LeoFS
 Limits <http://leo-project.net/leofs/docs/faq_2.html#nfs-support>`_
+
+
+
+.. |leo_gateway_conf| raw:: html
+
+   <a href="https://github.com/leo-project/leo_gateway/blob/develop/priv/leo_gateway.conf#L46" target="_blank">leo_gateway.conf</a>
