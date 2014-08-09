@@ -6,6 +6,9 @@
 Operation Flow and Launch
 =========================
 
+.. index::
+    pair: Administration; Operation Flow Diagram
+
 Operation Flow Diagram
 -----------------------
 
@@ -15,6 +18,9 @@ The LeoFS operation flow is as follows:
    :width: 780px
 
 * `The diagram only <http://www.leofs.org/docs/_images/leofs-flow-diagram.jpg>`_
+
+.. index::
+    pair: Administration; System launch order
 
 System launch order
 ----------------------
@@ -51,6 +57,9 @@ Explanation of the Operations
 | 8           | > status                           | Confirm status of the cluster on Manager Master Console #2 |
 +-------------+------------------------------------+------------------------------------------------------------+
 
+
+.. index::
+    pair: Administration; System launch step by step
 
 System launch step by step
 --------------------------

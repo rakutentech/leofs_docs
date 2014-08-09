@@ -4,6 +4,9 @@
 Storage Operation
 =================
 
+.. index::
+    pair: Storage operation; Storage cluster operation commands
+
 Storage Cluster Operation Commands
 ----------------------------------
 
@@ -56,8 +59,9 @@ Table of Storage Cluster's Commands
 | recover cluster `{CLUSTER_ID}`  | [v1.0.0-] Synchronize objects between local-cluster with a remote-cluster                         |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
 
+
 .. index::
-    detach-command
+    pair: Storage cluster operation commands; detach-command
 
 .. _detach-command-label:
 
@@ -74,7 +78,7 @@ Command: ``detach {STORAGE_NODE}``
     OK
 
 .. index::
-   suspend-command
+    pair: Storage cluster operation commands; suspend-command
 
 **'suspend'** - Suspend a storage node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -86,8 +90,9 @@ Command: ``suspend {STORAGE_NODE}``
     suspend storage_0@127.0.0.1
     OK
 
+
 .. index::
-   resume-command
+    pair: Storage cluster operation commands; resume-command
 
 **'resume'** - Resume a storage node
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -99,8 +104,9 @@ Command: ``resume {STORAGE_NODE}``
     resume storage_0@127.0.0.1
     OK
 
+
 .. index::
-   rebalance-command
+    pair: Storage cluster operation commands; rebalance-command
 
 .. _rebalance-command-label:
 
@@ -114,10 +120,9 @@ Command: ``rebalance``
     rebalance
     OK
 
-.. _whereis:
 
 .. index::
-   whereis-command
+    pair: Storage cluster operation commands; whereis-command
 
 **'whereis'**
 ^^^^^^^^^^^^^
@@ -142,7 +147,8 @@ Command: ``whereis {FILE_PATH}``
 **recover** - Recover target node's objects and RING synchronization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. index:: recover-file-command
+.. index::
+    pair: Storage cluster operation commands; recover-file-command
 
 **'recover file'** - Synchronize an object between nodes
 
@@ -153,7 +159,9 @@ Command: ``whereis {FILE_PATH}``
 
 \
 
-.. index:: recover-node-command
+
+.. index::
+    pair: Storage cluster operation commands; recover-node-command
 
 **'recover node'** - Recover target node's objects
 
@@ -164,7 +172,9 @@ Command: ``whereis {FILE_PATH}``
 
 \
 
-.. index:: recover-ring-command
+
+.. index::
+    pair: Storage cluster operation commands; recover-ring-command
 
 **'recover ring'** - Synchronize target node's RING with Manager's RING
 
@@ -175,6 +185,9 @@ Command: ``whereis {FILE_PATH}``
 
 \
 \
+
+.. index::
+    pair: Storage operation; Storage maintenance commands
 
 Storage Maintenance Commands
 ----------------------------
@@ -208,7 +221,9 @@ Storage Maintenance Commands
 **du** - Disk Usage
 ^^^^^^^^^^^^^^^^^^^
 
-.. index:: du-command
+
+.. index::
+    pair: Storage maintenance commands; du-command
 
 **'du'** - Display disk usage (summary)
 
@@ -225,7 +240,9 @@ Command: ``du {STORAGE_NODE}``
         last compaction start: 2013-03-04 12:39:47 +0900
           last compaction end: 2013-03-04 12:39:55 +0900
 
-.. index:: du-detail-command
+
+.. index::
+    pair: Storage maintenance commands; du-detail-command
 
 **'du detail'** - Display disk usage in details (per raw file)
 
@@ -268,7 +285,9 @@ Command: ``du detail {STORAGE_NODE}``
 \
 \
 
-.. index:: compact-start-command
+
+.. index::
+    pair: Storage maintenance commands; compact-start-command
 
 **'compact start'** - Start compaction
 
@@ -291,7 +310,9 @@ Command: ``compact start {STORAGE_NODE} (all | {NUM_OF_TARGETS}) [{NUM_OF_COMPAC
 
 \
 
-.. index:: compact-suspend-command
+
+.. index::
+    pair: Storage maintenance commands; compact-suspend-command
 
 **'compact suspend'** - Suspend a compaction job in progress
 
@@ -304,7 +325,9 @@ Command: ``compact suspend {STORAGE_NODE}``
 
 \
 
-.. index:: compact-resume-command
+
+.. index::
+    pair: Storage maintenance commands; compact-resume-command
 
 **'compact resume'** - Resume a suspended compaction job
 
@@ -317,7 +340,9 @@ Command: ``compact resume {STORAGE_NODE}``
 
 \
 
-.. index:: compact-status-command
+
+.. index::
+    pair: Storage maintenance commands; compact-status-command
 
 **'compact status'** - Retrieve compaction statuses
 
