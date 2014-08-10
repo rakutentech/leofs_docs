@@ -11,6 +11,7 @@ We explain core administrative tasks and practices that operators of LeoFS will 
    :maxdepth: 2
 
    admin_guide_1
+   admin_guide_general_cmd.rst
    admin_guide_2
    admin_guide_3
    admin_guide_s3_api

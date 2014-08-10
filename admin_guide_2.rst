@@ -5,7 +5,7 @@ Storage Operation
 =================
 
 .. index::
-    pair: Storage operation; Storage cluster operation commands
+    Storage cluster operation commands
 
 Storage Cluster Operation Commands
 ----------------------------------
@@ -187,7 +187,7 @@ Command: ``whereis {FILE_PATH}``
 \
 
 .. index::
-    pair: Storage operation; Storage maintenance commands
+    Storage maintenance commands
 
 Storage Maintenance Commands
 ----------------------------

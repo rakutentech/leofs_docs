@@ -4,6 +4,9 @@
 Multi Datacenter Replication Operation
 ======================================
 
+.. index::
+    MultiDC-related commands
+
 MultiDC-related Commands
 ------------------------
 
@@ -26,7 +29,7 @@ MultiDC-related Commands
 .. _join_cluster:
 
 .. index::
-    join-cluster-command
+    pair: MultiDC-related commands; join-cluster-command
 
 **'join-cluster'** - Communicate between the local-cluster and a remote cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -45,7 +48,7 @@ Command: ``join-cluster {REMOTE_MANAGER_MASTER} {REMOTE_MANAGER_SLAVE}``
 .. _remove_cluster:
 
 .. index::
-    remove-cluster-command
+    pair: MultiDC-related commands; remove-cluster-command
 
 **'remove-cluster'** - Remove communication between clusters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -64,7 +67,7 @@ Command: ``remove-cluster {REMOTE_MANAGER_MASTER} {REMOTE_MANAGER_SLAVE}``
 .. _cluster_status:
 
 .. index::
-    cluster-status-command
+    pair: MultiDC-related commands; cluster-status-command
 
 **'cluster-status'** - Retrieve current status of clusters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
