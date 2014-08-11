@@ -5,7 +5,7 @@
 .. =========================================================
 
 .. index::
-   pair: LeoFS; Getting Started
+   pair: Getting Started; Quick Start: All in one in a local node
 
 ---------------------------------------
 Quick Start: All in one in a local node
@@ -26,9 +26,7 @@ Install
 .. _install_leofs_label:
 
 Install LeoFS on CentOS-6.x
-"""""""""""""""""""""""""""""""""""""""""""""""""
-.. index::
-   pair: CentOS-6; Installation
+"""""""""""""""""""""""""""
 
 ::
 
@@ -40,9 +38,7 @@ Install LeoFS on CentOS-6.x
     $ chown -R {USER}:{GROUP} /usr/local/leofs/{VERSION}
 
 Install LeoFS on Ubuntu Server 12.04 LTS or Higher
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.. index::
-   pair: Ubuntu; Installation
+""""""""""""""""""""""""""""""""""""""""""""""""""
 
 .. code-block:: bash
 
@@ -181,7 +177,7 @@ Using LeoFS
     $ curl http://localhost:8080/your_bucket_name/path/to/file
     > {CONTENTS}
 
-.. note:: From version 0.16.0, you need to set ACL settings of your bucket to ``public-read`` by using the command :ref:`update-acl<s3-update-acl>` if you want to get the data stored in LeoFS via web browser.
+.. note:: From version 0.16.0, you need to set ACL settings of your bucket to ``public-read`` by using the command :ref:`update-acl<update-acl>` if you want to get the data stored in LeoFS via web browser.
 
 Wrap up
 ^^^^^^^

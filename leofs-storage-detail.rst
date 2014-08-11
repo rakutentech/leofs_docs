@@ -4,6 +4,9 @@
 .. http://leo-project.net/
 .. =========================================================
 
+.. index::
+   pair: Architecture; LeoFS Storage
+
 LeoFS Storage
 =============
 
@@ -29,7 +32,7 @@ Data Structure
 LeoFS's object consists of 3 layers which are **metadata**, **needle** and **object container**.
 
 * The object storage manages and stores both an object and a metadata, which merges as a needle.
-* The metadata storage manages and stores attributes of an object which includes *filename*, *size*, *checksum*, and so on. And it depends of |bitcask| or |leveldb|.
+* The metadata storage manages and stores attributes of an object which includes *filename*, *size*, *checksum*, and so on. And it depends of |bitcask_2| or |leveldb|.
 * The object container is a log structured file format.
     * This format is robust and high performance because effect of local file system is just a little part.
     * The storage is necessary to GC - the **compaction** mechanism in order to remove unnecessary objects from the object container.
@@ -61,7 +64,7 @@ On the other hand, In case of READ of a large object, first, *Gateway* retrieves
 
    <a href="https://github.com/basho/bitcask" target="_blank">bitcask</a>
 
-.. |bitcask| raw:: html
+.. |bitcask_2| raw:: html
 
    <a href="https://github.com/basho/bitcask" target="_blank">bitcask</a>
 

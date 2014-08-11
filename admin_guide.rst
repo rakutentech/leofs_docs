@@ -4,6 +4,8 @@
 .. http://leo-project.net/
 .. =========================================================
 
+.. _administration-guide:
+
 Administration Guide
 ====================
 

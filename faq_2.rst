@@ -4,9 +4,15 @@
 .. http://leo-project.net/
 .. =========================================================
 
+.. index::
+   FAQ LeoFS limits
+
 =======================
 FAQ: LeoFS Limits
 =======================
+
+.. index::
+   pair: FAQ LeoFS limits; Features
 
 Features
 --------
@@ -20,6 +26,9 @@ See Also:
 
 ----
 
+.. index::
+   pair: FAQ LeoFS limits; Operations
+
 Operations
 ----------
 
@@ -32,6 +41,9 @@ See Also:
     * `The roadmap of LeoFS <faq_1.html#is-there-the-roadmap-of-leofs>`_
 
 ----
+
+.. index::
+   pair: FAQ LeoFS limits; NFS support
 
 NFS Support
 -----------

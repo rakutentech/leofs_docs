@@ -4,10 +4,15 @@
 .. http://leo-project.net/
 .. =========================================================
 
+.. index::
+   FAQ fundamentals
+
 =======================
 FAQ: LeoFS Fundamentals
 =======================
 
+.. index::
+   pair: FAQ fundamentals; What kind of storage is leofs?
 
 What kind of storage is leofs?
 ------------------------------
@@ -22,6 +27,9 @@ See Also:
 
 ----
 
+.. index::
+   pair: FAQ fundamentals; What are typical uses for LeoFS?
+
 What are typical uses for LeoFS?
 --------------------------------
 
@@ -33,6 +41,9 @@ See Also:
     * `LeoFS Overview <intro.html>`_
 
 ----
+
+.. index::
+   pair: FAQ fundamentals; What is benefit for LeoFS users?
 
 What is benefit for LeoFS users?
 --------------------------------
@@ -78,6 +89,9 @@ For administrators
 
 ----
 
+.. index::
+   pair: FAQ fundamentals; What is architecture of LeoFS?
+
 What is architecture of LeoFS?
 ------------------------------
 
@@ -103,6 +117,9 @@ Also, what we payed attention when we desined LeoFS are the following 3 things:
 
 ----
 
+.. index::
+   pair: FAQ fundamentals; Is there the roadmap of LeoFS?
+
 Is there the roadmap of LeoFS?
 ------------------------------
 
@@ -118,6 +135,9 @@ We've published LeoFS milestones on both of |GitHub| and `LeoFS website <milesto
 
 ----
 
+.. index::
+   pair: FAQ fundamentals; What language is LeoFS written in?
+
 What language is LeoFS written in?
 ----------------------------------
 
@@ -129,6 +149,9 @@ See Also:
     * |LeoCenter|
 
 ----
+
+.. index::
+   pair: FAQ fundamentals; What language can I use to work with LeoFS?
 
 What language can I use to work with LeoFS?
 -------------------------------------------

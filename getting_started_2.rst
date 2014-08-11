@@ -6,6 +6,9 @@
 
 .. _quick-start2-label:
 
+.. index::
+   pair: Getting Started; Quick Start: Building a cluster
+
 ---------------------------------
 Quick Start: Building a cluster
 ---------------------------------
@@ -223,9 +226,9 @@ Using LeoFS
     $ curl http://localhost:8080/your_bucket_name/path/to/file
     > {CONTENTS}
 
-.. note:: From version 0.16.0, you need to set ACL settings of your bucket to ``public-read`` by using the command :ref:`update-acl<s3-update-acl>` if you want to get the data stored in LeoFS via web browser.
+.. note:: From version 0.16.0, you need to set ACL settings of your bucket to ``public-read`` by using the command :ref:`update-acl<update-acl>` if you want to get the data stored in LeoFS via web browser.
 
 Wrap up
 ^^^^^^^
 
-You now have a working *LeoFS cluster*. Make sure to have a look at :ref:`LeoFS Installation <leofs-installation-label>`, :ref:`LeoFS Configuration <leofs-configuration-label>` and :ref:`Administration Guide <administration-guide-label>` to learn more about setting up and managing your LeoFS cluster.
+You now have a working *LeoFS cluster*. Make sure to have a look at :ref:`LeoFS Installation <leofs-installation-label>`, :ref:`LeoFS Configuration <leofs-configuration-label>` and :ref:`Administration Guide <administration-guide>` to learn more about setting up and managing your LeoFS cluster.

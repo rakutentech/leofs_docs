@@ -77,6 +77,9 @@ The Consistency Level
 | consistency.rack_aware_replicas | # of rack-aware replicas                                |
 +---------------------------------+---------------------------------------------------------+
 
+.. index::
+   pair: Configuration; Consistency level
+
 * A reference consistency level
 
 +-------------+--------------------------------------------------------+

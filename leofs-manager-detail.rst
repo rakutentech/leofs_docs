@@ -4,6 +4,9 @@
 .. http://leo-project.net/
 .. =========================================================
 
+.. index::
+   pair: Architecture; LeoFS Manager
+
 LeoFS Manager
 =============
 

@@ -4,8 +4,6 @@
 .. http://leo-project.net/
 .. =========================================================
 
-.. index::
-   pair: Erlang; Installation
 
 Install Erlang
 ---------------
@@ -17,27 +15,36 @@ most Linux platforms with the following software installed:
 .. note:: We recommend this installation method. Please follow the relevant instructions for your environment.
 
 
-Preparation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Prepare
+^^^^^^^
+
+.. index::
+   pair: Install; CentOS
 
 Install required libraries using yum (CentOS 6.5)
 """""""""""""""""""""""""""""""""""""""""""""""""
-.. index::
-   pair: CentOS-6.5; Installation
 
 ::
 
    $ sudo yum install gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf \
                       libuuid-devel cmake check check-devel
 
+\
+
+.. index::
+   pair: Install; Ubuntu/Debian
+
 Install required libraries using apt-get (Ubuntu Server 12.04 LTS or Higher)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.. index::
-   pair: Ubuntu-12.04; Installation
 
 ::
 
    $ sudo apt-get install build-essential libtool libncurses5-dev libssl-dev cmake check
+
+\
+
+.. index::
+   pair: Install; libatomic_ops
 
 Install "libatomic_ops" for R16B03-1  *(both CentOS and Ubuntu)*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -51,6 +58,11 @@ Install "libatomic_ops" for R16B03-1  *(both CentOS and Ubuntu)*
    $ make
    $ sudo make install
 
+\
+
+.. index::
+   pair: Install; Download Erlang
+
 Download "Erlang R16B03-1"
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -60,6 +72,10 @@ Download "Erlang R16B03-1"
    $ cd $WORK_DIR
    $ wget http://www.erlang.org/download/otp_src_R16B03-1.tar.gz
 
+\
+
+.. index::
+   pair: Install; Build Erlang on CentOS
 
 Build Erlang on CentOS 6.5
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -83,8 +99,13 @@ Build Erlang on CentOS 6.5
    $ make
    $ sudo make install
 
-Build Erlang on Debian and others
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+\
+
+.. index::
+   pair: Install; Build Erlang on Ubuntu/Debian
+
+Build Erlang on Ubuntu/Debian
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
@@ -103,6 +124,11 @@ Build Erlang on Debian and others
                  --with-libatomic_ops=/usr/local
    $ make
    $ sudo make install
+
+\
+
+.. index::
+   pair: Install; Confirm Erlang
 
 Confirm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
