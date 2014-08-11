@@ -3,11 +3,11 @@
 
 .. _operation-flow-diagram-label:
 
-Operation Flow and Launch
+Launch and Operation Flow
 =========================
 
 .. index::
-    pair: Administration; Operation Flow Diagram
+    pair: Administration; Operation flow diagram
 
 Operation Flow Diagram
 -----------------------
@@ -19,10 +19,11 @@ The LeoFS operation flow is as follows:
 
 * `The diagram only <http://www.leofs.org/docs/_images/leofs-flow-diagram.jpg>`_
 
-.. index::
-    pair: Administration; System launch order
 
-System launch order
+.. index::
+    pair: Administration; LeoFS launch order
+
+LeoFS launch order
 ----------------------
 
 LeoFS's system launch process is very simple:
@@ -37,62 +38,62 @@ Explanation of the Operations
 
 \
 
-+-------------+------------------------------------+------------------------------------------------------------+
-| Order       | Command                            | Explanation                                                |
-+=============+====================================+============================================================+
-| 1           | $ bin/leofs_manager start          | Starting Manager Master **on Manager Master Node**         |
-+-------------+------------------------------------+------------------------------------------------------------+
-| 2           | $ bin/leofs_manager start          | Starting Manager Slave  **on Manager Slave Node**          |
-+-------------+------------------------------------+------------------------------------------------------------+
-| 3           | $ bin/leofs_storage start          | Starting Storage(s) **on each Storage Nodes**              |
-+-------------+------------------------------------+------------------------------------------------------------+
-| 4           | $ telnet $manager-master 10010     | Accessing **Manager Master Console** by telnet             |
-+-------------+------------------------------------+------------------------------------------------------------+
-| 5           | > start                            | Starting LeoFS (manager and storage)                       |
-+-------------+------------------------------------+------------------------------------------------------------+
-| 6           | > status                           | Confirm status of the cluster on Manager Master Console #1 |
-+-------------+------------------------------------+------------------------------------------------------------+
-| 7           | $ bin/leofs_gateway start          | Starting Gateway(s) **on each Gateway Node**               |
-+-------------+------------------------------------+------------------------------------------------------------+
-| 8           | > status                           | Confirm status of the cluster on Manager Master Console #2 |
-+-------------+------------------------------------+------------------------------------------------------------+
++-------------+------------------------------------+--------------------------------------------------------------+
+| Order       | Command                            | Explanation                                                  |
++=============+====================================+==============================================================+
+| 1           | $ bin/leofs_manager start          | Start LeoFS Manager’s master                                 |
++-------------+------------------------------------+--------------------------------------------------------------+
+| 2           | $ bin/leofs_manager start          | Start LeoFS Manager’s slave                                  |
++-------------+------------------------------------+--------------------------------------------------------------+
+| 3           | $ bin/leofs_storage start          | Start LeoFS Storage                                          |
++-------------+------------------------------------+--------------------------------------------------------------+
+| 4           | $ telnet $manager-master 10010     | Connect LeoFS Manager console with telnet                    |
++-------------+------------------------------------+--------------------------------------------------------------+
+| 5           | > start                            | Start LeoFS storage cluster                                  |
++-------------+------------------------------------+--------------------------------------------------------------+
+| 6           | > status                           | Confirm state of the every LeoFS Storage                     |
++-------------+------------------------------------+--------------------------------------------------------------+
+| 7           | $ bin/leofs_gateway start          | Start LeoFS Gateway                                          |
++-------------+------------------------------------+--------------------------------------------------------------+
+| 8           | > status                           | Confirm state of the every node - LeoFS Storaage and Gateway |
++-------------+------------------------------------+--------------------------------------------------------------+
 
 
 .. index::
-    pair: Administration; System launch step by step
+    pair: Administration; LeoFS launch step by step
 
-System launch step by step
+LeoFS launch step by step
 --------------------------
 
-.. index::
-    pair: Operation; System Launch
-
-Start manager-master on **LeoFS-Manager Master** node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Start LeoFS Manager's master
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     $ cd $LEOFS_DEPLOYED_DIR
     $ manager_0/bin/leo_manager start
 
-Start manager-slave on **LeoFS-Manager Slave** node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Start LeoFS Manager's slave
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     $ cd $LEOFS_DEPLOYED_DIR
     $ manager_1/bin/leo_manager start
 
-Start storage on each **LeoFS-Storage** node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Start LeoFS Storage
+^^^^^^^^^^^^^^^^^^^
 
 ::
 
     $ cd $LEOFS_DEPLOYED_DIR
     $ leo_storage/bin/leo_storage start
 
-Open LeoFS Manager Console on **LeoFS-Manager Master** node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Connect LeoFS Manager console with telnet
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * 'status' command - Inspect LeoFS-cluster ::
 
@@ -128,16 +129,17 @@ Open LeoFS Manager Console on **LeoFS-Manager Master** node
       S    | storage_3@127.0.0.1      | attached     |                |                | 2014-04-03 11:28:20 +0900
 
 
-**'start' command** - Launch LeoFS-cluster
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The "start" command - Start LeoFS storage cluster
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
     start
     OK
 
-Confirm#1 by **LeoFS-Manager** node's console
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Confirm state of the every LeoFS storage
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -168,8 +170,8 @@ Confirm#1 by **LeoFS-Manager** node's console
       S    | storage_3@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
 
 
-Launch Gateway on each **LeoFS-Gateway** node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Start LeoFS Gateway
+^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -177,8 +179,8 @@ Launch Gateway on each **LeoFS-Gateway** node
     $ gateway/bin/leo_gateway start
 
 
-Confirm#2 by **LeoFS-Manager** master node's console
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Confirm state of the every node
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 

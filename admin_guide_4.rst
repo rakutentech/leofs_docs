@@ -1,16 +1,12 @@
 .. LeoFS documentation
 .. Copyright (c) 2013-2014 Rakuten, Inc.
 
-Gateway and Other Operation
+Gateway Operation
 ===========================
 
 .. index::
-    Gateway maintenance and misc commands
+    Gateway operation
 
-Gateway Maintenance and Misc Commands
--------------------------------------
-
-\
 
 +------------------------------------------------------+-----------------------------------------------------------------------------------+
 | Command                                              | Explanation                                                                       |

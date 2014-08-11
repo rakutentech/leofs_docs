@@ -8,13 +8,14 @@ We explain core administrative tasks and practices that operators of LeoFS will 
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
+   admin_commands
    admin_guide_1
-   admin_guide_general_cmd.rst
    admin_guide_2
    admin_guide_3
-   admin_guide_s3_api
    admin_guide_4
    admin_guide_5
-
+   admin_guide_6
+   admin_guide_7
+   admin_guide_8
