@@ -26,6 +26,8 @@ Manager Maintenance
 +------------------------------------------------------------+-----------------------------------------------------------------------------------+
 
 
+.. _backup-mnesia:
+
 .. index::
     pair: Manager maintenance; backup-mnesia-command
 
@@ -40,6 +42,8 @@ Copy LeoFS's Manager data to the file-path
     OK
 
 \
+
+.. _restore-mnesia:
 
 .. index::
     pair: Manager maintenance; restore-mnesia-command
@@ -56,6 +60,8 @@ Restore LeoFS's Manager data from the backup file
 
 \
 
+.. _update-managers:
+
 .. index::
     pair: Manager maintenance; update-managers-command
 
@@ -71,6 +77,8 @@ update-managers <manager-master> <manager-slave>
     OK
 
 \
+
+.. _dump-ring:
 
 .. index::
     pair: Manager maintenance; dump-ring-command

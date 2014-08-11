@@ -44,6 +44,8 @@ Remove logical deleted objects and meta data and check the current disk usage
 \
 
 
+.. _compact-start:
+
 .. index::
     pair: Compaction commands; compact-start-command
 
@@ -72,6 +74,7 @@ compact start <storage-node> (all | <num-of-targets>) [<num-of-compaction-procs>
 
 \
 
+.. _compact-suspend:
 
 .. index::
     pair: Compaction commands; compact-suspend-command
@@ -89,6 +92,8 @@ Suspend to execute the compaction
 \
 
 
+.. _compact-resume:
+
 .. index::
     pair: Compaction commands; compact-resume-command
 
@@ -104,6 +109,7 @@ Resume to execute the compaction
 
 \
 
+.. _compact-status:
 
 .. index::
     pair: Compaction commands; compact-status-command
@@ -127,6 +133,8 @@ compact status <storage-node>
 
 \
 
+.. _du:
+
 .. index::
     pair: Compaction commands; du-command
 
@@ -147,7 +155,8 @@ See the current disk usages
           last compaction end: 2013-03-04 12:39:55 +0900
 
 
-.. index::
+.. _du-detail:
+
 .. index::
     pair: Compaction commands; du-detail-command
 

@@ -19,6 +19,7 @@ General Commands
 | whereis `<file-path>`           | Retrieve an assigned object by the file-path                                                      |
 +---------------------------------+---------------------------------------------------------------------------------------------------+
 
+.. _status-command:
 
 .. index::
     pair: General commands; status-command
@@ -130,6 +131,9 @@ Retrieve status of the specified node
                       kernel_poll : true
                  thread_pool_size : 32
 
+\
+
+.. _whereis-command:
 
 .. index::
     pair: General commands; whereis-command

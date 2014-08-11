@@ -39,7 +39,7 @@ Storage Operation
 .. index::
     pair: Storage operation; detach-command
 
-.. _detach-command-label:
+.. _detach-command:
 
 detach <storage-node>
 ^^^^^^^^^^^^^^^^^^^^^
@@ -57,7 +57,7 @@ Remove the storage node in the storage cluster
 .. index::
     pair: Storage operation; suspend-command
 
-.. _suspend-command-label:
+.. _suspend-command:
 
 suspend <storage-node>
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -75,7 +75,7 @@ suspend <storage-node>
 .. index::
     pair: Storage operation; resume-command
 
-.. _resume-command-label:
+.. _resume-command:
 
 resume <storage-node>
 ^^^^^^^^^^^^^^^^^^^^^
@@ -93,7 +93,7 @@ Resume the storage node
 .. index::
     pair: Storage operation; start-command
 
-.. _start-command-label:
+.. _start-command:
 
 start
 ^^^^^
@@ -102,7 +102,7 @@ Start LeoFS after distributing the RING from LeoFS Manager to LeoFS Storage and 
 
 ::
 
-    rebalance
+    start
     OK
 
 \
@@ -111,7 +111,7 @@ Start LeoFS after distributing the RING from LeoFS Manager to LeoFS Storage and 
 .. index::
     pair: Storage operation; rebalance-command
 
-.. _rebalance-command-label:
+.. _rebalance-command:
 
 rebalance
 ^^^^^^^^^

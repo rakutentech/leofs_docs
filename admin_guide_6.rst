@@ -22,6 +22,8 @@ Gateway Operation
 
 \
 
+.. _purge:
+
 .. index::
     pair: Gateway operation; purge-command
 
@@ -37,6 +39,7 @@ Remove the cache from each gateway
 
 \
 
+.. _remove:
 
 .. index::
     pair: Gateway operation; remove-command

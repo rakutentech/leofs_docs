@@ -25,6 +25,8 @@ Recover Commands
 +---------------------------------+---------------------------------------------------------------------------------------------------+
 
 
+.. _recover-file-command:
+
 .. index::
     pair: Recover commands; recover-file-command
 
@@ -41,6 +43,8 @@ Recover an inconsistent object specified by the file-path
 \
 
 
+.. _recover-node-command:
+
 .. index::
     pair: Recover commands; recover-node-command
 
@@ -56,6 +60,7 @@ Recover all inconsistent objects in the specified node
 
 \
 
+.. _recover-ring-command:
 
 .. index::
     pair: Recover commands; recover-ring-command
@@ -72,6 +77,7 @@ Recover rings of the specified node
 
 \
 
+.. _recover-cluster-command:
 
 .. index::
     pair: Recover commands; recover-cluster-command
