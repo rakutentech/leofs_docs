@@ -1,17 +1,17 @@
-
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
-
-General Commands
-===========================
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 .. index::
     General commands
 
-\
+General Commands
+===========================
 
 +---------------------------------+---------------------------------------------------------------------------------------------------+
-| Command                         | Explanation                                                                                       |
+| Command                         | Description                                                                                       |
 +=================================+===================================================================================================+
 | status [`<node>`]               | * Retrieve status of every node (default)                                                         |
 |                                 | * Retrieve status of the specified node                                                           |

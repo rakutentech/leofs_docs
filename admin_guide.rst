@@ -1,5 +1,8 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 Administration Guide
 ====================
@@ -19,3 +22,6 @@ We explain core administrative tasks and practices that operators of LeoFS will 
    admin_guide_6
    admin_guide_7
    admin_guide_8
+   admin_guide_9
+   admin_guide_10
+

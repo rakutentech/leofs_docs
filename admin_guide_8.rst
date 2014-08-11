@@ -1,210 +1,359 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
-
-System Maintenance
-==================
-
-.. index::
-    upgrade-leofs
-
-\
-
-Upgrade your old version LeoFS to v1.0.2
-----------------------------------------
-
-This section describes the way of replacement of old LeoFS to v1.0.2
-
-Upgrade flow diagram
-^^^^^^^^^^^^^^^^^^^^
-
-\
-
-.. image:: _static/images/leofs-upgrade-flow-diagram.png
-   :width: 780px
-
-* `The diagram only <http://www.leofs.org/docs/_images/leofs-upgrade-flow-diagram.png>`_
-
-\
-
-.. note:: If you're using LeoFS v1.0.0-pre1, v0.16 or v0.14, you need to take over the configuration of ``metadata-storage`` as follows because from v1.0.0-pre2, the default configuration is ``leveldb``. So we're planning to provide the ``db-converter`` tool - from ``bitcask`` to ``leveldb`` with v1.1.0.
-
-Takeover a part of confugurations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-\
-
-+-------------------------------------+---------------+
-| Item                                | Default value |
-+=====================================+===============+
-| leo_object_storage.metadata_storage | bitcask       |
-+-------------------------------------+---------------+
-
-\
-
-Adjust Every Path
-^^^^^^^^^^^^^^^^^
-
-* Manager: [mnesia, log-dir and queue-dir]
-
-.. code-block:: bash
-
-    .
-    .
-    .
-    ## Mnesia dir
-    mnesia.dir = ./work/mnesia/{IP}
-    .
-    .
-    .
-    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
-    log.log_level = 1
-    ## Output log file(s) - Erlang's log
-    log.erlang = ./log/erlang
-    ## Output log file(s) - app
-    log.app = ./log/app
-    ## Output log file(s) - members of storage-cluster
-    log.member_dir = ./log/ring
-    ## Output log file(s) - ring
-    log.ring_dir = ./log/ring
-
-    ## Directory of queue for monitoring "RING"
-    queue_dir = ./work/queue
-    ## Directory of SNMP agent configuration
-    snmp_agent = ./snmp/snmpa_manager_0/LEO-MANAGER
-
-
-* Storage: [obj_containers, log-dir and queue-dir]
-
-.. code-block:: bash
-
-    ## Object container
-    obj_containers.path = [./avs]
-    obj_containers.num_of_containers = [8]
-
-    ## e.g. Case of plural pathes
-    ## obj_containers.path = [/var/leofs/avs/1, /var/leofs/avs/2]
-    ## obj_containers.num_of_containers = [32, 64]
-    .
-    .
-    .
-    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
-    log.log_level = 1
-    ## Output log file(s) - Erlang's log
-    log.erlang = ./log/erlang
-    ## Output log file(s) - app
-    log.app = ./log/app
-    ## Output log file(s) - members of storage-cluster
-    log.member_dir = ./log/ring
-    ## Output log file(s) - ring
-    log.ring_dir = ./log/ring
-
-    ## Directory of queue for monitoring "RING"
-    queue_dir = ./work/queue
-    ## Directory of SNMP agent configuration
-    snmp_agent = ./snmp/snmpa_storage_0/LEO-STORAGE
-
-
-* Gateway: [SSL-related files, cache-related pathes, log-dir and queue-dir]
-
-.. code-block:: bash
-
-    ## SSL Certificate file
-    http.ssl_certfile = ./etc/server_cert.pem
-    ## SSL key
-    http.ssl_keyfile  = ./etc/server_key.pem
-
-    ## Directory for the disk cache data
-    cache.cache_disc_dir_data    = ./cache/data
-    ## Directory for the disk cache journal
-    cache.cache_disc_dir_journal = ./cache/journal
-    .
-    .
-    .
-    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
-    log.log_level = 1
-    ## Output log file(s) - Erlang's log
-    log.erlang = ./log/erlang
-    ## Output log file(s) - app
-    log.app = ./log/app
-    ## Output log file(s) - members of storage-cluster
-    log.member_dir = ./log/ring
-    ## Output log file(s) - ring
-    log.ring_dir = ./log/ring
-
-    ## Directory of queue for monitoring "RING"
-    queue_dir = ./work/queue
-    ## Directory of SNMP agent configuration
-    snmp_agent = ./snmp/snmpa_gateway_0/LEO-GATEWAY
-
-
-Attach/Detach node into a Storage-cluster in operation
-------------------------------------------------------
-
-This section describes the process of adding and removing nodes in a LeoFS Storage cluster.
-
-* Adding a storage node:
-    * The node can be added to the cluster once it is running. You can use the :ref:`rebalance <rebalance-command-label>` command to request a join from the Manager.
-* Removing a storage node:
-    * The node can be removed from the cluster when it is either running or stopped. You can use the :ref:`detach <detach-command-label>` command to remove the node.
-    * After that, you need to execute the :ref:`rebalance <rebalance-command-label>` command in the Manager to actually remove the node from the storage cluster.
-
-
-.. image:: _static/images/leofs-order-of-attach.png
-   :width: 640px
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 .. index::
-   detach-storage
+        S3-API commands
 
-.. image:: _static/images/leofs-order-of-detach.png
-   :width: 640px
+S3-API Commands
+===============
+
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| **Command**                                                | **Description**                                                                   |
++============================================================+===================================================================================+
+| **S3-API Commands - User**                                                                                                                     |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| create-user <user-id> <password>                           | * Register the new user                                                           |
+|                                                            | * Generate an S3 key pair (AccessKeyID and SecretAccessKey)                       |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| delete-user <user-id>                                      | * Remove the user                                                                 |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| get-users                                                  | * Retrieve the list of users                                                      |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| update-user-role <user-id> <role-id>                       | * Update the user's role                                                          |
+|                                                            | * Currently, we are supporting two kinds of roles                                 |
+|                                                            | * role-id:                                                                        |
+|                                                            |     * 1: General user                                                             |
+|                                                            |     * 9: Administrator                                                            |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| **S3-API Commands - Endpoint**                                                                                                                 |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| add-endpoint <endpoint>                                    | * Register a new S3 Endpoint                                                      |
+|                                                            | * LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`                    |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| delete-endpoint <endpoint>                                 | * Remove the endpoint                                                             |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| get-endpoints                                              | * Retrieve the list of endpoints                                                  |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| **S3-API Commands - Bucket**                                                                                                                   |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| add-bucket <bucket> <access-key-id>                        | * Create the new bucket                                                           |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| delete-bucket <bucket> <access-key-id>                     | * Remove the bucket and all files stored in the bucket                            |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| get-buckets                                                | * Retrieve the list of the buckets registered                                     |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| get-bucket <access-key-id>                                 | * Retrieve the list of the buckets owned by the specified user                    |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| chown-bucket <bucket> <access-key-id>                      | * ``v0.16.5-`` Change the owner of the bucket                                     |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| update-acl <bucket> <access-key-id>                        | * ``v0.16.0-`` Update the ACL (Access Control List) for the bucket                |
+| (private | public-read | public-read-write)                | * Available ACL list:                                                             |
+|                                                            |      * ``private (default)`` : No one except the owner has access rights          |
+|                                                            |      * ``public-read``       : All users have READ access                         |
+|                                                            |      * ``public-read-write`` : All users have READ and WRITE access               |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
 
 
+S3-API Commands - User
+----------------------
 
+.. ### CREATE USER ###
+.. _s3-create-user:
 
-Gateway Access-log Format (v1.0.0-pre3)
----------------------------------------
+.. index::
+        pair: S3-API commands; create-user-command
 
-LeoFS-Gateway is able to output access-log. If you would like to use this option, you can check and set :ref:`the configuration <conf_gateway_label>`.
+create-user <user-id> <password>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Sample
-^^^^^^
+* Register the new user
+* Generate an S3 key pair (AccessKeyID and SecretAccessKey)
 
 ::
 
-    --------+-------+--------------------+----------+-------+---------------------------------------+-----------------------+----------
-    Method  | Bucket| Path               |Child Num |  Size | Timestamp                             | Unix Time             | Response
-    --------+-------+--------------------+----------|-------+---------------------------------------+-----------------------+----------
-    [HEAD]   photo   photo/1              0          0       2013-10-18 13:28:56.148269 +0900        1381206536148320        500
-    [HEAD]   photo   photo/1              0          0       2013-10-18 13:28:56.465670 +0900        1381206536465735        404
-    [HEAD]   photo   photo/city/tokyo.png 0          0       2013-10-18 13:28:56.489234 +0900        1381206536489289        200
-    [GET]    photo   photo/1              0          1024    2013-10-18 13:28:56.518631 +0900        1381206536518693        500
-    [GET]    photo   photo/city/paris.png 0          2048    2013-10-18 13:28:56.550376 +0900        1381206536550444        404
-    [PUT]    logs    logs/leofs           1          5242880 2013-10-18 13:28:56.518631 +0900        1381206536518693        500
-    [PUT]    logs    logs/leofs           2          5242880 2013-10-18 13:28:56.518631 +0900        1381206536518693        500
-    [PUT]    logs    logs/leofs           3          5120    2013-10-18 13:28:56.518631 +0900        1381206536518693        500
+    create-user test_account password
+    access-key-id: be8111173c8218aaf1c3
+    secret-access-key: 929b09f9b794832142c59218f2907cd1c35ac163
 
-Format
-^^^^^^
+\
 
-.. note:: The format of the access log is **Tab Separated Values**.
+.. ### DELETE USER ###
+.. _s3-delete-user:
 
-+---------------+------------------------------------------------------------+
-| Column Number | Explanation                                                |
-+===============+============================================================+
-| 1             | Method: [HEAD|PUT|GET|DELETE]                              |
-+---------------+------------------------------------------------------------+
-| 2             | Bucket                                                     |
-+---------------+------------------------------------------------------------+
-| 3             | Filename (including path)                                  |
-+---------------+------------------------------------------------------------+
-| 4             | Child number of a file                                     |
-+---------------+------------------------------------------------------------+
-| 5             | File Size (byte)                                           |
-+---------------+------------------------------------------------------------+
-| 6             | Timestamp with timezone                                    |
-+---------------+------------------------------------------------------------+
-| 7             | Unixtime (including micro-second)                          |
-+---------------+------------------------------------------------------------+
-| 8             | Response (HTTP Status Code)                                |
-+---------------+------------------------------------------------------------+
+.. index::
+        pair: S3-API commands; delete-user-command
 
+delete-user <user-id>
+^^^^^^^^^^^^^^^^^^^^^
+
+Remove the user
+
+::
+
+    delete-user test
+    ok
+
+\
+
+.. ### GET USERS ###
+.. _s3-get-users:
+
+.. index::
+       pair: S3-API commands; get-users-command
+
+get-users
+^^^^^^^^^
+
+Retrieve the list of users
+
+::
+
+    get-users
+    user_id     | access_key_id          | created_at
+    ------------+------------------------+---------------------------
+    _test_leofs | 05236                  | 2012-12-07 10:27:39 +0900
+    leo         | 39bbad4f3b837ed209fb   | 2012-12-07 10:27:39 +0900
+
+\
+
+.. ### UPDATE USER ROLE ###
+.. _s3-update-user-role:
+
+.. index::
+       pair: S3-API commands; update-user-role-command
+
+update-user-role <user-id> <role-id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Update the user's role
+* Currently, we are supporting two kinds of roles
+* role-id:
+    * 1: General user
+    * 9: Administrator
+
+::
+
+    update-user-role 05236 1
+    OK
+
+\
+
+
+S3-API Commands - Endpoint
+--------------------------
+
+.. ### ADD ENDPOINT ###
+.. _s3-add-endpoint:
+
+.. index::
+       pair: S3-API commands; add-endpoint-command
+
+add-endpoint <endpoint>
+^^^^^^^^^^^^^^^^^^^^^^^
+
+ - Register a new Endpoint
+
+.. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`
+
+
+::
+
+    add-endpoint leo-project.net
+    OK
+
+\
+
+.. ### DELETE ENDPOINTS ###
+.. _s3-delete-endpoint:
+
+.. index::
+       pair: S3-API commands; delete-endpoint-command
+
+delete-endpoint <endpoint>
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Remove the endpoint
+
+::
+
+    delete-endpoint leo-project.net
+    OK
+
+\
+
+.. ### GET ENDPOINTS ###
+.. _s3-get-endpoints:
+
+.. index::
+       pair: S3-API commands; delete-endpoint-command
+
+get-endpoints
+^^^^^^^^^^^^^
+
+Retrieve the list of endpoints
+
+::
+
+    get-endpoints
+    endpoint         | created at
+    -----------------+---------------------------
+    s3.amazonaws.com | 2012-09-12 14:09:52 +0900
+    localhost        | 2012-09-12 14:09:52 +0900
+    leofs.org        | 2012-09-12 14:09:52 +0900
+
+\
+
+
+S3-API Commands - Bucket
+------------------------
+
+.. ### ADD BUCKET ###
+.. _s3-add-bucket:
+
+.. index::
+       pair: S3-API commands; add-bucket-command
+
+
+add-bucket <bcuket> <access-key-id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+ Create the bucket
+
+::
+
+    add-bucket backup 05236
+    OK
+
+\
+
+.. ### DELETE BUCKET ###
+.. _s3-delete-bucket:
+
+.. index::
+       pair: S3-API commands; delete-bucket-command
+
+delete-bucket <bucket> <access-key-id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Remove the bucket and all files stored in the bucket
+
+::
+
+    delete-bucket backup 05236
+    OK
+
+\
+
+.. ### GET BUCKETS ###
+.. _s3-get-buckets:
+
+.. index::
+       pair: S3-API commands; get-buckets-command
+
+get-buckets
+^^^^^^^^^^^
+
+Retrieve the list of the buckets registered
+
+::
+
+    get-buckets
+    cluster id   | bucket   | owner       | permissions                            | created at
+    -------------+----------+-------------+----------------------------------------+---------------------------
+    leofs_1      | backup   | _test_leofs | Me(full_control), Everyone(read)       | 2014-04-03 11:39:01 +0900
+    leofs_1      | docs     | _test_leofs | Me(full_control), Everyone(read)       | 2014-04-03 11:39:25 +0900
+    leofs_1      | logs     | _test_leofs | Me(full_control), Everyone(read,write) | 2014-04-03 11:39:38 +0900
+    leofs_1      | movie    | _test_leofs | Me(full_control)                       | 2014-04-03 11:39:45 +0900
+
+\
+
+.. ### GET BUCKET ###
+.. _s3-get-bucket:
+
+.. index::
+       pair: S3-API commands; get-bucket-command
+
+get-bucket <access-key-id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Retrieve the list of the buckets owned by the specified user
+
+::
+
+    get-bucket 05236
+    bucket   | permissions                            | created at
+    ---------+----------------------------------------+---------------------------
+    backup   | Me(full_control), Everyone(read)       | 2014-04-03 11:39:01 +0900
+    docs     | Me(full_control), Everyone(read)       | 2014-04-03 11:39:25 +0900
+    logs     | Me(full_control), Everyone(read,write) | 2014-04-03 11:39:38 +0900
+    movie    | Me(full_control)                       | 2014-04-03 11:39:45 +0900
+
+\
+
+.. ### CHANGE BUCKET OWNER ###
+.. _s3-chown-bucket:
+
+.. index::
+       pair: S3-API commands; chown-bucket-command
+
+chown-bucket <bucket> <access-key-id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``v0.16.5-`` Change the owner of the bucket
+
+::
+
+    chown-bucket backup 47ad5ca9
+    OK
+
+\
+
+.. ### UPDATE ACL ###
+.. _s3-update-acl:
+
+.. index::
+        pair: S3-API commands; update-acl-command
+
+update-acl <bucket> <access-key-id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* ``v0.16.0-`` Update the ACL (Access Control List) for the bucket
+* Available ACL list:
+    * ``private (default)`` : No one except the owner has access rights
+    * ``public-read``       : All users have READ access
+    * ``public-read-write`` : All users have READ and WRITE access
+
+::
+
+    update-acl photo 05236 private
+    ok
+
+    update-acl photo 05236 public-read
+    ok
+
+    update-acl photo 05236 public-read-write
+    ok
+
+\
+
+
+Canned ACL
+^^^^^^^^^^^
+
+.. note:: When using S3-API, LeoFS supports a set of predefined grants, known as canned ACLs. Each canned ACL has a predefined a set of grantees and permissions. The following table lists the set of canned ACLs and the associated predefined grants.
+
++------------------+-----------------------+------------------------------------------------------------------------+
+| Canned ACL       | Applies to            | Permissions added to ACL                                               |
++==================+=======================+========================================================================+
+| private          | Bucket and object     | Owner gets FULL_CONTROL. No one else has access rights (default).      |
++------------------+-----------------------+------------------------------------------------------------------------+
+| public-read      | Bucket and object     | Owner gets FULL_CONTROL. The AllUsers group gets READ access.          |
++------------------+-----------------------+------------------------------------------------------------------------+
+| public-read-write| Bucket and object     | Owner gets FULL_CONTROL. The AllUsers group gets READ and WRITE access.|
+|                  |                       | Granting this on a bucket is generally not recommended.                |
++------------------+-----------------------+------------------------------------------------------------------------+
+
+* Reference:`Access Control List (ACL) Overview <http://docs.aws.amazon.com/AmazonS3/latest/dev/ACLOverview.html>`_

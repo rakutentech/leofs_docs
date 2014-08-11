@@ -1,10 +1,13 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
-
-.. _operation-flow-diagram-label:
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 Launch and Operation Flow
 =========================
+
+.. _operation-flow-diagram-label:
 
 .. index::
     pair: Administration; Operation flow diagram
@@ -33,13 +36,13 @@ LeoFS's system launch process is very simple:
 
 
 
-Explanation of the Operations
+Description of the Operations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 \
 
 +-------------+------------------------------------+--------------------------------------------------------------+
-| Order       | Command                            | Explanation                                                  |
+| Order       | Command                            | Description                                                  |
 +=============+====================================+==============================================================+
 | 1           | $ bin/leofs_manager start          | Start LeoFS Manager’s master                                 |
 +-------------+------------------------------------+--------------------------------------------------------------+

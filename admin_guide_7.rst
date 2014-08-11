@@ -1,83 +1,85 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
-
-Multi Datacenter Replication Operation
-======================================
-
-.. index::
-    MultiDC-related commands
-
-MultiDC-related Commands
-------------------------
-
-\
-
-+-------------------------------------------------------------------+-------------------------------------------------------------------------------+
-| Command                                                           | Explanation                                                                   |
-+===================================================================+===============================================================================+
-| join-cluster `{REMOTE_MANAGER_MASTER}` `{REMOTE_MANAGER_SLAVE}`   | [1.0.0-] Communicate between the local-cluster and a remote cluster           |
-+-------------------------------------------------------------------+-------------------------------------------------------------------------------+
-| remove-cluster `{REMOTE_MANAGER_MASTER}` `{REMOTE_MANAGER_SLAVE}` | [1.0.0-] Remove communication between clusters                                |
-+-------------------------------------------------------------------+-------------------------------------------------------------------------------+
-| cluster-status                                                    | [1.0.0-] Retrieve current status of clusters                                  |
-+-------------------------------------------------------------------+-------------------------------------------------------------------------------+
-
-\
-
-.. ### JOIN-CLUSTER ###
-
-.. _join_cluster:
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 .. index::
-    pair: MultiDC-related commands; join-cluster-command
+    Manager maintenance
 
-**'join-cluster'** - Communicate between the local-cluster and a remote cluster
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Manager Maintenance
+===================
 
-Command: ``join-cluster {REMOTE_MANAGER_MASTER} {REMOTE_MANAGER_SLAVE}``
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| **Command**                                                | **Description**                                                                   |
++============================================================+===================================================================================+
+| **Manager Maintenance**                                                                                                                        |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| backup-mnesia <backup-filepath>                            | * Copy LeoFS's Manager data to the file-path                                      |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| restore-mnesia <backup-filepath>                           | * Restore LeoFS's Manager data from the backup file                               |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| update-managers <manager-master> <manager-slave>           | * Update LeoFS Manager nodes                                                      |
+|                                                            | * Destribute the new LeoFS Manager nodes to LeoFS Storage and Gateway             |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| dump-ring (<manager-node>|<storage-node>|<gateway-node>)   | * Dump the ring data to the local disk                                            |
++------------------------------------------------------------+-----------------------------------------------------------------------------------+
+
+
+.. index::
+    pair: Manager maintenance; backup-mnesia-command
+
+backup-mnesia <backup-filepath>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Copy LeoFS's Manager data to the file-path
 
 ::
 
-    join-cluster manager_c2_0@10.1.2.1 manager_c2_1@10.1.2.2
+    backup-mnesia /path/to/file
     OK
 
 \
 
-.. ### REMOVE-CLUSTER ###
-
-.. _remove_cluster:
-
 .. index::
-    pair: MultiDC-related commands; remove-cluster-command
+    pair: Manager maintenance; restore-mnesia-command
 
-**'remove-cluster'** - Remove communication between clusters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+restore-mnesia <backup-filepath>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command: ``remove-cluster {REMOTE_MANAGER_MASTER} {REMOTE_MANAGER_SLAVE}``
+Restore LeoFS's Manager data from the backup file
 
 ::
 
-    remove-cluster manager_c2_0@10.1.2.1 manager_c2_1@10.1.2.2
+    restore-mnesia /path/to/file
     OK
 
 \
 
-.. ### CLUSTER-STATUS ###
-
-.. _cluster_status:
-
 .. index::
-    pair: MultiDC-related commands; cluster-status-command
+    pair: Manager maintenance; update-managers-command
 
-**'cluster-status'** - Retrieve current status of clusters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+update-managers <manager-master> <manager-slave>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Command: ``cluster-status``
+* Update LeoFS Manager nodes
+* Destribute the new LeoFS Manager nodes to LeoFS Storage and Gateway
 
 ::
 
-    cluster-status
-    cluster id |   dc id    |    status    | # of storages  |          updated at
-    -----------+------------+--------------+----------------+-----------------------------
-    leofs_2    | dc_2       |   running    |              8 | 2014-03-21 19:17:45 +0900
+    update-managers manager_0@10.1.0.1 manager_1@10.1.0.2
+    OK
 
+\
+
+.. index::
+    pair: Manager maintenance; dump-ring-command
+
+dump-ring (<manager-node>|<storage-node>|<gateway-node>)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Dump the ring data to the local disk
+
+::
+
+    dump-ring storage_0@10.1.0.11

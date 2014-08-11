@@ -1,62 +1,87 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
-
-Gateway Operation
-===========================
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 .. index::
-    Gateway operation
+    Recover commands
 
+Recover Commands
+=================
 
-+------------------------------------------------------+-----------------------------------------------------------------------------------+
-| Command                                              | Explanation                                                                       |
-+======================================================+===================================================================================+
-| Gateway                                                                                                                                  |
-+------------------------------------------------------+-----------------------------------------------------------------------------------+
-| purge `{FILE_PATH}`                                  | Purge a cached file if the specified file exists in the cache                     |
-+------------------------------------------------------+-----------------------------------------------------------------------------------+
-| remove `{GATEWAY_NODE}`                              | * Retrieve status of the cluster                                                  |
-|                                                      | * Retrieve status of the node                                                     |
-+------------------------------------------------------+-----------------------------------------------------------------------------------+
-| Misc                                                                                                                                     |
-+------------------------------------------------------+-----------------------------------------------------------------------------------+
-| dump-ring `{MANAGER}`|`{STORAGE}`|`{GATEWAY}`        | Dump ring and memeber-info [1.0.0-pre1 or higher ]                                |
-+------------------------------------------------------+-----------------------------------------------------------------------------------+
-| history                                              | Retrieve history of operations                                                    |
-+------------------------------------------------------+-----------------------------------------------------------------------------------+
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| Command                         | Description                                                                                       |
++=================================+===================================================================================================+
+| **Recover Commands**                                                                                                                |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| recover file `<file-path>`      | Recover an inconsistent object specified by the file-path                                         |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| recover node `<storage-node>`   | Recover all inconsistent objects in the specified node                                            |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| recover ring `<storage-node>`   | Recover rings of the specified node                                                               |
++---------------------------------+---------------------------------------------------------------------------------------------------+
+| recover cluster `<cluster-id>`  | [v1.0.0-] Recover all inconsistent objects in the specified cluster                               |
++---------------------------------+---------------------------------------------------------------------------------------------------+
 
 
 .. index::
-    pair: Gateway maintenance and misc commands; purge-command
+    pair: Recover commands; recover-file-command
 
-@TODO
+recover file <file-path>
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. index::
-    pair: Gateway maintenance and misc commands; remove-command
-
-@TODO
-
-
-
-
-.. index::
-    pair: Gateway maintenance and misc commands; history-command
-
-**'history'** - Retrieve history of operations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``history``
+Recover an inconsistent object specified by the file-path
 
 ::
 
-    history
-    [Histories]
-    1    | 2012-06-29 14:23:01 +0900 | status
-    2    | 2012-06-29 14:23:02 +0900 | status
-    3    | 2012-06-29 14:23:03 +0900 | attach storage_0@127.0.0.1
-    4    | 2012-06-29 14:23:04 +0900 | attach storage_1@127.0.0.1
-    5    | 2012-06-29 14:23:05 +0900 | attach storage_2@127.0.0.1
-    6    | 2012-06-29 14:23:06 +0900 | attach storage_3@127.0.0.1
-    7    | 2012-06-29 14:23:07 +0900 | start
-    8    | 2012-06-29 14:23:15 +0900 | status
+  recover file leo/fast/storage.key
+  OK
 
+\
+
+
+.. index::
+    pair: Recover commands; recover-node-command
+
+recover node <node>
+^^^^^^^^^^^^^^^^^^^
+
+Recover all inconsistent objects in the specified node
+
+::
+
+  recover node storage_0@127.0.0.1
+  OK
+
+\
+
+
+.. index::
+    pair: Recover commands; recover-ring-command
+
+recover ring <node>
+^^^^^^^^^^^^^^^^^^^
+
+Recover rings of the specified node
+
+::
+
+  recover ring storage_0@127.0.0.1
+  OK
+
+\
+
+
+.. index::
+    pair: Recover commands; recover-cluster-command
+
+recover cluster <cluster-id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Recover all inconsistent objects in the specified cluster
+
+::
+
+  recover cluster cluster-1
+  OK
