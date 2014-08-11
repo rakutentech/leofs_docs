@@ -23,7 +23,7 @@ Multi Datacenter Replication Operation
 \
 
 .. ### JOIN-CLUSTER ###
-.. _join_cluster:
+.. _join-cluster:
 
 .. index::
     pair: Multi Datacenter replication commands; join-cluster-command
@@ -41,7 +41,7 @@ Begin to communicate between the local cluster and the remote cluster
 \
 
 .. ### REMOVE-CLUSTER ###
-.. _remove_cluster:
+.. _remove-cluster:
 
 .. index::
     pair: Multi Datacenter replication commands; remove-cluster-command
@@ -60,7 +60,7 @@ Terminate to communicate between the local cluster and the remote cluster
 \
 
 .. ### CLUSTER-STATUS ###
-.. _cluster_status:
+.. _cluster-status:
 
 .. index::
     pair: Multi Datacenter replication commands; cluster-status-command

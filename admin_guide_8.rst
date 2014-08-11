@@ -61,7 +61,7 @@ S3-API Commands - User
 ----------------------
 
 .. ### CREATE USER ###
-.. _s3-create-user:
+.. _create-user:
 
 .. index::
         pair: S3-API commands; create-user-command
@@ -81,7 +81,7 @@ create-user <user-id> <password>
 \
 
 .. ### DELETE USER ###
-.. _s3-delete-user:
+.. _delete-user:
 
 .. index::
         pair: S3-API commands; delete-user-command
@@ -99,7 +99,7 @@ Remove the user
 \
 
 .. ### GET USERS ###
-.. _s3-get-users:
+.. _get-users:
 
 .. index::
        pair: S3-API commands; get-users-command
@@ -120,7 +120,7 @@ Retrieve the list of users
 \
 
 .. ### UPDATE USER ROLE ###
-.. _s3-update-user-role:
+.. _update-user-role:
 
 .. index::
        pair: S3-API commands; update-user-role-command
@@ -146,7 +146,7 @@ S3-API Commands - Endpoint
 --------------------------
 
 .. ### ADD ENDPOINT ###
-.. _s3-add-endpoint:
+.. _add-endpoint:
 
 .. index::
        pair: S3-API commands; add-endpoint-command
@@ -167,7 +167,7 @@ add-endpoint <endpoint>
 \
 
 .. ### DELETE ENDPOINTS ###
-.. _s3-delete-endpoint:
+.. _delete-endpoint:
 
 .. index::
        pair: S3-API commands; delete-endpoint-command
@@ -185,7 +185,7 @@ Remove the endpoint
 \
 
 .. ### GET ENDPOINTS ###
-.. _s3-get-endpoints:
+.. _get-endpoints:
 
 .. index::
        pair: S3-API commands; delete-endpoint-command
@@ -211,7 +211,7 @@ S3-API Commands - Bucket
 ------------------------
 
 .. ### ADD BUCKET ###
-.. _s3-add-bucket:
+.. _add-bucket:
 
 .. index::
        pair: S3-API commands; add-bucket-command
@@ -230,7 +230,7 @@ add-bucket <bcuket> <access-key-id>
 \
 
 .. ### DELETE BUCKET ###
-.. _s3-delete-bucket:
+.. _delete-bucket:
 
 .. index::
        pair: S3-API commands; delete-bucket-command
@@ -248,7 +248,7 @@ Remove the bucket and all files stored in the bucket
 \
 
 .. ### GET BUCKETS ###
-.. _s3-get-buckets:
+.. _get-buckets:
 
 .. index::
        pair: S3-API commands; get-buckets-command
@@ -271,7 +271,7 @@ Retrieve the list of the buckets registered
 \
 
 .. ### GET BUCKET ###
-.. _s3-get-bucket:
+.. _get-bucket:
 
 .. index::
        pair: S3-API commands; get-bucket-command
@@ -294,7 +294,7 @@ Retrieve the list of the buckets owned by the specified user
 \
 
 .. ### CHANGE BUCKET OWNER ###
-.. _s3-chown-bucket:
+.. _chown-bucket:
 
 .. index::
        pair: S3-API commands; chown-bucket-command
@@ -312,7 +312,7 @@ chown-bucket <bucket> <access-key-id>
 \
 
 .. ### UPDATE ACL ###
-.. _s3-update-acl:
+.. _update-acl:
 
 .. index::
         pair: S3-API commands; update-acl-command

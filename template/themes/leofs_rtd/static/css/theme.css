@@ -2659,7 +2659,7 @@ select[disabled],textarea[disabled],input[readonly],select[readonly],textarea[re
     text-align: center
 }
 .wy-table td,.rst-content table.docutils td,.rst-content table.field-list td,.wy-table th,.rst-content table.docutils th,.rst-content table.field-list th {
-    font-size: 90%;
+    /* font-size: 90%; */
     margin: 0;
     overflow: visible;
     padding: 8px 16px

@@ -84,39 +84,39 @@ LeoFS Administration Commands
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | **S3-API Commands - User**                                                                                                                                                                  |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| create-user <user-id> <password>                                                     | * Register the new user                                                                              |
+| :ref:`create-user <create-user>` <user-id> <password>                                | * Register the new user                                                                              |
 |                                                                                      | * Generate an S3 key pair (AccessKeyID and SecretAccessKey)                                          |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| delete-user <user-id>                                                                | * Remove the user                                                                                    |
+| :ref:`delete-user <delete-user>` <user-id>                                           | * Remove the user                                                                                    |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| get-users                                                                            | * Retrieve the list of users                                                                         |
+| :ref:`get-users <get-users>`                                                         | * Retrieve the list of users                                                                         |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| update-user-role                                                                     | * Update the user's role                                                                             |
+| :ref:`update-user-role <update-user-role>`                                           | * Update the user's role                                                                             |
 |                                                                                      | * Currently, we are supporting two kinds of roles                                                    |
 |                                                                                      | * 1: General user, 9: Administrator                                                                  |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | **S3-API Commands - Endpoint**                                                                                                                                                              |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| add-endpoint <endpoint>                                                              | * Register a new S3 Endpoint                                                                         |
+| :ref:`add-endpoint <add-endpoint>` <endpoint>                                        | * Register a new S3 Endpoint                                                                         |
 |                                                                                      | * LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`                                       |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| delete-endpoint <endpoint>                                                           | * Remove the endpoint                                                                                |
+| :ref:`delete-endpoint <delete-endpoint>` <endpoint>                                  | * Remove the endpoint                                                                                |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| get-endpoints                                                                        | * Retrieve the list of endpoints                                                                     |
+| :ref:`get-endpoints <get-endpoint>`                                                  | * Retrieve the list of endpoints                                                                     |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | **S3-API Commands - Bucket**                                                                                                                                                                |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| add-bucket <bucket> <access-key-id>                                                  | * Create the new bucket                                                                              |
+| :ref:`add-bucket <add-bucket>` <bucket> <access-key-id>                              | * Create the new bucket                                                                              |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| delete-bucket <bucket> <access-key-id>                                               | * Remove the bucket and all files stored in the bucket                                               |
+| :ref:`delete-bucket <delete-bucket>` <bucket> <access-key-id>                        | * Remove the bucket and all files stored in the bucket                                               |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| get-buckets                                                                          | * Retrieve the list of the buckets registered                                                        |
+| :ref:`get-buckets <get-buckets>`                                                     | * Retrieve the list of the buckets registered                                                        |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| get-bucket <access-key-id>                                                           | * Retrieve the list of the buckets owned by the specified user                                       |
+| :ref:`get-bucket <get-bucket>` <access-key-id>                                       | * Retrieve the list of the buckets owned by the specified user                                       |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| chown-bucket <bucket> <access-key-id>                                                | * ``v0.16.5-`` Change the owner of the bucket                                                        |
+| :ref:`chown-bucket <chown-bucket>` <bucket> <access-key-id>                          | * ``v0.16.5-`` Change the owner of the bucket                                                        |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| update-acl <bucket> <access-key-id>                                                  | * ``v0.16.0-`` Update the ACL (Access Control List) for the bucket                                   |
+| :ref:`update-acl <update-acl>` <bucket> <access-key-id>                              | * ``v0.16.0-`` Update the ACL (Access Control List) for the bucket                                   |
 | (private | public-read | public-read-write)                                          | * Available ACL list:                                                                                |
 |                                                                                      |      * ``private (default)`` : No one except the owner has access rights                             |
 |                                                                                      |      * ``public-read``       : All users have READ access                                            |
@@ -124,10 +124,10 @@ LeoFS Administration Commands
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | **Multi Data Center Operation**                                                                                                                                                             |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| join-cluster <remote-manager-master> <remote-manager-slave>                          | ``1.0.0-`` Begin to communicate between the local cluster and the remote cluster                     |
+| :ref:`join-cluster <join-cluster>` <remote-manager-master> <remote-manager-slave>    | ``1.0.0-`` Begin to communicate between the local cluster and the remote cluster                     |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| remove-cluster <remote-manager-master> <remote-manager-slave>                        | ``1.0.0-`` Terminate to communicate between the local cluster and the remote cluster                 |
+| :ref:`remove-cluster <remove-cluster>` <remote-manager-master> <remote-manager-slave>| ``1.0.0-`` Terminate to communicate between the local cluster and the remote cluster                 |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| cluster-status                                                                       | ``1.0.0-`` See the current state of cluster(s)                                                       |
+| :ref:`cluster-status <cluster-status>`                                               | ``1.0.0-`` See the current state of cluster(s)                                                       |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 
