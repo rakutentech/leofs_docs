@@ -10,19 +10,17 @@
 Recover Commands
 =================
 
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| Command                         | Description                                                                                       |
-+=================================+===================================================================================================+
-| **Recover Commands**                                                                                                                |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| recover file `<file-path>`      | Recover an inconsistent object specified by the file-path                                         |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| recover node `<storage-node>`   | Recover all inconsistent objects in the specified node                                            |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| recover ring `<storage-node>`   | Recover rings of the specified node                                                               |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| recover cluster `<cluster-id>`  | [v1.0.0-] Recover all inconsistent objects in the specified cluster                               |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------+--------------------------------------------------------------------+
+| **Shell**                                                               | **Description**                                                    |
++=========================================================================+====================================================================+
+| leofs-adm :ref:`recover-file <recover-file-command>` <file-path>        | Recover an inconsistent object specified by the file-path          |
++-------------------------------------------------------------------------+--------------------------------------------------------------------+
+| leofs-adm :ref:`recover-node <recover-node-command>` <storage-node>     | Recover all inconsistent objects in the specified node             |
++-------------------------------------------------------------------------+--------------------------------------------------------------------+
+| leofs-adm :ref:`recover-ring <recover-ring-command>` <storage-node>     | Recover rings of the specified node                                |
++-------------------------------------------------------------------------+--------------------------------------------------------------------+
+| leofs-adm :ref:`recover-cluster <recover-cluster-command>` <cluster-id> | [v1.0.0-] Recover all inconsistent objects in the specified cluster|
++-------------------------------------------------------------------------+--------------------------------------------------------------------+
 
 
 .. _recover-file-command:
@@ -30,14 +28,14 @@ Recover Commands
 .. index::
     pair: Recover commands; recover-file-command
 
-recover file <file-path>
+recover-file <file-path>
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Recover an inconsistent object specified by the file-path
 
-::
+.. code-block:: bash
 
-  recover file leo/fast/storage.key
+  $ leofs-adm recover file leo/fast/storage.key
   OK
 
 \
@@ -48,14 +46,14 @@ Recover an inconsistent object specified by the file-path
 .. index::
     pair: Recover commands; recover-node-command
 
-recover node <node>
+recover-node <node>
 ^^^^^^^^^^^^^^^^^^^
 
 Recover all inconsistent objects in the specified node
 
-::
+.. code-block:: bash
 
-  recover node storage_0@127.0.0.1
+  $ leofs-adm recover node storage_0@127.0.0.1
   OK
 
 \
@@ -65,14 +63,14 @@ Recover all inconsistent objects in the specified node
 .. index::
     pair: Recover commands; recover-ring-command
 
-recover ring <node>
+recover-ring <node>
 ^^^^^^^^^^^^^^^^^^^
 
 Recover rings of the specified node
 
-::
+.. code-block:: bash
 
-  recover ring storage_0@127.0.0.1
+  $ leofs-adm recover-ring storage_0@127.0.0.1
   OK
 
 \
@@ -82,12 +80,12 @@ Recover rings of the specified node
 .. index::
     pair: Recover commands; recover-cluster-command
 
-recover cluster <cluster-id>
+recover-cluster <cluster-id>
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Recover all inconsistent objects in the specified cluster
 
-::
+.. code-block:: bash
 
-  recover cluster cluster-1
+  $ leofs-adm recover cluster cluster-1
   OK

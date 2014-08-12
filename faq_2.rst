@@ -22,7 +22,7 @@ Features
 
 See Also:
     * `Amazon S3 API and Interface <s3_api.html>`_
-    * `Configuration of Gateway nodes <configuration_3.html>`_
+    * `Configuration of LeoFS Gateway nodes <configuration_3.html>`_
 
 ----
 
@@ -53,7 +53,7 @@ NFS Support
 * If you use LeoFS with NFS, you should set the size of a chunked object in LeoFS to 1MB (1048576Bytes), otherwise the efficiency of disk utilization can be decreased.
 
 See Also:
-    * `Configuration of Gateway nodes <configuration_3.html>`_
+    * `Configuration of LeoFS Gateway nodes <configuration_3.html>`_
     * |ISSUE_198|
 
 

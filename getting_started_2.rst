@@ -149,24 +149,18 @@ Start the system
 
 * Use the command ``start`` in the LeoFS manager console
 
-::
+.. code-block:: bash
 
-    $ telnet 127.0.0.1 10010
-    > start
+    $ leofs-adm start
 
 Confirm that the system is running
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Use the command ``status`` in the LeoFS manager console
 
-::
+.. code-block:: bash
 
-    $ telnet 127.0.0.1 10010
-    Trying 127.0.0.1...
-    Connected to localhost.
-    Escape character is '^]'.
-
-    status
+    $ leofs-adm status
     [System config]
                     System version : 1.0.0
                         Cluster Id : leofs_1
@@ -196,26 +190,24 @@ Confirm that the system is running
 Get your S3 API Key from the LeoFS manager console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Use the command ``create-user`` in the LeoFS manager console
+* Use the command :ref:`create-user <create-user>` in the LeoFS manager console
 * It takes the user name as its only argument
 
 .. code-block:: bash
 
-    $ telnet 127.0.0.1 10010
-    > create-user {YOUR_NAME}
+    $ leofs-adm create-user <your-name>
     access-key-id: 05dcba94333c7590a635
     secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
 Using LeoFS
 ^^^^^^^^^^^
 
-* Use the command ``add-bucket`` in the LeoFS manager console
+* Use the command :ref:`add-bucket <add-bucket>` in the LeoFS manager console
 * It takes the bucket name and access-key-id got in the previous section as its arguments
 
 .. code-block:: bash
 
-    $ telnet 127.0.0.1 10010
-    > add-bucket {BUCKET_NAME} {YOUR_ACCESS_KEY_ID}
+    $ leofs-adm add-bucket <bucket> <access-key-id>
     ok
 
 * Insert some data into LeoFS by using any S3 client as mentioned above

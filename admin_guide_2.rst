@@ -8,16 +8,16 @@
     General commands
 
 General Commands
-===========================
+================
 
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| Command                         | Description                                                                                       |
-+=================================+===================================================================================================+
-| status [`<node>`]               | * Retrieve status of every node (default)                                                         |
-|                                 | * Retrieve status of the specified node                                                           |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| whereis `<file-path>`           | Retrieve an assigned object by the file-path                                                      |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
++-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| **Shell**                                             | **Description**                                                                                   |
++=======================================================+===================================================================================================+
+| leofs-adm :ref:`status <status-command>` [<node>]     | * Retrieve status of every node (default)                                                         |
+|                                                       | * Retrieve status of the specified node                                                           |
++-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`whereis <whereis-command>` <file-path>| Retrieve an assigned object by the file-path                                                      |
++-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
 
 .. _status-command:
 
@@ -29,9 +29,9 @@ status
 
 Retrieve status of every node (default)
 
-::
+.. code-block:: bash
 
-    status
+    $ leofs-adm status
     [System config]
                     System version : 1.0.0
                         Cluster Id : leofs_1
@@ -65,9 +65,9 @@ status <node>
 
 Retrieve status of the specified node
 
-::
+.. code-block:: bash
 
-    status storage_0@127.0.0.1
+    $ leofs-adm status storage_0@127.0.0.1
     [config]
                 version : 0.14.1
           obj-container : [[{path,"./avs"},{num_of_containers,64}]]
@@ -89,9 +89,8 @@ Retrieve status of the specified node
         vnode-sync msgs : 0
          rebalance msgs : 0
 
-::
 
-    status gateway_0@127.0.0.1
+    $ leofs-adm status gateway_0@127.0.0.1
     [config-1]
                           version : 0.14.1
                           log dir : ./log
@@ -146,9 +145,9 @@ whereis <file-path>
 Retrieve an assigned object by the file-path
 Paths used by `whereis` are ruled by :ref:`this rule <s3-path-label>`
 
-::
+.. code-block:: bash
 
-    whereis leo/fast/storage.key
+    $ leofs-adm whereis leo/fast/storage.key
     -----------------------------------------------------------------------------------------------------------------------
      del? node                 ring address    size   # of chunks  checksum    vclock            when
     -----------------------------------------------------------------------------------------------------------------------

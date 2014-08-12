@@ -12,7 +12,7 @@
 LeoFS Storage
 -------------
 
-**Configuration of Storage nodes**
+**Configuration of LeoFS Storage nodes**
 
 **[leo_storage.conf]**
 
@@ -188,9 +188,9 @@ LeoFS Storage
 +-------------------------+--------------------------------------------------------+
 |Property                 | Description                                            |
 +=========================+========================================================+
-|{STORAGE_ALIAS}          | Storage node's Alias name                              |
+|{STORAGE_ALIAS}          | LeoFS Storage node's Alias name                        |
 +-------------------------+--------------------------------------------------------+
-|{STORAGE_IP}             | Storage node's IP-Address                              |
+|{STORAGE_IP}             | LeoFS Storage node's IP-Address                        |
 +-------------------------+--------------------------------------------------------+
 |{SNMPA-DIR}              | SNMPA configuration files directory                    |
 +-------------------------+--------------------------------------------------------+

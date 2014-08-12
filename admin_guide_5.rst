@@ -12,28 +12,28 @@ Compaction Commands
 
 Remove logical deleted objects and meta data and check the current disk usage
 
-+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| Command                                                     | Description                                                                                                     |
-+=============================================================+=================================================================================================================+
-| **Compaction**                                                                                                                                                                |
-+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| compact start `<storage-node>` (`all` | `<num-of-targets>`) | * Execute to remove unnecessary objects from the node                                                           |
-| `[<num-of-compaction-proc>]`                                | * num-of-targets: It controls the number of containers in parallel                                              |
-|                                                             | * num-of-compaction-procs: It controls the number of procs to execute the compaction in parallel                |
-+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| compact suspend `<storage-node>`                            | * Suspend to execute the compaction                                                                             |
-+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| compact resume  `<storage-node>`                            | * Resume to execute the compaction                                                                              |
-+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| compact status  `<storage-node>`                            | * See the current compaction status                                                                             |
-|                                                             | * Compaction's status: ``idle``, ``running``, ``suspend``                                                       |
-+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| **Disk Usage**                                                                                                                                                                |
-+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| du `<storage-node>`                                         | See the current disk usages                                                                                     |
-+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| du detail `<storage-node>`                                  | See the current disk usages in the details                                                                      |
-+-------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **Shell**                                                                            | **Description**                                                                                      |
++======================================================================================+======================================================================================================+
+| **Compaction Commands**                                                                                                                                                                     |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`compact-start <compact-start>` <storage-node> (all|<num-of-targets>) | * Execute to remove unnecessary objects from the node                                                |
+| [<num-of-compaction-proc>]                                                           | * ``num-of-targets``: It controls the number of containers in parallel                               |
+|                                                                                      | * ``num-of-compaction-procs``: It controls the number of procs to execute the compaction in parallel |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`compact-suspend <compact-suspend>` <storage-node>                    | * Suspend to execute the compaction                                                                  |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`compact-resume <compact-resume>` <storage-node>                      | * Resume to execute the compaction                                                                   |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`compact-status <compact-status>` <storage-node>                      | * See the current compaction status                                                                  |
+|                                                                                      | * Compaction's status: ``idle``, ``running``, ``suspend``                                            |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **Disk Usage**                                                                                                                                                                              |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`du <du>` <storage-node>                                              | * See the current disk usages                                                                        |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`du-detail <du-detail>` <storage-node>                                | * See the current disk usages in the details                                                         |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 
 \
 
@@ -59,17 +59,15 @@ compact start <storage-node> (all | <num-of-targets>) [<num-of-compaction-procs>
 
 .. note:: Default ``<num-of-compation-procs>`` is '3' - You can control the number of processes to execute compaction in parallel. It enables you to get maximum performance by setting an appropriate number corresponding to the number of cores.
 
-::
+.. code-block:: bash
 
     ## All compaction-targets will be executed with 3 concurrent processes
     ## (default concurrency is 3)
-    compact start storage_0@127.0.0.1 all
+    $ leofs-adm compact-start storage_0@127.0.0.1 all
     OK
 
-::
-
     ## Number of compaction-targets will be executed with 2 concurrent processes
-    compact start storage_0@127.0.0.1 5 2
+    $ leofs-adm compact-start storage_0@127.0.0.1 5 2
     OK
 
 \
@@ -84,9 +82,9 @@ compact suspend <storage-node>
 
 Suspend to execute the compaction
 
-::
+.. code-block:: bash
 
-    compact suspend storage_0@127.0.0.1
+    $ leofs-adm compact-suspend storage_0@127.0.0.1
     OK
 
 \
@@ -102,9 +100,9 @@ compact resume <storage-node>
 
 Resume to execute the compaction
 
-::
+.. code-block:: bash
 
-    compact resume storage_0@127.0.0.1
+    $ leofs-adm compact-resume storage_0@127.0.0.1
     OK
 
 \
@@ -121,9 +119,9 @@ compact status <storage-node>
 * See the current compaction status
 * Compaction's status: ``idle``, ``running`` and ``suspend``
 
-::
+.. code-block:: bash
 
-  compact status storage_0@127.0.0.1
+  $ leofs-adm compact-status storage_0@127.0.0.1
           current status: running
    last compaction start: 2013-03-04 12:39:47 +0900
            total targets: 64
@@ -143,9 +141,9 @@ du <storage-node>
 
 See the current disk usages
 
-::
+.. code-block:: bash
 
-    du storage_0@127.0.0.1
+    $ leofs-adm du storage_0@127.0.0.1
      active number of objects: 19968
       total number of objects: 39936
        active size of objects: 198256974.0
@@ -166,9 +164,9 @@ du detail <storage-node>
 See the current disk usages in the details
 
 
-::
+.. code-block:: bash
 
-    du detail storage_0@127.0.0.1
+    $ leofs-adm du-detail storage_0@127.0.0.1
     [du(storage stats)]
                     file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/0.avs
      active number of objects: 320

@@ -10,20 +10,18 @@
 Manager Maintenance
 ===================
 
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| **Command**                                                | **Description**                                                                   |
-+============================================================+===================================================================================+
-| **Manager Maintenance**                                                                                                                        |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| backup-mnesia <backup-filepath>                            | * Copy LeoFS's Manager data to the file-path                                      |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| restore-mnesia <backup-filepath>                           | * Restore LeoFS's Manager data from the backup file                               |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| update-managers <manager-master> <manager-slave>           | * Update LeoFS Manager nodes                                                      |
-|                                                            | * Destribute the new LeoFS Manager nodes to LeoFS Storage and Gateway             |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| dump-ring (<manager-node>|<storage-node>|<gateway-node>)   | * Dump the ring data to the local disk                                            |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| **Shell**                                                                            | **Description**                                                                   |
++======================================================================================+===================================================================================+
+| leofs-adm :ref:`backup-mnesia <backup-mnesia>` <backup-filepath>                     | * Copy LeoFS's Manager data to the filepath                                       |
++--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| leofs-adm :ref:`restore-mnesia <restore-mnesia>` <backup-filepath>                   | * Restore LeoFS's Manager data from the backup file                               |
++--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| leofs-adm :ref:`update-managers <update-managers>` <manager-master> <manager-slave>  | * Update LeoFS Manager nodes                                                      |
+|                                                                                      | * Destribute the new LeoFS Manager nodes to LeoFS Storage and Gateway             |
++--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| leofs-adm :ref:`dump-ring <dump-ring>` (<manager-node>|<storage-node>|<gateway-node>)| * Dump the ring data to the local disk                                            |
++--------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
 
 
 .. _backup-mnesia:
@@ -36,9 +34,9 @@ backup-mnesia <backup-filepath>
 
 Copy LeoFS's Manager data to the file-path
 
-::
+.. code-block:: bash
 
-    backup-mnesia /path/to/file
+    $ leofs-adm backup-mnesia /path/to/file
     OK
 
 \
@@ -53,9 +51,9 @@ restore-mnesia <backup-filepath>
 
 Restore LeoFS's Manager data from the backup file
 
-::
+.. code-block:: bash
 
-    restore-mnesia /path/to/file
+    $ leofs-adm restore-mnesia /path/to/file
     OK
 
 \
@@ -71,9 +69,9 @@ update-managers <manager-master> <manager-slave>
 * Update LeoFS Manager nodes
 * Destribute the new LeoFS Manager nodes to LeoFS Storage and Gateway
 
-::
+.. code-block:: bash
 
-    update-managers manager_0@10.1.0.1 manager_1@10.1.0.2
+    $ leofs-adm update-managers manager_0@10.1.0.1 manager_1@10.1.0.2
     OK
 
 \
@@ -88,6 +86,10 @@ dump-ring (<manager-node>|<storage-node>|<gateway-node>)
 
 Dump the ring data to the local disk
 
-::
+.. code-block:: bash
 
-    dump-ring storage_0@10.1.0.11
+    $ leofs-adm dump-ring storage_0@10.1.0.11
+    OK
+
+\
+

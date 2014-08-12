@@ -50,7 +50,7 @@ Takeover a part of confugurations
 Adjust Every Path
 ^^^^^^^^^^^^^^^^^
 
-* Manager: [mnesia, log-dir and queue-dir]
+* LeoFS Manager: [mnesia, log-dir and queue-dir]
 
 .. code-block:: bash
 
@@ -79,7 +79,7 @@ Adjust Every Path
     snmp_agent = ./snmp/snmpa_manager_0/LEO-MANAGER
 
 
-* Storage: [obj_containers, log-dir and queue-dir]
+* LeoFS Storage: [obj_containers, log-dir and queue-dir]
 
 .. code-block:: bash
 
@@ -110,7 +110,7 @@ Adjust Every Path
     snmp_agent = ./snmp/snmpa_storage_0/LEO-STORAGE
 
 
-* Gateway: [SSL-related files, cache-related pathes, log-dir and queue-dir]
+* LeoFS Gateway: [SSL-related files, cache-related pathes, log-dir and queue-dir]
 
 .. code-block:: bash
 
@@ -170,10 +170,10 @@ This section describes the process of adding and removing nodes in a LeoFS Stora
 \
 
 .. index::
-    pair: System maintenance; Gateway access-log format
+    pair: System maintenance; LeoFS Gateway access-log format
 
-Gateway Access-log Format (v1.0.0-pre3)
----------------------------------------
+LeoFS Gateway Access-log Format (v1.0.0-pre3 later)
+---------------------------------------------------
 
 LeoFS-Gateway is able to output access-log. If you would like to use this option, you can check and set :ref:`the configuration <conf_gateway_label>`.
 

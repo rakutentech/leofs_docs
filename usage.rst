@@ -36,16 +36,15 @@ Testing without a load balancer
     * :ref:`Storage <conf_storage_label>`
         * IP: 192.168.1.4 .. 192.168.1.6
         * Name: storage_0@192.168.1.4 .. storage_2@192.168.1.6
-* Commands to execute on LeoFS-Manager's console for authentication
-    * Set an endpoint - ``yourhost.com``
-    * Create a user   - ``yourname``
+* Commands to execute with |leofs-adm|
+    * Set an endpoint
+    * Create a user
 
 ::
 
-    $ telnet 127.0.0.1 10010
-    > add-endpoint yourhost.com
+    $ leofs-adm add-endpoint <your-host-name>
     OK
-    > create-user yourname
+    $ leofs-adm create-user <your-name>
     access-key-id: 05dcba94333c7590a635
     secret-access-key: c776574f3661579ceb91aa8788dfcac733b21b3a
 
@@ -55,3 +54,9 @@ Production/Staging with a load balancer
 ---------------------------------------
 
 (under construction)
+
+
+
+.. |leofs-adm| raw:: html
+
+   <a href="https://github.com/leo-project/leofs/blob/master/leofs-adm" target="_blank">leofs-adm</a>

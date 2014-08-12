@@ -10,51 +10,49 @@
 S3-API Commands
 ===============
 
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| **Command**                                                | **Description**                                                                   |
-+============================================================+===================================================================================+
-| **S3-API Commands - User**                                                                                                                     |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| create-user <user-id> <password>                           | * Register the new user                                                           |
-|                                                            | * Generate an S3 key pair (AccessKeyID and SecretAccessKey)                       |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| delete-user <user-id>                                      | * Remove the user                                                                 |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| get-users                                                  | * Retrieve the list of users                                                      |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| update-user-role <user-id> <role-id>                       | * Update the user's role                                                          |
-|                                                            | * Currently, we are supporting two kinds of roles                                 |
-|                                                            | * role-id:                                                                        |
-|                                                            |     * 1: General user                                                             |
-|                                                            |     * 9: Administrator                                                            |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| **S3-API Commands - Endpoint**                                                                                                                 |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| add-endpoint <endpoint>                                    | * Register a new S3 Endpoint                                                      |
-|                                                            | * LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`                    |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| delete-endpoint <endpoint>                                 | * Remove the endpoint                                                             |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| get-endpoints                                              | * Retrieve the list of endpoints                                                  |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| **S3-API Commands - Bucket**                                                                                                                   |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| add-bucket <bucket> <access-key-id>                        | * Create the new bucket                                                           |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| delete-bucket <bucket> <access-key-id>                     | * Remove the bucket and all files stored in the bucket                            |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| get-buckets                                                | * Retrieve the list of the buckets registered                                     |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| get-bucket <access-key-id>                                 | * Retrieve the list of the buckets owned by the specified user                    |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| chown-bucket <bucket> <access-key-id>                      | * ``v0.16.5-`` Change the owner of the bucket                                     |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
-| update-acl <bucket> <access-key-id>                        | * ``v0.16.0-`` Update the ACL (Access Control List) for the bucket                |
-| (private | public-read | public-read-write)                | * Available ACL list:                                                             |
-|                                                            |      * ``private (default)`` : No one except the owner has access rights          |
-|                                                            |      * ``public-read``       : All users have READ access                         |
-|                                                            |      * ``public-read-write`` : All users have READ and WRITE access               |
-+------------------------------------------------------------+-----------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **Shell**                                                                            | **Description**                                                                                      |
++======================================================================================+======================================================================================================+
+| **S3-API Commands - User**                                                                                                                                                                  |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`create-user <create-user>` <user-id> <password>                      | * Register the new user                                                                              |
+|                                                                                      | * Generate an S3 key pair (AccessKeyID and SecretAccessKey)                                          |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`delete-user <delete-user>` <user-id>                                 | * Remove the user                                                                                    |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`get-users <get-users>`                                               | * Retrieve the list of users                                                                         |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`update-user-role <update-user-role>`                                 | * Update the user's role                                                                             |
+|                                                                                      | * Currently, we are supporting two kinds of roles                                                    |
+|                                                                                      | * 1: General user, 9: Administrator                                                                  |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **S3-API Commands - Endpoint**                                                                                                                                                              |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`add-endpoint <add-endpoint>` <endpoint>                              | * Register a new S3 Endpoint                                                                         |
+|                                                                                      | * LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`                                       |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`delete-endpoint <delete-endpoint>` <endpoint>                        | * Remove the endpoint                                                                                |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`get-endpoints <get-endpoints>`                                       | * Retrieve the list of endpoints                                                                     |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **S3-API Commands - Bucket**                                                                                                                                                                |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`add-bucket <add-bucket>` <bucket> <access-key-id>                    | * Create the new bucket                                                                              |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`delete-bucket <delete-bucket>` <bucket> <access-key-id>              | * Remove the bucket and all files stored in the bucket                                               |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`get-buckets <get-buckets>`                                           | * Retrieve the list of the buckets registered                                                        |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`get-bucket <get-bucket>` <access-key-id>                             | * Retrieve the list of the buckets owned by the specified user                                       |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`chown-bucket <chown-bucket>` <bucket> <access-key-id>                | * ``v0.16.5-`` Change the owner of the bucket                                                        |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`update-acl <update-acl>` <bucket> <access-key-id>                    | * ``v0.16.0-`` Update the ACL (Access Control List) for the bucket                                   |
+| (private | public-read | public-read-write)                                          | * Available ACL list:                                                                                |
+|                                                                                      |      * ``private (default)`` : No one except the owner has access rights                             |
+|                                                                                      |      * ``public-read``       : All users have READ access                                            |
+|                                                                                      |      * ``public-read-write`` : All users have READ and WRITE access                                  |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 
 
 S3-API Commands - User
@@ -72,9 +70,9 @@ create-user <user-id> <password>
 * Register the new user
 * Generate an S3 key pair (AccessKeyID and SecretAccessKey)
 
-::
+.. code-block:: bash
 
-    create-user test_account password
+    $ leofs-adm create-user test_account password
     access-key-id: be8111173c8218aaf1c3
     secret-access-key: 929b09f9b794832142c59218f2907cd1c35ac163
 
@@ -91,9 +89,9 @@ delete-user <user-id>
 
 Remove the user
 
-::
+.. code-block:: bash
 
-    delete-user test
+    $ leofs-adm delete-user test
     ok
 
 \
@@ -109,9 +107,9 @@ get-users
 
 Retrieve the list of users
 
-::
+.. code-block:: bash
 
-    get-users
+    $ leofs-adm get-users
     user_id     | access_key_id          | created_at
     ------------+------------------------+---------------------------
     _test_leofs | 05236                  | 2012-12-07 10:27:39 +0900
@@ -134,9 +132,9 @@ update-user-role <user-id> <role-id>
     * 1: General user
     * 9: Administrator
 
-::
+.. code-block:: bash
 
-    update-user-role 05236 1
+    $ leofs-adm update-user-role 05236 1
     OK
 
 \
@@ -159,9 +157,9 @@ add-endpoint <endpoint>
 .. note:: LeoFS domains are ruled by :ref:`this rule <s3-path-label>`
 
 
-::
+.. code-block:: bash
 
-    add-endpoint leo-project.net
+    $ leofs-adm add-endpoint leo-project.net
     OK
 
 \
@@ -177,9 +175,9 @@ delete-endpoint <endpoint>
 
 Remove the endpoint
 
-::
+.. code-block:: bash
 
-    delete-endpoint leo-project.net
+    leofs-adm delete-endpoint leo-project.net
     OK
 
 \
@@ -195,9 +193,9 @@ get-endpoints
 
 Retrieve the list of endpoints
 
-::
+.. code-block:: bash
 
-    get-endpoints
+    $ leofs-adm get-endpoints
     endpoint         | created at
     -----------------+---------------------------
     s3.amazonaws.com | 2012-09-12 14:09:52 +0900
@@ -222,9 +220,9 @@ add-bucket <bcuket> <access-key-id>
 
  Create the bucket
 
-::
+.. code-block:: bash
 
-    add-bucket backup 05236
+    $ leofs-adm add-bucket backup 05236
     OK
 
 \
@@ -240,9 +238,9 @@ delete-bucket <bucket> <access-key-id>
 
 Remove the bucket and all files stored in the bucket
 
-::
+.. code-block:: bash
 
-    delete-bucket backup 05236
+    $ leofs-adm delete-bucket backup 05236
     OK
 
 \
@@ -258,9 +256,9 @@ get-buckets
 
 Retrieve the list of the buckets registered
 
-::
+.. code-block:: bash
 
-    get-buckets
+    $ leofs-adm get-buckets
     cluster id   | bucket   | owner       | permissions                            | created at
     -------------+----------+-------------+----------------------------------------+---------------------------
     leofs_1      | backup   | _test_leofs | Me(full_control), Everyone(read)       | 2014-04-03 11:39:01 +0900
@@ -281,9 +279,9 @@ get-bucket <access-key-id>
 
 Retrieve the list of the buckets owned by the specified user
 
-::
+.. code-block:: bash
 
-    get-bucket 05236
+    $ leofs-adm get-bucket 05236
     bucket   | permissions                            | created at
     ---------+----------------------------------------+---------------------------
     backup   | Me(full_control), Everyone(read)       | 2014-04-03 11:39:01 +0900
@@ -304,9 +302,9 @@ chown-bucket <bucket> <access-key-id>
 
 ``v0.16.5-`` Change the owner of the bucket
 
-::
+.. code-block:: bash
 
-    chown-bucket backup 47ad5ca9
+    $ leofs-adm chown-bucket backup 47ad5ca9
     OK
 
 \
@@ -326,15 +324,15 @@ update-acl <bucket> <access-key-id>
     * ``public-read``       : All users have READ access
     * ``public-read-write`` : All users have READ and WRITE access
 
-::
+.. code-block:: bash
 
-    update-acl photo 05236 private
+    $ leofs-adm update-acl photo 05236 private
     ok
 
-    update-acl photo 05236 public-read
+    $ leofs-adm update-acl photo 05236 public-read
     ok
 
-    update-acl photo 05236 public-read-write
+    $ leofs-adm update-acl photo 05236 public-read-write
     ok
 
 \

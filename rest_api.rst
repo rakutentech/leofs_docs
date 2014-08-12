@@ -13,11 +13,11 @@ REST API
 Configuration
 -------------
 
-* Update ``Gateway HTTP API`` in :ref:`your Gateway configuration <conf_gateway_label>`
+* Update ``LeoFS Gateway HTTP API`` in :ref:`your LeoFS Gateway configuration <conf_gateway_label>`
 
 ::
 
-    http.handler = rest
+    protocol = rest
 
 \
 
@@ -43,14 +43,13 @@ Description of LeoFS' behavior for each HTTP verb
 URL format
 ^^^^^^^^^^
 
-* URL format: http://${HOST}:8080/**${KEY}**
-    * LeoFS will only use the ``${KEY}`` part of the URL to identify objects
+* URL format: http://${HOST}:8080/**<file-path>**
+    * LeoFS will only use the ``<file-path>`` part of the URL to identify objects
     * You can check that an object exists in the cluster by using:
 
 ::
 
-    $ telnet 127.0.0.1 10010
-    whereis ${KEY}
+    $ leofs-adm whereis <file-path>
 
 
 .. index::
