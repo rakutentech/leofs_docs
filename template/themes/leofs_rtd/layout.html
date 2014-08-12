@@ -101,7 +101,7 @@
   <div class="wy-grid-for-nav">
     {# SIDE NAV, TOGGLES ON MOBILE #}
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <!-- {% include "searchbox.html" %} -->
+      {% include "searchbox.html" %}
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         {% set toctree = toctree(maxdepth=2, collapse=True, includehidden=True) %}
         {% if toctree %}

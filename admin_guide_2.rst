@@ -1,134 +1,153 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
-
-Storage Operation
-=================
-
-Storage Cluster Operation Commands
-----------------------------------
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 .. index::
-    pair: Operation; Command
+    General commands
 
-* LeoFS-cluster's operation commands are executed on **LeoFS-Manager Console**.
-* Please refer :ref:`LeoFS operation flow diagram <operation-flow-diagram-label>`, too.
+General Commands
+================
 
++-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| **Shell**                                             | **Description**                                                                                   |
++=======================================================+===================================================================================================+
+| leofs-adm :ref:`status <status-command>` [<node>]     | * Retrieve status of every node (default)                                                         |
+|                                                       | * Retrieve status of the specified node                                                           |
++-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`whereis <whereis-command>` <file-path>| Retrieve an assigned object by the file-path                                                      |
++-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+
+.. _status-command:
 
 .. index::
-   Storage-cluster-related-commands
+    pair: General commands; status-command
+
+status
+^^^^^^
+
+Retrieve status of every node (default)
+
+.. code-block:: bash
+
+    $ leofs-adm status
+    [System config]
+                    System version : 1.0.0
+                        Cluster Id : leofs_1
+                             DC Id : dc_1
+                    Total replicas : 3
+               # of successes of R : 1
+               # of successes of W : 2
+               # of successes of D : 2
+     # of DC-awareness replicas    : 0
+                         ring size : 2^128
+                 Current ring hash : 8cd79c31
+                    Prev ring hash : 8cd79c31
+    [Multi DC replication settings]
+             max # of joinable DCs : 2
+                # of replicas a DC : 1
+
+    [Node(s) state]
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+     type  |           node           |    state     |  current ring  |   prev ring    |          updated at
+    -------+--------------------------+--------------+----------------+----------------+----------------------------
+      S    | storage_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_1@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_2@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      S    | storage_3@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:20 +0900
+      G    | gateway_0@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:21 +0900
+      G    | gateway_1@127.0.0.1      | running      | 8cd79c31       | 8cd79c31       | 2014-04-03 11:28:21 +0900
 
 
-Table of Storage Cluster's Commands
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+status <node>
+^^^^^^^^^^^^^
+
+Retrieve status of the specified node
+
+.. code-block:: bash
+
+    $ leofs-adm status storage_0@127.0.0.1
+    [config]
+                version : 0.14.1
+          obj-container : [[{path,"./avs"},{num_of_containers,64}]]
+                log dir : ./log
+    [status-1: ring]
+      ring state (cur)  : 64212f2d
+      ring state (prev) : 64212f2d
+    [status-2: erlang-vm]
+             vm version : 5.9.3.1
+        total mem usage : 30886632
+       system mem usage : 12774309
+        procs mem usage : 18178027
+          ets mem usage : 1154464
+                  procs : 326/1048576
+            kernel_poll : true
+       thread_pool_size : 32
+    [status-3: # of msgs]
+       replication msgs : 0
+        vnode-sync msgs : 0
+         rebalance msgs : 0
+
+
+    $ leofs-adm status gateway_0@127.0.0.1
+    [config-1]
+                          version : 0.14.1
+                          log dir : ./log
+    [config-2]
+      -- http-server-related --
+              using api [s3|rest] : s3
+                   listening port : 8080
+               listening ssl port : 8443
+                   # of_acceptors : 0
+      -- cache-related --
+          http cache [true|false] : false
+               # of cache_workers : 128
+                     cache expire : 300
+            cache max content len : 1048576
+               ram cache capacity : 1073741824
+           disc cache capacity    : 0
+           disc cache threshold   : 1048576
+           disc cache data dir    : ./cache/data
+           disc cache journal dir : ./cache/journal
+      -- large-object-related --
+            max # of chunked objs : 1000
+                max object length : 524288000
+            chunked object length : 5242880
+     threshold chunked obj length : 5767168
+
+     [status-1: ring]
+                ring state (cur)  : 64212f2d
+                ring state (prev) : 64212f2d
+
+    [status-2: erlang-vm]
+                       vm version : 5.9.3.1
+                  total mem usage : 48095776
+                 system mem usage : 34839664
+                  procs mem usage : 13261128
+                    ets mem usage : 1195144
+                            procs : 504/1048576
+                      kernel_poll : true
+                 thread_pool_size : 32
 
 \
 
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| Command                         | Explanation                                                                                       |
-+=================================+===================================================================================================+
-| *Storage-node related commands*                                                                                                     |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| detach `{STORAGE_NODE}`         | * Remove a storage node from the LeoFS storage-cluster                                            |
-|                                 | * Current status: ``running`` | ``stop``                                                          |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| suspend `{STORAGE_NODE}`        | * Suspend a storage node for maintenance. This command does NOT change the "routing-table (RING)" |
-|                                 | * Current status: ``running``                                                                     |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| resume `{STORAGE_NODE}`         | * Resume a storage node                                                                           |
-|                                 | * Current status: ``suspended`` | ``restarted``                                                   |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| *Storage-cluster related commands*                                                                                                  |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| start                           | Launch LeoFS after distributing the "routing-table (RING)" from Manager to Storage and Gateway    |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| rebalance                       | Move or Copy files into the LeoFS storage-cluster due to changed RING                             |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| whereis `{FILE_PATH}`           | Retrieve status of an assigned file                                                               |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| **Recover**                                                                                                                         |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| recover file `{FILE_PATH}`      | Synchronize an object between nodes in charge                                                     |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| recover node `{STORAGE_NODE}`   | Recover belonging target node's objects                                                           |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| recover ring `{STORAGE_NODE}`   | Synchronize target node's RING with Manager's RING                                                |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
-| recover cluster `{CLUSTER_ID}`  | [v1.0.0-] Synchronize objects between local-cluster with a remote-cluster                         |
-+---------------------------------+---------------------------------------------------------------------------------------------------+
+.. _whereis-command:
 
 .. index::
-    detach-command
+    pair: General commands; whereis-command
 
-.. _detach-command-label:
+\
 
-**'detach'** - Storage node is removed from the LeoFS-Cluster
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+whereis <file-path>
+^^^^^^^^^^^^^^^^^^^
 
-Command: ``detach {STORAGE_NODE}``
-
-::
-
-    detach storage_0@127.0.0.1
-    OK
-    rebalance
-    OK
-
-.. index::
-   suspend-command
-
-**'suspend'** - Suspend a storage node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``suspend {STORAGE_NODE}``
-
-::
-
-    suspend storage_0@127.0.0.1
-    OK
-
-.. index::
-   resume-command
-
-**'resume'** - Resume a storage node
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``resume {STORAGE_NODE}``
-
-::
-
-    resume storage_0@127.0.0.1
-    OK
-
-.. index::
-   rebalance-command
-
-.. _rebalance-command-label:
-
-**'rebalance'** - Rebalance files into the cluster
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Command: ``rebalance``
-
-::
-
-    rebalance
-    OK
-
-.. _whereis:
-
-.. index::
-   whereis-command
-
-**'whereis'**
-^^^^^^^^^^^^^
-
+Retrieve an assigned object by the file-path
 Paths used by `whereis` are ruled by :ref:`this rule <s3-path-label>`
 
-Command: ``whereis {FILE_PATH}``
+.. code-block:: bash
 
-::
-
-    whereis leo/fast/storage.key
+    $ leofs-adm whereis leo/fast/storage.key
     -----------------------------------------------------------------------------------------------------------------------
      del? node                 ring address    size   # of chunks  checksum    vclock            when
     -----------------------------------------------------------------------------------------------------------------------
@@ -136,202 +155,3 @@ Command: ``whereis {FILE_PATH}``
           storage_0@127.0.0.1  207643840133    35409  0             4116193149  1332407492290951  2012-06-29 14:23:31 +0900
 
 \
-
-\
-
-**recover** - Recover target node's objects and RING synchronization
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. index:: recover-file-command
-
-**'recover file'** - Synchronize an object between nodes
-
-::
-
-  recover file leo/fast/storage.key
-  OK
-
-\
-
-.. index:: recover-node-command
-
-**'recover node'** - Recover target node's objects
-
-::
-
-  recover node storage_0@127.0.0.1
-  OK
-
-\
-
-.. index:: recover-ring-command
-
-**'recover ring'** - Synchronize target node's RING with Manager's RING
-
-::
-
-  recover ring storage_0@127.0.0.1
-  OK
-
-\
-\
-
-Storage Maintenance Commands
-----------------------------
-
-\
-
-+-----------------------------------------------------------+----------------------------------------------------------------+
-| Command                                                   | Explanation                                                    |
-+===========================================================+================================================================+
-| **Disk Usage**                                                                                                             |
-+-----------------------------------------------------------+----------------------------------------------------------------+
-| du `{STORAGE_NODE}`                                       | Display disk usages (like Unix du command)                     |
-+-----------------------------------------------------------+----------------------------------------------------------------+
-| du detail `{STORAGE_NODE}`                                | Display disk usages in details (like Unix du command)          |
-+-----------------------------------------------------------+----------------------------------------------------------------+
-| **Compaction**                                                                                                             |
-+-----------------------------------------------------------+----------------------------------------------------------------+
-| compact start `{STORAGE_NODE}` `all` | `{NUM_OF_TARGETS}` | * Compact raw files used by the LeoFS Storage subsystem        |
-| `[{NUM_OF_COMPACT_PROC}]`                                 | * Default {NUM_OF_COMPACT_PROC} is '3'                         |
-+-----------------------------------------------------------+----------------------------------------------------------------+
-| compact suspend `{STORAGE_NODE}`                          | Suspend a compaction job in progress                           |
-+-----------------------------------------------------------+----------------------------------------------------------------+
-| compact resume  `{STORAGE_NODE}`                          | Resume a suspended compaction job                              |
-+-----------------------------------------------------------+----------------------------------------------------------------+
-| compact status  `{STORAGE_NODE}`                          | * Display compaction statuses                                  |
-|                                                           | * Compaction's status: ``idle``, ``running``, ``suspend``      |
-+-----------------------------------------------------------+----------------------------------------------------------------+
-
-\
-
-**du** - Disk Usage
-^^^^^^^^^^^^^^^^^^^
-
-.. index:: du-command
-
-**'du'** - Display disk usage (summary)
-
-Command: ``du {STORAGE_NODE}``
-
-::
-
-    du storage_0@127.0.0.1
-     active number of objects: 19968
-      total number of objects: 39936
-       active size of objects: 198256974.0
-        total size of objects: 254725020.0
-         ratio of active size: 77.83%
-        last compaction start: 2013-03-04 12:39:47 +0900
-          last compaction end: 2013-03-04 12:39:55 +0900
-
-.. index:: du-detail-command
-
-**'du detail'** - Display disk usage in details (per raw file)
-
-Command: ``du detail {STORAGE_NODE}``
-
-::
-
-    du detail storage_0@127.0.0.1
-    [du(storage stats)]
-                    file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/0.avs
-     active number of objects: 320
-      total number of objects: 640
-       active size of objects: 3206378.0
-        total size of objects: 4082036.0
-         ratio of active size: 78.55%
-        last compaction start: 2013-03-04 12:39:47 +0900
-          last compaction end: 2013-03-04 12:39:55 +0900
-    .
-    .
-    .
-                    file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/63.avs
-     active number of objects: 293
-      total number of objects: 586
-       active size of objects: 2968909.0
-        total size of objects: 3737690.0
-         ratio of active size: 79.43%
-        last compaction start: ____-__-__ __:__:__
-          last compaction end: ____-__-__ __:__:__
-
-\
-
-**compact** - Remove logical deleted objects and meta data
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-\
-
-.. image:: _static/images/leofs-compaction-state-transition.png
-   :width: 640px
-
-\
-\
-
-.. index:: compact-start-command
-
-**'compact start'** - Start compaction
-
-Command: ``compact start {STORAGE_NODE} (all | {NUM_OF_TARGETS}) [{NUM_OF_COMPACT_PROC}]``
-
-.. note:: Default ``{NUM_OF_COMPACT_PROC}`` is '3' - You can control the number of processes to execute compaction in parallel. It enables you to get maximum performance by setting an appropriate number corresponding to the number of cores.
-
-::
-
-    ## All compaction-targets will be executed with 3 concurrent processes
-    ## (default concurrency is 3)
-    compact start storage_0@127.0.0.1 all
-    OK
-
-::
-
-    ## Number of compaction-targets will be executed with 2 concurrent processes
-    compact start storage_0@127.0.0.1 5 2
-    OK
-
-\
-
-.. index:: compact-suspend-command
-
-**'compact suspend'** - Suspend a compaction job in progress
-
-Command: ``compact suspend {STORAGE_NODE}``
-
-::
-
-    compact suspend storage_0@127.0.0.1
-    OK
-
-\
-
-.. index:: compact-resume-command
-
-**'compact resume'** - Resume a suspended compaction job
-
-Command: ``compact resume {STORAGE_NODE}``
-
-::
-
-    compact resume storage_0@127.0.0.1
-    OK
-
-\
-
-.. index:: compact-status-command
-
-**'compact status'** - Retrieve compaction statuses
-
-Command: ``compact status {STORAGE_NODE}``
-
-* Compaction's status: ``idle``, ``running``, ``suspend``
-
-::
-
-  compact status storage_0@127.0.0.1
-          current status: running
-   last compaction start: 2013-03-04 12:39:47 +0900
-           total targets: 64
-    # of pending targets: 5
-    # of ongoing targets: 3
-    # of out of targets : 56
-

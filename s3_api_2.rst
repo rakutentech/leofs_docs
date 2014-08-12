@@ -1,5 +1,8 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 Amazon S3 Interface
 ===================
@@ -40,7 +43,7 @@ How to determine the name of Bucket
   | Host header  | Host: s3.amazonaws.com                                 |
   +--------------+--------------------------------------------------------+
 
-  The argument of LeoFS' :ref:`whereis <whereis>` | :ref:`purge <purge>` commands should be `bucket/path_to_file`.
+  The argument of LeoFS' :ref:`whereis <whereis-command>` | :ref:`purge <purge>` commands should be `bucket/path_to_file`.
 
 **2. http://www.example.com.s3.amazonaws.com/path_to_file**
 
@@ -56,7 +59,7 @@ How to determine the name of Bucket
   | Host header  | Host: www.example.com.s3.amazonaws.com                 |
   +--------------+--------------------------------------------------------+
 
-  The argument of LeoFS' :ref:`whereis <whereis>` | :ref:`purge <purge>` commands should be `www.example.com/path_to_file`.
+  The argument of LeoFS' :ref:`whereis <whereis-command>` | :ref:`purge <purge>` commands should be `www.example.com/path_to_file`.
 
 **3. http://www.example.com/path_to_file**
 
@@ -72,7 +75,7 @@ How to determine the name of Bucket
   | Host header  | Host: www.example.com                                  |
   +--------------+--------------------------------------------------------+
 
-  The argument of LeoFS' :ref:`whereis <whereis>` | :ref:`purge <purge>` commands should be `www.example.com/path_to_file`.
+  The argument of LeoFS' :ref:`whereis <whereis-command>` | :ref:`purge <purge>` commands should be `www.example.com/path_to_file`.
 
 
 **4. Rules for Bucket Naming (v0.16.1-)**

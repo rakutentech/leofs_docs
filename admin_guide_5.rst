@@ -1,210 +1,190 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
-
-System Maintenance
-==================
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 .. index::
-    upgrade-leofs
+    Compaction commands
+
+Compaction Commands
+===================
+
+Remove logical deleted objects and meta data and check the current disk usage
+
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **Shell**                                                                            | **Description**                                                                                      |
++======================================================================================+======================================================================================================+
+| **Compaction Commands**                                                                                                                                                                     |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`compact-start <compact-start>` <storage-node> (all|<num-of-targets>) | * Execute to remove unnecessary objects from the node                                                |
+| [<num-of-compaction-proc>]                                                           | * ``num-of-targets``: It controls the number of containers in parallel                               |
+|                                                                                      | * ``num-of-compaction-procs``: It controls the number of procs to execute the compaction in parallel |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`compact-suspend <compact-suspend>` <storage-node>                    | * Suspend to execute the compaction                                                                  |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`compact-resume <compact-resume>` <storage-node>                      | * Resume to execute the compaction                                                                   |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`compact-status <compact-status>` <storage-node>                      | * See the current compaction status                                                                  |
+|                                                                                      | * Compaction's status: ``idle``, ``running``, ``suspend``                                            |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| **Disk Usage**                                                                                                                                                                              |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`du <du>` <storage-node>                                              | * See the current disk usages                                                                        |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`du-detail <du-detail>` <storage-node>                                | * See the current disk usages in the details                                                         |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 
 \
 
-Upgrade your old version LeoFS to v1.0.2
-----------------------------------------
 
-This section describes the way of replacement of old LeoFS to v1.0.2
-
-Upgrade flow diagram
-^^^^^^^^^^^^^^^^^^^^
+.. image:: _static/images/leofs-compaction-state-transition.png
+   :width: 640px
 
 \
 
-.. image:: _static/images/leofs-upgrade-flow-diagram.png
-   :width: 780px
 
-* `The diagram only <http://www.leofs.org/docs/_images/leofs-upgrade-flow-diagram.png>`_
+.. _compact-start:
+
+.. index::
+    pair: Compaction commands; compact-start-command
+
+compact start <storage-node> (all | <num-of-targets>) [<num-of-compaction-procs>]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Execute to remove unnecessary objects from the node
+* num-of-targets: It controls the number of containers in parallel
+* num-of-compaction-procs: It controls the number of procs to execute the compaction in parallel
+
+
+.. note:: Default ``<num-of-compation-procs>`` is '3' - You can control the number of processes to execute compaction in parallel. It enables you to get maximum performance by setting an appropriate number corresponding to the number of cores.
+
+.. code-block:: bash
+
+    ## All compaction-targets will be executed with 3 concurrent processes
+    ## (default concurrency is 3)
+    $ leofs-adm compact-start storage_0@127.0.0.1 all
+    OK
+
+    ## Number of compaction-targets will be executed with 2 concurrent processes
+    $ leofs-adm compact-start storage_0@127.0.0.1 5 2
+    OK
 
 \
 
-.. note:: If you're using LeoFS v1.0.0-pre1, v0.16 or v0.14, you need to take over the configuration of ``metadata-storage`` as follows because from v1.0.0-pre2, the default configuration is ``leveldb``. So we're planning to provide the ``db-converter`` tool - from ``bitcask`` to ``leveldb`` with v1.1.0.
+.. _compact-suspend:
 
-Takeover a part of confugurations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. index::
+    pair: Compaction commands; compact-suspend-command
+
+compact suspend <storage-node>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Suspend to execute the compaction
+
+.. code-block:: bash
+
+    $ leofs-adm compact-suspend storage_0@127.0.0.1
+    OK
 
 \
 
-+-------------------------------------+---------------+
-| Item                                | Default value |
-+=====================================+===============+
-| leo_object_storage.metadata_storage | bitcask       |
-+-------------------------------------+---------------+
+
+.. _compact-resume:
+
+.. index::
+    pair: Compaction commands; compact-resume-command
+
+compact resume <storage-node>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Resume to execute the compaction
+
+.. code-block:: bash
+
+    $ leofs-adm compact-resume storage_0@127.0.0.1
+    OK
 
 \
 
-Adjust Every Path
+.. _compact-status:
+
+.. index::
+    pair: Compaction commands; compact-status-command
+
+
+compact status <storage-node>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* See the current compaction status
+* Compaction's status: ``idle``, ``running`` and ``suspend``
+
+.. code-block:: bash
+
+  $ leofs-adm compact-status storage_0@127.0.0.1
+          current status: running
+   last compaction start: 2013-03-04 12:39:47 +0900
+           total targets: 64
+    # of pending targets: 5
+    # of ongoing targets: 3
+    # of out of targets : 56
+
+\
+
+.. _du:
+
+.. index::
+    pair: Compaction commands; du-command
+
+du <storage-node>
 ^^^^^^^^^^^^^^^^^
 
-* Manager: [mnesia, log-dir and queue-dir]
+See the current disk usages
 
 .. code-block:: bash
 
-    .
-    .
-    .
-    ## Mnesia dir
-    mnesia.dir = ./work/mnesia/{IP}
-    .
-    .
-    .
-    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
-    log.log_level = 1
-    ## Output log file(s) - Erlang's log
-    log.erlang = ./log/erlang
-    ## Output log file(s) - app
-    log.app = ./log/app
-    ## Output log file(s) - members of storage-cluster
-    log.member_dir = ./log/ring
-    ## Output log file(s) - ring
-    log.ring_dir = ./log/ring
-
-    ## Directory of queue for monitoring "RING"
-    queue_dir = ./work/queue
-    ## Directory of SNMP agent configuration
-    snmp_agent = ./snmp/snmpa_manager_0/LEO-MANAGER
+    $ leofs-adm du storage_0@127.0.0.1
+     active number of objects: 19968
+      total number of objects: 39936
+       active size of objects: 198256974.0
+        total size of objects: 254725020.0
+         ratio of active size: 77.83%
+        last compaction start: 2013-03-04 12:39:47 +0900
+          last compaction end: 2013-03-04 12:39:55 +0900
 
 
-* Storage: [obj_containers, log-dir and queue-dir]
-
-.. code-block:: bash
-
-    ## Object container
-    obj_containers.path = [./avs]
-    obj_containers.num_of_containers = [8]
-
-    ## e.g. Case of plural pathes
-    ## obj_containers.path = [/var/leofs/avs/1, /var/leofs/avs/2]
-    ## obj_containers.num_of_containers = [32, 64]
-    .
-    .
-    .
-    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
-    log.log_level = 1
-    ## Output log file(s) - Erlang's log
-    log.erlang = ./log/erlang
-    ## Output log file(s) - app
-    log.app = ./log/app
-    ## Output log file(s) - members of storage-cluster
-    log.member_dir = ./log/ring
-    ## Output log file(s) - ring
-    log.ring_dir = ./log/ring
-
-    ## Directory of queue for monitoring "RING"
-    queue_dir = ./work/queue
-    ## Directory of SNMP agent configuration
-    snmp_agent = ./snmp/snmpa_storage_0/LEO-STORAGE
-
-
-* Gateway: [SSL-related files, cache-related pathes, log-dir and queue-dir]
-
-.. code-block:: bash
-
-    ## SSL Certificate file
-    http.ssl_certfile = ./etc/server_cert.pem
-    ## SSL key
-    http.ssl_keyfile  = ./etc/server_key.pem
-
-    ## Directory for the disk cache data
-    cache.cache_disc_dir_data    = ./cache/data
-    ## Directory for the disk cache journal
-    cache.cache_disc_dir_journal = ./cache/journal
-    .
-    .
-    .
-    ## Log level: [0:debug, 1:info, 2:warn, 3:error]
-    log.log_level = 1
-    ## Output log file(s) - Erlang's log
-    log.erlang = ./log/erlang
-    ## Output log file(s) - app
-    log.app = ./log/app
-    ## Output log file(s) - members of storage-cluster
-    log.member_dir = ./log/ring
-    ## Output log file(s) - ring
-    log.ring_dir = ./log/ring
-
-    ## Directory of queue for monitoring "RING"
-    queue_dir = ./work/queue
-    ## Directory of SNMP agent configuration
-    snmp_agent = ./snmp/snmpa_gateway_0/LEO-GATEWAY
-
-
-Attach/Detach node into a Storage-cluster in operation
-------------------------------------------------------
-
-This section describes the process of adding and removing nodes in a LeoFS Storage cluster.
-
-* Adding a storage node:
-    * The node can be added to the cluster once it is running. You can use the :ref:`rebalance <rebalance-command-label>` command to request a join from the Manager.
-* Removing a storage node:
-    * The node can be removed from the cluster when it is either running or stopped. You can use the :ref:`detach <detach-command-label>` command to remove the node.
-    * After that, you need to execute the :ref:`rebalance <rebalance-command-label>` command in the Manager to actually remove the node from the storage cluster.
-
-
-.. image:: _static/images/leofs-order-of-attach.png
-   :width: 640px
+.. _du-detail:
 
 .. index::
-   detach-storage
+    pair: Compaction commands; du-detail-command
 
-.. image:: _static/images/leofs-order-of-detach.png
-   :width: 640px
+du detail <storage-node>
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+See the current disk usages in the details
 
 
+.. code-block:: bash
 
-
-Gateway Access-log Format (v1.0.0-pre3)
----------------------------------------
-
-LeoFS-Gateway is able to output access-log. If you would like to use this option, you can check and set :ref:`the configuration <conf_gateway_label>`.
-
-Sample
-^^^^^^
-
-::
-
-    --------+-------+--------------------+----------+-------+---------------------------------------+-----------------------+----------
-    Method  | Bucket| Path               |Child Num |  Size | Timestamp                             | Unix Time             | Response
-    --------+-------+--------------------+----------|-------+---------------------------------------+-----------------------+----------
-    [HEAD]   photo   photo/1              0          0       2013-10-18 13:28:56.148269 +0900        1381206536148320        500
-    [HEAD]   photo   photo/1              0          0       2013-10-18 13:28:56.465670 +0900        1381206536465735        404
-    [HEAD]   photo   photo/city/tokyo.png 0          0       2013-10-18 13:28:56.489234 +0900        1381206536489289        200
-    [GET]    photo   photo/1              0          1024    2013-10-18 13:28:56.518631 +0900        1381206536518693        500
-    [GET]    photo   photo/city/paris.png 0          2048    2013-10-18 13:28:56.550376 +0900        1381206536550444        404
-    [PUT]    logs    logs/leofs           1          5242880 2013-10-18 13:28:56.518631 +0900        1381206536518693        500
-    [PUT]    logs    logs/leofs           2          5242880 2013-10-18 13:28:56.518631 +0900        1381206536518693        500
-    [PUT]    logs    logs/leofs           3          5120    2013-10-18 13:28:56.518631 +0900        1381206536518693        500
-
-Format
-^^^^^^
-
-.. note:: The format of the access log is **Tab Separated Values**.
-
-+---------------+------------------------------------------------------------+
-| Column Number | Explanation                                                |
-+===============+============================================================+
-| 1             | Method: [HEAD|PUT|GET|DELETE]                              |
-+---------------+------------------------------------------------------------+
-| 2             | Bucket                                                     |
-+---------------+------------------------------------------------------------+
-| 3             | Filename (including path)                                  |
-+---------------+------------------------------------------------------------+
-| 4             | Child number of a file                                     |
-+---------------+------------------------------------------------------------+
-| 5             | File Size (byte)                                           |
-+---------------+------------------------------------------------------------+
-| 6             | Timestamp with timezone                                    |
-+---------------+------------------------------------------------------------+
-| 7             | Unixtime (including micro-second)                          |
-+---------------+------------------------------------------------------------+
-| 8             | Response (HTTP Status Code)                                |
-+---------------+------------------------------------------------------------+
+    $ leofs-adm du-detail storage_0@127.0.0.1
+    [du(storage stats)]
+                    file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/0.avs
+     active number of objects: 320
+      total number of objects: 640
+       active size of objects: 3206378.0
+        total size of objects: 4082036.0
+         ratio of active size: 78.55%
+        last compaction start: 2013-03-04 12:39:47 +0900
+          last compaction end: 2013-03-04 12:39:55 +0900
+    .
+    .
+    .
+                    file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/63.avs
+     active number of objects: 293
+      total number of objects: 586
+       active size of objects: 2968909.0
+        total size of objects: 3737690.0
+         ratio of active size: 79.43%
+        last compaction start: ____-__-__ __:__:__
+          last compaction end: ____-__-__ __:__:__
 

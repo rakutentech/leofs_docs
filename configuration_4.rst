@@ -1,5 +1,8 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 .. index::
     SNMP
@@ -9,8 +12,11 @@ SNMPA Setup
 
 Each LeoFS node provides a built in SNMP server which allows to connect external systems, such as |Nagios| and |Zabbix|. You can retrieve various statistics as follows:
 
-Manager
-^^^^^^^
+.. index::
+   pair: SNMP; LeoFS Manager
+
+LeoFS Manager
+^^^^^^^^^^^^^^
 
 a. SNMPA Properties
 
@@ -82,8 +88,11 @@ c. Method of confirmation
     SNMPv2-SMI::enterprises.35450.11.11.0 = Gauge32: 1935758
 
 
-Storage
-^^^^^^^
+.. index::
+   pair: SNMP; LeoFS Storage
+
+LeoFS Storage
+^^^^^^^^^^^^^^
 
 a. SNMPA Properties
 
@@ -204,8 +213,11 @@ c. Method of confirmation
     SNMPv2-SMI::enterprises.35450.24.23.0 = Gauge32: 0
     SNMPv2-SMI::enterprises.35450.24.24.0 = Gauge32: 0
 
-Gateway
-^^^^^^^
+.. index::
+   pair: SNMP; LeoFS Gatewat
+
+LeoFS Gateway
+^^^^^^^^^^^^^^
 
 a. SNMPA Properties
 
@@ -228,7 +240,7 @@ b. SNMPA Items
 \
 
 +------------------+------------------------------------+
-| Branch Number    | Explanation                        |
+| Branch Number    | Description                        |
 +==================+====================================+
 | 1                | Node name                          |
 +------------------+------------------------------------+

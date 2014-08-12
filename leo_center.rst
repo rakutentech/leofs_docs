@@ -1,5 +1,11 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
+
+.. index::
+   LeoCenter
 
 LeoCenter v0.4.6
 ================
@@ -34,14 +40,13 @@ Create Admin User
 
 .. note:: You need to create an ``administrator`` user from LeoFS-Manager's console.
 
-::
+.. code-block:: bash
 
-  $ telnet ${LEOFS_MANAGER_HOST} ${LEOFS_MANAGER_PORT}
-  > create-user leo_admin password
-    access-key-id: ab96d56258e0e9d3621a
-    secret-access-key: 5c3d9c188d3e4c4372e414dbd325da86ecaa8068
+  $ leofs-adm create-user leo_admin password
+  access-key-id: ab96d56258e0e9d3621a
+  secret-access-key: 5c3d9c188d3e4c4372e414dbd325da86ecaa8068
 
-  > update-user-role leo_admin 9
+  $ leofs-adm update-user-role leo_admin 9
   OK
 
 
@@ -245,17 +250,17 @@ Milestones
     * Bucket status
         * Belonging bucket-list
 
-* 0.4 (Mar - Jan 2014)
+* 0.4 (Mar - Aug 2014)
     *  User Group
         * Sharing LeoFS' credential-keys in the group
         * User management in the group
 
-* 0.6 (Feb 2014)
+* 0.6 (Sept 2014 - )
     * Link LeoQoS *(LeoFS's Quality of Service)*
         * Bucket status
             * total of files
             * total used disk capacity
 
-* 0.8 (May 2014)
+* 0.8
     * Log Search/Analysis (Option)
 

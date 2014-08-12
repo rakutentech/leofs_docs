@@ -1,5 +1,8 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 .. _leofs-configuration-label:
 
@@ -61,7 +64,7 @@ The Consistency Level
 .. note::  The consistency level is configured in this file. It should not be modified while the system is running.
 
 +---------------------------------+---------------------------------------------------------+
-| Property                        | Explanation                                             |
+| Property                        | Description                                             |
 +=================================+=========================================================+
 | n - consistency.num_of_replicas | # of replicas                                           |
 +---------------------------------+---------------------------------------------------------+
@@ -73,6 +76,9 @@ The Consistency Level
 +---------------------------------+---------------------------------------------------------+
 | consistency.rack_aware_replicas | # of rack-aware replicas                                |
 +---------------------------------+---------------------------------------------------------+
+
+.. index::
+   pair: Configuration; Consistency level
 
 * A reference consistency level
 

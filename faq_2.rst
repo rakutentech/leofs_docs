@@ -1,9 +1,18 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
+
+.. index::
+   FAQ LeoFS limits
 
 =======================
 FAQ: LeoFS Limits
 =======================
+
+.. index::
+   pair: FAQ LeoFS limits; Features
 
 Features
 --------
@@ -13,9 +22,12 @@ Features
 
 See Also:
     * `Amazon S3 API and Interface <s3_api.html>`_
-    * `Configuration of Gateway nodes <configuration_3.html>`_
+    * `Configuration of LeoFS Gateway nodes <configuration_3.html>`_
 
 ----
+
+.. index::
+   pair: FAQ LeoFS limits; Operations
 
 Operations
 ----------
@@ -30,14 +42,18 @@ See Also:
 
 ----
 
+.. index::
+   pair: FAQ LeoFS limits; NFS support
+
 NFS Support
 -----------
 
 * NFS implemantation with LeoFS v1.1 is a subset of |NFSv3|. Lock manager protocol, ``Authentication``, and ``Owner/Permission`` management are NOT covered.
+* The `ls` command may take too much time when the target directory have lots of child. We're planning to provide better performance with LeoFS v.1.2.
 * If you use LeoFS with NFS, you should set the size of a chunked object in LeoFS to 1MB (1048576Bytes), otherwise the efficiency of disk utilization can be decreased.
 
 See Also:
-    * `Configuration of Gateway nodes <configuration_3.html>`_
+    * `Configuration of LeoFS Gateway nodes <configuration_3.html>`_
     * |ISSUE_198|
 
 

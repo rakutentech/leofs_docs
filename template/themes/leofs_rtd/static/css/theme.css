@@ -64,8 +64,15 @@ pre,code,.rst-content tt,kbd,samp {
     font-size: 1em
 }
 pre {
-    white-space: pre
+  white-space: pre;
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  white-space: nowrap;
+  background-color: #f9f2f4;
+  border-radius: 4px;
 }
+
 q {
     quotes: none
 }
@@ -2339,12 +2346,13 @@ input[type="button"],input[type="reset"],input[type="submit"] {
 }
 input[type="text"],input[type="password"],input[type="email"],input[type="url"],input[type="date"],input[type="month"],input[type="time"],input[type="datetime"],input[type="datetime-local"],input[type="week"],input[type="number"],input[type="search"],input[type="tel"],input[type="color"] {
     -webkit-appearance: none;
-    padding: 6px;
+    padding: 8px 8px 8px 8px;
+    width: 300px;
     display: inline-block;
     border: 1px solid #ccc;
     font-size: 80%;
     font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
-    box-shadow: inset 0 1px 3px #ddd;
+    /* box-shadow: inset 0 1px 3px #ddd; */
     border-radius: 0;
     -webkit-transition: border 0.3s linear;
     -moz-transition: border 0.3s linear;
@@ -2652,7 +2660,7 @@ select[disabled],textarea[disabled],input[readonly],select[readonly],textarea[re
     text-align: center
 }
 .wy-table td,.rst-content table.docutils td,.rst-content table.field-list td,.wy-table th,.rst-content table.docutils th,.rst-content table.field-list th {
-    font-size: 90%;
+    /* font-size: 90%; */
     margin: 0;
     overflow: visible;
     padding: 8px 16px
@@ -2667,6 +2675,7 @@ select[disabled],textarea[disabled],input[readonly],select[readonly],textarea[re
     white-space: nowrap;
 }
 .wy-table thead th,.rst-content table.docutils thead th,.rst-content table.field-list thead th {
+    background-color: #f0f0f0;
     font-weight: bold;
     border-bottom: solid 2px #e1e4e5
 }
@@ -2856,8 +2865,9 @@ code,.rst-content tt {
     max-width: 100%;
     background: #fff;
     border: solid 1px #e1e4e5;
-    font-size: 75%;
-    padding: 0 5px;
+    color: #c7254e;
+    font-size: 80%;
+    padding: 3px 3px 3px 3px;
     font-family: Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
     color: #e74c3c;
     overflow-x: auto
@@ -2958,7 +2968,7 @@ div[class^='highlight'] pre {
     margin: 0;
     padding: 12px 12px;
     font-family: Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
-    font-size: 12px;
+    /* font-size: 12px; */
     line-height: 1.5;
     display: block;
     overflow: auto;
@@ -3872,7 +3882,7 @@ nav.stickynav {
     padding-left: 0
 }
 .rst-content tt {
-    color: #000
+    /* color: #000 */
 }
 .rst-content tt big,.rst-content tt em {
     font-size: 100% !important;

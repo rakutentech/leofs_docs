@@ -1,5 +1,8 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 .. index::
     pair: Benchmark; Benchmark
@@ -39,23 +42,18 @@ Create a test bucket
 
 .. code-block:: bash
 
-    $ telnet ${MANAGER_CONSOLE_IP} 10010
-    Trying 127.0.0.1...
-    Connected to localhost.
-    Escape character is '^]'.
-
-    add-endpoint ${GATEWAY_IP}
+    $ leofs-adm add-endpoint <gateway-ip-address>
     OK
 
-    add-bucket test 05236
+    $ leofs-adm add-bucket test 05236
     OK
 
-    get-buckets
+    $ leofs-adm get-buckets
     bucket   | owner       | created at
     ---------+-------------+---------------------------
     test     | _test_leofs | 2013-02-27 14:06:54 +0900
 
-    update-acl test 05236 public-read
+    $ leofs-adm update-acl test 05236 public-read
     OK
 
 
@@ -99,9 +97,9 @@ Description
   +-------------------+--------------------------------------------------------+
   | Key               | Value                                                  |
   +===================+========================================================+
-  | http_raw_ips      | The `Gateway nodes` we want to benchmark               |
+  | http_raw_ips      | The `LeoFS Gateway nodes` we want to benchmark         |
   +-------------------+--------------------------------------------------------+
-  | http_raw_port     | The port used by the Gateway nodes                     |
+  | http_raw_port     | The port used by the LeoFS Gateway nodes               |
   +-------------------+--------------------------------------------------------+
   | http_raw_path     | URL path prefix. The first path segment MUST be a      |
   |                   | BUCKET name                                            |
@@ -143,15 +141,10 @@ Configure the ``endpoint`` on LeoFS-Manager console
 
 .. code-block:: bash
 
-    $ telnet ${MANAGER_CONSOLE_IP} 10010
-    Trying 127.0.0.1...
-    Connected to localhost.
-    Escape character is '^]'.
-
-    add-endpoint ${HOST_NAME_OF_LEOFS_GATEWAY}
+    $ leofs-adm add-endpoint <host-name-of-leofs-gateway>
     OK
 
-    get-endpoints
+    $ leofs-adm get-endpoints
     endpoint                      | created at
     ------------------------------+---------------------------
     localhost                     | 2013-03-01 00:14:04 +0000

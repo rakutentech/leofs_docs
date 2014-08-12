@@ -1,5 +1,8 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 .. index::
    pair: Configuration; LeoFS Storage
@@ -9,7 +12,7 @@
 LeoFS Storage
 -------------
 
-**Configuration of Storage nodes**
+**Configuration of LeoFS Storage nodes**
 
 **[leo_storage.conf]**
 
@@ -185,9 +188,9 @@ LeoFS Storage
 +-------------------------+--------------------------------------------------------+
 |Property                 | Description                                            |
 +=========================+========================================================+
-|{STORAGE_ALIAS}          | Storage node's Alias name                              |
+|{STORAGE_ALIAS}          | LeoFS Storage node's Alias name                        |
 +-------------------------+--------------------------------------------------------+
-|{STORAGE_IP}             | Storage node's IP-Address                              |
+|{STORAGE_IP}             | LeoFS Storage node's IP-Address                        |
 +-------------------------+--------------------------------------------------------+
 |{SNMPA-DIR}              | SNMPA configuration files directory                    |
 +-------------------------+--------------------------------------------------------+

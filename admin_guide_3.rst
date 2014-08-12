@@ -1,80 +1,123 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
-
-Multi Datacenter Replication Operation
-======================================
-
-MultiDC-related Commands
-------------------------
-
-\
-
-+-------------------------------------------------------------------+-------------------------------------------------------------------------------+
-| Command                                                           | Explanation                                                                   |
-+===================================================================+===============================================================================+
-| join-cluster `{REMOTE_MANAGER_MASTER}` `{REMOTE_MANAGER_SLAVE}`   | [1.0.0-] Communicate between the local-cluster and a remote cluster           |
-+-------------------------------------------------------------------+-------------------------------------------------------------------------------+
-| remove-cluster `{REMOTE_MANAGER_MASTER}` `{REMOTE_MANAGER_SLAVE}` | [1.0.0-] Remove communication between clusters                                |
-+-------------------------------------------------------------------+-------------------------------------------------------------------------------+
-| cluster-status                                                    | [1.0.0-] Retrieve current status of clusters                                  |
-+-------------------------------------------------------------------+-------------------------------------------------------------------------------+
-
-\
-
-.. ### JOIN-CLUSTER ###
-
-.. _join_cluster:
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
 
 .. index::
-    join-cluster-command
+    Storage operation
 
-**'join-cluster'** - Communicate between the local-cluster and a remote cluster
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Storage Operation
+=================
 
-Command: ``join-cluster {REMOTE_MANAGER_MASTER} {REMOTE_MANAGER_SLAVE}``
+* LeoFS Storage operation commands are executed on **LeoFS-Manager console** OR the ``leofs-adm`` script.
+* Refer :ref:`LeoFS operation flow diagram <operation-flow-diagram-label>`
 
-::
++-----------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| **Shell**                                                 | **Description**                                                                                   |
++===========================================================+===================================================================================================+
+| leofs-adm :ref:`detach <detach-command>` <storage-node>   | * Remove the storage node in the LeoFS storage cluster                                            |
+|                                                           | * Current status: ``running`` | ``stop``                                                          |
++-----------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`suspend <suspend-command>` <storage-node> | * Suspend a storage node for maintenance                                                          |
+|                                                           | * This command does NOT detach the node from the storage cluster                                  |
+|                                                           | * While suspending, it rejects any requests                                                       |
+|                                                           | * Current status: ``running``                                                                     |
++-----------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`resume <resume-command>` <storage-node>   | * Resume a storage node for finished maintenance                                                  |
+|                                                           | * Current status: ``suspended`` | ``restarted``                                                   |
++-----------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`start <start-command>`                    | * Start LeoFS after distributing the RING from LeoFS Manager to LeoFS Storage and LeoFS Gateway   |
++-----------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`rebalance <rebalance-command>`            | * Commit detached and attached nodes to join the cluster                                          |
+|                                                           | * Rebalance objects in the cluster based on the updated cluster topology                          |
++-----------------------------------------------------------+---------------------------------------------------------------------------------------------------+
 
-    join-cluster manager_c2_0@10.1.2.1 manager_c2_1@10.1.2.2
+
+.. index::
+    pair: Storage operation; detach-command
+
+.. _detach-command:
+
+detach <storage-node>
+^^^^^^^^^^^^^^^^^^^^^
+
+Remove the storage node in the storage cluster
+
+.. code-block:: bash
+
+    $ leofs-adm detach storage_0@127.0.0.1
+    OK
+    rebalance
+    OK
+
+
+.. index::
+    pair: Storage operation; suspend-command
+
+.. _suspend-command:
+
+suspend <storage-node>
+^^^^^^^^^^^^^^^^^^^^^^
+
+* Suspend the storage node
+* While suspending, it rejects any requests
+* This command does NOT detach the node from the storage cluster
+
+.. code-block:: bash
+
+    $ leofs-adm suspend storage_0@127.0.0.1
+    OK
+
+
+.. index::
+    pair: Storage operation; resume-command
+
+.. _resume-command:
+
+resume <storage-node>
+^^^^^^^^^^^^^^^^^^^^^
+
+Resume the storage node
+
+.. code-block:: bash
+
+    $ leofs-adm resume storage_0@127.0.0.1
     OK
 
 \
 
-.. ### REMOVE-CLUSTER ###
-
-.. _remove_cluster:
 
 .. index::
-    remove-cluster-command
+    pair: Storage operation; start-command
 
-**'remove-cluster'** - Remove communication between clusters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _start-command:
 
-Command: ``remove-cluster {REMOTE_MANAGER_MASTER} {REMOTE_MANAGER_SLAVE}``
+start
+^^^^^
 
-::
+Start LeoFS after distributing the RING from LeoFS Manager to LeoFS Storage and LeoFS Gateway
 
-    remove-cluster manager_c2_0@10.1.2.1 manager_c2_1@10.1.2.2
+.. code-block:: bash
+
+    $ leofs-adm start
     OK
 
 \
 
-.. ### CLUSTER-STATUS ###
-
-.. _cluster_status:
 
 .. index::
-    cluster-status-command
+    pair: Storage operation; rebalance-command
 
-**'cluster-status'** - Retrieve current status of clusters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _rebalance-command:
 
-Command: ``cluster-status``
+rebalance
+^^^^^^^^^
 
-::
+Commit detached and attached nodes to join the cluster AND Rebalance objects in the cluster based on the updated cluster topology
 
-    cluster-status
-    cluster id |   dc id    |    status    | # of storages  |          updated at
-    -----------+------------+--------------+----------------+-----------------------------
-    leofs_2    | dc_2       |   running    |              8 | 2014-03-21 19:17:45 +0900
+.. code-block:: bash
+
+    $ leofs-adm rebalance
+    OK
 

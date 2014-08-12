@@ -1,10 +1,18 @@
+.. =========================================================
 .. LeoFS documentation
-.. Copyright (c) 2013-2014 Rakuten, Inc.
+.. Copyright (c) 2012-2014 Rakuten, Inc.
+.. http://leo-project.net/
+.. =========================================================
+
+.. index::
+   FAQ fundamentals
 
 =======================
 FAQ: LeoFS Fundamentals
 =======================
 
+.. index::
+   pair: FAQ fundamentals; What kind of storage is leofs?
 
 What kind of storage is leofs?
 ------------------------------
@@ -19,6 +27,9 @@ See Also:
 
 ----
 
+.. index::
+   pair: FAQ fundamentals; What are typical uses for LeoFS?
+
 What are typical uses for LeoFS?
 --------------------------------
 
@@ -30,6 +41,9 @@ See Also:
     * `LeoFS Overview <intro.html>`_
 
 ----
+
+.. index::
+   pair: FAQ fundamentals; What is benefit for LeoFS users?
 
 What is benefit for LeoFS users?
 --------------------------------
@@ -75,22 +89,25 @@ For administrators
 
 ----
 
+.. index::
+   pair: FAQ fundamentals; What is architecture of LeoFS?
+
 What is architecture of LeoFS?
 ------------------------------
 
 We've been mainly focusing on **High Availability**, **High Scalability** and **High Cost Performance Ratio** since unstructured data such as images, movies and logs have been exponentially increasing day by day, and we needed to build a cloud storage that can handle all them.
 
-LeoFS consists of 3 core components - `Gateway <leofs-gateway-detail.html>`_, `Storage <leofs-storage-detail.html>`_ and `Manager <leofs-manager-detail.html>`_. The role of each component is clearly defined.
+LeoFS consists of 3 core components - `LeoFS Gateway <leofs-gateway-detail.html>`_, `Storage <leofs-storage-detail.html>`_ and `Manager <leofs-manager-detail.html>`_. The role of each component is clearly defined.
 
 
 .. image:: _static/images/leofs-architecture.001.jpg
    :width: 780px
 
-`Gateway <leofs-gateway-detail.html>`_ handles http-requests and http-responses from clients when using REST-API OR S3-API. Also, it has the built-in object-cache system.
+`LeoFS Gateway <leofs-gateway-detail.html>`_ handles http-requests and http-responses from clients when using REST-API OR S3-API. Also, it has the built-in object-cache system.
 
-`Storage <leofs-storage-detail.html>`_ handles *GET*, *PUT* and *DELETE*, Also it has replicator and recoverer in order to keep running and consistency.
+`LeoFS Storage <leofs-storage-detail.html>`_ handles *GET*, *PUT* and *DELETE*, Also it has replicator and recoverer in order to keep running and consistency.
 
-`Manager <leofs-manager-detail.html>`_ always monitors Gateway(s) and Storage(s). Manger monitors node-status and RING(logical routing-table) checksum to keep running and consistency.
+`LeoFS Manager <leofs-manager-detail.html>`_ always monitors Gateway(s) and Storage(s). Manger monitors node-status and RING(logical routing-table) checksum to keep running and consistency.
 
 
 Also, what we payed attention when we desined LeoFS are the following 3 things:
@@ -99,6 +116,9 @@ Also, what we payed attention when we desined LeoFS are the following 3 things:
     * To provide easy administration, we already provide LeoFS CUI and GUI console.
 
 ----
+
+.. index::
+   pair: FAQ fundamentals; Is there the roadmap of LeoFS?
 
 Is there the roadmap of LeoFS?
 ------------------------------
@@ -115,6 +135,9 @@ We've published LeoFS milestones on both of |GitHub| and `LeoFS website <milesto
 
 ----
 
+.. index::
+   pair: FAQ fundamentals; What language is LeoFS written in?
+
 What language is LeoFS written in?
 ----------------------------------
 
@@ -126,6 +149,9 @@ See Also:
     * |LeoCenter|
 
 ----
+
+.. index::
+   pair: FAQ fundamentals; What language can I use to work with LeoFS?
 
 What language can I use to work with LeoFS?
 -------------------------------------------
