@@ -43,7 +43,7 @@ How to determine the name of Bucket
   | Host header  | Host: s3.amazonaws.com                                 |
   +--------------+--------------------------------------------------------+
 
-  The argument of LeoFS' :ref:`whereis <whereis-command>` | :ref:`purge <purge>` commands should be `bucket/path_to_file`.
+  The argument of LeoFS' :ref:`whereis <whereis-command>` | :ref:`purge-cache <purge>` commands should be `bucket/path_to_file`.
 
 **2. http://www.example.com.s3.amazonaws.com/path_to_file**
 

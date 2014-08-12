@@ -10,13 +10,13 @@
 LeoFS Gateway Operation
 =======================
 
-+------------------------------------------------------+-----------------------------------------------------------------------------------+
-| **Shell**                                            | **Description**                                                                   |
-+======================================================+===================================================================================+
-| leofs-adm :ref:`purge <purge>` <file-path>           | * Remove the cache from each LeoFS Gateway node                                   |
-+------------------------------------------------------+-----------------------------------------------------------------------------------+
-| leofs-adm :ref:`remove <remove>` <gateway-node>      | * Remove the LeoFS Gateway node, which is already stopped                         |
-+------------------------------------------------------+-----------------------------------------------------------------------------------+
++--------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| **Shell**                                                    | **Description**                                                                   |
++==============================================================+===================================================================================+
+| leofs-adm :ref:`purge-cache <purge>` <file-path>             | * Remove the cache from each LeoFS Gateway node                                   |
++--------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| leofs-adm :ref:`remove-gateway <remove>` <gateway-node>      | * Remove the LeoFS Gateway node, which is already stopped                         |
++--------------------------------------------------------------+-----------------------------------------------------------------------------------+
 
 \
 
@@ -25,14 +25,14 @@ LeoFS Gateway Operation
 .. index::
     pair: LeoFS Gateway operation; purge-command
 
-purge <file-path>
-^^^^^^^^^^^^^^^^^
+purge-cache <file-path>
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Remove the cache from each gateway
 
 .. code-block:: bash
 
-    $ leofs-adm purge leo/fast/storage.key
+    $ leofs-adm purge-cache leo/fast/storage.key
     OK
 
 \
@@ -42,10 +42,10 @@ Remove the cache from each gateway
 .. index::
     pair: LeoFS Gateway operation; remove-command
 
-remove <gateway-node>
-^^^^^^^^^^^^^^^^^^^^^
+remove-gateway <gateway-node>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
-    $ leofs-adm remove gateway_0@127.0.0.1
+    $ leofs-adm remove-gateway gateway_0@127.0.0.1
     OK

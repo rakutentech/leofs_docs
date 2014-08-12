@@ -35,7 +35,7 @@ Recover an inconsistent object specified by the file-path
 
 .. code-block:: bash
 
-  $ leofs-adm recover file leo/fast/storage.key
+  $ leofs-adm recover-file leo/fast/storage.key
   OK
 
 \
@@ -53,7 +53,7 @@ Recover all inconsistent objects in the specified node
 
 .. code-block:: bash
 
-  $ leofs-adm recover node storage_0@127.0.0.1
+  $ leofs-adm recover-node storage_0@127.0.0.1
   OK
 
 \
@@ -87,5 +87,5 @@ Recover all inconsistent objects in the specified cluster
 
 .. code-block:: bash
 
-  $ leofs-adm recover cluster cluster-1
+  $ leofs-adm recover-cluster cluster-1
   OK
