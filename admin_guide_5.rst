@@ -32,7 +32,7 @@ Remove logical deleted objects and meta data and check the current disk usage
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | leofs-adm :ref:`du <du>` <storage-node>                                              | * See the current disk usages                                                                        |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| leofs-adm :ref:`du-detail <du-detail>` <storage-node>                                | * See the current disk usages in the details                                                         |
+| leofs-adm :ref:`du detail <du-detail>` <storage-node>                                | * See the current disk usages in the details                                                         |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 
 \
@@ -166,7 +166,7 @@ See the current disk usages in the details
 
 .. code-block:: bash
 
-    $ leofs-adm du-detail storage_0@127.0.0.1
+    $ leofs-adm du detail storage_0@127.0.0.1
     [du(storage stats)]
                     file path: /home/leofs/dev/leofs/package/leofs/storage/avs/object/0.avs
      active number of objects: 320
