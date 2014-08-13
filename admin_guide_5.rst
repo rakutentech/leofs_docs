@@ -49,7 +49,7 @@ Remove logical deleted objects and meta data and check the current disk usage
 .. index::
     pair: Compaction commands; compact-start-command
 
-compact start <storage-node> (all | <num-of-targets>) [<num-of-compaction-procs>]
+compact-start <storage-node> (all | <num-of-targets>) [<num-of-compaction-procs>]
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Execute to remove unnecessary objects from the node
@@ -77,7 +77,7 @@ compact start <storage-node> (all | <num-of-targets>) [<num-of-compaction-procs>
 .. index::
     pair: Compaction commands; compact-suspend-command
 
-compact suspend <storage-node>
+compact-suspend <storage-node>
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Suspend to execute the compaction
@@ -95,7 +95,7 @@ Suspend to execute the compaction
 .. index::
     pair: Compaction commands; compact-resume-command
 
-compact resume <storage-node>
+compact-resume <storage-node>
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Resume to execute the compaction
@@ -113,7 +113,7 @@ Resume to execute the compaction
     pair: Compaction commands; compact-status-command
 
 
-compact status <storage-node>
+compact-status <storage-node>
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * See the current compaction status
