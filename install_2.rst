@@ -33,7 +33,7 @@ Only the servers running **LeoFS storage nodes** will benefit from using XFS (un
 Start fdisk
 """""""""""""""""
 
-::
+.. code-block:: bash
 
    $ sudo fdisk /dev/sda
 
@@ -83,7 +83,7 @@ Create partition
 Confirm
 """"""""
 
-::
+.. code-block:: bash
 
    $ sudo fdisk /dev/sda
 
@@ -105,10 +105,11 @@ Confirm
    /dev/sda2            1952        2472     4184932+  82  Linux swap / Solaris
    /dev/sda3            2473        8908    51697170   83  Linux
 
+
 Reboot
 """""""
 
-::
+.. code-block:: bash
 
    $ sudo reboot
 
@@ -118,14 +119,14 @@ Format the partition
 * `Reference(EN) <http://www.ibm.com/developerworks/linux/library/l-fs10/index.html>`_
 * `Reference(JP) <http://www.ibm.com/developerworks/jp/linux/library/l-fs10/index.html>`_
 
-::
+.. code-block:: bash
 
    $ sudo mkfs.xfs -d agcount=4 -l size=32m {TARGET_PARTITION}
 
 Modify the "/etc/fstab" file
 """"""""""""""""""""""""""""
 
-::
+.. code-block:: bash
 
    $ sudo vi /etc/fstab
    /dev/sda3   /mnt/xfs   xfs   noatime,nodiratime,osyncisdsync 0 0
@@ -133,7 +134,7 @@ Modify the "/etc/fstab" file
 Mount the partition
 """""""""""""""""""""""""""""""""""""""""""""""
 
-::
+.. code-block:: bash
 
    $ sudo mkdir /mnt/xfs
    $ sudo mount -a
@@ -141,7 +142,7 @@ Mount the partition
 Confirm
 """""""""
 
-::
+.. code-block:: bash
 
    $ df
    Filesystem           1K-blocks      Used Available Use% Mounted on

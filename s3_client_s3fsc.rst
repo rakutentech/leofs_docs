@@ -14,20 +14,20 @@ S3FS-C is a FUSE (File System in User Space) based file system backed by Amazon 
 Install libs for S3FS-C into Ubuntu-12.04
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-::
+.. code-block:: bash
 
-    sudo apt-get install libfuse-dev libcurl4-openssl-dev fuse-utils
+    $ sudo apt-get install libfuse-dev libcurl4-openssl-dev fuse-utils
 
 Install "S3FS-C"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-::
+.. code-block:: bash
 
-    git clone https://github.com/leo-project/s3fs-c.git
-    cd s3fs-c
-    ./configure
-    make
-    sudo make install
+    $ git clone https://github.com/leo-project/s3fs-c.git
+    $ cd s3fs-c
+    $ ./configure
+    $ make
+    $ sudo make install
 
 Modify "/etc/hosts"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -35,22 +35,22 @@ Modify "/etc/hosts"
 * Add a LeoFS domain in ``/etc/hosts``
 * LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`
 
-::
+.. code-block:: bash
 
     $ sudo vi /etc/hosts
 
     ## Add a LeoFS domain ##
-    127.0.0.1 localhost ${BUCKET_NAME}.localhost
+    127.0.0.1 localhost <bucket>.localhost
 
 Create a credential file for S3FS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-::
+.. code-block:: bash
 
     $ vi ~/.passwd-s3fs
 
     ## Set access-key and secret-key ##
-    ${ACCESS_KEY}:${SECRET_KEY}
+    <access-key-id>:<secret-key>
 
     $ chmod 600 ~/.passwd-s3fs
 
@@ -58,7 +58,7 @@ Create a credential file for S3FS
 Mount "LeoFS"
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-::
+.. code-block:: bash
 
-    $ s3fs ${BUCKET_NAME} ${MOUNT_POINT} -o url='http://${END_POINT}:${PORT}'
+    $ s3fs <bucket> <mount-point> -o url='http://<endpoint>:<port>'
 

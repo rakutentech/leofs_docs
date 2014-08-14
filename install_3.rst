@@ -19,7 +19,7 @@ File structure
 Before running make
 """""""""""""""""""
 
-::
+.. code-block:: bash
 
     $ git clone https://github.com/leo-project/leofs.git
 
@@ -40,7 +40,7 @@ Before running make
 After running make
 """"""""""""""""""
 
-::
+.. code-block:: bash
 
     $ cd {LEOFS_SRC}/
     $ make
@@ -90,7 +90,7 @@ After running make
 Building
 ^^^^^^^^^^^^^^^^^
 
-::
+.. code-block:: bash
 
     $ cd leofs/
     $ make

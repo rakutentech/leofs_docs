@@ -17,7 +17,7 @@ Configuration
 
 .. note:: LeoFS' domains are ruled by :ref:`this rule <s3-path-label>`. You need to set 'Endpoint' and 'Port'.
 
-::
+.. code-block:: bash
 
   $ s3cmd --configure
 
