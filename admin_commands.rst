@@ -50,13 +50,13 @@ leofs-adm Command Line
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | **Compaction Commands**                                                                                                                                                                     |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| leofs-adm :ref:`compact-start <compact-start>` <storage-node> (all|<num-of-targets>) | * Execute to remove unnecessary objects from the node                                                |
+| leofs-adm :ref:`compact-start <compact-start>` <storage-node> (all|<num-of-targets>) | * Remove unnecessary objects from the node                                                           |
 | [<num-of-compaction-proc>]                                                           | * ``num-of-targets``: It controls the number of containers in parallel                               |
 |                                                                                      | * ``num-of-compaction-procs``: It controls the number of procs to execute the compaction in parallel |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| leofs-adm :ref:`compact-suspend <compact-suspend>` <storage-node>                    | * Suspend to execute the compaction                                                                  |
+| leofs-adm :ref:`compact-suspend <compact-suspend>` <storage-node>                    | * Suspend the compaction                                                                             |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
-| leofs-adm :ref:`compact-resume <compact-resume>` <storage-node>                      | * Resume to execute the compaction                                                                   |
+| leofs-adm :ref:`compact-resume <compact-resume>` <storage-node>                      | * Resume the compaction                                                                              |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | leofs-adm :ref:`compact-status <compact-status>` <storage-node>                      | * See the current compaction status                                                                  |
 |                                                                                      | * Compaction's status: ``idle``, ``running``, ``suspend``                                            |
