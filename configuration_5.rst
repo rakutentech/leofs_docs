@@ -7,21 +7,20 @@
 .. _leofs-with-nfs-label:
 
 .. index::
-   pair: Configuration; LeoFS with NFS
+   pair: Configuration; Multi data center replication
 
-LeoFS with NFS
-==============
+Multi data center replication
+=============================
 
 .. index::
    pair: NFS; Purpose
 
 Purpose
 -------
-This section is a step by step guide to setting up LeoFS with NFS. By
-following this tutorial you can easily build a LeoFS system with NFS.
+This section is a step by step guide to setting up the multi data center replication.
 
 .. index::
-   pair: NFS; Getting Started
+   pair: Multi data center replication; Getting Started
 
 Getting Started
 ---------------
@@ -32,233 +31,93 @@ Pre-requirement
 .. note:: We have checked this mechanism with CentOS 6.5 and Ubuntu Server 14.04 LTS but we're goinng to investigate other OS such as FreeBSD and SmartOS.
 
 
-- Install NFS client on CentOS 6.5
+LeoFS Manager Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: bash
+Set |leo_manager_conf_1|
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    $ sudo yum install nfs-utils
-
-- Install NFS client on Ubuntu Server 14.04 LTS
-
-.. code-block:: bash
-
-    $ sudo apt-get install nfs-common
-
-Configuration
-~~~~~~~~~~~~~
-
-- Modify |leo_gateway_conf|
-
- -  Set ``protocol`` to ``nfs``
- -  Set ``large_object.chunked_obj_len`` to ``1048576``
-
-.. note:: If you also want to access LeoFS via S3 intereface, you need to start another LeoFS Gateway with setting ``protocol`` to s3.
+If you need to change DC's Id and Cluster's Id, set ``system.dc_id`` and ``cluster_id``
 
 ::
 
-    ## Gateway protocol to use: [s3 | rest | embed | nfs]
-    protocol = nfs
+    ## DC Id
+    system.dc_id = dc_N
 
-    ## Length of a chunked object
-    large_object.chunked_obj_len = 1048576
+    ## Cluster Id
+    system.cluster_id = leofs_N
 
-Start LeoFS as NFS Server with other dependent programs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- `Start LeoFS as usual <http://leo-project.net/leofs/docs/admin_guide_1.html>`_
+Set |leo_manager_conf_2|
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Start rpcbind 
+You need to set RPC-related configuration as follows to be able to communicate each cluster with LeoFS's RPC. Regarding ``rpc.server.listen_port``, which is used by the `join-cluster <admin_guide_9.html#join-cluster>`_ command.
 
-.. code-block:: bash
 
-    $ sudo service rpcbind start
 
-- Create a bucket for NFS with ``leofs-adm``
+::
 
-.. code-block:: bash
+    ## RPC-Server's acceptors
+    rpc.server.acceptors = 16
 
-    $ ./leofs-adm add-bucket test 05236           
-    OK
-    $ ./leofs-adm get-buckets          
-    cluster id   | bucket   | owner       | permissions      | created at                
-    -------------+----------+-------------+------------------+---------------------------
-    leofs_1      | test     | _test_leofs | Me(full_control) | 2014-07-31 10:20:42 +0900
+    ## RPC-Server's listening port number
+    rpc.server.listen_port = 13075
 
+    ## RPC-Server's listening timeout(second)
+    rpc.server.listen_timeout = 5000
 
-- Create a mount point and Mount
+    ## RPC-Client's size of connection pool
+    rpc.client.connection_pool_size = 16
 
-.. code-block:: bash
+    ## RPC-Client's size of connection buffer
+    rpc.client.connection_buffer_size = 16
 
-    $ sudo mkdir /mnt/leofs   
-    $ sudo mount -t nfs -o nolock 127.0.0.1:/test /mnt/leofs
 
-Now you can operate the bucket test in LeoFS as a filesystem via ``/mnt/leofs``.
+LeoFS Storage Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Confirm that NFS works
-~~~~~~~~~~~~~~~~~~~~~~
+Set |leo_storage_conf|
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Create a file
+You need to set RPC-related configuration as follows to be able to communicate each cluster with LeoFS's RPC.
 
-.. code-block:: bash
+::
 
-    $ touch /mnt/leofs/newfile 
-    $ ls -al /mnt/leofs
+    ## RPC-Server's acceptors
+    ## this value must be determinted by following logic
+    ## rpc.server.acceptor need to be larger than
+    ## rpc.client.connection_pool(buffer)_size * "# of storage nodes + # of manager nodes in your cluster"
+    ## The default value is suitable for less than 16 nodes in a cluster
+    rpc.server.acceptors = 128
 
-    drwxrwxrwx. 0 root root 4096 7月 31 10:09 2014 .
-    drwxr-xr-x. 6 root root 4096 7月 11 12:38 2014 ..
-    -rw-rw-rw-  0 root root    0 7月 31 10:25 2014 newfile
+    ## RPC-Server's listening port number
+    rpc.server.listen_port = 13077
 
-- Modify a file 
+    ## RPC-Server's listening timeout(second)
+    rpc.server.listen_timeout = 30000
 
-.. code-block:: bash
-   
-    $ echo "hello world" > /mnt/leofs/newfile
-    $ cat /mnt/leofs/newfile
+    ## RPC-Client's size of connection pool
+    rpc.client.connection_pool_size = 8
 
-    hello world
+    ## RPC-Client's size of connection buffer
+    rpc.client.connection_buffer_size = 8
 
-- Copy a file
+* See Also: |multidc-replication|
 
-.. code-block:: bash
 
-    $ cp /mnt/leofs/newfile /mnt/leofs/newfile.copy 
-    $ ls -al /mnt/leofs
+.. |leo_manager_conf_1| raw:: html
 
-    drwxrwxrwx  0 root root 4096 7月 31 10:09 2014 .
-    drwxr-xr-x. 6 root root 4096 7月 11 12:38 2014 .. 
-    -rw-rw-rw-  0 root root   12 7月 31 10:29 2014 newfile 
-    -rw-rw-rw-  0 root root   12 7月 31 10:31 2014 newfile.copy
-    
-.. code-block:: bash
+   <a href="https://github.com/leo-project/leo_manager/blob/1.1.1/priv/leo_manager_0.conf#L55-L59" target="_blank">leo_manager.conf - DC Id and Cluster Id</a>
 
-    $ ./leofs-adm whereis photo/newfile
-    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
-     del?  |           node           |             ring address             |    size    |   checksum   |  # of chunks   |     clock      |             when
-    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
-           | storage_0@127.0.0.1      | 22f3d93762d31abc5f5704f78edf1691     |        12B |   6f5902ac23 |              0 | 4ffe2d105f1f4  | 2014-07-31 10:29:01 +0900
+.. |leo_manager_conf_2| raw:: html
 
-    $ ./leofs-adm whereis photo/newfile.copy
-    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
-     del?  |           node           |             ring address             |    size    |   checksum   |  # of chunks   |     clock      |             when
-    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
-           | storage_0@127.0.0.1      | d02e1e52d93242d2dcdb98224421a1fb     |        12B |   6f5902ac23 |              0 | 4ffe2d20343a3  | 2014-07-31 10:31:17 +0900
+   <a href="https://github.com/leo-project/leo_manager/blob/1.1.1/priv/leo_manager_0.conf#L140-L153" target="_blank">RPC-related configuration</a>
 
+.. |leo_storage_conf| raw:: html
 
-- Diff files
+   <a href="https://github.com/leo-project/leo_storage/blob/1.1.1/priv/leo_storage.conf#L169-L186" target="_blank">RPC-related configuration</a>
 
-.. code-block:: bash
 
-    $ diff /mnt/leofs/newfile /mnt/leofs/newfile.copy
+.. |multidc-replication| raw:: html
 
-- Remove a file 
-
-.. code-block:: bash
-
-    $ rm /mnt/leofs/newfile 
-    $ ls -al /mnt/leofs
-
-    drwxrwxrwx  0 root root 4096 7月 31 10:09 2014 . 
-    drwxr-xr-x. 6 root root 4096 7月 11 12:38 2014 .. 
-    -rw-rw-rw-  0 root root   12 7月 31 10:31 2014 newfile.copy
-
-.. code-block:: bash
-
-    $ ./leofs-adm whereis photo/newfile
-    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
-     del?  |           node           |             ring address             |    size    |   checksum   |  # of chunks   |     clock      |             when
-    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
-      *    | storage_0@127.0.0.1      | 22f3d93762d31abc5f5704f78edf1691     |         0B |   d41d8cd98f |              0 | 4ffe2e5d9cffe  | 2014-07-31 10:34:50 +0900
-
-
-- Create a directory 
-
-.. code-block:: bash
-
-    $ mkdir -p /mnt/leofs/1/2/3 
-    $ ls -alR /mnt/leofs/1
-
-    /mnt/leofs/1: 
-    drwxrwxrwx 0 root root 4096 7月 31 19:37 2014 .
-    drwxrwxrwx 0 root root 4096 7月 31 10:09 2014 ..
-    drwxrwxrwx 0 root root 4096 7月 31 10:37 2014 2
-
-    /mnt/leofs/1/2: 
-    drwxrwxrwx 0 root root 4096 7月 31 19:37 2014 .
-    drwxrwxrwx 0 root root 4096 7月 31 19:37 2014 .. 
-    drwxrwxrwx 0 root root 4096 7月 31 10:37 2014 3
-
-    /mnt/leofs/1/2/3:
-    drwxrwxrwx 0 root root 4096 7月 31 19:37 2014 .
-    drwxrwxrwx 0 root root 4096 7月 31 19:37 2014 ..
-
-- Create a very large file 
-
-.. code-block:: bash
-
-    # Create a 50M file 
-    $ dd if=/dev/urandom of=/mnt/leofs/1/2/3/largefile bs=1048576 count=50 
-    $ ls -alR /mnt/leofs/1
-
-    drwxrwxrwx 0 root root     4096 7月 31 19:42 2014 .
-    drwxrwxrwx 0 root root     4096 7月 31 19:42 2014 ..
-    -rw-rw-rw- 0 root root 52428800 7月 31 10:42 2014 largefile
-
-.. code-block:: bash
-
-    $ ./leofs-adm whereis photo/1/2/3/largefile
-    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
-     del?  |           node           |             ring address             |    size    |   checksum   |  # of chunks   |     clock      |             when
-    -------+--------------------------+--------------------------------------+------------+--------------+----------------+----------------+----------------------------
-           | storage_0@127.0.0.1      | b7992d2fac981fbd98230a124ac78506     |     51200K |   d41d8cd98f |             10 | 4ffe2f44badd2  | 2014-07-31 10:42:53 +0900
-
-
-- Remove files recursively 
-
-.. code-block:: bash
-
-    $ rm -rf /mnt/leofs/1/
-    $ ls -al /mnt/leofs
-
-    drwxrwxrwx  0 root root 4096 7月 31 10:09 2014 .
-    drwxr-xr-x. 6 root root 4096 7月 11 12:38 2014 ..
-    -rw-rw-rw-  0 root root   12 7月 31 10:31 2014 leofs.copy
-
-And other basic file/directory operations also should work except
-controlling owners/permissions/symbolic links/special files.
-
-
-.. index::
-   pair: NFS; Configuration
-
-Configuration
--------------
-
-You can change the port number the NFS/Mount server use and the number
-of acceptor processes at ``leo_gateway.conf``.
-
-+------------------------+------------------------------------------------------------------------+
-| Property               | Description                                                            |
-+========================+========================================================================+
-| nfs.port               | Port number the NFS server use                                         |
-+------------------------+------------------------------------------------------------------------+
-| nfs.num_of_acceptors   | The number of acceptor processes listening for NFS server connection   |
-+------------------------+------------------------------------------------------------------------+
-| mount.port             | Port number the Mount server use                                       |
-+------------------------+------------------------------------------------------------------------+
-| mount.num_of_acceptors | The number of acceptor processes listening for Mount server connection |
-+------------------------+------------------------------------------------------------------------+
-
-.. index::
-   pair: NFS; Limits
-
-Limits
-------
-
-Since LeoFS NFS implementation is still the alpha version, there are some limitations. The details are described at `LeoFS
-Limits <http://leo-project.net/leofs/docs/faq_2.html#nfs-support>`_
-
-
-
-.. |leo_gateway_conf| raw:: html
-
-   <a href="https://github.com/leo-project/leo_gateway/blob/develop/priv/leo_gateway.conf#L46" target="_blank">leo_gateway.conf</a>
+   <a href="http://leo-project.net/leofs/blog-entry-3.html" target="_blank">Multi Data Center Replication (1st phase)</a>

@@ -28,17 +28,19 @@ Multi Datacenter Replication Operation
 .. index::
     pair: Multi Datacenter replication commands; join-cluster-command
 
-join-cluster <remote-manager-master> <remote-manager-slave>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+join-cluster <remote-manager-master>:<rpc-port> <remote-manager-slave>:<rpc-port>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Begin to communicate between the local cluster and the remote cluster
 
 .. code-block:: bash
 
-    $ leofs-adm join-cluster manager_c2_0@10.1.2.1 manager_c2_1@10.1.2.2
+    $ leofs-adm join-cluster manager_c2_0@10.1.2.1:13075 manager_c2_1@10.1.2.2:13075
     OK
 
 \
+
+* See Also: `Configuration/Multi data center replication <configuration_5.html>`_
 
 .. ### REMOVE-CLUSTER ###
 .. _remove-cluster:
@@ -47,14 +49,14 @@ Begin to communicate between the local cluster and the remote cluster
     pair: Multi Datacenter replication commands; remove-cluster-command
 
 
-remove-cluster <remote-manager-master> <remote-manager-slave>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+remove-cluster <remote-manager-master>:<rpc-port> <remote-manager-slave>:<rpc-port>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Terminate to communicate between the local cluster and the remote cluster
 
 .. code-block:: bash
 
-    $ leofs-adm remove-cluster manager_c2_0@10.1.2.1 manager_c2_1@10.1.2.2
+    $ leofs-adm remove-cluster manager_c2_0@10.1.2.1:13075 manager_c2_1@10.1.2.2:13075
     OK
 
 \

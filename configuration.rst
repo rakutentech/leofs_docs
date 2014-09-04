@@ -8,10 +8,11 @@ Configuration
 =============
 
 .. toctree::
-   :maxdepth: 3
+    :maxdepth: 3
 
-   configuration_1
-   configuration_2
-   configuration_3
-   configuration_4
-   configuration_5
+    configuration_1
+    configuration_2
+    configuration_3
+    configuration_4
+    configuration_5
+    configuration_6
