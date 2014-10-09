@@ -37,7 +37,7 @@ Operations
 
 See Also:
     * `Configuration of Storage nodes <configuration_2.html>`_
-    * `Upgrade your old version LeoFS to v1.0.2 <admin_guide_5.html>`_
+    * `Upgrade your old version LeoFS to v1.1.0 <admin_guide_10.html>`_
     * `The roadmap of LeoFS <faq_1.html#is-there-the-roadmap-of-leofs>`_
 
 ----

@@ -155,3 +155,32 @@ Paths used by `whereis` are ruled by :ref:`this rule <s3-path-label>`
           storage_0@127.0.0.1  207643840133    35409  0             4116193149  1332407492290951  2012-06-29 14:23:31 +0900
 
 \
+
+If you want to retrieve an object whose file-path contains spaces,
+Enclose the file-path with double quotation.
+
+.. code-block:: bash
+
+    $ leofs-adm whereis "leo/fast/storage with space.key"
+    -----------------------------------------------------------------------------------------------------------------------
+     del? node                 ring address    size   # of chunks  checksum    vclock            when
+    -----------------------------------------------------------------------------------------------------------------------
+          storage_1@127.0.0.1  207643840133    35409  0             4116193149  1332407492290951  2012-06-29 14:23:31 +0900
+          storage_0@127.0.0.1  207643840133    35409  0             4116193149  1332407492290951  2012-06-29 14:23:31 +0900
+
+\
+
+If you want to retrieve a chunk object which is part of a large object,
+Append `\n` and the chunk number to the file-path.
+
+.. code-block:: bash
+
+    $ leofs-adm whereis leo/fast/storage.key\n1
+    -----------------------------------------------------------------------------------------------------------------------
+     del? node                 ring address    size   # of chunks  checksum    vclock            when
+    -----------------------------------------------------------------------------------------------------------------------
+          storage_1@127.0.0.1  207643840133    5120K  0             4116193149  1332407492290951  2012-06-29 14:23:31 +0900
+          storage_0@127.0.0.1  207643840133    5120K  0             4116193149  1332407492290951  2012-06-29 14:23:31 +0900
+
+\
+

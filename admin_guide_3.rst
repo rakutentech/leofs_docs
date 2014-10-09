@@ -48,7 +48,7 @@ Remove the storage node in the storage cluster
 
     $ leofs-adm detach storage_0@127.0.0.1
     OK
-    rebalance
+    $ leofs-adm rebalance
     OK
 
 

@@ -177,7 +177,7 @@ Remove the endpoint
 
 .. code-block:: bash
 
-    leofs-adm delete-endpoint leo-project.net
+    $ leofs-adm delete-endpoint leo-project.net
     OK
 
 \

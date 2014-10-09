@@ -58,7 +58,7 @@ mark {
 }
 pre,code,.rst-content tt,kbd,samp {
     /* border-left: 5px solid #327DAD; */
-    border-left: 5px solid #014A78;
+    border-left: 5px solid #0062A3;
     font-family: monospace,serif;
     _font-family: "courier new",monospace;
     font-size: 1em
@@ -3301,7 +3301,7 @@ div[class^='highlight'] pre {
     font-weight: bold;
     position: relative;
     /* background: #327DAD; */
-    background: #014A78;
+    background: #0062A3;
 
     border: none;
     border-bottom: solid 1px #c9c9c9;
@@ -3353,7 +3353,7 @@ div[class^='highlight'] pre {
 .wy-side-nav-search {
     z-index: 200;
     /* background-color: #327DAD; */
-    background-color: #014A78;
+    background-color: #0062A3;
     text-align: center;
     padding: 0.809em;
     display: block;
@@ -3372,7 +3372,7 @@ div[class^='highlight'] pre {
     height: 45px;
     width: 45px;
     /* background-color: #327DAD; */
-    background-color: #014A78;
+    background-color: #0062A3;
     padding: 5px;
     /* border-radius: 100% */
 }
@@ -4002,7 +4002,7 @@ span[id*='MathJax-Span'] {
     left: 0;
     width: 100%;
     font-size: 31px;
-    background-color: #014A78;
+    background-color: #0062A3;
     color: white;
     margin: 0;
     padding: 0;

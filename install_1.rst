@@ -24,7 +24,7 @@ Prepare
 Install required libraries using yum (CentOS 6.5)
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-::
+.. code-block:: bash
 
    $ sudo yum install gcc gcc-c++ glibc-devel make ncurses-devel openssl-devel autoconf \
                       libuuid-devel cmake check check-devel
@@ -37,7 +37,7 @@ Install required libraries using yum (CentOS 6.5)
 Install required libraries using apt-get (Ubuntu Server 12.04 LTS or Higher)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-::
+.. code-block:: bash
 
    $ sudo apt-get install build-essential libtool libncurses5-dev libssl-dev cmake check
 

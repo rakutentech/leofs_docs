@@ -25,10 +25,10 @@ Upgrade flow diagram
 
 \
 
-.. image:: _static/images/leofs-upgrade-flow-diagram.png
+.. image:: _static/images/leofs-upgrade-flow-diagram.jpg
    :width: 780px
 
-* `The diagram only <http://www.leofs.org/docs/_images/leofs-upgrade-flow-diagram.png>`_
+* `The diagram only <http://www.leofs.org/docs/_images/leofs-upgrade-flow-diagram.jpg>`_
 
 \
 
