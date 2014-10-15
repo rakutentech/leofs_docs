@@ -175,7 +175,7 @@ This section describes the process of adding and removing nodes in a LeoFS Stora
 LeoFS Gateway Access-log Format (v1.0.0-pre3 later)
 ---------------------------------------------------
 
-LeoFS-Gateway is able to output access-log. If you would like to use this option, you can check and set :ref:`the configuration <conf_gateway_label>`.
+LeoFS-Gateway is able to output access-log. If you would like to use this option, you can check and set :ref:`LeoFS Gateway configuration <conf_gateway_label>`.
 
 Sample
 ^^^^^^
@@ -228,10 +228,10 @@ Format
 LeoFS Storage Data Diagnosis log Format (v1.1.5 later)
 -------------------------------------------------------
 
-LeoFS-Storage is able to diagnose the data. If you would like to use this option, you can check and set :ref:`the configuration <conf_storage_label>`.
+LeoFS-Storage is able to diagnose the data. If you would like to use this option, you can check and set :ref:`LeoFS Storage configuration <conf_storage_label>`.
 
-Sample
-^^^^^^
+Sample - List of files
+^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
@@ -244,6 +244,10 @@ Sample
     38658   57520977797167422772945547576980778561    photo/leo_rpc/ebin/leo_rpc_client_utils.beam                     0       2576        1413348057512261   2014-10-15 13:40:57 +0900   0
     69506   187294034498591995039607573685274229706   photo/leo_backend_db/src/leo_backend_db_server.erl               0       13911       1413348068031188   2014-10-15 13:41:08 +0900   0
     83603   316467020376888598364250682951088839795   photo/leo_backend_db/test/leo_backend_db_api_prop.erl            0       3507        1413348068052219   2014-10-15 13:41:08 +0900   1
+
+
+Format - List of files
+^^^^^^^^^^^^^^^^^^^^^^
 
 .. note:: The format of the data diagnosis log is **Tab Separated Values**.
 
@@ -266,3 +270,92 @@ Sample
 +---------------+------------------------------------------------------------+
 | 8             | Removed file?                                              |
 +---------------+------------------------------------------------------------+
+
+
+Sample - Report of a data diagnosis / data compaction
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: erlang
+
+    {file_path,"/home/yosuke/dev/leo/test/leofs-1.1.5/package/leo_storage/avs/object/0.avs"}.
+    {avs_ver,<<"LeoFS AVS-2.4">>}.
+    {num_of_active_objs,9}.
+    {size_of_active_objs,52518}.
+    {total_num_of_objs,9}.
+    {total_size_of_objs,52518}.
+    {start_datetime,"2014-10-15 14:21:31 +0900"}.
+    {end_datetime,"2014-10-15 14:21:31 +0900"}.
+    {errors,[]}.
+    {duration,0}.
+    {result,success}.
+
+
+Format - Report of a data diagnosis / data compaction
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. note:: The format of the data diagnosis/compaction report is **Erlang Term**.
+
++--------------------+------------------------------------------------------------+
+| Element            | Description                                                |
++====================+============================================================+
+| file_path          | AVS-file path                                              |
++--------------------+------------------------------------------------------------+
+| avs_ver            | AVS-file version                                           |
++--------------------+------------------------------------------------------------+
+| num_of_active_obj  | Number of active objects                                   |
++--------------------+------------------------------------------------------------+
+| size_of_active_obj | Summary of size of active objects                          |
++--------------------+------------------------------------------------------------+
+| total_num_of_objs  | Total number of objects                                    |
++--------------------+------------------------------------------------------------+
+| total_size_of_objs | Total size of objects                                      |
++--------------------+------------------------------------------------------------+
+| start_datetime     | Data diagnosis/compaciton start datetime                   |
++--------------------+------------------------------------------------------------+
+| end_datetime       | Data diagnosis/compaciton end datetime                     |
++--------------------+------------------------------------------------------------+
+| duration           | Data diagnosis/compaciton duration time(second)            |
++--------------------+------------------------------------------------------------+
+| errors             | Errors                                                     |
++--------------------+------------------------------------------------------------+
+| result             | Result of data diagnosis/compaciton: [success|failure]     |
++--------------------+------------------------------------------------------------+
+
+
+Diagnosis Log Dir
+^^^^^^^^^^^^^^^^^
+
+.. note:: The data diagnosis log is assigned at **LeoFS Storage's data directory** - :ref:`LeoFS Storage configuration <conf_storage_label>`.
+
+::
+
+    leo_storage_0/avs/log/
+    |-- [ 102 Oct 15 14:00]  leo_object_storage_0 -> /home/leofs/dev/leofs-1.1.5/package/leo_storage_0/avs/log/leo_object_storage_0.20141015.14.2
+    |-- [1.3K Oct 15 13:53]  leo_object_storage_0.20141015.13.1
+    |-- [1.3K Oct 15 13:56]  leo_object_storage_0.20141015.13.2
+    |-- [1.3K Oct 15 13:58]  leo_object_storage_0.20141015.13.3
+    |-- [1.3K Oct 15 14:00]  leo_object_storage_0.20141015.13.4
+    |-- [1.3K Oct 15 14:00]  leo_object_storage_0.20141015.14.1
+    |-- [   0 Oct 15 14:00]  leo_object_storage_0.20141015.14.2
+    |-- [ 376 Oct 15 13:45]  leo_object_storage_0.report.63580567518
+    |-- [ 374 Oct 15 13:50]  leo_object_storage_0.report.63580567830
+    |-- [ 362 Oct 15 13:53]  leo_object_storage_0.report.63580568032
+    |-- [ 362 Oct 15 13:56]  leo_object_storage_0.report.63580568197
+    |-- [ 362 Oct 15 13:58]  leo_object_storage_0.report.63580568300
+    |-- [ 362 Oct 15 14:00]  leo_object_storage_0.report.63580568416
+    |-- [ 362 Oct 15 14:00]  leo_object_storage_0.report.63580568445
+    .
+    .
+    .
+
+Diagnosis Log Files
+^^^^^^^^^^^^^^^^^^^
+
++--------------------------------------------------+-----------------------------+
+| Log File                                         | Description                 |
++==================================================+=============================+
+| leo_object_storage_<avs-num>.<date>.<hour>.<seq> | List of files               |
++--------------------------------------------------+-----------------------------+
+| leo_object_storage_<avs-num>.report.<timestamp>  | Report of a data diagnosis  |
++--------------------------------------------------+-----------------------------+
+
