@@ -11,14 +11,14 @@ System Maintenance
 ==================
 
 .. index::
-    pair: System maintenance; Upgrade old version to 1.1.0
+    pair: System maintenance; Upgrade old version to 1.1.5
 
 \
 
-Upgrade your old version LeoFS to v1.1.0
+Upgrade your old version LeoFS to v1.1.5
 ----------------------------------------
 
-This section describes the way of replacement of old LeoFS to v1.1.0
+This section describes the way of replacement of old LeoFS to v1.1.5
 
 Upgrade flow diagram
 ^^^^^^^^^^^^^^^^^^^^
@@ -183,7 +183,7 @@ Sample
 ::
 
     --------+-------+--------------------+----------+-------+---------------------------------------+-----------------------+----------
-    Method  | Bucket| Path               |Child Num |  Size | Timestamp                             | Unix Time             | Response
+    Method  | Bucket| Path               |Child Num |  Size | Timestamp                             | Unixtime              | Response
     --------+-------+--------------------+----------|-------+---------------------------------------+-----------------------+----------
     [HEAD]   photo   photo/1              0          0       2013-10-18 13:28:56.148269 +0900        1381206536148320        500
     [HEAD]   photo   photo/1              0          0       2013-10-18 13:28:56.465670 +0900        1381206536465735        404
@@ -219,3 +219,50 @@ Format
 | 8             | Response (HTTP Status Code)                                |
 +---------------+------------------------------------------------------------+
 
+
+\
+
+.. index::
+    pair: System maintenance; LeoFS Storage data-diagnosis-log format
+
+LeoFS Storage Data Diagnosis log Format (v1.1.5 later)
+-------------------------------------------------------
+
+LeoFS-Storage is able to diagnose the data. If you would like to use this option, you can check and set :ref:`the configuration <conf_storage_label>`.
+
+Sample
+^^^^^^
+
+::
+
+    ------+------------------------------------------+------------------------------------------------------------+-----------+------------+------------------+--------------------------+----
+    Offset| RING's address-id                        | Filename                                                   | Child num | File Size  | Unixtime         | Localtime                |del?
+    ------+------------------------------------------+------------------------------------------------------------+-----------+------------+------------------+--------------------------+----
+    194     296754181484029444656944009564610621293   photo/leo_redundant_manager/Makefile                             0       2034        1413348050768344   2014-10-15 13:40:50 +0900   0
+    2400    185993533055981727582172380494809056426   photo/leo_redundant_manager/ebin/leo_redundant_manager.beam      0       24396       1413348050869454   2014-10-15 13:40:50 +0900   0
+    38446   53208912738248114804281793572563205919    photo/leo_rpc/.git/refs/remotes/origin/HEAD                      0       33          1413348057441546   2014-10-15 13:40:57 +0900   0
+    38658   57520977797167422772945547576980778561    photo/leo_rpc/ebin/leo_rpc_client_utils.beam                     0       2576        1413348057512261   2014-10-15 13:40:57 +0900   0
+    69506   187294034498591995039607573685274229706   photo/leo_backend_db/src/leo_backend_db_server.erl               0       13911       1413348068031188   2014-10-15 13:41:08 +0900   0
+    83603   316467020376888598364250682951088839795   photo/leo_backend_db/test/leo_backend_db_api_prop.erl            0       3507        1413348068052219   2014-10-15 13:41:08 +0900   1
+
+.. note:: The format of the data diagnosis log is **Tab Separated Values**.
+
++---------------+------------------------------------------------------------+
+| Column Number | Description                                                |
++===============+============================================================+
+| 1             | Offset of the AVS-file                                     |
++---------------+------------------------------------------------------------+
+| 2             | RING's address id (routing-table)                          |
++---------------+------------------------------------------------------------+
+| 3             | Filename                                                   |
++---------------+------------------------------------------------------------+
+| 4             | Child number of a file                                     |
++---------------+------------------------------------------------------------+
+| 5             | File Size (byte)                                           |
++---------------+------------------------------------------------------------+
+| 6             | Timestamp - unixtime                                       |
++---------------+------------------------------------------------------------+
+| 7             | Timestamp - localtime                                      |
++---------------+------------------------------------------------------------+
+| 8             | Removed file?                                              |
++---------------+------------------------------------------------------------+
