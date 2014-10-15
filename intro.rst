@@ -23,7 +23,7 @@ LeoFS consists of 3 applications - `LeoFS Storage <leofs-storage-detail.html>`_,
 
 `LeoFS Gateway <leofs-gateway-detail.html>`_ handles http-request and http-response from any clients when using REST-API OR S3-API. Also, it is already built in the object-cache mechanism *(memory and disk cache)*.
 
-`LeoFS Storage <leofs-storage-detail.html>`_ handles GET, PUT and DELETE objects as well as metadata. Also, it has *replicator*, *recoverer* and *queueing mechanism* in order to keep running a storage node and realise eventualy consistency.
+`LeoFS Storage <leofs-storage-detail.html>`_ handles GET, PUT and DELETE objects as well as metadata. Also, it has *replicator*, *recoverer* and *queueing mechanism* in order to keep running a storage node and realise eventual consistency.
 
 `LeoFS Manager <leofs-manager-detail.html>`_ always monitors *LeoFS Gateway* and *LeoFS Storage* nodes. The main monitoring status are *Node status* and *RING's checksum* in order to realise to keep high availability and keep data consistency.
 
