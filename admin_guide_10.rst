@@ -222,6 +222,8 @@ Format
 
 \
 
+.. _data_diagnosis_log:
+
 .. index::
     pair: System maintenance; LeoFS Storage data-diagnosis-log format
 
@@ -229,6 +231,8 @@ LeoFS Storage Data Diagnosis log Format (v1.1.5 later)
 -------------------------------------------------------
 
 LeoFS-Storage is able to diagnose the data. If you would like to use this option, you can check and set :ref:`LeoFS Storage configuration <conf_storage_label>`.
+
+* See also: :ref:`diagnose-start command <diagnose-start>`
 
 Sample - List of files
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -245,6 +249,7 @@ Sample - List of files
     69506   187294034498591995039607573685274229706   photo/leo_backend_db/src/leo_backend_db_server.erl               0       13911       1413348068031188   2014-10-15 13:41:08 +0900   0
     83603   316467020376888598364250682951088839795   photo/leo_backend_db/test/leo_backend_db_api_prop.erl            0       3507        1413348068052219   2014-10-15 13:41:08 +0900   1
 
+\
 
 Format - List of files
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -271,6 +276,7 @@ Format - List of files
 | 8             | Removed file?                                              |
 +---------------+------------------------------------------------------------+
 
+\
 
 Sample - Report of a data diagnosis / data compaction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

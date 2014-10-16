@@ -117,9 +117,7 @@ LeoFS supports a part of |measurement_units| which can be used in |Nginx| config
 List of verified CDN services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-LeoFS development team tested the following CDN services with LeoFS. But
-other CDN services also should work. If you have some troubles, please
-let us know.
+LeoFS development team tested the following CDN services with LeoFS. But other CDN services also should work. If you have some troubles, please let us know.
 
 -  |aws_cloudfront|
 
