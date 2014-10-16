@@ -47,7 +47,7 @@ How to write *http_custom_header.conf*
 
 The syntax is a subset of a |Nginx| configuration. You can use location contexts to specify TTL and add any headers by the path like this.
 
-.. code:: nginx
+::
 
     location bucket/static {
         expires    12h;
@@ -60,7 +60,7 @@ thare is a file at ``bucket/static/path_to_file``, if a user browse that
 file via the CDN, the CDN will receive a response from the Origin(LeoFS)
 with customized http headers like this.
 
-.. code:: mime
+::
 
     Cache-Control: public, max-age=43200;
     X-OriginalHeader: OriginalValue;
@@ -78,8 +78,7 @@ Use cases
 
 -  Specify TTL by the bucket
 
-.. code:: nginx
-
+::
 
     location bucket1 {
         expires    1h;
