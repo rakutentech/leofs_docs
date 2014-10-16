@@ -2864,12 +2864,14 @@ code,.rst-content tt {
     white-space: nowrap;
     max-width: 100%;
     background: #fff;
-    border: solid 1px #e1e4e5;
-    color: #c7254e;
-    font-size: 80%;
+    border: solid 0px;
+    /* border: solid 1px #e1e4e5; */
+    /* color: #c7254e; */
+    background: #e3e3e3;
+    font-size: 90%;
     padding: 3px 3px 3px 3px;
     font-family: Consolas,"Andale Mono WT","Andale Mono","Lucida Console","Lucida Sans Typewriter","DejaVu Sans Mono","Bitstream Vera Sans Mono","Liberation Mono","Nimbus Mono L",Monaco,"Courier New",Courier,monospace;
-    color: #e74c3c;
+    color: #BA2B9D;
     overflow-x: auto
 }
 code.code-large,.rst-content tt.code-large {
