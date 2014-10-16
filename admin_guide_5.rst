@@ -28,6 +28,8 @@ Remove logical deleted objects and meta data and check the current disk usage
 | leofs-adm :ref:`compact-status <compact-status>` <storage-node>                      | * See the current compaction status                                                                  |
 |                                                                                      | * Compaction's status: ``idle``, ``running``, ``suspend``                                            |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`diagnose-start <diagnose-start>` <storage-node>                      | * ``v1.1.5-`` Diagnose data of a target storage node                                                 |
++--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | **Disk Usage**                                                                                                                                                                              |
 +--------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+
 | leofs-adm :ref:`du <du>` <storage-node>                                              | * See the current disk usages                                                                        |
@@ -128,6 +130,24 @@ compact-status <storage-node>
     # of pending targets: 5
     # of ongoing targets: 3
     # of out of targets : 56
+
+\
+
+.. _diagnose-start:
+
+.. index::
+    pair: Compaction commands; diagnose-start-command
+
+diagnose-start <storage-node>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* ``v1.1.5-`` Diagnose data of a target storage node
+* See also: :ref:`LeoFS Storage data-diagnosis-log format <data_diagnosis_log>`
+
+.. code-block:: bash
+
+    $ leofs-adm diagnose-start storage_0@127.0.0.1
+    OK
 
 \
 
