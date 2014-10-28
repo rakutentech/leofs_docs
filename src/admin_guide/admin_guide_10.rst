@@ -25,7 +25,7 @@ Upgrade flow diagram
 
 \
 
-.. image:: _static/images/leofs-upgrade-flow-diagram.jpg
+.. image:: ../../_static/images/leofs-upgrade-flow-diagram.jpg
    :width: 780px
 
 * `The diagram only <http://www.leofs.org/docs/_images/leofs-upgrade-flow-diagram.jpg>`_
@@ -158,13 +158,13 @@ This section describes the process of adding and removing nodes in a LeoFS Stora
     * After that, you need to execute the :ref:`rebalance <rebalance-command>` command in the Manager to actually remove the node from the storage cluster.
 
 
-.. image:: _static/images/leofs-order-of-attach.png
+.. image:: ../../_static/images/leofs-order-of-attach.png
    :width: 640px
 
 .. index::
    detach-storage
 
-.. image:: _static/images/leofs-order-of-detach.png
+.. image:: ../../_static/images/leofs-order-of-detach.png
    :width: 640px
 
 \

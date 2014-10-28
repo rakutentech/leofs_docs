@@ -12,7 +12,7 @@ LeoFS Gateway
 
 *LeoFS Gateway* consists of the fast HTTP-Server - |Cowboy|, the API handler and the cache mecanism. It provides `the REST-API <rest_api.html>`_ and |S3API|. You're able to easily access LeoFS with S3-Clients such as |s3cmd|, |DragonDisk|, program languages - |Erlang|, |Java|, |Ruby|, |Python|, |Go| and so on.
 
-.. image:: _static/images/leofs-architecture.002.jpg
+.. image:: ../../_static/images/leofs-architecture.002.jpg
    :width: 760px
 
 A client requests an object or a bucket operation to *LeoFS Gateway* then *LeoFS Gateway* requests the message of operation to a storage-node.

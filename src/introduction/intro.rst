@@ -15,7 +15,7 @@ LeoFS provides **High Reliability** thanks to its great design on top of the Erl
 
 LeoFS provides **High Scalability**. Adding and removing nodes is simple and quick, allowing you to react swiftly when your needs change. A LeoFS cluster can be thought as elastic storage that you can stretch as much and as often as you need.
 
-.. image:: _static/images/leofs-architecture.001.jpg
+.. image:: ../../_static/images/leofs-architecture.001.jpg
    :width: 760px
 
 

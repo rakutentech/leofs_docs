@@ -110,12 +110,12 @@ Your Credentials
 
 * You can confirm your credentials by using the ``Security Credentials`` menu on the top right of the screen.
 
-.. image:: _static/screenshots/leofs_console/userinfo_0.png
+.. image:: ../../_static/screenshots/leofs_console/userinfo_0.png
    :width: 720px
 
 \
 
-.. image:: _static/screenshots/leofs_console/userinfo_1.png
+.. image:: ../../_static/screenshots/leofs_console/userinfo_1.png
    :width: 720px
 
 
@@ -126,7 +126,7 @@ Bucket Status View
     * You can create new buckets.
     * ``Deletion of a bucket`` is planned to be supported from ``LeoCenter v0.4.2``.
 
-.. image:: _static/screenshots/leofs_console/bucket_status_0.png
+.. image:: ../../_static/screenshots/leofs_console/bucket_status_0.png
    :width: 720px
 
 
@@ -138,21 +138,21 @@ Node Status View
 
 \
 
-.. image:: _static/screenshots/leofs_console/nodestatus_0.png
+.. image:: ../../_static/screenshots/leofs_console/nodestatus_0.png
    :width: 720px
 
 * Group by status View:
 
 \
 
-.. image:: _static/screenshots/leofs_console/nodestatus_2.png
+.. image:: ../../_static/screenshots/leofs_console/nodestatus_2.png
    :width: 720px
 
 * Administrators can use the ``Change Status button`` to suspend, resume or detach storage nodes.
 
 \
 
-.. image:: _static/screenshots/leofs_console/nodestatus_3.png
+.. image:: ../../_static/screenshots/leofs_console/nodestatus_3.png
    :width: 720px
 
 \
@@ -175,10 +175,10 @@ Table - Changeable Status
 | |stop| stop           | detach                     |
 +-----------------------+----------------------------+
 
-.. |running| image:: _static/images/leofs-console-icons/available.png
-.. |suspend| image:: _static/images/leofs-console-icons/warn.png
-.. |restarted| image:: _static/images/leofs-console-icons/add.png
-.. |stop| image:: _static/images/leofs-console-icons/fire.png
+.. |running| image:: ../../_static/images/leofs-console-icons/available.png
+.. |suspend| image:: ../../_static/images/leofs-console-icons/warn.png
+.. |restarted| image:: ../../_static/images/leofs-console-icons/add.png
+.. |stop| image:: ../../_static/images/leofs-console-icons/fire.png
 
 \
 
@@ -190,7 +190,7 @@ Re balancing the storage cluster
 
 \
 
-.. image:: _static/screenshots/leofs_console/nodestatus_rebalance_0.png
+.. image:: ../../_static/screenshots/leofs_console/nodestatus_rebalance_0.png
    :width: 720px
 
 
@@ -204,7 +204,7 @@ System Conf View
 * Overview of the configuration of LeoFS
 * Please see :ref:`LeoFS’ system-configuration <system-configuration-label>`
 
-.. image:: _static/screenshots/leofs_console/admintools_system_conf.png
+.. image:: ../../_static/screenshots/leofs_console/admintools_system_conf.png
    :width: 720px
 
 
@@ -215,7 +215,7 @@ Users View
     * You can create and delete users
     * You can change an user's role using the ``Update Role button``
 
-.. image:: _static/screenshots/leofs_console/admintools_users.png
+.. image:: ../../_static/screenshots/leofs_console/admintools_users.png
    :width: 720px
 
 Buckets View
@@ -224,7 +224,7 @@ Buckets View
 * Lists the registered buckets, per owner
     * You can create new buckets
 
-.. image:: _static/screenshots/leofs_console/admintools_buckets.png
+.. image:: ../../_static/screenshots/leofs_console/admintools_buckets.png
    :width: 720px
 
 Endpoints View
@@ -233,7 +233,7 @@ Endpoints View
 * List of registered endpoints
     * You can create and delete endpoints
 
-.. image:: _static/screenshots/leofs_console/admintools_endpoints.png
+.. image:: ../../_static/screenshots/leofs_console/admintools_endpoints.png
    :width: 720px
 
 

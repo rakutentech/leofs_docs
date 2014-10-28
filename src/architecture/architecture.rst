@@ -11,7 +11,7 @@ We're really focused on is **High Availability**, **High Scalability** and **Hig
 
 We really succeeded in designing and implementing LeoFS as simple as possible. LeoFS consists of 3 core components - `LeoFS Gateway <leofs-gateway-detail.html>`_, `LeoFS Storage <leofs-storage-detail.html>`_ and `LeoFS Manager <leofs-manager-detail.html>`_. The role of each component is clearly defined.
 
-.. image:: _static/images/leofs-architecture.001.jpg
+.. image:: ../../_static/images/leofs-architecture.001.jpg
    :width: 760px
 
 Also, what we carefully desined LeoFS is 3 things:

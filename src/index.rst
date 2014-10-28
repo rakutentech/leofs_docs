@@ -46,16 +46,16 @@ LeoFS aims to provide all of 3-HIGHs as follow:
 .. toctree::
    :hidden:
 
-   intro
-   getting_started
-   install
-   configuration
-   admin_guide
-   architecture
-   usage
-   rest_api
-   s3_api
-   s3_client
-   benchmark
-   leo_center
-   faq
+   introduction/intro
+   getting_started/getting_started
+   installation/install
+   configuration/configuration
+   admin_guide/admin_guide
+   architecture/architecture
+   usecase/usage
+   rest_api/rest_api
+   s3api_interface/s3_api
+   s3api_client/s3_client
+   benchmark/benchmark
+   leo_center/leo_center
+   faq/faq
