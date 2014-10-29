@@ -23,6 +23,9 @@ Features
 See Also:
     * `Amazon S3 API and Interface <s3_api.html>`_
     * `Configuration of LeoFS Gateway nodes <configuration_3.html>`_
+    * |ISSUE_177|
+    * |ISSUE_190|
+
 
 ----
 
@@ -79,5 +82,13 @@ See Also:
 .. |ISSUE_198| raw:: html
 
    <a href="https://github.com/leo-project/leofs/issues/198" target="_blank">NFS R/W transfer block size is limited up to 1MB</a>
+
+.. |ISSUE_177| raw:: html
+
+   <a href="https://github.com/leo-project/leofs/issues/177" target="_blank">Respond an incorrect MD5 of an large object</a>
+
+.. |ISSUE_190| raw:: html
+
+   <a href="https://github.com/leo-project/leofs/issues/190" target="_blank">Multipart uploads of large files produces partially corrupted data when upload chunk size</a>
 
 
