@@ -4,7 +4,7 @@
 .. http://leo-project.net/
 .. =========================================================
 
-LeoFS v1.1 Manual
+LeoFS v1.2 Manual
 =================
 
 **LeoFS** is a highly available, distributed, eventually consistent object/blob store. If you are searching a storage system that is able to store huge amount and various kind of files such as photo, movie, log data and so on, LeoFS is suitable for that.
