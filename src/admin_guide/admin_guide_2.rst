@@ -68,67 +68,132 @@ Retrieve status of the specified node
 .. code-block:: bash
 
     $ leofs-adm status storage_0@127.0.0.1
-    [config]
-                version : 0.14.1
-          obj-container : [[{path,"./avs"},{num_of_containers,64}]]
-                log dir : ./log
+    [config-1: basic]
+    --------------------------------+------------------
+                            version | 1.2.0
+                   number of vnodes | 168
+                      group level-1 |   
+                      group level-2 | 
+                object container(s) | [[{path,"./avs"},{num_of_containers,8}]]
+                            log dir | ./log/erlang
+    --------------------------------+------------------
+
+    [config-2: watchdog]
+    --------------------------------+------------------
+     rex  - watch interval(sec)     | 5
+     rex  - threshold mem capacity  | 33554432
+    --------------------------------+------------------
+     cpu  - watchdog enabled        | disabled
+     cpu  - watch interval(sec)     | 5
+     cpu  - threshold cpu load avg  | 1.5
+     cpu  - threshold cpu util(%)   | 100
+    --------------------------------+------------------
+      io  - watchdog enabled        | disabled
+      io  - watch interval(sec)     | 1
+      io  - threshold input size/s  | 134217728
+      io  - threshold output size/s | 134217728
+    --------------------------------+------------------
+     disk - watchdog enabled        | disabled
+     disk - watch interval(sec)     | 1
+     disk - threshold disk use(%)   | 85
+     disk - threshold disk util(%)  | 95
+    --------------------------------+------------------
+
     [status-1: ring]
-      ring state (cur)  : 64212f2d
-      ring state (prev) : 64212f2d
+    --------------------------------+------------------
+                  ring state (cur)  | c8ab8e21
+                  ring state (prev) | c8ab8e21
+    --------------------------------+------------------
+
     [status-2: erlang-vm]
-             vm version : 5.9.3.1
-        total mem usage : 30886632
-       system mem usage : 12774309
-        procs mem usage : 18178027
-          ets mem usage : 1154464
-                  procs : 326/1048576
-            kernel_poll : true
-       thread_pool_size : 32
+    --------------------------------+------------------
+                         vm version | 5.10.4
+                    total mem usage | 36080472
+                   system mem usage | 20999568
+                    procs mem usage | 15126936
+                      ets mem usage | 5031968
+                              procs | 410/1048576
+                        kernel_poll | true
+                   thread_pool_size | 32
+    --------------------------------+------------------
+
     [status-3: # of msgs]
-       replication msgs : 0
-        vnode-sync msgs : 0
-         rebalance msgs : 0
+    --------------------------------+------------------
+                   replication msgs | 0
+                    vnode-sync msgs | 0
+                     rebalance msgs | 0
+    --------------------------------+------------------
 
 
     $ leofs-adm status gateway_0@127.0.0.1
-    [config-1]
-                          version : 0.14.1
-                          log dir : ./log
-    [config-2]
-      -- http-server-related --
-              using api [s3|rest] : s3
-                   listening port : 8080
-               listening ssl port : 8443
-                   # of_acceptors : 0
-      -- cache-related --
-          http cache [true|false] : false
-               # of cache_workers : 128
-                     cache expire : 300
-            cache max content len : 1048576
-               ram cache capacity : 1073741824
-           disc cache capacity    : 0
-           disc cache threshold   : 1048576
-           disc cache data dir    : ./cache/data
-           disc cache journal dir : ./cache/journal
-      -- large-object-related --
-            max # of chunked objs : 1000
-                max object length : 524288000
-            chunked object length : 5242880
-     threshold chunked obj length : 5767168
+    [config-1: basic]
+    -------------------------------+------------------
+     basic
+    -------------------------------+------------------
+                           version | 1.2.0
+                    using protocol | s3
+                           log dir | ./log/erlang
+    -------------------------------+------------------
+     http-server-related for REST/S3 API
+    -------------------------------+------------------
+                    listening port | 8080
+                listening ssl port | 8443
+                    # of_acceptors | 128
+    -------------------------------+------------------
+     cache-related
+    -------------------------------+------------------
+           http cache [true|false] | false
+                # of cache_workers | 16
+                      cache expire | 300
+             cache max content len | 1048576
+                ram cache capacity | 268435456
+            disk cache capacity    | 524288000
+            disk cache threshold   | 1048576
+            disk cache data dir    | ./cache/data
+            disk cache journal dir | ./cache/journal
+    -------------------------------+------------------
+     large-object-related
+    -------------------------------+------------------
+               max # of chunk objs | 1000
+               chunk object length | 5242880
+                 max object length | 5242880000
+         reading  chunk obj length | 5242880
+         threshold of chunk length | 5767168
+    -------------------------------+------------------
 
-     [status-1: ring]
-                ring state (cur)  : 64212f2d
-                ring state (prev) : 64212f2d
+    [config-2: watchdog]
+    -------------------------------+------------------
+     rex - watch interval(sec)     | 5
+     rex - threshold mem capacity  | 33554432
+    -------------------------------+------------------
+     cpu - watchdog eanbled        | disabled
+     cpu - watch interval(sec)     | 5
+     cpu - threshold cpu load avg  | 2
+     cpu - threshold cpu util(%)   | 100
+    -------------------------------+------------------
+      io - watchdog enabled        | disabled
+      io - watch interval(sec)     | 5
+      io - threshold input size/s  | 134217728
+      io - threshold output size/s | 134217728
+    -------------------------------+------------------
+
+    [status-1: ring]
+    -------------------------------+------------------
+                 ring state (cur)  | c8ab8e21
+                 ring state (prev) | c8ab8e21
+    -------------------------------+------------------
 
     [status-2: erlang-vm]
-                       vm version : 5.9.3.1
-                  total mem usage : 48095776
-                 system mem usage : 34839664
-                  procs mem usage : 13261128
-                    ets mem usage : 1195144
-                            procs : 504/1048576
-                      kernel_poll : true
-                 thread_pool_size : 32
+    -------------------------------+------------------
+                        vm version | 5.10.4
+                   total mem usage | 60515880
+                  system mem usage | 45586112
+                   procs mem usage | 14956896
+                     ets mem usage | 5491896
+                             procs | 463/1048576
+                       kernel_poll | true
+                  thread_pool_size | 32
+    -------------------------------+------------------
 
 \
 

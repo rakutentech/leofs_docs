@@ -7,8 +7,8 @@
 .. index::
     CDN Integration
 
-CDN Integration
-===============
+CDN Integration [1.2.0-]
+========================
 
 .. index::
     pair: CDN Integration; How to integrate LeoFS with CDN
