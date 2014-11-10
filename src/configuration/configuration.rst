@@ -4,22 +4,16 @@
 .. http://leo-project.net/
 .. =========================================================
 
-LeoFS Contents
-==============
+Configuration
+=============
 
 .. toctree::
-   :maxdepth: 3
+    :maxdepth: 3
 
-   intro
-   getting_started
-   install
-   configuration
-   admin_guide
-   architecture
-   usage
-   rest_api
-   s3_api
-   s3_client
-   benchmark
-   leo_center
-   faq
+    configuration_1
+    configuration_2
+    configuration_3
+    configuration_4
+    configuration_5
+    configuration_6
+    configuration_7

@@ -7,7 +7,7 @@
 Goals
 ================================
 
-.. image:: _static/images/leofs-architecture.008.jpg
+.. image:: ../../_static/images/leofs-architecture.008.jpg
    :width: 640px
 
 * HIGH Reliability

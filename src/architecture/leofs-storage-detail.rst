@@ -22,7 +22,7 @@ On the other hand, in case of a read operation, *LeoFS Gateway* requests a LeoFS
 If the LeoFS Storage node finds inconsistency of an object, it will be recovered with the backend process. The object eventually keep consistensy with their functions.
 
 
-.. image:: _static/images/leofs-architecture.003.jpg
+.. image:: ../../_static/images/leofs-architecture.003.jpg
    :width: 760px
 
 
@@ -37,7 +37,7 @@ LeoFS's object consists of 3 layers which are **metadata**, **needle** and **obj
     * This format is robust and high performance because effect of local file system is just a little part.
     * LeoFS Storage is necessary to GC - the **compaction** mechanism in order to remove unnecessary objects from the object container.
 
-.. image:: _static/images/leofs-architecture.005.jpg
+.. image:: ../../_static/images/leofs-architecture.005.jpg
    :width: 760px
 
 
@@ -53,7 +53,7 @@ In case of a write operation, a large size object is divided to plural objects a
 On the other hand, In case of READ of a large object, first, *LeoFS Gateway* retrieves a metadata of a requested object from a client. Then if it is a large size object, *LeoFS Gateway* retrieves the chunked objects in order of the chunk object number from the LeoFS Storage cluster. Finally, *LeoFS Gateway* responds the objects to the client.
 
 
-.. image:: _static/images/leofs-architecture.006.jpg
+.. image:: ../../_static/images/leofs-architecture.006.jpg
    :width: 760px
 
 .. |eventualy_consistency| raw:: html

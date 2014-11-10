@@ -100,7 +100,7 @@ We've been mainly focusing on **High Availability**, **High Scalability** and **
 LeoFS consists of 3 core components - `LeoFS Gateway <leofs-gateway-detail.html>`_, `Storage <leofs-storage-detail.html>`_ and `Manager <leofs-manager-detail.html>`_. The role of each component is clearly defined.
 
 
-.. image:: _static/images/leofs-architecture.001.jpg
+.. image:: ../../_static/images/leofs-architecture.001.jpg
    :width: 780px
 
 `LeoFS Gateway <leofs-gateway-detail.html>`_ handles http-requests and http-responses from clients when using REST-API OR S3-API. Also, it has the built-in object-cache system.
@@ -126,7 +126,7 @@ Is there the roadmap of LeoFS?
 We've published LeoFS milestones on both of |GitHub| and `LeoFS website <milestone.html>`_. We may revise the milestones occasionally because there is a possibility to add new features or change priority of implementation. We'll keep them always updated.
 
 
-.. image:: _static/images/leofs-milestone-toward-v2.0.png
+.. image:: ../../_static/images/leofs-milestone-toward-v2.0.png
    :width: 780px
 
 .. raw:: html

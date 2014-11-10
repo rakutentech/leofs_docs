@@ -5,10 +5,16 @@
 .. =========================================================
 
 .. index::
-    Storage operation
+    LeoFS Storage operation
 
 Storage Operation
 =================
+
+.. index::
+   pair: LeoFS Storage cluster; LeoFS Storage operation
+
+Storage Cluster Operation
+-------------------------
 
 * LeoFS Storage operation commands are executed on **LeoFS-Manager console** OR the ``leofs-adm`` script.
 * Refer :ref:`LeoFS operation flow diagram <operation-flow-diagram-label>`
@@ -121,3 +127,66 @@ Commit detached and attached nodes to join the cluster AND Rebalance objects in 
     $ leofs-adm rebalance
     OK
 
+\
+
+.. index::
+   pair: LeoFS Storage MQ; LeoFS Storage operation
+
+Storage MQ Operation [1.2.0-]
+-----------------------------
+
+* LeoFS Storage MQ is controllable mechanism manually. We've published ``mq-suspend`` and ``mq-resume`` command in ``leofs-adm`` script.
+
++--------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| **Shell**                                                                | **Description**                                                                                   |
++==========================================================================+===================================================================================================+
+| leofs-adm :ref:`mq-stats <mq-stats-command>` <storage-node>              | * See the statuses of message queues used in LeoFS Storage                                        |
++--------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`mq-suspend <mq-suspend-command>` <storage-node> <mq-id>  | * Suspend a process consuming a message queue                                                     |
+|                                                                          | * Active message queues only can be suspended                                                     |
+|                                                                          | * While suspending, no messages are consumed                                                      |
++--------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+| leofs-adm :ref:`mq-resume <mq-resume-command>` <storage-node> <mq-id>    | * Resume a process consuming a message queue                                                      |
++--------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+
+\
+
+.. _mq-stats-command:
+
+mq-stats <storage-node>
+^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    $ ./leofs-adm mq-stats storage_0@127.0.0.1
+                 id                |    state    | num of msgs |            description
+   --------------------------------+-------------+-------------|-----------------------------------
+    leo_delete_dir_queue           |   idling    | 0           | delete directories
+    leo_comp_meta_with_dc_queue    |   idling    | 0           | compare metadata w/remote-node
+    leo_sync_obj_with_dc_queue     |   idling    | 0           | sync objs w/remote-node
+    leo_recovery_node_queue        |   idling    | 0           | recovery objs of node
+    leo_async_deletion_queue       |   idling    | 0           | async deletion of objs
+    leo_rebalance_queue            |   idling    | 0           | rebalance objs
+    leo_sync_by_vnode_id_queue     |   idling    | 0           | sync objs by vnode-id
+    leo_per_object_queue           |   idling    | 0           | recover inconsistent objs
+
+
+.. _mq-suspend-command:
+
+mq-suspend <storage-node> <mq-id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    $ ./leofs-adm mq-suspend storage_0@127.0.0.1 leo_delete_dir_queue
+    OK
+
+.. _mq-resume-command:
+
+mq-resume <storage-node> <mq-id>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    $ ./leofs-adm mq-resume storage_0@127.0.0.1 leo_delete_dir_queue
+    OK

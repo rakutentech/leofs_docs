@@ -19,7 +19,7 @@ Setting up LeoFS account details
 * To setup your LeoFS' account, go to the menu ``File/Accounts``.
 * If the details are valid, you can see that S3 has been added to the Root list.
 
-.. image:: _static/images/dragondisk-2.png
+.. image:: ../../_static/images/dragondisk-2.png
    :width: 320px
 
 Create a bucket
@@ -28,7 +28,7 @@ Create a bucket
 * You need to create the bucket where the objects will be stored.
 * Buckets can only be manipulated using a unique, developer-assigned key.
 
-.. image:: _static/images/dragondisk-3.png
+.. image:: ../../_static/images/dragondisk-3.png
    :width: 720px
 
 
@@ -37,6 +37,6 @@ Manipulating files
 
 * You can ``upload files`` into LeoFS, ``download files`` from LeoFS and do any other operations on them.
 
-.. image:: _static/images/dragondisk-1.png
+.. image:: ../../_static/images/dragondisk-1.png
    :width: 720px
 

@@ -13,7 +13,7 @@ Usage
 Testing without a load balancer
 -------------------------------
 
-.. image:: _static/images/leofs-usecase-without-lb.png
+.. image:: ../../_static/images/leofs-usecase-without-lb.png
    :width: 700px
 
 * Example:

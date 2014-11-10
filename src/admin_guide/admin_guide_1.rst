@@ -17,7 +17,7 @@ Operation Flow Diagram
 
 The LeoFS operation flow is as follows:
 
-.. image:: _static/images/leofs-flow-diagram.jpg
+.. image:: ../../_static/images/leofs-flow-diagram.jpg
    :width: 780px
 
 * `The diagram only <http://www.leofs.org/docs/_images/leofs-flow-diagram.jpg>`_
@@ -31,7 +31,7 @@ LeoFS launch order
 
 LeoFS's system launch process is very simple:
 
-.. image:: _static/images/leofs-order-of-system-launch.png
+.. image:: ../../_static/images/leofs-order-of-system-launch.png
    :width: 640px
 
 

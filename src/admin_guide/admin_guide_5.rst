@@ -40,7 +40,7 @@ Remove logical deleted objects and meta data and check the current disk usage
 \
 
 
-.. image:: _static/images/leofs-compaction-state-transition.png
+.. image:: ../../_static/images/leofs-compaction-state-transition.png
    :width: 640px
 
 \
