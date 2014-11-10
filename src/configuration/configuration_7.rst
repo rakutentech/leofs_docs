@@ -37,7 +37,13 @@ Pre-requirement
 Configuration of LeoFS Gateway
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Modify |leo_gateway_conf|
+.. note:: All default setting of the watchdogs are disabled. Before getting use this mechanism, you need to turn on them.
+
+Modify |leo_gateway_conf| at the section of wathdog.
+
+
+LeoFS Gateway's watchdog properties:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +--------------------------------------+-------------------+----------------------------------------------+
 | Property                             | Default value     | Description                                  |
@@ -50,7 +56,7 @@ Configuration of LeoFS Gateway
 +--------------------------------------+-------------------+----------------------------------------------+
 | **CPU**                                                                                                 |
 +--------------------------------------+-------------------+----------------------------------------------+
-| watchdog.cpu.is_enabled              | false             | Is cpu-watchdog enabled *[true|false]*       |
+| watchdog.cpu.is_enabled              | false             | Is cpu-watchdog enabled? *[true|false]*      |
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.cpu.interval                | 5                 | Watch interval(sec)                          |
 +--------------------------------------+-------------------+----------------------------------------------+
@@ -60,7 +66,7 @@ Configuration of LeoFS Gateway
 +--------------------------------------+-------------------+----------------------------------------------+
 | **IO**                                                                                                  |
 +--------------------------------------+-------------------+----------------------------------------------+
-| watchdog.io.is_enabled               | false             | Is io-watchdog enabled *[true|false]*        |
+| watchdog.io.is_enabled               | false             | Is io-watchdog enabled? *[true|false]*       |
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.io.interval                 | 1                 | Watch interval *(sec)*                       |
 +--------------------------------------+-------------------+----------------------------------------------+
@@ -77,7 +83,10 @@ Configuration of LeoFS Gateway
 Configuration of LeoFS Storage
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- Modify |leo_storage_conf|
+Modify |leo_storage_conf| at the section of watchdog.
+
+LeoFS Storage's watchdog properties:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +--------------------------------------+-------------------+----------------------------------------------+
 | Property                             | Default value     | Description                                  |
@@ -90,7 +99,7 @@ Configuration of LeoFS Storage
 +--------------------------------------+-------------------+----------------------------------------------+
 | **CPU**                                                                                                 |
 +--------------------------------------+-------------------+----------------------------------------------+
-| watchdog.cpu.is_enabled              | false             | Is cpu-watchdog enabled *[true|false]*       |
+| watchdog.cpu.is_enabled              | false             | Is cpu-watchdog enabled? *[true|false]*      |
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.cpu.interval                | 5                 | Watch interval(sec)                          |
 +--------------------------------------+-------------------+----------------------------------------------+
@@ -100,7 +109,7 @@ Configuration of LeoFS Storage
 +--------------------------------------+-------------------+----------------------------------------------+
 | **IO**                                                                                                  |
 +--------------------------------------+-------------------+----------------------------------------------+
-| watchdog.io.is_enabled               | false             | Is io-watchdog enabled *[true|false]*        |
+| watchdog.io.is_enabled               | false             | Is io-watchdog enabled? *[true|false]*       |
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.io.interval                 | 1                 | Watch interval *(sec)*                       |
 +--------------------------------------+-------------------+----------------------------------------------+
@@ -110,7 +119,7 @@ Configuration of LeoFS Storage
 +--------------------------------------+-------------------+----------------------------------------------+
 | **DISK**                                                                                                |
 +--------------------------------------+-------------------+----------------------------------------------+
-| watchdog.disk.is_enabled             | false             | Is disk-watchdog enabled *[true|false]*      |
+| watchdog.disk.is_enabled             | false             | Is disk-watchdog enabled? *[true|false]*     |
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.disk.interval               | 1                 | Watch interval *(sec)*                       |
 +--------------------------------------+-------------------+----------------------------------------------+
