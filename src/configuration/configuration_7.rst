@@ -126,8 +126,8 @@ Configuration of LeoFS Storage
 
 .. |leo_gateway_conf| raw:: html
 
-   <a href="https://github.com/leo-project/leo_gateway/blob/1.2.0/priv/leo_gateway.conf#L160-L191" target="_blank">leo_gateway.conf</a>
+   <a href="https://github.com/leo-project/leo_gateway/blob/master/priv/leo_gateway.conf" target="_blank">leo_gateway.conf</a>
 
 .. |leo_storage_conf| raw:: html
 
-   <a href="https://github.com/leo-project/leo_storage/blob/1.2.0/priv/leo_storage.conf#L55-L98" tarrget="_blank">leo_storage.conf</a>
+   <a href="https://github.com/leo-project/leo_storage/blob/master/priv/leo_storage.conf" tarrget="_blank">leo_storage.conf</a>
