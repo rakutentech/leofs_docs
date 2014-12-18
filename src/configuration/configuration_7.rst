@@ -9,7 +9,7 @@
 .. index::
    pair: Configuration; LeoFS watchdog
 
-LeoFS Watchdog [1.2.0-]
+LeoFS Watchdog [1.2.2-]
 =======================
 
 .. index::
@@ -28,7 +28,7 @@ Getting Started
 Pre-requirement
 ~~~~~~~~~~~~~~~
 
-.. note:: We have checked this mechanism with CentOS 6.5 and Ubuntu Server 13.10/14.04 LTS but we're goinng to investigate other OS such as FreeBSD and SmartOS. And also, disk monitoring is using the |iostat-command|, you need to install it before getting started the watchdog.
+.. note:: We have supported this mechanism for CentOS 6.5/7.0, Ubuntu Server 14.04 LTS, FreeBSD and SmartOS. And also, ``disk monitoring`` is using the |iostat-command| and |df-command|, you need to install it before getting started the watchdog.
 
 
 .. index::
@@ -60,11 +60,13 @@ LeoFS Gateway's watchdog properties:
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.cpu.interval                | 5                 | Watch interval(sec)                          |
 +--------------------------------------+-------------------+----------------------------------------------+
-| watchdog.cpu.threshold_cpu_load_avg  | 2                 | Threshold CPU load avg for 1min/5min         |
+| watchdog.cpu.raised_error_times      | 3                 | Raised error times                           |
++--------------------------------------+-------------------+----------------------------------------------+
+| watchdog.cpu.threshold_cpu_load_avg  | 5.0               | Threshold CPU load avg for 1min/5min         |
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.cpu.threshold_cpu_util      | 100               | Threshold CPU load util(%)                   |
 +--------------------------------------+-------------------+----------------------------------------------+
-| **IO**                                                                                                  |
+| **Erlang IO**                                                                                           |
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.io.is_enabled               | false             | Is io-watchdog enabled? *[true|false]*       |
 +--------------------------------------+-------------------+----------------------------------------------+
@@ -103,11 +105,13 @@ LeoFS Storage's watchdog properties:
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.cpu.interval                | 5                 | Watch interval(sec)                          |
 +--------------------------------------+-------------------+----------------------------------------------+
-| watchdog.cpu.threshold_cpu_load_avg  | 2                 | Threshold CPU load avg for 1min/5min         |
+| watchdog.cpu.raised_error_times      | 3                 | Raised error times                           |
++--------------------------------------+-------------------+----------------------------------------------+
+| watchdog.cpu.threshold_cpu_load_avg  | 5.0               | Threshold CPU load avg for 1min/5min         |
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.cpu.threshold_cpu_util      | 100               | Threshold CPU load util(%)                   |
 +--------------------------------------+-------------------+----------------------------------------------+
-| **IO**                                                                                                  |
+| **Erlang IO**                                                                                           |
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.io.is_enabled               | false             | Is io-watchdog enabled? *[true|false]*       |
 +--------------------------------------+-------------------+----------------------------------------------+
@@ -123,15 +127,27 @@ LeoFS Storage's watchdog properties:
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.disk.interval               | 1                 | Watch interval *(sec)*                       |
 +--------------------------------------+-------------------+----------------------------------------------+
+| watchdog.disk.raised_error_times     | 3                 | Raised error times                           |
++--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.disk.threshold_disk_use     | 85                | Threshold disk use *(%)*                     |
 +--------------------------------------+-------------------+----------------------------------------------+
-| watchdog.disk.threshold_disk_util    | 95                | Threshold disk util *(%)*                    |
+| watchdog.disk.threshold_disk_util    | 100               | Threshold disk util *(%)*                    |
++--------------------------------------+-------------------+----------------------------------------------+
+| watchdog.disk.threshold_disk_rkb     | 262144            | Threshold disk read KB/sec                   |
++--------------------------------------+-------------------+----------------------------------------------+
+| watchdog.disk.threshold_disk_wkb     | 262144            | Threshold disk write KB/sec                  |
++--------------------------------------+-------------------+----------------------------------------------+
+| watchdog.disk.target_devices         | []                | Target devices for checking disk utilization |
 +--------------------------------------+-------------------+----------------------------------------------+
 
 
 .. |iostat-command| raw:: html
 
    <a href="http://en.wikipedia.org/wiki/Iostat" target="_blank">iostat command</a>
+
+.. |df-command| raw:: html
+
+   <a href="http://en.wikipedia.org/wiki/Df_%28Unix%29" target="_blank">df command</a>
 
 .. |leo_gateway_conf| raw:: html
 
