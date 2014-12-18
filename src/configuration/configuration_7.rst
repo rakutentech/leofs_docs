@@ -4,10 +4,10 @@
 .. http://leo-project.net/
 .. =========================================================
 
-.. _leofs-with-nfs-label:
+.. _watchdog-label:
 
 .. index::
-   pair: Configuration; LeoFS watchdog
+   pair: Configuration; Watchdog
 
 LeoFS Watchdog [1.2.2-]
 =======================
@@ -18,6 +18,7 @@ LeoFS Watchdog [1.2.2-]
 Purpose
 -------
 
+The watchdog mechanism monitors CPU, Erlang-IO and Disk status in order to keep running a node stably. Also, this mechanism communicates ``the MQ mechanism`` and `the auto-compaction <configuration_8.html>`_/compaction mechanism.
 
 .. index::
    pair: Watchdog; Getting Started
@@ -64,7 +65,7 @@ LeoFS Gateway's watchdog properties:
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.cpu.threshold_cpu_load_avg  | 5.0               | Threshold CPU load avg for 1min/5min         |
 +--------------------------------------+-------------------+----------------------------------------------+
-| watchdog.cpu.threshold_cpu_util      | 100               | Threshold CPU load util(%)                   |
+| watchdog.cpu.threshold_cpu_util      | 100               | Threshold CPU load util *(%)*                |
 +--------------------------------------+-------------------+----------------------------------------------+
 | **Erlang IO**                                                                                           |
 +--------------------------------------+-------------------+----------------------------------------------+
@@ -103,13 +104,13 @@ LeoFS Storage's watchdog properties:
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.cpu.is_enabled              | false             | Is cpu-watchdog enabled? *[true|false]*      |
 +--------------------------------------+-------------------+----------------------------------------------+
-| watchdog.cpu.interval                | 5                 | Watch interval(sec)                          |
+| watchdog.cpu.interval                | 5                 | Watch interval *(sec)*                       |
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.cpu.raised_error_times      | 3                 | Raised error times                           |
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.cpu.threshold_cpu_load_avg  | 5.0               | Threshold CPU load avg for 1min/5min         |
 +--------------------------------------+-------------------+----------------------------------------------+
-| watchdog.cpu.threshold_cpu_util      | 100               | Threshold CPU load util(%)                   |
+| watchdog.cpu.threshold_cpu_util      | 100               | Threshold CPU load util *(%)*                |
 +--------------------------------------+-------------------+----------------------------------------------+
 | **Erlang IO**                                                                                           |
 +--------------------------------------+-------------------+----------------------------------------------+
@@ -139,6 +140,12 @@ LeoFS Storage's watchdog properties:
 +--------------------------------------+-------------------+----------------------------------------------+
 | watchdog.disk.target_devices         | []                | Target devices for checking disk utilization |
 +--------------------------------------+-------------------+----------------------------------------------+
+
+See Also
+^^^^^^^^
+
+* `LeoFS Storage configuration  <configuration_2.html>`_
+* `LeoFS Auto-compaction configuration <configuration_8.html>`_
 
 
 .. |iostat-command| raw:: html

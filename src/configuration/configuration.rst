@@ -17,3 +17,4 @@ Configuration
     configuration_5
     configuration_6
     configuration_7
+    configuration_8
