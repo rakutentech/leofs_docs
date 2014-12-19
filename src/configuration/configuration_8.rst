@@ -10,7 +10,7 @@
    pair: Configuration; Auto-compaction
 
 Auto-compaction
-========================
+===============
 
 Since
 -------
