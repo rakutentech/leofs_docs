@@ -132,8 +132,16 @@ Commit detached and attached nodes to join the cluster AND Rebalance objects in 
 .. index::
    pair: LeoFS Storage MQ; LeoFS Storage operation
 
-Storage MQ Operation [1.2.0-]
------------------------------
+Storage MQ Operation
+--------------------
+
+Since
+^^^^^^^^^
+
+LeoFS v1.2.2
+
+Overview
+^^^^^^^^^
 
 * LeoFS Storage MQ is controllable mechanism manually. We've published ``mq-suspend`` and ``mq-resume`` command in ``leofs-adm`` script.
 
@@ -159,17 +167,16 @@ mq-stats <storage-node>
 .. code-block:: bash
 
     $ ./leofs-adm mq-stats storage_0@127.0.0.1
-                 id                |    state    | num of msgs |            description
-   --------------------------------+-------------+-------------|-----------------------------------
-    leo_delete_dir_queue           |   idling    | 0           | delete directories
-    leo_comp_meta_with_dc_queue    |   idling    | 0           | compare metadata w/remote-node
-    leo_sync_obj_with_dc_queue     |   idling    | 0           | sync objs w/remote-node
-    leo_recovery_node_queue        |   idling    | 0           | recovery objs of node
-    leo_async_deletion_queue       |   idling    | 0           | async deletion of objs
-    leo_rebalance_queue            |   idling    | 0           | rebalance objs
-    leo_sync_by_vnode_id_queue     |   idling    | 0           | sync objs by vnode-id
-    leo_per_object_queue           |   idling    | 0           | recover inconsistent objs
-
+                  id                |    state    | number of msgs | batch of msgs  |    interval    |            description
+    --------------------------------+-------------+----------------|----------------|----------------|-----------------------------------
+    leo_delete_dir_queue            |   idling    | 0              | 1000           | 100            | delete directories
+    leo_comp_meta_with_dc_queue     |   idling    | 0              | 1000           | 100            | compare metadata w/remote-node
+    leo_sync_obj_with_dc_queue      |   idling    | 0              | 1000           | 100            | sync objs w/remote-node
+    leo_recovery_node_queue         |   idling    | 0              | 1000           | 100            | recovery objs of node
+    leo_async_deletion_queue        |   idling    | 0              | 1000           | 100            | async deletion of objs
+    leo_rebalance_queue             |   running   | 2167           | 1400           | 10             | rebalance objs
+    leo_sync_by_vnode_id_queue      |   idling    | 0              | 1000           | 100            | sync objs by vnode-id
+    leo_per_object_queue            |   idling    | 0              | 1000           | 100            | recover inconsistent objsx
 
 .. _mq-suspend-command:
 

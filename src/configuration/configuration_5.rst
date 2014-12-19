@@ -12,6 +12,12 @@
 Multi data center replication
 =============================
 
+Since
+-------
+
+LeoFS v1.0.0
+
+
 .. index::
    pair: NFS; Purpose
 

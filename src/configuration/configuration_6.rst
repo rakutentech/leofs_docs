@@ -9,8 +9,13 @@
 .. index::
    pair: Configuration; LeoFS with NFS
 
-LeoFS with NFS [1.1.0-]
+LeoFS with NFS
 =======================
+
+Since
+-------
+
+LeoFS v1.1.0
 
 .. index::
    pair: NFS; Purpose

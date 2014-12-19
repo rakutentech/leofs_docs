@@ -9,8 +9,13 @@
 .. index::
    pair: Configuration; Auto-compaction
 
-Auto-compaction [1.2.2-]
+Auto-compaction
 ========================
+
+Since
+-------
+
+LeoFS v1.2.2
 
 .. index::
    pair: Auto-compaction; Purpose

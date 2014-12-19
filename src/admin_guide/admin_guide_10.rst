@@ -172,8 +172,16 @@ This section describes the process of adding and removing nodes in a LeoFS Stora
 .. index::
     pair: System maintenance; LeoFS Gateway access-log format
 
-LeoFS Gateway Access-log Format (v1.0.0-pre3 later)
+LeoFS Gateway Access-log Format
 ---------------------------------------------------
+
+Since
+^^^^^^
+
+LeoFS v1.0.0-pre3
+
+Overview
+^^^^^^^^
 
 LeoFS-Gateway is able to output access-log. If you would like to use this option, you can check and set :ref:`LeoFS Gateway configuration <conf_gateway_label>`.
 
@@ -227,8 +235,16 @@ Format
 .. index::
     pair: System maintenance; LeoFS Storage data-diagnosis-log format
 
-LeoFS Storage Data Diagnosis log Format (v1.1.5 later)
+LeoFS Storage Data Diagnosis log Format
 -------------------------------------------------------
+
+Since
+^^^^^
+
+LeoFS v1.1.5
+
+Overview
+^^^^^^^^
 
 LeoFS-Storage is able to diagnose the data. If you would like to use this option, you can check and set :ref:`LeoFS Storage configuration <conf_storage_label>`.
 

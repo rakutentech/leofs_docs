@@ -81,6 +81,31 @@ See Also:
     * `recover-node command <../admin_guide/admin_guide_4.html#recover-node-command>`_
     * `leo_storage.conf <../configuration/configuration_2.html>`_
 
+\
+
+
+What should I do when Too many processes errors happen?
+-------------------------------------------------------
+
+LeoFS usually try to keep the number of Erlang processes as minimum as possible, but there are some exceptions when doing something asynchronously.
+
+Replicating an object to the non-primary assigned nodes
+Retrying to replicate an object when the previous attempt failed
+Given that LeoFS suffered from very high load AND there are some nodes downed for some reason, The number of Erlang processes gradually have increased and might have reached the sysmte limit.
+
+We recommend users to set an appropriate value which depends on your workload to the ``+P option``. Also if the ``+P option`` does NOT work for you, there are some possibilities that some external system resources like disk, network equipments have broken, Please check out the dmesg/syslog on your sysmtem.
+
+See Also:
+    * |erlang-p|
+
+\
+
+
+Why does starting a leo_storage using bitcask as metadata take too much time?
+-----------------------------------------------------------------------------
+
+When starting a leo_storage with bitcask, since leo_storage always call the ``bitcask:merge`` operation, starting process may take too much time if leo_storage stored lots of objects. We recommend users to replace ``bitcask`` with ``leveldb`` by using |b2l|.
+
 
 .. |leofs-adm| raw:: html
 
@@ -102,3 +127,10 @@ See Also:
 
    <a href="http://project-fifo.net" target="_blank">Project FiFo</a>
 
+.. |erlang-p| raw:: html
+
+   <a href="http://erlang.org/doc/man/erl.html#+P" target="_blank">Erlang - +P</a>
+
+.. |b2l| raw:: html
+
+   <a href="https://github.com/leo-project/leofs_utils/tree/develop/tools/b2l" target="_blank">Tool:Converting metadata from bitcask to leveldb</a>

@@ -9,11 +9,17 @@
 .. index::
    pair: Configuration; Watchdog
 
-LeoFS Watchdog [1.2.2-]
+LeoFS Watchdog
 =======================
 
 .. index::
    pair: Watchdog; Purpose
+
+Since
+-------
+
+LeoFS v1.2.2
+
 
 Purpose
 -------
