@@ -89,8 +89,9 @@ What should I do when Too many processes errors happen?
 
 LeoFS usually try to keep the number of Erlang processes as minimum as possible, but there are some exceptions when doing something asynchronously.
 
-Replicating an object to the non-primary assigned nodes
-Retrying to replicate an object when the previous attempt failed
+* Replicating an object to the non-primary assigned nodes
+* Retrying to replicate an object when the previous attempt failed
+
 Given that LeoFS suffered from very high load AND there are some nodes downed for some reason, The number of Erlang processes gradually have increased and might have reached the sysmte limit.
 
 We recommend users to set an appropriate value which depends on your workload to the ``+P option``. Also if the ``+P option`` does NOT work for you, there are some possibilities that some external system resources like disk, network equipments have broken, Please check out the dmesg/syslog on your sysmtem.
