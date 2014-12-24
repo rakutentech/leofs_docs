@@ -19,6 +19,7 @@ Amazon S3 Client Tutorials
    s3_client_erlang
    s3_client_boto
    s3_client_nodejs
+   s3_client_golang
    s3_client_s3fsc
    s3_client_s3cmd
    s3_client_dragondisk
